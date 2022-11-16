@@ -83,6 +83,7 @@ function Register(props: Props) {
     }
 
 
+
     if (currentTab < 3) {
       moveTabs()
 
@@ -271,12 +272,11 @@ function Register(props: Props) {
                 <input
                   value={userInfo.country}
                   onChange={(e) => {
-                    handleCountry(e)
                     setUserinfo({ ...userInfo, country: e.target.value })
+                    setDropdownToggleCountry(false)
                   }}
                   required
                   type="text"
-                  onBlur={() => setDropdownToggleCountry(false)}
                   placeholder="Country"
                 ></input>
 

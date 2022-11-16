@@ -337,3 +337,10 @@ body::-webkit-scrollbar{
     margin-right: 0.7rem;
   }
 }
+
+.input-contain div select{
+  -webkit-appearance: none;
+  width : calc(100% - 30px);
+  margin-left: -10px;
+  outline: none;
+}
