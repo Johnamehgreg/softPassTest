@@ -108,7 +108,7 @@ function Topnav(props: Props) {
             </span>
             <NavLink
               to={routes.register}
-              className="md:w-[120px] w-[100%] md:px-5 px-12 py-3 text-[13px] font-semibold bg-softpasspurple-300 text-white rounded-lg shadow-lg"
+              className="md:w-[120px] w-[100%] md:px-5 px-12 py-3 text-[13px] font-semibold bg-softpasspurple-300 text-white rounded-lg shadow-lg hover-btn"
             >
               Get Started
             </NavLink>

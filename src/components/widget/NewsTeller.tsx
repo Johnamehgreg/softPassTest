@@ -1,4 +1,3 @@
-import React from 'react'
 
 interface Props {
     header?: String | Boolean
@@ -15,8 +14,8 @@ function NewsTeller(props: Props) {
 
            <form>
                 <div>
-                    <input placeholder='Your Email' type='email'></input>
-                    <button>Subscribe</button>
+                    <input className="subcribe-email-input" placeholder='Your Email' type='email'></input>
+                    <button className='subscribe-btn'>Subscribe</button>
                 </div>
            </form>
         </div>

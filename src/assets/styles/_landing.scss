@@ -46,7 +46,20 @@
    @apply relative px-5 bg-softpasspurple-300 text-white rounded-xl text-[11px] py-3 garrif
    tracking-[0.04em]
    font-semibold pr-16 mt-10 mb-4;
+   transition: all linear 300ms;
+   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.317);
+   transform: scale(1);
 }
+
+.get-button:hover{
+  transition: all linear 300ms;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.317);
+  transform: scale(1.05);
+}
+
+
+
+
 .get-button::after{
   content: "";
   @apply w-[30px] bg-white  h-[2px]  absolute rounded-xl;
@@ -159,6 +172,14 @@
    @apply relative px-10 bg-softpasspurple-300 text-white rounded-xl text-[11px] py-4
    tracking-[0.04em]
    font-semibold mt-10 mb-4;
+   transition: all linear 300ms;
+   transform: scale(1);
+}
+.no-arrow-button:hover{
+  transition: all linear 300ms;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.317);
+  transform: scale(1.05);
+
 }
 .kyc-header{
   @apply text-white garrif;
@@ -244,7 +265,15 @@
   }
 }
 .outline-header-button{
-  @apply py-3 px-6 border-[1px] border-white text-[13px] rounded-lg text-white border-dashed mb-10
+  @apply py-3 px-6 border-[1px] border-white text-[13px] rounded-lg text-white border-dashed mb-10;
+  transition:  all linear 300ms;
+  
+}
+
+.outline-header-button:hover {
+  transition: all linear 300ms;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.317);
+  transform: scale(1.05);
 }
 
 

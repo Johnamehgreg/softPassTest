@@ -344,3 +344,42 @@ body::-webkit-scrollbar{
   margin-left: -10px;
   outline: none;
 }
+
+
+
+
+.hover-btn{
+  transition:  all linear 300ms;
+  z-index: 200;
+}
+
+a{
+  transition: all linear 300ms;
+  transform: scale(1);
+}
+a:hover{
+  transition: all linear 300ms;
+  transform: scale(1.04);
+
+}
+
+.subscribe-btn{
+  transition: all linear 300ms;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.317);
+ 
+}
+
+
+.subscribe-btn:hover{
+  transform: scale(1.05);
+}
+
+
+
+
+
+.hover-btn:hover{
+   transition: all linear 300ms;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.317);
+  transform: scale(1.05);
+}
