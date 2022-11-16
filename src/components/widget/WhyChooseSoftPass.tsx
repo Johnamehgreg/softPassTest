@@ -59,11 +59,12 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
         {
           tab === 1 && (
             <>
-              <div className="hidden md:block">
+              <div className="hidden md:block why-pass-img-wrapper">
                 <img
                   alt="design-dashboard"
                   width="100%"
                   className='md:pr-8'
+
                   // src={dashboardFrame}
                   src={dashboard1}
                 ></img>
@@ -86,7 +87,7 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
         {
           tab === 2 && (
             <>
-              <div className="hidden md:block">
+              <div className="hidden md:block why-pass-img-wrapper">
                 <img
                   alt="design-dashboard"
                   width="100%"
@@ -113,11 +114,11 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
 
             <>
 
-              <div className="hidden md:block">
+              <div className="hidden md:block why-pass-img-wrapper">
                 <img
                   alt="design-dashboard"
                   width="100%"
-                  className='md:pr-8'
+                  className='md:pr-8 he'
                   // src={dashboardFrame}
                   src={dashboard3}
                 ></img>
