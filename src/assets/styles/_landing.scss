@@ -184,7 +184,7 @@
   }
   span::after{
     content: '';
-  @apply md:h-full md:border-r-[2px] border-gray-300 border-dotted md:top-full md:left-[calc(50%-1px)]
+  @apply md:h-full md:border-r-[2px] border-gray-300 border-dotted md:left-[calc(50%-1px)] md:top-full 
   left-full top-[calc(50%-1px)] w-[200%] border-t-[2px] border-r-[0px]  md:border-t-[0px] md:w-[0%] absolute
   }
 }
@@ -199,7 +199,7 @@
   }
   span::after{
     content: '';
-  @apply md:h-full md:border-r-[2px] border-gray-600 border-dotted md:top-full md:left-[calc(50%-1px)]
+  @apply md:h-full md:border-r-[2px] border-gray-600 border-dotted md:left-[calc(50%-1px)] md:top-full 
   left-full top-[calc(50%-1px)] w-[200%] border-t-[2px] border-r-[0px]  md:border-t-[0px] md:w-[0%] absolute
   }
 }
