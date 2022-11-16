@@ -1,15 +1,15 @@
+import 'aos/dist/aos.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-import { useContext } from 'react'
-import "./assets/styles/main.scss"
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import { Toaster } from 'react-hot-toast';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { Provider } from 'react-redux';
+import App from './App';
+import "./assets/styles/main.scss";
 import { store } from './redux/store';
-import { Provider } from 'react-redux'
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const queryClient = new QueryClient()
 

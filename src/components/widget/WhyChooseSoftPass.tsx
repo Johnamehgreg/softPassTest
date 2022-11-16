@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import AOS from 'aos'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import dashboard2 from '../../assets/svg/external-Encryption-hacker-attack-others-papa-vector.png'
 import dashboard3 from '../../assets/svg/integration.png'
 import dashboard1 from '../../assets/svg/security-pass.png'
+import routes from '../../navigation/Routes'
 import ScanIcon from '../svg-icons/ScanIcon'
 import SecuritySafeIcon from '../svg-icons/SecuritySafeIcon'
+
+
 // import CircleBreakIcon from '../svg-icons/CircleBreakIcon'
 
 interface Props { }
@@ -11,9 +16,16 @@ interface Props { }
 const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
   const { } = props
 
+  useEffect(() => {
+    AOS.init({})
+  }, [])
+
+  const navigation = useNavigate()
+
+
   const [tab, settab] = useState<number>(1)
   return (
-    <article className="mid-nav-article">
+    <article data-aos="zoom-in" className="mid-nav-article">
       <h2 className="mt-16"> Why choose SoftPass? </h2>
       <div className="mid-landing-nav">
         {/* <button onClick={() => settab(1) }  className={tab === 1 ? "mid-active-link" : ""}>
@@ -64,7 +76,7 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
                   customers while protecting from identity
                   fraud through automatic identity verification
                 </p>
-                <button className="get-button">GET STARTED</button>
+                <button onClick={() => navigation(routes.register)} className="get-button">GET STARTED</button>
               </div>
             </>
 
@@ -89,7 +101,8 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
                   Secure your company’s networks from threats
                   and forget all your Data Privacy concerns with our highly secure solutions
                 </p>
-                <button className="get-button">GET STARTED</button>
+                <button onClick={() => navigation(routes.register)} className="get-button">GET STARTED</button>
+
               </div>
 
             </>
@@ -116,7 +129,8 @@ const WhyChooseSoftPass: React.FC<Props> = (props: Props) => {
                   to use and seamless integration process to simplify
                   the development process without a complex integration mechanism
                 </p>
-                <button className="get-button">GET STARTED</button>
+                <button onClick={() => navigation(routes.register)} className="get-button">GET STARTED</button>
+
               </div>
 
 

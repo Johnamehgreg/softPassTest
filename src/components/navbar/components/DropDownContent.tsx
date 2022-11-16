@@ -48,7 +48,7 @@ const DropDownContent: React.FC<Props> = ({ item, dropdownContent }) => {
                                                     <Image />
                                                 </div>
                                                 <div className='article-item-content'>
-                                                    <b className='block'> {item.title}</b>
+                                                    <b className='block'> {item.title}:</b>
                                                     <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
                                                 </div>
                                             </NavLink>

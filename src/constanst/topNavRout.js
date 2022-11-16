@@ -26,7 +26,7 @@ export const topNavRoute = [
             },
             {
                 Image:TFiger,
-                title:'Facial Verification:',
+                title:'Facial Verification',
                 content:"Adopt our AI-powered facial \n biometric solution to verify facial identities: Liveness Check OCR for businesses",
                 route: '/facial-verification'
             },
@@ -60,31 +60,31 @@ export const topNavRoute = [
             {
                 route: '/customer-onboarding',
                 Image:Tbuger,
-                title:'Customer Onboarding:',
+                title:'Customer Onboarding',
                 content:"With the Integration of a single API, Softpass helps businesses complete their customer onboarding process seamlessly by verifying their data swiftly"
             },
             {
                 route: '/kyc-crypto',
                 Image:TFiger,
-                title:'KYC for crypto:',
+                title:'KYC for crypto',
                 content:"Meet KYC and AML compliance for your customers by seamlessly verifying customer identity information"
             },
             {
                 route: '/kyc-driver',
                 Image:TWallet,
-                title:'KYC for Drivers:',
+                title:'KYC for Drivers',
                 content:"Uphold your business integrity and amble trust by verifying staff identity to help mitigate business risks "
             },
             {
                 route: '/sim-registration',
                 Image:TSim,
-                title:'Sim Registration:',
+                title:'Sim Registration',
                 content:"Verify your basic customer information to help Fastrack sim registration across locations"
             },
             {
                 route: '/age-verification',
                 Image:TUserDetail,
-                title:'Age Verification:',
+                title:'Age Verification',
                 content:"Verify the DOB of your customers by integrating with our reliable and swift API "
             },
         ]
@@ -120,7 +120,7 @@ export const topNavRoute = [
             {
                 route: '/contact-us',
                 Image:TContact,
-                title:'CONTACT US:',
+                title:'CONTACT US',
                 content:"Email: enquiries@softpass.net Phone Number: 07026356742"
             },
             {

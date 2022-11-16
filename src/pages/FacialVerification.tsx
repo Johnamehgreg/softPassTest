@@ -1,26 +1,42 @@
-import React, { useState } from 'react'
-import FullWidth from '../components/widget/FullWidth'
-import TrustedPartners from '../components/widget/TrustedPartners'
-import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
-import HeroWidget from '../components/widget/HeroWidget'
-import facialVerification from '../assets/image/facial-verify.png'
+import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import dashboardFacialVerification from '../assets/image/dashboard-Facial-Identification.png'
 import facialScan from '../assets/image/facial-frame.png'
-import NewsTeller from '../components/widget/NewsTeller'
+import facialVerification from '../assets/image/facial-verify.png'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
 import TargetedIndustry from '../components/landingPage/TargetedIndustry'
+import FullWidth from '../components/widget/FullWidth'
+import HeroWidget from '../components/widget/HeroWidget'
+import NewsTeller from '../components/widget/NewsTeller'
+import TrustedPartners from '../components/widget/TrustedPartners'
+import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
+import routes from '../navigation/Routes'
 
-interface Props {}
+
+
+
+interface Props { }
 
 function FacialVerification(props: Props) {
-  const {} = props
+
+  const ScrollRef = useRef<null | HTMLDivElement>(null);
+
+  const { } = props
+
+  const navigation = useNavigate()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+
 
   return (
     <LandingTemplate>
       <HeroWidget>
         <div className="flex flex-wrap max-softpass-width items-center md:pt-[50px] pt-20 pb-[50px] md:pb-[150px]">
           <div className="md:w-6/12 w-full kyc-header">
-            <b className="">Facial Verification</b>
+            <b ref={ScrollRef} className="">Facial Verification</b>
             <h1>
               Adopt our AI-powered facial biometric solution to verify facial
               identities{' '}
@@ -29,7 +45,7 @@ function FacialVerification(props: Props) {
               Leverage our AI-powered technology to confirm identities using
               their face.{' '}
             </p>
-            <button className="outline-header-button">Start for free</button>
+            <button onClick={() => navigation(routes.register)} className="outline-header-button">Start for free</button>
           </div>
           <div className="md:w-6/12 w-full md:flex md:justify-end">
             <img alt="" src={facialVerification} className="rounded-2xl"></img>

@@ -1,25 +1,25 @@
-import React from 'react'
-import HeroWidget from '../components/widget/HeroWidget'
-import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
-import driver from '../assets/image/01_16taxicar15 1 (1).png'
-import { ReactComponent as CUSTOMERAge } from '../assets/image/svg/customer-age.svg'
-import { ReactComponent as ENABLEAgeVerify } from '../assets/image/svg/enable-age-verify.svg'
+import { useNavigate } from 'react-router-dom'
 import { ReactComponent as Check } from '../assets/image/svg/OrangeCheck.svg'
-import { ReactComponent as SecureExperience }  from '../assets/image/svg/secure-experience.svg'
-import secured from '../assets/image/secured.png'
-import FullWidth from '../components/widget/FullWidth'
-import TrustedPartners from '../components/widget/TrustedPartners'
-import NewsTeller from '../components/widget/NewsTeller'
-import TargetedIndustry from '../components/landingPage/TargetedIndustry'
+import { ReactComponent as SecureExperience } from '../assets/image/svg/secure-experience.svg'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
+import TargetedIndustry from '../components/landingPage/TargetedIndustry'
 import ShieldCheckIcon from '../components/svg-icons/ShieldCheckIcon'
-import WhyChooseSoftPass from '../components/widget/WhyChooseSoftPass'
+import FullWidth from '../components/widget/FullWidth'
+import HeroWidget from '../components/widget/HeroWidget'
+import NewsTeller from '../components/widget/NewsTeller'
 import SvgGallery from '../components/widget/SvgGallery'
+import TrustedPartners from '../components/widget/TrustedPartners'
+import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
+import routes from '../navigation/Routes'
+
+
 
 interface Props {}
 
 function AboutUs(props: Props) {
     const {} = props
+
+    const navigation = useNavigate()
 
     return (
        <LandingTemplate>
@@ -37,7 +37,9 @@ function AboutUs(props: Props) {
             </p>
           </div>
           <div className="w-full center-verical mb-32">
-            <button className="hero-sub-button">
+            <button
+            onClick={() => navigation(routes.register)}
+            className="hero-sub-button">
               <i className="relative -top-[1px]">
                 <ShieldCheckIcon width="16" />
               </i>

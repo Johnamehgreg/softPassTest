@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
-import FullWidth from '../components/widget/FullWidth'
-import TrustedPartners from '../components/widget/TrustedPartners'
-import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
-import HeroWidget from '../components/widget/HeroWidget'
+import { useNavigate } from 'react-router-dom'
 import AMLHeaderImage from '../assets/image/AML_header_img.png'
 import AntiMoneyLaundry from '../assets/image/anti-money-laundry.png'
 import AntiMoneylaundry2 from '../assets/image/anti_money_laundry_2.png'
 import BusinessVerification from "../assets/image/business-verification.png"
-import facialScan from '../assets/image/facial-frame.png'
-import NewsTeller from '../components/widget/NewsTeller'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
 import TargetedIndustry from '../components/landingPage/TargetedIndustry'
+import FullWidth from '../components/widget/FullWidth'
+import HeroWidget from '../components/widget/HeroWidget'
+import NewsTeller from '../components/widget/NewsTeller'
+import TrustedPartners from '../components/widget/TrustedPartners'
+import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
+import routes from '../navigation/Routes'
 
 interface Props {}
 
 function AML(props: Props) {
   const {} = props
+
+  const navigation = useNavigate()
 
   return (
     <LandingTemplate>
@@ -30,7 +32,7 @@ function AML(props: Props) {
               Fulfill your AML compliance requirements by leveraging our
               AI-based systems that compare customer selfies with uploaded IDs.{' '}
             </p>
-            <button className="outline-header-button">Start for free</button>
+            <button onClick={() => navigation(routes.register)} className="outline-header-button">Start for free</button>
           </div>
           <div className="md:w-6/12 w-full md:flex md:justify-end">
             <img alt="" src={AMLHeaderImage} className="rounded-2xl"></img>

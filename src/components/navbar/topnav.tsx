@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import softLogo from '../../assets/image/Logo.png'
+import { topNavRoute } from '../../constanst/topNavRout'
+import routes from '../../navigation/Routes'
 import ArrowDown from '../svg-icons/ArrowDown'
 import Navicon from '../svg-icons/Navicon'
 import DropDownContent from './components/DropDownContent'
-import { topNavRoute } from '../../constanst/topNavRout'
-import { ReactComponent as SLogo } from '../../assets/image/svg/softpassSVG 3.svg'
 interface Props {}
 
 function Topnav(props: Props) {
@@ -107,7 +107,7 @@ function Topnav(props: Props) {
               <NavLink to="/login">Login</NavLink>
             </span>
             <NavLink
-              to="/register"
+              to={routes.register}
               className="md:w-[120px] w-[100%] md:px-5 px-12 py-3 text-[13px] font-semibold bg-softpasspurple-300 text-white rounded-lg shadow-lg"
             >
               Get Started

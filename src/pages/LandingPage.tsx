@@ -1,22 +1,34 @@
-import React from 'react'
-import ShieldCheckIcon from '../components/svg-icons/ShieldCheckIcon'
-import HeroWidget from '../components/widget/HeroWidget'
-import TrustedPartners from '../components/widget/TrustedPartners'
-import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
-import CircleBreakIcon from '../components/svg-icons/CircleBreakIcon'
-import LandingPageCard from '../components/widget/LandingPageCard'
-import ZigZagicon from '../components/svg-icons/ZigZagicon'
-import PlayIcon from '../components/svg-icons/PlayIcon'
-import NewsTeller from '../components/widget/NewsTeller'
-import BlogSection from '../components/landingPage/BlogSection'
-import HeroMidWidget from '../components/widget/HeroMidWidget'
+import AOS from 'aos'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
+import BlogSection from '../components/landingPage/BlogSection'
+import CircleBreakIcon from '../components/svg-icons/CircleBreakIcon'
+import PlayIcon from '../components/svg-icons/PlayIcon'
+import ShieldCheckIcon from '../components/svg-icons/ShieldCheckIcon'
+import ZigZagicon from '../components/svg-icons/ZigZagicon'
+import HeroMidWidget from '../components/widget/HeroMidWidget'
+import HeroWidget from '../components/widget/HeroWidget'
+import LandingPageCard from '../components/widget/LandingPageCard'
+import NewsTeller from '../components/widget/NewsTeller'
+import TrustedPartners from '../components/widget/TrustedPartners'
 import WhyChooseSoftPass from '../components/widget/WhyChooseSoftPass'
+import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
+import routes from '../navigation/Routes'
+
 
 interface Props {}
 
 function LandingPage(props: Props) {
   const {} = props
+
+  useEffect(() => {
+    AOS.init({})
+  }, [])
+
+
+  const navigation = useNavigate()
+  
 
   return (
     <LandingTemplate>
@@ -34,7 +46,7 @@ function LandingPage(props: Props) {
             </p>
           </div>
           <div className="w-full center-verical mb-32">
-            <button className="hero-sub-button">
+            <button onClick={() => navigation(routes.register)} className="hero-sub-button">
               <i className="relative -top-[1px]">
                 <ShieldCheckIcon width="16" />
               </i>
@@ -42,7 +54,7 @@ function LandingPage(props: Props) {
             </button>
           </div>
         </HeroWidget>
-        <section className="px-4 bg-white">
+        <section data-aos="fade-up-left" className="px-4 bg-white">
           <TrustedPartners />
           <article className="landing-article">
             <h2>Instantly verify, Stay compliant</h2>
