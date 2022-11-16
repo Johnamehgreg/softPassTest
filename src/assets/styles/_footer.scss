@@ -1,0 +1,19 @@
+.footer-container{
+    @apply flex justify-center w-11/12 md:w-10/12;
+}
+.footer-link-container{
+    @apply w-6/12 md:w-3/12;
+    b{
+        font-family: 'Noto Sans Warang Citi', sans-serif;
+        @apply block w-full text-white text-[13px] mb-3 mt-5;
+    }
+    ul{
+        li{
+            font-family: 'Noto Sans Warang Citi', sans-serif;
+            @apply opacity-50  text-[13px] py-2 font-[300] text-white;
+        }
+    }
+}
+.copyright-text{
+    @apply text-gray-500 text-[13px] font-bold;
+}
