@@ -83,7 +83,6 @@ function Register(props: Props) {
     }
 
 
-
     if (currentTab < 3) {
       moveTabs()
 
@@ -272,8 +271,8 @@ function Register(props: Props) {
                 <input
                   value={userInfo.country}
                   onChange={(e) => {
+                    handleCountry(e)
                     setUserinfo({ ...userInfo, country: e.target.value })
-                    setDropdownToggleCountry(false)
                   }}
                   required
                   type="text"
@@ -289,7 +288,8 @@ function Register(props: Props) {
                           return (
                             <button
                               onClick={() => {
-                                alert('click')
+                                setUserinfo({ ...userInfo, country:name?.common})
+                                setDropdownToggleCountry(!dropdownToggleCountry)
                               }}
                               key={`${name?.common} ${index}`}
                               className="country-dropdown-item pointer">
