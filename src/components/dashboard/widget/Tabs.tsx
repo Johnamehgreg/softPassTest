@@ -1,14 +1,18 @@
-import React from 'react'
+import React from "react";
+import ChartImage from "../../../assets/image/image/card 1.png";
 
 interface Props {
-  details: any
+  details: any;
 }
 
- function Tabs (props: Props) {
-  const { details } = props
+function Tabs(props: Props) {
+  const { details } = props;
 
   return (
-    <div className="full bg-white px-4 py-4 rounded-sm garrif">
+    <div
+      className="full bg-white px-4 py-4 rounded-sm garrif relative bg-contain"
+      style={{ backgroundImage: `url(${ChartImage})` }}
+    >
       <span className="block w-full sm:text-[13px] text-[10px] pb-1">
         {details?.name}
       </span>
@@ -19,7 +23,7 @@ interface Props {
         </abbr>
       </span>
     </div>
-  )
+  );
 }
 
-export default Tabs
+export default Tabs;
