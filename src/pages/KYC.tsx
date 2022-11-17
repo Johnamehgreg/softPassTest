@@ -61,11 +61,7 @@ function KYC(props: Props) {
 
 
             <FullWidth bg="white">
-            <button
-            onClick={handleClick} 
-            className="">
-                    scroll
-                </button>
+            
                 <div className='bg-white max-softpass-width md:rounded-2xl relative md:-top-[100px]'>
                     <TrustedPartners />
                 </div>

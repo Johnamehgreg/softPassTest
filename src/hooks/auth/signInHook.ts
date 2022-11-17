@@ -24,7 +24,7 @@ export const useSignInHook = (type:{setisLoading:React.Dispatch<React.SetStateAc
             const {status, data} = error.response
 
             if(status >=  400 && data.message){
-               showPopUp({type:'error', title:data.message})
+               showPopUp({type:'error', message:data.message})
             } 
 
         }).finally(() => {

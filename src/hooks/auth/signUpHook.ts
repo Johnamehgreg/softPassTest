@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { showPopUp } from "../../constanst/popupFunc"
-import routes from "../../navigation/Routes"
+import { popType, showPopUp } from "../../constanst/popupFunc"
 import apis from "../../services/apiSevices"
 
 
@@ -15,18 +14,14 @@ export const useSignUpHook = (type:{setisLoading:React.Dispatch<React.SetStateAc
         setisLoading(true)
         // showPopUp({type:'success', title:'Shoe Pop'})
         apis.auth.register(data).then((response:any)=> {
-            showPopUp({type:'success', title:'Account created successfully'})
-
-            setTimeout(() => {
-                navigation(routes.login)
-            }, 4000)
-            
+            showPopUp({type:popType.success, message:'Account created successfully'})
+ 
         }).catch((error:any) => {
 
             const {status, data} = error.response
 
             if(status >=  400 && data.message){
-               showPopUp({type:'error', title:data.message})
+               showPopUp({type:popType.error, message:data.message})
             } 
 
         }).finally(() => {

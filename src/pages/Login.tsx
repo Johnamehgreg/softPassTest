@@ -5,7 +5,6 @@ import AppLoader from '../components/AppComponent/AppLoader'
 import EyeSlashIcon from '../components/svg-icons/EyeSlashIcon'
 import FullScreenWidget from '../components/widget/FullScreenWidget'
 import HeroWidget from '../components/widget/HeroWidget'
-import { PopUp } from '../components/widget/PopUp'
 import { useSignInHook } from '../hooks/auth/signInHook'
 import routes from '../navigation/Routes'
 
@@ -40,7 +39,6 @@ function Login(props: Props) {
    return (
       <HeroWidget>
          <AppLoader isLoading={isLoading} />
-         <PopUp />
          <FullScreenWidget>
             <div className='py-12 flex justify-center'><img alt='' src={softPass}></img></div>
 

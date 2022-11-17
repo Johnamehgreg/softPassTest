@@ -121,7 +121,7 @@ export const topNavRoute = [
                 route: '/contact-us',
                 Image:TContact,
                 title:'CONTACT US',
-                content:"Email: enquiries@softpass.net Phone Number: 07026356742"
+                content:"Email: enquiries@softpass.net \n Phone Number: 07026356742"
             },
             {
                 route: '/blog',

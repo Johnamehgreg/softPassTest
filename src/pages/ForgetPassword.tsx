@@ -3,7 +3,6 @@ import softPass from "../assets/image/softpassSVG 3.png"
 import AppLoader from '../components/AppComponent/AppLoader'
 import FullScreenWidget from '../components/widget/FullScreenWidget'
 import HeroWidget from '../components/widget/HeroWidget'
-import { PopUp } from '../components/widget/PopUp'
 import { useForgetPasswordHook } from '../hooks/auth/forgetpasswordHook'
 
 interface Props { }
@@ -30,7 +29,6 @@ function ForgetPassword(props: Props) {
    return (
       <HeroWidget>
          <AppLoader isLoading={isLoading} />
-         <PopUp />
          <FullScreenWidget>
             <div className='py-12 flex justify-center'><img alt='' src={softPass}></img></div>
 
