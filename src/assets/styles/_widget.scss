@@ -1,0 +1,14 @@
+.hero-widget{
+  @apply flex justify-center flex-wrap;
+  background-image: url("https://res.cloudinary.com/softpass/image/upload/v1667388220/hero-section-bubble_aixaeb.gif");
+  background-size: cover;
+}
+.hero-mid-widget{
+  @apply flex justify-center flex-wrap bg-softpasspurple-500
+}
+.mid-hero-list{
+  @apply pt-4 garrif;
+  li{
+    @apply flex py-2 text-[13px] items-center;
+  }
+}

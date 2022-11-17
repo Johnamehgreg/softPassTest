@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Noto+Sans+Wancho&family=Noto+Sans+Warang+Citi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700&display=swap');
+@import 'landing';
+@import 'others';
+@import 'dashboard';
+@import 'tailwind';
+@import 'fontFace';
+@import 'navbar';
+@import "widget";
+@import "footer" ;
+
+$font-stack: rgb(18 113 227);
+
+::selection {
+    background: #39CDCC;
+    color:white
+  }
+
+html, body{
+    overflow-x: hidden !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #F7F8FA;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+    height:5px
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-softpasspurple-300 rounded-full h-1;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  .center-verical{
+    @apply flex justify-center;
+
+  }
+  .center-horizontal{
+    @apply flex items-center
+  }
+  .center{
+    @apply flex items-center items-center
+  }
+  .newsteller-container{
+    font-family: 'Noto Sans Warang Citi', sans-serif;
+    @apply px-4 ;
+    @apply flex flex-wrap justify-center;
+    form{
+      @apply sm:w-7/12 md:w-6/12 w-full my-12;
+      div{
+        @apply bg-softpassgray-100 border-[1px] border-gray-300 rounded-full flex items-center text-[14px] w-full ;
+        input{
+          flex: 1 1 100%;
+          @apply bg-transparent outline-none pl-3;
+        }
+        button{
+          @apply w-[120px] inline-block text-center text-[12px] py-3 bg-softpasspurple-300 text-white rounded-full border-none;
+        }
+      }
+    }
+  }
+  .gotham{
+    font-family: 'Inter Tight', sans-serif;
+  }
+  .garrif{
+    font-family: 'Noto Sans Warang Citi', sans-serif;
+  }
+
+
+  // LOGIN
+  .login-input-container{
+    @apply flex justify-center flex-wrap p-6 px-0 pb-0;
+    h3{
+      @apply text-[25px] font-bold gotham py-3 mx-6;
+    }
+    div{
+      @apply mx-6
+    }
+  }
+  .input-contain{
+    @apply w-full border-[1px] border-gray-400 py-[10px] rounded-lg flex items-center my-3 relative;
+    animation: 0.5s ease-in-out 1 flow;
+    input{
+      flex: 1 1 100%;
+      @apply outline-none text-[14px] pl-3 garrif bg-transparent;
+    }
+  }
+  @keyframes flow {
+    from{
+      left: 50% ;opacity: 0;
+    }
+    to{
+      left:0; opacity: 1;
+    }
+  }
+.login-forgot-password{
+  @apply w-full flex text-[15px] items-center garrif justify-start;
+  div{
+    @apply w-6/12 mx-0;
+  }
+  div:nth-of-type(2){
+    @apply text-right;
+  }
+}
+.next-button{
+  @apply w-full bg-softpasspurple-300 py-3 text-center text-[15px] font-bold my-3 outline-none text-white rounded-lg
+}
+
+//Register
+
+
+.active-tab{
+  @apply w-4/12 flex items-center;
+}
+.active-tab>i{
+  @apply inline-flex justify-center items-center w-[30px] h-[30px] p-3 border-[2px] rounded-full border-white/70
+}
+.active-tab > i > i{
+  @apply inline-block p-[5px] rounded-full bg-white/70
+}
+.active-tab>span{
+  @apply inline-flex h-[2px] w-[calc(100%-30px)] bg-white/70;
+}
+.active-tab:nth-last-child(1)>span{
+  @apply hidden 
+}
+.active-tab:nth-last-child(1){
+  width: 30px !important;
+}
+.initial-tab{
+  @apply w-4/12 flex items-center;
+}
+.initial-tab>i{
+    @apply relative inline-flex justify-center items-center w-[30px] h-[30px] p-3 border-[2px] rounded-full border-softpasspurple-300 
+}
+.initial-tab > i > i{
+  @apply inline-block p-[5px] rounded-full bg-softpasspurple-300
+}
+.initial-tab>span{
+  @apply inline-flex h-[2px] w-[calc(100%-30px)] bg-softpasspurple-300;
+}
+.initial-tab:nth-last-child(1)>span{
+  @apply hidden 
+}
+.initial-tab:nth-last-child(1){
+  width: 30px !important;
+}
+.tab-check{
+  @apply absolute w-full h-full rounded-full bg-softpasspurple-300 flex justify-center items-center z-10
+}
+.wallet-container{
+  @apply w-full lg:w-[32%] md:w-[100%] sm:w-[49%] mt-3 bg-white px-4 py-4 rounded-sm  garrif flex items-center;
+  div:nth-of-type(1){
+    flex: 1 1 100%;
+  }
+}
+.all-flex{
+  flex: 1 1 100%;
+}
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: calc(50% - 11px);
+  left: 0;
+  height: 22px;
+  width: 22px;
+  border-radius: 50px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  @apply bg-softpasspurple-300
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.appLoader-container{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.273);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+
+}
+
+.side-popup {
+  position: fixed;
+  min-height: 100px;
+  top: 80px;
+  right: -500px;
+  width: 350px;
+  z-index: 300;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.38) ;
+  display: flex;
+  font-size: 1.1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: all linear 500ms;
+  border-radius: 5px;
+  top: 10px;
+  border-width: 2px;
+  
+
+
+  #popUp-title{
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+  }
+
+  #popUp-message{
+    font-size: 1rem;
+  }
+
+  #popUp-error-icon{
+    display: none;
+  }
+
+  #popUp-success-icon{
+    display: none;
+  }
+
+
+}
+
+.side-popup-close-icon{
+  position: absolute;
+  right: 5px;
+  top: 5px !important;
+}
+
+
+.show-popup{
+  right: 30px !important
+}
+
+.loader-inner{
+  width: 130px;
+  height: 130px;
+  background-color: #fff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img{
+    width: 50px;
+    height:50px;
+  }
+}
+
+
+.contry-drop-down{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  background-color: #fff;
+  transform: translateX(50%);
+  left: -55%;
+  overflow-x: scroll;
+  top: 50px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.23);
+
+
+  .country-dropdown-item{
+  // background-color: #e1217b13;
+  height: 40px;
+  display: flex;
+  padding: 0 !important;
+  margin: 0!important;
+  margin-bottom: 5px !important;
+  align-items: center;
+    
+  }
+
+
+  .flag-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .country-flag-cont {
+    height: 30px;
+    width: 50px;
+    margin-right: 0.7rem;
+  }
+}
+
+.input-contain div select{
+  -webkit-appearance: none;
+  width : calc(100% - 30px);
+  margin-left: -10px;
+  outline: none;
+}
+
+
+
+
+.hover-btn{
+  transition:  all linear 300ms;
+  z-index: 200;
+}
+
+a{
+  transition: all linear 300ms;
+  transform: scale(1);
+}
+a:hover{
+  transition: all linear 300ms;
+  transform: scale(1.04);
+
+}
+
+.subscribe-btn{
+  transition: all linear 300ms;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.317);
+ 
+}
+
+
+.subscribe-btn:hover{
+  transform: scale(1.05);
+}
+
+
+
+
+
+.hover-btn:hover{
+   transition: all linear 300ms;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.317);
+  transform: scale(1.05);
+}

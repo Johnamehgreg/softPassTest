@@ -1,0 +1,90 @@
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { ReactComponent as DLogo } from '../../../assets/image/svg/softpassSVG 3.svg'
+import { dashboardSideRoute } from '../dashboardSideRoute'
+import { ReactComponent as DLogout } from '../../../assets/image/svg/logout.svg'
+import { ReactComponent as ArrowDown } from '../../../assets/image/svg/ArrowDown.svg'
+
+interface Props {
+  closeSidebar: boolean
+  closebarFunction: Function
+}
+
+const DashboardSideNav: React.FC<Props> = (props: Props) => {
+  const { closeSidebar, closebarFunction } = props
+
+  //VARIABLES
+  const [route, setRoute] = useState('Users')
+  const [isDropdownActive, setIsDropDownActive] = useState(-1)
+
+  //FUNCTIONS
+  const setNavigation = (val: string) => {
+    setRoute(val)
+  }
+  const setIsDropDownActiveFunc = (val: number) => {
+    isDropdownActive == -1 ? setIsDropDownActive(val) : setIsDropDownActive(-1)
+  }
+
+  return (
+    <div className={`w-full side-nav-container overflow-x-visible overflow-y-auto px-6 pt-6`}>
+      <div className="w-full flex items-center">
+        <div className="w-11/12">
+          <DLogo />
+        </div>
+        <div className="md:hidden w-1/12 text-right text-[30px]">
+          <span
+            onClick={() => {
+              closebarFunction(false)
+            }}
+            className="cursor-pointer"
+          >
+            &times;
+          </span>
+        </div>
+      </div>
+      <div className="mt-8">
+        {dashboardSideRoute.map((item: any, index: number) => {
+          const { Icon, subRoute } = item
+          return (
+            <div className="flex flex-wrap py-3 inter">
+              <span className="flex w-full items-center text-[14px] capitalize cursor-pointer">
+                <Icon width={'18'} />
+                &nbsp; &nbsp; {item.name}
+                {item.subRoute.length > 0 && (
+                  <span
+                    onClick={() => {
+                      setIsDropDownActiveFunc(index)
+                    }}
+                    className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index ? 'rotate-180' : 'rotate-0'}`}
+                  >
+                    <ArrowDown />
+                  </span>
+                )}
+              </span>
+              {isDropdownActive == index && (
+                <div className="pl-2">
+                  {subRoute.map((item: any, index: number) => {
+                    return (
+                      <span
+                      onClick={()=>{ setIsDropDownActiveFunc(-1)}}
+                      className="sub-route-item mt-2 relative">
+                        {item.subname}
+                      </span>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          )
+        })}
+        <div className="logout-container">
+          <span className="text-[15px] text-softpassgray-150 flex items-center">
+            <DLogout /> &nbsp; &nbsp; Log Out
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default DashboardSideNav
