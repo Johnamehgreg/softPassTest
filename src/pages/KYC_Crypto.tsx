@@ -1,12 +1,11 @@
-import React from 'react'
-import HeroWidget from '../components/widget/HeroWidget'
-import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
 import dataSecurity from '../assets/image/Data_security.png'
-import FullWidth from '../components/widget/FullWidth'
-import TrustedPartners from '../components/widget/TrustedPartners'
-import NewsTeller from '../components/widget/NewsTeller'
-import TargetedIndustry from '../components/landingPage/TargetedIndustry'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
+import TargetedIndustry from '../components/landingPage/TargetedIndustry'
+import FullWidth from '../components/widget/FullWidth'
+import HeroWidget from '../components/widget/HeroWidget'
+import NewsTeller from '../components/widget/NewsTeller'
+import TrustedPartners from '../components/widget/TrustedPartners'
+import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
 
 interface Props {}
 
@@ -38,7 +37,7 @@ function KYC_Crypto(props: Props) {
          
 
         <FullWidth bg={'white'}>
-        <div className="flex flex-wrap max-softpass-width md:pt-[00px] pt-16 pb-[50px] md:pb-[80px] justify-between items-center">
+        <div className="flex flex-wrap max-softpass-width md:pt-[00px] pt-2 pb-[50px] md:pb-[80px] justify-between items-center">
           <div className="sm:w-5/12 w-full  text-black md:pr-3 pt-6">
             <h1 className='text-softpasspurple-300 capitalize text-[37px] font-bold gotham'>
                     Meet complaince with one integration

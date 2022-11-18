@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { popType, showPopUp } from "../../constanst/popupFunc"
+import routes from "../../navigation/Routes"
 import apis from "../../services/apiSevices"
 
 
@@ -15,6 +16,7 @@ export const useSignUpHook = (type:{setisLoading:React.Dispatch<React.SetStateAc
         // showPopUp({type:'success', title:'Shoe Pop'})
         apis.auth.register(data).then((response:any)=> {
             showPopUp({type:popType.success, message:'Account created successfully'})
+            navigation(routes.authOtpVerify)
  
         }).catch((error:any) => {
 

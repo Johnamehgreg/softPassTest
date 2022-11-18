@@ -61,3 +61,33 @@ export const useVerifyForgetPassword = (type:{setisLoading:React.Dispatch<React.
         submit
     }
 }
+export const useVerifyAccount = (type:{setisLoading:React.Dispatch<React.SetStateAction<boolean>>}) => {
+    const {setisLoading} = type
+    const navigation = useNavigate()
+    
+    
+    const submit =  (data:object) => {
+        setisLoading(true)
+       
+        apis.auth.verifyAccount(data).then((response:any)=> {
+            if(response){
+                showPopUp({type:'success', message:'Account  verify successfully'})
+                navigation(routes.login)
+            }
+        }).catch((error:any) => {
+            console.log(error)
+            const {status, data} = error.response
+            if(status >=  400 && data.message){
+               showPopUp({type:'error', message:data.message})
+            } else{
+                showPopUp({type:'error', message:'Something went wrong'})
+            }
+
+        }).finally(() => {
+            setisLoading(false)
+        })
+    }
+    return {
+        submit
+    }
+}

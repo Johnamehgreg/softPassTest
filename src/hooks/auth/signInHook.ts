@@ -1,31 +1,50 @@
 import Cookies from 'js-cookie'
 import { useContext } from "react"
+import { useNavigate } from 'react-router-dom'
 import { showPopUp } from "../../constanst/popupFunc"
 import { AuthProvider } from "../../contextProvide/AuthContext"
+import routes from '../../navigation/Routes'
 import apis from "../../services/apiSevices"
 
 
 
 
-export const useSignInHook = (type:{setisLoading:React.Dispatch<React.SetStateAction<boolean>>}) => {
-    const {isUserLogin, setisUserLogin} = useContext(AuthProvider)
 
-    const {setisLoading} = type
+export const useSignInHook = (type: { setisLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
-    
-    const submit =  (data:object) => {
+    const navigation = useNavigate()
+    const { isUserLogin, setisUserLogin } = useContext(AuthProvider)
+
+    const { setisLoading } = type
+
+
+    const submit = (data: object) => {
         setisLoading(true)
         // showPopUp({type:'success', title:'Shoe Pop'})
-        apis.auth.login(data).then((response:any)=> {
+        apis.auth.login(data).then((response: any) => {
             Cookies.set('isLogin', 'true')
             setisUserLogin(true)
-        }).catch((error:any) => {
-            console.log(error)
-            const {status, data} = error.response
+        }).catch((error: any) => {
+            const { status, data } = error.response
 
-            if(status >=  400 && data.message){
-               showPopUp({type:'error', message:data.message})
-            } 
+            if (status === 401) {
+                let emailData = {
+                    "email": data.email,
+                }
+                apis.auth.verifyAccount(emailData)
+                    .then(() => {
+                        navigation(routes.authOtpVerify)
+                    }).catch(() => {
+                        const { data } = error.response
+                        showPopUp({ type: 'error', message: data.message })
+                    })
+
+
+            }
+
+            if (status >= 400 && data.message) {
+                showPopUp({ type: 'error', message: data.message })
+            }
 
         }).finally(() => {
             setisLoading(false)

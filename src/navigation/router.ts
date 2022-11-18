@@ -17,6 +17,7 @@ import KYC_Driver from '../pages/KYC_Driver';
 import LandingPage from '../pages/LandingPage';
 import Login from '../pages/Login';
 import OTPSend from '../pages/OTPSend';
+import OTPVerifyAccount from '../pages/OTPVerifyAccount';
 import Register from '../pages/Register';
 import Sim_Registration from '../pages/Sim_Registration';
 
@@ -127,6 +128,11 @@ const route = [
         stack: stacks.AUTH,
         route: routes.authOtp,
         Page: OTPSend,
+    },
+    {
+        stack: stacks.AUTH,
+        route: routes.authOtpVerify,
+        Page: OTPVerifyAccount,
     },
 
 

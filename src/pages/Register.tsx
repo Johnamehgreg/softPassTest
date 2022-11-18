@@ -10,16 +10,16 @@ import HeroWidget from "../components/widget/HeroWidget";
 import { country } from "../constanst/country";
 import { useSignUpHook } from "../hooks/auth/signUpHook";
 
-interface Props {}
+interface Props { }
 
 function Register(props: Props) {
-  const {} = props;
+  const { } = props;
   const newPassword = useRef<any>();
   const confirmPassword = useRef<any>();
   const [list, setlist] = useState(country);
 
   //Variables
-  const [currentTab, setCurrentTab] = useState(2);
+  const [currentTab, setCurrentTab] = useState(1);
   const [proceedToSubmit, setProceedToSubmit] = useState(false);
   const [matchPassword, setMatchpassword] = useState(false);
   const [initPassword, setNewPassword] = useState(true);
@@ -76,6 +76,8 @@ function Register(props: Props) {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // alert('chan')
+
     let data = {
       first_name: userInfo.fullName,
       last_name: userInfo.fullName,
@@ -89,7 +91,6 @@ function Register(props: Props) {
     };
 
     if (currentTab < 3) {
-      if (checkingAllDropdownValue()) return;
       moveTabs();
     } else if (currentTab === 3) {
       submit(data);

@@ -2,6 +2,7 @@ import AOS from 'aos'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
+import Article from '../components/landingPage/Article'
 import BlogSection from '../components/landingPage/BlogSection'
 import CircleBreakIcon from '../components/svg-icons/CircleBreakIcon'
 import PlayIcon from '../components/svg-icons/PlayIcon'
@@ -56,45 +57,7 @@ function LandingPage(props: Props) {
         </HeroWidget>
         <section data-aos="fade-up-left" className="px-4 bg-white">
           <TrustedPartners />
-          <article className="landing-article">
-            <h2>Instantly verify, Stay compliant</h2>
-            <div className="w-full flex justify-center items-center flex-wrap">
-              <div className="md:w-5/12 w-full">
-                <p className="pb-3">
-                  Our services help you verify customer identities, gain deeper
-                  insights about users/businesses, detect and prevent fraud.
-                </p>
-                <ul className="landing-list">
-                  <li>
-                    Authentication made easy for businesses to verify the
-                    identity of online customers
-                  </li>
-                  <li>
-                    Softpass enables companies to identify and take action
-                    against fraudulent behavior within their business.{' '}
-                  </li>
-                  <li>
-                    We provide trusted real-time verification data for your
-                    applications, helping you build a fraud-free ecosystem.{' '}
-                  </li>
-                  <li>
-                    Our authentic products help you verify, gain deeper insights
-                    about users/businesses, detect and prevent fraud.
-                  </li>
-                </ul>
-                <div className="w-full">
-                  <button className="get-button">GET IN TOUCH</button>
-                </div>
-              </div>
-              <div className="md:w-5/12 w-full">
-                <img
-                  alt="design-dashboard"
-                  width="100%"
-                  src={'https://res.cloudinary.com/softpass/image/upload/v1667388239/slider_h41kjb.gif'}
-                ></img>
-              </div>
-            </div>
-          </article>
+          <Article />
 
         <WhyChooseSoftPass/>
         </section>

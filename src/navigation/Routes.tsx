@@ -6,6 +6,7 @@ const routes = {
   landing: '/landing',
   login: '/login',
   authOtp: '/otp-send',
+  authOtpVerify: '/otp-verify',
   register: '/register',
   forgetPassword: '/forget-password',
   kyc:'/kyc',
