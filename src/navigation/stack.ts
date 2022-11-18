@@ -1,9 +1,10 @@
+import { AppType } from "../constanst/ApptypeEnum"
 
 
 const route = {
-    APP: 'app',
-    AUTH: 'auth',
-    Landing: 'landing',
+    APP: AppType.APP,
+    AUTH: AppType.AUTH,
+    Landing: AppType.LANDING,
 }
 
 
