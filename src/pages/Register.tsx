@@ -19,7 +19,7 @@ function Register(props: Props) {
   const [list, setlist] = useState(country);
 
   //Variables
-  const [currentTab, setCurrentTab] = useState(2);
+  const [currentTab, setCurrentTab] = useState(1);
   const [proceedToSubmit, setProceedToSubmit] = useState(false);
   const [matchPassword, setMatchpassword] = useState(false);
   const [initPassword, setNewPassword] = useState(true);
@@ -43,13 +43,12 @@ function Register(props: Props) {
   const { submit } = useSignUpHook({ setisLoading });
   //Functions
   const checkingAllDropdownValue = () => {
-    if (currentTab != 2) return true;
+    if (currentTab != 2) return false;
 
     let getvalues =
       userInfo?.product?.trim() == "" ||
       userInfo?.aboutUs?.trim() == "" ||
       userInfo?.currentJob?.trim() == "";
-
     if (getvalues) setProceedFromDropDown(true);
     return getvalues;
   };
@@ -121,17 +120,6 @@ function Register(props: Props) {
     },
   ]);
 
-  const heckingAllDropdownValue = () => {
-    if (currentTab != 2) return true;
-
-    let getvalues =
-      userInfo?.product?.trim() == "" ||
-      userInfo?.aboutUs?.trim() == "" ||
-      userInfo?.currentJob?.trim() == "";
-
-    if (getvalues) setProceedFromDropDown(true);
-    return getvalues;
-  };
   const updateUserInfo = (val: string, type: string) => {
     switch (type) {
       case "Product":
