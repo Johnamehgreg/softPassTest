@@ -43,12 +43,13 @@ function Register(props: Props) {
   const { submit } = useSignUpHook({ setisLoading });
   //Functions
   const checkingAllDropdownValue = () => {
-    if (currentTab != 2) return false;
+    if (currentTab != 2) return true;
 
     let getvalues =
       userInfo?.product?.trim() == "" ||
       userInfo?.aboutUs?.trim() == "" ||
       userInfo?.currentJob?.trim() == "";
+
     if (getvalues) setProceedFromDropDown(true);
     return getvalues;
   };
@@ -121,6 +122,17 @@ function Register(props: Props) {
     },
   ]);
 
+  const heckingAllDropdownValue = () => {
+    if (currentTab != 2) return true;
+
+    let getvalues =
+      userInfo?.product?.trim() == "" ||
+      userInfo?.aboutUs?.trim() == "" ||
+      userInfo?.currentJob?.trim() == "";
+
+    if (getvalues) setProceedFromDropDown(true);
+    return getvalues;
+  };
   const updateUserInfo = (val: string, type: string) => {
     switch (type) {
       case "Product":
