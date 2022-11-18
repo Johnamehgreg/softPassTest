@@ -50,6 +50,7 @@ function Register(props: Props) {
       userInfo?.aboutUs?.trim() == "" ||
       userInfo?.currentJob?.trim() == "";
     if (getvalues) setProceedFromDropDown(true);
+    else setProceedFromDropDown(false)
     return getvalues;
   };
   const setPasswordToUser = (data: any) => {
