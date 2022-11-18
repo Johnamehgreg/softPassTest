@@ -1,7 +1,7 @@
 import { Select } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import softPass from "../assets/image/softpassSVG 3.png";
+import SoftpassLogoTransparent from "../components/svg-icons/SoftpassLogoTransparent";
 import AppLoader from "../components/AppComponent/AppLoader";
 import TabsIndicator from "../components/login/TabsIndicator";
 import EyeSlashIcon from "../components/svg-icons/EyeSlashIcon";
@@ -170,7 +170,7 @@ function Register(props: Props) {
       <AppLoader isLoading={isLoading} />
       <FullScreenWidget>
         <div className="py-12 flex justify-center">
-          <img alt="" src={softPass}></img>
+          <SoftpassLogoTransparent/>
         </div>
         <div className="my-8 flex justify-center w-full">
           <TabsIndicator

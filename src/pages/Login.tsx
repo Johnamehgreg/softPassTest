@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import softPass from "../assets/image/softpassSVG 3.png"
+import SoftpassLogoTransparent from '../components/svg-icons/SoftpassLogoTransparent'
 import AppLoader from '../components/AppComponent/AppLoader'
 import EyeSlashIcon from '../components/svg-icons/EyeSlashIcon'
 import FullScreenWidget from '../components/widget/FullScreenWidget'
@@ -40,7 +40,7 @@ function Login(props: Props) {
       <HeroWidget>
          <AppLoader isLoading={isLoading} />
          <FullScreenWidget>
-            <div className='py-12 flex justify-center'><img alt='' src={softPass}></img></div>
+            <div className='py-12 flex justify-center'><SoftpassLogoTransparent/></div>
 
             <form
                onSubmit={onSubmit}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import softLogo from '../../assets/image/Logo.png'
+import SoftpassLogo from '../svg-icons/SoftpassLogo'
 import { topNavRoute } from '../../constanst/topNavRout'
 import routes from '../../navigation/Routes'
 import ArrowDown from '../svg-icons/ArrowDown'
@@ -40,7 +40,7 @@ function Topnav(props: Props) {
     <nav className=" bg-white flex flex-wrap w-full items-center px-2 lg:px-16 md:px-4 garrif md: fixed shadow-lg z-10  top-0 left-0 ">
       <div className="md:w-3/12 w-full flex relative px-2">
         <NavLink to="/">
-          <img alt="soft-logo" className="w-[120px]" src={softLogo}></img>
+         <SoftpassLogo width={'140'} height={'37'}/>
         </NavLink>
         <span
           className="md:hidden inline-block absolute right-2 top-[25px] cursor-pointer"
