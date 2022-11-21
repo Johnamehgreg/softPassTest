@@ -1,5 +1,5 @@
 export enum AppType {
-    APP = 'App',
+    APP = 'app',
     LANDING = 'landing',
     AUTH = 'auth'
 } 
