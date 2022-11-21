@@ -1,10 +1,12 @@
 import Cookies from 'js-cookie';
 import { useContext, useEffect } from 'react';
 import {
-  BrowserRouter, Navigate, Route,
+  BrowserRouter, Route,
   Routes
 } from "react-router-dom";
 import { AuthProvider } from '../contextProvide/AuthContext';
+import Dashboard from '../pages/home/pages/Dashboard';
+import Verification from '../pages/home/pages/Verification';
 import route from './router';
 
 
@@ -12,9 +14,13 @@ const RootRoutes = () => {
 
   const { isUserLogin, setisUserLogin } = useContext(AuthProvider)
 
-  const mainRoute = route.filter((item: any) => item.stack === 'app')
+  const MainRoute = route.filter((item: any) => item.stack === 'app')[0]
   const landingRoute = route.filter((item: any) => item.stack !== 'app')
   const user = Cookies.get('isLogin')
+
+
+
+
 
   const readCookies = () => {
 
@@ -31,7 +37,7 @@ const RootRoutes = () => {
     <BrowserRouter>
       <Routes>
 
-        
+
 
         {
           !isUserLogin && (
@@ -52,7 +58,7 @@ const RootRoutes = () => {
         {
           isUserLogin && (
             <>
-              {
+              {/* {
                 mainRoute.map((item: any) => {
                   const { Page, route } = item
 
@@ -61,12 +67,17 @@ const RootRoutes = () => {
                   )
 
                 })
-              }
+              } */}
+
+              <Route path={MainRoute.route} element={<MainRoute.Page />} >
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/auth-verification' element={<Verification />} />
+              </Route>
             </>
           )
         }
 
-        <Route path='*' element={<Navigate to={isUserLogin ? '/' : '/landing'} />} />
+        {/* <Route path='*' element={<Navigate to={isUserLogin ? '/' : '/landing'} />} /> */}
 
 
       </Routes>

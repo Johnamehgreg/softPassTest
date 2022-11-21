@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ReactComponent as ArrowDown } from "../../../assets/image/svg/ArrowDown.svg";
+import { ReactComponent as DLogout } from "../../../assets/image/svg/logout.svg";
 import { ReactComponent as DLogo } from "../../../assets/image/svg/softpassSVG 3.svg";
 import { dashboardSideRoute } from "../dashboardSideRoute";
-import { ReactComponent as DLogout } from "../../../assets/image/svg/logout.svg";
-import { ReactComponent as ArrowDown } from "../../../assets/image/svg/ArrowDown.svg";
 
 interface Props {
   closeSidebar: boolean;
@@ -13,6 +13,7 @@ interface Props {
 const DashboardSideNav: React.FC<Props> = (props: Props) => {
   const { closeSidebar, closebarFunction } = props;
 
+  const navigation = useNavigate()
   //VARIABLES
   const [route, setRoute] = useState("Users");
   const [isDropdownActive, setIsDropDownActive] = useState(-1);
@@ -47,11 +48,13 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
       </div>
       <div className="mt-8">
         {dashboardSideRoute.map((item: any, index: number) => {
-          const { Icon, subRoute } = item;
+          const { Icon, route, subRoute } = item;
           return (
             <div className="flex flex-wrap py-1 inter">
               <span
                 onClick={() => {
+                 
+                  navigation(route)
                   setActiveSideContent(index);
                 }}
                 className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer

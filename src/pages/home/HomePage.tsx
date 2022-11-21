@@ -2,10 +2,11 @@ import { useRef, useState } from "react";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
 import Verification from "./pages/Verification";
 
-interface Props {}
+
+interface Props { }
 
 function HomePage(props: Props) {
-  const {} = props;
+  const { } = props;
   const ref = useRef(null);
 
   //Variables
@@ -66,8 +67,11 @@ function HomePage(props: Props) {
 
   return (
     <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
-     {/* <Dashboard /> */}
-     <Verification />
+
+      {/* <Outlet /> */}
+      {/* <Dashboard /> */}
+     
+      <Verification />
 
     </DashboardTemplate>
   );
