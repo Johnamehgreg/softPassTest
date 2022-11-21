@@ -14,6 +14,7 @@ import ChartDashboard from "../../components/dashboard/widget/Chart";
 import TopCardContainer from "../../components/dashboard/widget/TopCardContainer";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
 import { createPopper } from "@popperjs/core";
+import SelectIdDropdown from "../../components/dashboard/widget/SelectIdDropdown";
 
 interface Props {}
 
@@ -78,7 +79,7 @@ function HomePage(props: Props) {
 
 
   return (
-    <DashboardTemplate>
+    <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
       <TopCardContainer tabs={tabs} />
 
       <section className="bg-white mt-8 garrif">
@@ -86,58 +87,7 @@ function HomePage(props: Props) {
           <h1 className="w-6/12 text-[22px] font-semibold">Overview</h1>
           <div className="w-6/12">
             <div className="flex justify-end z-10">
-              <div className="select-verification relative">
-                <span
-                  className="flex items-center cursor-pointer"
-                  onClick={() => {
-                    setSelectId(!selectId);
-                  }}
-                >
-                  Select verification ID <IoMdArrowDropdown size={25} />
-                </span>
-
-                  <div
-                    ref={ref}
-                    className={`select-id-dropdown ${selectId ? 'flex' : 'hidden'}`}
-                    onClick={(event) => {
-                      closeDropDown(event);
-                    }}
-                  >
-                    <div className="select-id-dp-container">
-                      <form className="select-dp-form mb-4">
-                        <BiSearch /> &nbsp; &nbsp;
-                        <input
-                          placeholder="Search Verification ID"
-                          className="bg-transparent outline-none"
-                        />
-                      </form>
-                      <div>
-                        {selectContent.map((item: any, index: number) => {
-                          return (
-                            <div
-                              className="my-2 py-1 mx-3"
-                              onClick={() => {
-                                setDbSelectId(index);
-                              }}
-                            >
-                              <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">
-                                <abbr className="font-semibold text-[13px]">
-                                  {item.name}
-                                </abbr>
-                                <input
-                                  type="checkbox"
-                                  checked={dbSelectId == index}
-                                />
-                                <span className="checkmark"></span>
-                              </label>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-              </div>
+                <SelectIdDropdown dropdownDirection={'left'}/>
             </div>
           </div>
         </div>

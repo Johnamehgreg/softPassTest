@@ -5,10 +5,12 @@ import SideNav from "../../components/navbar/SideNav";
 
 interface Props {
   children: ReactNode;
+  welcomeNote: String,
+  title: String
 }
 
 function DashboardTemplate(props: Props) {
-  const {} = props;
+  const {welcomeNote, title} = props;
 
   //Variables
   const [isMobile, setIsMobile] = useState(true);
@@ -38,7 +40,7 @@ function DashboardTemplate(props: Props) {
       </div>
       <div className="dashboard-detail-container">
         <div className="top-dashboard-nav bg-white">
-          <DashboardTopNav closebarFunction={setCloseSideNavFunc} />
+          <DashboardTopNav title={title} welcomeNote={welcomeNote} closebarFunction={setCloseSideNavFunc} />
         </div>
         <div className="body-dashboard-container">{props.children}</div>
       </div>

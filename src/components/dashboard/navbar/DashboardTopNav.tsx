@@ -6,11 +6,13 @@ import Avertar from '../../avertar'
 
 
 interface Props {
-  closebarFunction: Function
+  closebarFunction: Function,
+  welcomeNote: String,
+  title: String
 }
 
 const DashboardTopNav: React.FC<Props> = ( props: Props ) => {
-  const { closebarFunction } = props
+  const { closebarFunction, welcomeNote , title} = props
 
 
   return (
@@ -27,9 +29,9 @@ const DashboardTopNav: React.FC<Props> = ( props: Props ) => {
         </span>
       </div>
       <div className="w-full md:w-6/12 leading-5 py-3 md:py-0 px-5 bg-softpassgray-50 md:bg-transparent">
-        <b className="block w-full font-semibold">Good day Michael</b>
+        <b className="block w-full font-semibold">{welcomeNote}</b>
         <span className="text-[13px] text-gray-400">
-          Trust you are having a great day 🤨
+          {title}
         </span>
       </div>
       <div className="w-6/12 px-3 hidden md:flex flex-wrap justify-end items-center">

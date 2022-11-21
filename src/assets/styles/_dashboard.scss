@@ -126,7 +126,7 @@
 }
 .select-id-dropdown {
   @apply fixed flex top-0 left-0 w-[100vw] h-[100vh] bg-black/10 md:bg-white 
-    md:absolute md:top-[calc(100%+16px)] md:min-w-[300px]  md:max-w-[320px] md:h-auto md:-left-full
+    md:absolute md:top-[calc(100%+16px)] md:min-w-[300px]  md:max-w-[320px] md:h-auto 
     shadow-lg z-[9] rounded-md 
     items-end;
 }
