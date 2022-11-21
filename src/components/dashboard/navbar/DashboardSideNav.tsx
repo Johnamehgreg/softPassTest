@@ -49,15 +49,15 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
         {dashboardSideRoute.map((item: any, index: number) => {
           const { Icon, subRoute } = item;
           return (
-            <div className="flex flex-wrap py-3 inter">
+            <div className="flex flex-wrap py-1 inter">
               <span
                 onClick={() => {
                   setActiveSideContent(index);
                 }}
-                className={`flex w-full items-center text-[14px] capitalize cursor-pointer
+                className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
                 ${
                   activeSideContent == index
-                    ? " text-softpasspurple-300 scale-[1.1] transition duration-300"
+                    ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
                     : "transition duration-300"
                 }
                 `}
