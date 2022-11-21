@@ -1,12 +1,11 @@
 import Cookies from 'js-cookie';
 import { useContext, useEffect } from 'react';
 import {
-  BrowserRouter, Route,
+  BrowserRouter, Navigate, Route,
   Routes
 } from "react-router-dom";
 import { AuthProvider } from '../contextProvide/AuthContext';
-import Dashboard from '../pages/home/pages/Dashboard';
-import Verification from '../pages/home/pages/Verification';
+import HomePage from '../pages/home/HomePage';
 import route from './router';
 
 
@@ -69,15 +68,20 @@ const RootRoutes = () => {
                 })
               } */}
 
-              <Route path={MainRoute.route} element={<MainRoute.Page />} >
+
+              {/* <Route path={MainRoute.route} element={<MainRoute.Page />} >
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/auth-verification' element={<Verification />} />
-              </Route>
+              </Route> */}
+
+              <Route path='/' element={<HomePage />} />
+
+
             </>
           )
         }
 
-        {/* <Route path='*' element={<Navigate to={isUserLogin ? '/' : '/landing'} />} /> */}
+        <Route path='*' element={<Navigate to={isUserLogin ? '/' : '/landing'} />} />
 
 
       </Routes>
