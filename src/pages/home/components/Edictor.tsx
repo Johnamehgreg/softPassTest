@@ -120,7 +120,6 @@ function HomeEdictor() {
             </div>
         </div>
 
-
     );
 }
 export default HomeEdictor;

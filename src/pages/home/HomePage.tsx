@@ -1,7 +1,5 @@
 import { useRef, useState } from "react";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
-import Verification from "./pages/Verification";
-
 
 interface Props { }
 
@@ -67,12 +65,9 @@ function HomePage(props: Props) {
 
   return (
     <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
-
-      {/* <Outlet /> */}
-      {/* <Dashboard /> */}
-     
-      <Verification />
-
+     {/* <Dashboard /> */}
+     {/* <Verification /> */}
+      <FacialVerification/>
     </DashboardTemplate>
   );
 }

@@ -56,6 +56,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                  
                   navigation(route)
                   setActiveSideContent(index);
+                  setIsDropDownActiveFunc(index);
                 }}
                 className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
                 ${
@@ -76,9 +77,6 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                 &nbsp; &nbsp; {item.name}
                 {item.subRoute?.length > 0 && (
                   <span
-                    onClick={() => {
-                      setIsDropDownActiveFunc(index);
-                    }}
                     className={`ml-4 mt-1 inline-block transition ${
                       isDropdownActive == index && activeSideContent == index
                         ? "rotate-180"

@@ -42,9 +42,7 @@ const Verification: React.FC = (props: Props) => {
   };
 
   return (
-    <
-
-      >
+    <>
       <div>
         {/* start of select id */}
         <div className="max-w-[200px]">
@@ -73,13 +71,15 @@ const Verification: React.FC = (props: Props) => {
                   const { title } = item;
                   let filterTitle = "";
                   if (Array.isArray(title)) {
-                    filterTitle = "Input " + (
-                      fromUniqueInput.filter(
-                        (item: any, index: number) => item.title === headerTitle
-                      )[0] as any
-                    )?.name;
+                    filterTitle =
+                      "Input " +
+                      (
+                        fromUniqueInput.filter(
+                          (item: any, index: number) =>
+                            item.title === headerTitle
+                        )[0] as any
+                      )?.name;
                   } else filterTitle = title;
-
 
                   return (
                     <div className="verification-input-contain my-4">
@@ -91,6 +91,9 @@ const Verification: React.FC = (props: Props) => {
                     </div>
                   );
                 })}
+                <div className="w-full text-center py-3 garrif">
+                  <button className="next-button">Submit</button>
+                </div>
               </form>
             </div>
             <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
