@@ -326,7 +326,7 @@ function Register(props: Props) {
               </div>
               <div className="input-contain">
                 <input
-                  type={confirmInitpassword ? "password" : "text"}
+                  type={!confirmInitpassword ? "password" : "text"}
                   onChange={(e) => {
                     setPasswordToUser({ confirmPassword: e.target.value });
                   }}

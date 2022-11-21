@@ -32,16 +32,7 @@ const RootRoutes = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* {
-          route.map((item: any) => {
-            const { Page, route } = item
-
-            return (
-              <Route path={route} key={route} element={<Page />} />
-            )
-
-          })
-        } */}
+        
 
         {
           !isUserLogin && (
