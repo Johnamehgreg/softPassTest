@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import SoftpassLogoTransparent from '../components/svg-icons/SoftpassLogoTransparent'
 import AppLoader from '../components/AppComponent/AppLoader'
 import EyeSlashIcon from '../components/svg-icons/EyeSlashIcon'
+import SoftpassLogoTransparent from '../components/svg-icons/SoftpassLogoTransparent'
 import FullScreenWidget from '../components/widget/FullScreenWidget'
 import HeroWidget from '../components/widget/HeroWidget'
 import { useSignInHook } from '../hooks/auth/signInHook'
@@ -28,8 +28,8 @@ function Login(props: Props) {
       event.preventDefault()
 
       let data = {
-         "password": password,
-         "email":email
+         password: password,
+         email:email
      }
 
       submit(data)

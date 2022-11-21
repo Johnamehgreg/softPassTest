@@ -70,11 +70,13 @@ export const useVerifyAccount = (type:{setisLoading:React.Dispatch<React.SetStat
         setisLoading(true)
        
         apis.auth.verifyAccount(data).then((response:any)=> {
+            setisLoading(false)
             if(response){
                 showPopUp({type:'success', message:'Account  verify successfully'})
                 navigation(routes.login)
             }
         }).catch((error:any) => {
+            setisLoading(false)
             console.log(error)
             const {status, data} = error.response
             if(status >=  400 && data.message){
@@ -84,7 +86,7 @@ export const useVerifyAccount = (type:{setisLoading:React.Dispatch<React.SetStat
             }
 
         }).finally(() => {
-            setisLoading(false)
+           
         })
     }
     return {

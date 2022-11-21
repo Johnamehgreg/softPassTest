@@ -11,12 +11,12 @@ export const useSignUpHook = (type:{setisLoading:React.Dispatch<React.SetStateAc
 
     const navigation = useNavigate()
     
-    const submit =  (data:object) => {
+    const submit =  (data:any) => {
         setisLoading(true)
         // showPopUp({type:'success', title:'Shoe Pop'})
         apis.auth.register(data).then((response:any)=> {
             showPopUp({type:popType.success, message:'Account created successfully'})
-            navigation(routes.authOtpVerify)
+            navigation(routes.authOtpVerify, {state: {email:data.email, reg:true }})
  
         }).catch((error:any) => {
 

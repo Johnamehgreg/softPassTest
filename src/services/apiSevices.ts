@@ -8,6 +8,7 @@ const apis = {
         forgetPassword: (data:any) => server.post(`${BASE_URL}/account/request-forget-password`, data),
         verifyForgetPassword: (data:any) => server.post(`${BASE_URL}/account/verify-forget-password`, data),
         verifyAccount: (data:any) => server.post(`${BASE_URL}/account/verification/email`, data),
+        resendVerificationToken: (data:any) => server.post(`${BASE_URL}/account/resend/verification/email`, data),
     }
 
 }

@@ -67,7 +67,7 @@ function HomePage(props: Props) {
     <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
      {/* <Dashboard /> */}
      {/* <Verification /> */}
-      <FacialVerification/>
+      {/* <FacialVerification/> */}
     </DashboardTemplate>
   );
 }

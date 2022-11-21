@@ -18,28 +18,22 @@ export const useSignInHook = (type: { setisLoading: React.Dispatch<React.SetStat
     const { setisLoading } = type
 
 
-    const submit = (data: object) => {
+    const submit = (data: any) => {
+        // return console.log(data?.email)
+
+        let reciedData = data
         setisLoading(true)
         // showPopUp({type:'success', title:'Shoe Pop'})
         apis.auth.login(data).then((response: any) => {
             Cookies.set('isLogin', 'true')
             setisUserLogin(true)
         }).catch((error: any) => {
-            const { status, data } = error.response
+            
+            const { status, data  } = error.response
+            let email = reciedData.email
 
             if (status === 401) {
-                let emailData = {
-                    "email": data.email,
-                }
-                apis.auth.verifyAccount(emailData)
-                    .then(() => {
-                        navigation(routes.authOtpVerify)
-                    }).catch(() => {
-                        const { data } = error.response
-                        showPopUp({ type: 'error', message: data.message })
-                    })
-
-
+                navigation(routes.authOtpVerify, {state:{email}})
             }
 
             if (status >= 400 && data.message) {
