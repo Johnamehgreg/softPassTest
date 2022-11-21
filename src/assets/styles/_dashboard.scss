@@ -139,3 +139,6 @@
 .side-nav-svg path{
   fill: #E12179;
 }
+.upload-button{
+  @apply w-full mt-2 rounded-lg py-1 text-center text-[12px] text-gray-500 border-[1px] border-softpasspurple-300
+}

@@ -3,7 +3,8 @@ import { tags as t } from '@lezer/highlight';
 import { createTheme } from '@uiw/codemirror-themes';
 import CodeMirror from '@uiw/react-codemirror';
 import { useState } from 'react';
-import { curl, javaScript, nodeJs, php, Python } from '../constanst/ApiDoc';
+import { curl, javaScript, nodeJs, php, Python } from '../../../constanst/ApiDoc';
+
 
 const myTheme = createTheme({
     theme: 'light',
@@ -117,7 +118,6 @@ function HomeEdictor() {
                 </div>
             </div>
         </div>
-
 
     );
 }

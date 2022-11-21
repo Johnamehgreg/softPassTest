@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
 import Verification from "./pages/Verification";
+import FacialVerification from "../home/pages/FacialVerification"
 
 interface Props {}
 
@@ -67,8 +68,8 @@ function HomePage(props: Props) {
   return (
     <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
      {/* <Dashboard /> */}
-     <Verification />
-
+     {/* <Verification /> */}
+      <FacialVerification/>
     </DashboardTemplate>
   );
 }

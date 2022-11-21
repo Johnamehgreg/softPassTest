@@ -1,9 +1,11 @@
+import { Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 import HomeEdictor from "../components/Edictor";
+import { ReactComponent as ProfileImage } from "../../../assets/svg/profile-circle.svg";
 
 interface Props {}
 
-const Verification: React.FC = (props: Props) => {
+const FacialVerification: React.FC = (props: Props) => {
   const {} = props;
 
   //VARIABLES
@@ -65,47 +67,42 @@ const Verification: React.FC = (props: Props) => {
         <div className="border-t-[1px] border-gray-500 px-2 flex justify-center w-full">
           <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
             <div className="w-full md:w-5/12 ">
-              <form>
-                {displayInput.map((item: any, index: number) => {
-                  const { title } = item;
-                  let filterTitle = "";
-                  if (Array.isArray(title)) {
-                    filterTitle =
-                      "Input " +
-                      (
-                        fromUniqueInput.filter(
-                          (item: any, index: number) =>
-                            item.title === headerTitle
-                        )[0] as any
-                      )?.name;
-                  } else filterTitle = title;
-
-                  return (
-                    <div className="verification-input-contain my-4">
-                      <input
-                        required
-                        type="text"
-                        placeholder={filterTitle}
-                      ></input>
-                    </div>
-                  );
-                })}
-                <div className="w-full text-center py-3 garrif">
-                  <button className="next-button">Submit</button>
+              <div className="flex justify-between">
+                <div className="w-5/12 rounded-lg">
+                  <div className="border-[1px] cursor-pointer flex flex-wrap py-4 rounded-lg justify-center border-softpasspurple-300/40 w-full">
+                    <input className="hidden" type="file"></input>
+                    <ProfileImage />
+                  </div>
+                  <button className="upload-button">Upload First image</button>
                 </div>
-              </form>
-            </div>
-            <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
-              <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
-                <b className="mb-2 block">Request</b>
-                <HomeEdictor />
+                <div className="w-5/12 rounded-lg">
+                  <div className="border-[1px] cursor-pointer flex flex-wrap py-4 rounded-lg justify-center border-softpasspurple-300/40 w-full">
+                    <input className="hidden" type="file"></input>
+                    <ProfileImage />
+                  </div>
+                  <button className="upload-button">Upload Second image</button>
+                </div>
+              </div>
+              <div className="verification-input-contain my-6">
+                <input
+                  required
+                  type="text"
+                  placeholder="Currency type (NGN)"
+                ></input>
+              </div>
+              <div className="input-contain pl-4">
+                <Select placeholder="change">
+                  {["A", "B", "C"].map((item: any, index: number) => {
+                    return <option value={item}>{item}</option>;
+                  })}
+                </Select>
               </div>
 
-              <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
-                <b className="mb-2 block">Response</b>
-                <HomeEdictor />
+              <div className="w-full text-center py-3 garrif">
+                <button className="next-button">Submit</button>
               </div>
             </div>
+            <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5"></div>
           </div>
         </div>
       </section>
@@ -113,4 +110,4 @@ const Verification: React.FC = (props: Props) => {
   );
 };
 
-export default Verification;
+export default FacialVerification;
