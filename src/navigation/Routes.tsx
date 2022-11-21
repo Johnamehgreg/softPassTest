@@ -26,7 +26,7 @@ const routes = {
 
 
   home: "/",
-  verification: "/auth-verifiation"
+  verification: "/auth-verification"
 }
 
 export default routes

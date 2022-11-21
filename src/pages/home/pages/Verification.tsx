@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { isArray } from "util";
-import SelectIdDropdown from "../../components/dashboard/widget/SelectIdDropdown";
-import Edictor from "../../components/edictor";
-import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
+import HomeEdictor from "../components/Edictor";
 
 interface Props {}
 
@@ -44,14 +41,13 @@ const Verification: React.FC = (props: Props) => {
   };
 
   return (
-    <DashboardTemplate
-      welcomeNote={"Welcome to Identity verification"}
-      title={"kindly select an option"}
+    <
+     
     >
       <div>
         {/* start of select id */}
         <div className="max-w-[200px]">
-          <SelectIdDropdown onChange={onChange} dropdownDirection="right" />
+          {/* <SelectIdDropdown onChange={onChange} dropdownDirection="right" /> */}
         </div>
         {/* end of select id */}
       </div>
@@ -99,18 +95,18 @@ const Verification: React.FC = (props: Props) => {
             <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
               <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
                 <b className="mb-2 block">Request</b>
-                <Edictor />
+                <HomeEdictor />
               </div>
 
               <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
                 <b className="mb-2 block">Response</b>
-                <Edictor />
+                <HomeEdictor />
               </div>
             </div>
           </div>
         </div>
       </section>
-    </DashboardTemplate>
+    </>
   );
 };
 

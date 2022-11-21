@@ -1,7 +1,7 @@
 import { Select } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import SoftpassLogoTransparent from "../components/svg-icons/SoftpassLogoTransparent";
+import softPass from "../assets/image/softpassSVG 3.png";
 import AppLoader from "../components/AppComponent/AppLoader";
 import TabsIndicator from "../components/login/TabsIndicator";
 import EyeSlashIcon from "../components/svg-icons/EyeSlashIcon";
@@ -43,14 +43,14 @@ function Register(props: Props) {
   const { submit } = useSignUpHook({ setisLoading });
   //Functions
   const checkingAllDropdownValue = () => {
-    if (currentTab != 2) return true;
+    if (currentTab != 2) return false;
 
     let getvalues =
       userInfo?.product?.trim() == "" ||
       userInfo?.aboutUs?.trim() == "" ||
       userInfo?.currentJob?.trim() == "";
-
     if (getvalues) setProceedFromDropDown(true);
+    else setProceedFromDropDown(false)
     return getvalues;
   };
   const setPasswordToUser = (data: any) => {
@@ -122,17 +122,6 @@ function Register(props: Props) {
     },
   ]);
 
-  const heckingAllDropdownValue = () => {
-    if (currentTab != 2) return true;
-
-    let getvalues =
-      userInfo?.product?.trim() == "" ||
-      userInfo?.aboutUs?.trim() == "" ||
-      userInfo?.currentJob?.trim() == "";
-
-    if (getvalues) setProceedFromDropDown(true);
-    return getvalues;
-  };
   const updateUserInfo = (val: string, type: string) => {
     switch (type) {
       case "Product":
@@ -170,7 +159,7 @@ function Register(props: Props) {
       <AppLoader isLoading={isLoading} />
       <FullScreenWidget>
         <div className="py-12 flex justify-center">
-          <SoftpassLogoTransparent/>
+          <img alt="" src={softPass}></img>
         </div>
         <div className="my-8 flex justify-center w-full">
           <TabsIndicator

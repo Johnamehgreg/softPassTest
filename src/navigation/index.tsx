@@ -4,7 +4,6 @@ import {
   BrowserRouter, Navigate, Route,
   Routes
 } from "react-router-dom";
-import { AppType } from '../constanst/ApptypeEnum';
 import { AuthProvider } from '../contextProvide/AuthContext';
 import route from './router';
 
@@ -13,8 +12,8 @@ const RootRoutes = () => {
 
   const { isUserLogin, setisUserLogin } = useContext(AuthProvider)
 
-  const mainRoute = route.filter((item: any) => item.stack === AppType.APP)
-  const landingRoute = route.filter((item: any) => item.stack !== AppType.APP)
+  const mainRoute = route.filter((item: any) => item.stack === 'app')
+  const landingRoute = route.filter((item: any) => item.stack !== 'app')
   const user = Cookies.get('isLogin')
 
   const readCookies = () => {

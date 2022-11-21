@@ -10,7 +10,8 @@ import ContactUs from '../pages/ContactUs';
 import Costomer_Onboarding from '../pages/CostomerOnboarding';
 import FacialVerification from '../pages/FacialVerification';
 import ForgetPassword from '../pages/ForgetPassword';
-import HomePage from '../pages/Auth/HomePage';
+import HomePage from '../pages/home/HomePage';
+import Verification from '../pages/home/pages/Verification';
 import KYC from '../pages/KYC';
 import KYC_Crypto from '../pages/KYC_Crypto';
 import KYC_Driver from '../pages/KYC_Driver';
@@ -20,7 +21,6 @@ import OTPSend from '../pages/OTPSend';
 import OTPVerifyAccount from '../pages/OTPVerifyAccount';
 import Register from '../pages/Register';
 import Sim_Registration from '../pages/Sim_Registration';
-import Verification from '../pages/Auth/Verification';
 
 
 
