@@ -28,77 +28,98 @@ const DropDownContent: React.FC<Props> = ({ item, dropdownContent }) => {
     }
 
     return (
-        <section className='nav-dropdown-menu bg-white md:py-10 -z-[1] shadow-xl '>
-            <h3 className='dropdown-header hidden md:block font-bold text-[20px] text-softpasspurple-300'>{item.name}</h3>
-            <article className='w-full article-content'>
-                <div className='semi-container w-full'>
-                    {
-                        item?.subRoutes.map((item: any, index: number) => {
-                            const { Image } = item
-                            return (
-                                <>
-                                    {
-                                        item.scrollCustomer ?
+        <>
 
-                                            <NavLink
-                                                to={item.route}
-                                                state={{ scroll: item.scrollCustomer }}
-                                                key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
-                                                <div className='article-icon flex justify-center'>
-                                                    <Image />
-                                                </div>
-                                                <div className='article-item-content'>
-                                                    <b className='block'> {item.title}:</b>
-                                                    <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
-                                                </div>
-                                            </NavLink>
+            <section className='nav-dropdown-menu bg-white md:py-10 -z-[1] shadow-xl '>
+                <h3 className='dropdown-header hidden md:block font-bold text-[20px] text-softpasspurple-300'>{item.name}</h3>
+                <article className='w-full article-content'>
+                    <div className='semi-container w-full'>
+                        {
+                            item?.subRoutes.map((item: any, index: number) => {
+                                const { Image } = item
+                                return (
+                                    <>
+                                        {
+                                            item.scrollCustomer ?
 
-                                            :
+                                                <NavLink
+                                                    to={item.route}
+                                                    state={{ scroll: item.scrollCustomer }}
+                                                    key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                    <div className='article-icon flex justify-center'>
+                                                        <Image />
+                                                    </div>
+                                                    <div className='article-item-content'>
+                                                        <b className='block'> {item.title}:</b>
+                                                        <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
+                                                    </div>
+                                                </NavLink>
 
-                                            <>
+                                                :
+
+                                                <>
 
 
-                                                {
-                                                    item.route === '/contact-us' ?
+                                                    {
+                                                        item.route === '/contact-us' ?
 
-                                                        <NavLink
-                                                            to={item.route}
-                                                            key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
-                                                            <div className='article-icon flex justify-center'>
-                                                                <Image />
-                                                            </div>
-                                                            <div className='article-item-content'>
-                                                                <b className='block'> {item.title}:</b>
-                                                                <span className='block text-[13px] text-softpasspurple-500/40'>
-                                                                Email: enquiries@softpass.net <br /> Phone Number: 07026356742
+                                                            <NavLink
+                                                                to={item.route}
+                                                                key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                                <div className='article-icon flex justify-center'>
+                                                                    <Image />
+                                                                </div>
+                                                                <div className='article-item-content'>
+                                                                    <b className='block'> {item.title}:</b>
+                                                                    <span className='block text-[13px] text-softpasspurple-500/40'>
+                                                                        Email: enquiries@softpass.net <br /> Phone Number: 07026356742
+                                                                    </span>
+                                                                </div>
+                                                            </NavLink>
+
+                                                            : item.route === 'ApiDoc' ?
+
+                                                                <span
+                                                                    onClick={() => window.open('https://documenter.getpostman.com/view/4683690/2s8YmNPN8f', '_blank', 'noopener,noreferrer')}
+                                                                    key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                                    <div className='article-icon flex justify-center'>
+                                                                        <Image />
+                                                                    </div>
+                                                                    <div className='article-item-content'>
+                                                                        <b className='block'> {item.title}:</b>
+                                                                        <span className='block text-[13px] text-softpasspurple-500/40'>
+                                                                            Email: enquiries@softpass.net <br /> Phone Number: 07026356742
+                                                                        </span>
+                                                                    </div>
                                                                 </span>
-                                                            </div>
-                                                        </NavLink>
 
-                                                        :
-                                                        <NavLink
-                                                            to={item.route}
-                                                            key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
-                                                            <div className='article-icon flex justify-center'>
-                                                                <Image />
-                                                            </div>
-                                                            <div className='article-item-content'>
-                                                                <b className='block'> {item.title}:</b>
-                                                                <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
-                                                            </div>
-                                                        </NavLink>
-                                                }
-                                            </>
-                                    }
 
-                                </>
+                                                                :
+                                                                <NavLink
+                                                                    to={item.route}
+                                                                    key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                                    <div className='article-icon flex justify-center'>
+                                                                        <Image />
+                                                                    </div>
+                                                                    <div className='article-item-content'>
+                                                                        <b className='block'> {item.title}:</b>
+                                                                        <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
+                                                                    </div>
+                                                                </NavLink>
 
-                            )
-                        })
-                    }
-                </div>
-            </article>
-        </section>
+                                                    }
+                                                </>
+                                        }
+
+                                    </>
+
+                                )
+                            })
+                        }
+                    </div>
+                </article>
+            </section>
+        </>
     )
 }
 

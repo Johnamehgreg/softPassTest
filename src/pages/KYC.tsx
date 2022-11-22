@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import DashboardPng from "../assets/svg/Desktop - 7.svg"
 import dashboardFrame from "../assets/svg/kyc_header_image.svg"
 import SubRoute from '../components/kyc/SubRoute'
@@ -11,6 +11,7 @@ import HeroWidget from '../components/widget/HeroWidget'
 import NewsTeller from '../components/widget/NewsTeller'
 import TrustedPartners from '../components/widget/TrustedPartners'
 import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
+import routes from '../navigation/Routes'
 
 
 
@@ -24,6 +25,7 @@ function KYC(props: Props) {
     const location = useLocation();
     const state = location.state as any;
 
+    const navigation = useNavigate()
 
     
     const handleClick = () => {
@@ -47,7 +49,9 @@ function KYC(props: Props) {
                         <b className=''>KYC Identity verification</b>
                         <h1>Verify your customer <br></br>information within seconds </h1>
                         <p>Swift and Secured Customer Onboarding with e-KYC</p>
-                        <button className="get-button">GET IN TOUCH</button>
+                        <button
+                        onClick={() => navigation(routes.contactUs)}
+                        className="get-button">GET IN TOUCH</button>
                         {/* <button className="get-button">GET IN TOUCH
                    
                     </button> */}

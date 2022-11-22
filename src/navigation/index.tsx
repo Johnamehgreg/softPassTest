@@ -5,7 +5,6 @@ import {
   Routes
 } from "react-router-dom";
 import { AuthProvider } from '../contextProvide/AuthContext';
-import HomePage from '../pages/home/HomePage';
 import route from './router';
 
 
@@ -69,12 +68,12 @@ const RootRoutes = () => {
               } */}
 
 
-              {/* <Route path={MainRoute.route} element={<MainRoute.Page />} >
+              <Route path={MainRoute.route} element={<MainRoute.Page />} >
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/auth-verification' element={<Verification />} />
-              </Route> */}
+              </Route>
 
-              <Route path='/' element={<HomePage />} />
+              {/* <Route path='/' element={<HomePage />} /> */}
 
 
             </>
