@@ -103,15 +103,15 @@ function KYC(props: Props) {
                             <div className='costomer-info-article'>
                                 <span> <HouseBoxIcon width={'48'} /></span>
                                 <div>
-                                    <b>Phone number verification:</b>
-                                    <p>Verify the authenticity of mobile numbers using our phone number verification service. Confirm carrier, location, and validity of any phone number.</p>
+                                    <b>Bank Account Verification (NUBAN):</b>
+                                    <p>Our NUBAN lookup service allows you to verify any Nigerian bank account number easily.</p>
                                 </div>
                             </div>
                             <div className='costomer-info-article'>
                                 <span> <SettingsBoxIcon width={'48'} /></span>
                                 <div>
-                                    <b>Phone number verification:</b>
-                                    <p>Verify the authenticity of mobile numbers using our phone number verification service. Confirm carrier, location, and validity of any phone number.</p>
+                                    <b>Age verification:</b>
+                                    <p>Adopt our customer verification solution to verify the actual age of your customers.</p>
                                 </div>
                             </div>
                         </div>
