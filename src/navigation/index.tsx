@@ -8,8 +8,8 @@ import { AuthProvider } from '../contextProvide/AuthContext';
 import Dashboard from '../pages/home/pages/Dashboard';
 import FacialVerification from '../pages/home/pages/FacialVerification';
 import Verification from '../pages/home/pages/Verification';
+import Wallet from '../pages/home/pages/Wallet.tsx/index';
 import route from './router';
-
 
 const RootRoutes = () => {
 
@@ -25,9 +25,9 @@ const RootRoutes = () => {
 
   const readCookies = () => {
 
-    // if (user) {
+    if (user) {
       setisUserLogin(true)
-    // }
+    }
   }
   useEffect(() => {
     readCookies()
@@ -59,25 +59,16 @@ const RootRoutes = () => {
         {
           isUserLogin && (
             <>
-              {/* {
-                mainRoute.map((item: any) => {
-                  const { Page, route } = item
 
-                  return (
-                    <Route path={route} key={route} element={<Page />} />
-                  )
-
-                })
-              } */}
 
 
               <Route path={MainRoute.route} element={<MainRoute.Page />} >
-                <Route path='/dashboard'  element={<Dashboard />} />
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/auth-verification' element={<Verification />} />
                 <Route path='/facial-verification' element={<FacialVerification />} />
+                <Route path='/wallet' element={<Wallet />} />
               </Route>
 
-              {/* <Route path='/' element={<HomePage />} /> */}
 
 
             </>

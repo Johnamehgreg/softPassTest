@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
-import Wallet from "./pages/Wallet.tsx";
 
 
 interface Props { }
@@ -72,7 +71,7 @@ function HomePage(props: Props) {
      <Outlet />
      {/* <Verification /> */}
       {/* <FacialVerification/> */}
-      <Wallet/>
+      {/* <Wallet/> */}
 
     </DashboardTemplate>
   );
