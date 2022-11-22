@@ -42,10 +42,11 @@ export const topNavRoute = [
                 scrollCustomer:true
             },
             {
-                route: '/kyc',
+                route: '/aml',
                 Image:TBusiness,
                 title:'Business Verification',
-                content:" Establish the legitimacy of your customers business identities by verifying their credentials in real-time"
+                content:" Establish the legitimacy of your customers business identities by verifying their credentials in real-time",
+                scrollBusiness:true
             },
 
         ]

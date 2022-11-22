@@ -48,62 +48,120 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
       </div>
       <div className="mt-8">
         {dashboardSideRoute.map((item: any, index: number) => {
-          const { Icon, route, subRoute } = item;
+          const { Icon, route, name, subRoute } = item;
           return (
-            <div className="flex flex-wrap py-1 inter">
-              <span
-                onClick={() => {
-                 
-                  navigation(route)
-                  setActiveSideContent(index);
-                  setIsDropDownActiveFunc(index);
-                }}
-                className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
-                ${
-                  activeSideContent == index
-                    ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
-                    : "transition duration-300"
-                }
-                `}
-              >
-                <Icon
-                  width={"18"}
-                  class={
-                    activeSideContent == index
-                      ? `side-nav-svg transition duration-300`
-                      : "transition duration-300"
-                  }
-                />
-                &nbsp; &nbsp; {item.name}
-                {item.subRoute?.length > 0 && (
-                  <span
-                    className={`ml-4 mt-1 inline-block transition ${
-                      isDropdownActive == index && activeSideContent == index
-                        ? "rotate-180"
-                        : "rotate-0"
-                    }`}
-                  >
-                    <ArrowDown />
-                  </span>
-                )}
-              </span>
-              {isDropdownActive == index && activeSideContent == index && (
-                <div className="pl-2">
-                  {subRoute.map((item: any, index: number) => {
-                    return (
-                      <span
-                        onClick={() => {
-                          setIsDropDownActiveFunc(-1);
-                        }}
-                        className="sub-route-item mt-2 relative"
-                      >
-                        {item.subname}
-                      </span>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+            <>
+              {
+                name === 'verification' ?
+
+                  <div className="flex flex-wrap py-1 inter">
+                    <span
+                      onClick={() => {
+
+                        setActiveSideContent(index);
+                        setIsDropDownActiveFunc(index);
+                      }}
+                      className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+              ${activeSideContent == index
+                          ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                          : "transition duration-300"
+                        }
+              `}
+                    >
+                      <Icon
+                        width={"18"}
+                        class={
+                          activeSideContent == index
+                            ? `side-nav-svg transition duration-300`
+                            : "transition duration-300"
+                        }
+                      />
+                      &nbsp; &nbsp; {item.name}
+                      {item.subRoute?.length > 0 && (
+                        <span
+                          className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
+                              ? "rotate-180"
+                              : "rotate-0"
+                            }`}
+                        >
+                          <ArrowDown />
+                        </span>
+                      )}
+                    </span>
+                    {isDropdownActive == index && activeSideContent == index && (
+                      <div className="pl-2">
+                        {subRoute.map((item: any, index: number) => {
+                          return (
+                            <span
+                              onClick={() => {
+                                navigation(item?.route)
+                                // setIsDropDownActiveFunc(-1);
+                              }}
+                              className="sub-route-item mt-2 relative"
+                            >
+                              {item.subname}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                  :
+
+                  <div className="flex flex-wrap py-1 inter">
+                    <span
+                      onClick={() => {
+
+                        navigation(route)
+                        setActiveSideContent(index);
+                        setIsDropDownActiveFunc(index);
+                      }}
+                      className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+            ${activeSideContent == index
+                          ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                          : "transition duration-300"
+                        }
+            `}
+                    >
+                      <Icon
+                        width={"18"}
+                        class={
+                          activeSideContent == index
+                            ? `side-nav-svg transition duration-300`
+                            : "transition duration-300"
+                        }
+                      />
+                      &nbsp; &nbsp; {item.name}
+                      {item.subRoute?.length > 0 && (
+                        <span
+                          className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
+                              ? "rotate-180"
+                              : "rotate-0"
+                            }`}
+                        >
+                          <ArrowDown />
+                        </span>
+                      )}
+                    </span>
+                    {isDropdownActive == index && activeSideContent == index && (
+                      <div className="pl-2">
+                        {subRoute.map((item: any, index: number) => {
+                          return (
+                            <span
+                              onClick={() => {
+                                setIsDropDownActiveFunc(-1);
+                              }}
+                              className="sub-route-item mt-2 relative"
+                            >
+                              {item.subname}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+              }
+            </>
           );
         })}
         <div className="logout-container">

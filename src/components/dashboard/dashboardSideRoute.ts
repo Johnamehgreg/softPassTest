@@ -20,7 +20,7 @@ export const dashboardSideRoute = [
         name: 'verification',
         subRoute: [{
          subname:'Identity verification',
-         route:''
+         route:'/auth-verification'
         },
         {
          subname:'Customer Identification',
@@ -28,7 +28,7 @@ export const dashboardSideRoute = [
         },
         {
          subname:'Facial verification',
-         route:''
+         route:'/facial-verification'
         },
         {
          subname:'Business Verification',

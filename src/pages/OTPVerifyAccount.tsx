@@ -55,7 +55,6 @@ function OTPVerifyAccount(props: Props) {
    const state = location.state as any;
 
 
-   console.log(state)
 
 
 
@@ -174,7 +173,7 @@ function OTPVerifyAccount(props: Props) {
                      disabled={seconds > 0 || minutes > 0}
                      style={{
                         marginLeft: '10px',
-                        color: seconds > 0 || minutes > 0 ? "#FF5630" : "#E1217A",
+                        color: seconds > 0 || minutes > 0 ? "#4C4C4C" : "#E1217A",
                      }}
                      onClick={resendOTP}
                   >

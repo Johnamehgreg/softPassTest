@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AMLHeaderImage from '../assets/image/AML_header_img.png'
 import AntiMoneyLaundry from '../assets/image/anti-money-laundry.png'
 import AntiMoneylaundry2 from '../assets/image/anti_money_laundry_2.png'
@@ -15,7 +16,24 @@ import routes from '../navigation/Routes'
 interface Props {}
 
 function AML(props: Props) {
+
+  const location = useLocation();
+  const state = location.state as any;
   const {} = props
+  const ScrollRef = useRef<null | HTMLDivElement>(null);
+  console.log(location)
+
+  const handleClick = () => {
+    ScrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+};
+
+useEffect(() => {
+  if(state?.scroll){
+     handleClick()
+     
+  }
+ }, [location])
+
 
   const navigation = useNavigate()
 
@@ -92,7 +110,7 @@ function AML(props: Props) {
       </FullWidth>
 
       <FullWidth bg="white">
-        <div className="flex flex-wrap max-softpass-width pt-[50px] pb-[50px] md:pb-[150px] items-center">
+        <div  ref={ScrollRef} className="flex flex-wrap max-softpass-width pt-[50px] pb-[50px] md:pb-[150px] items-center">
           <div className="md:w-6/12 w-full md:pr-3">
             <h1 className="text-[35px] text-softpasspurple-300 garrif font-bold">
               Business Verification (KYB)

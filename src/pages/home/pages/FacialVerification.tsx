@@ -1,12 +1,12 @@
 import { Select } from "@chakra-ui/react";
 import React, { useState } from "react";
-import HomeEdictor from "../components/Edictor";
 import { ReactComponent as ProfileImage } from "../../../assets/svg/profile-circle.svg";
+import HomeEdictor from "../components/Edictor";
 
-interface Props {}
+interface Props { }
 
 const FacialVerification: React.FC = (props: Props) => {
-  const {} = props;
+  const { } = props;
 
   //VARIABLES
   const [headerTitle, setHeaderTitle] = useState("");
@@ -102,7 +102,17 @@ const FacialVerification: React.FC = (props: Props) => {
                 <button className="next-button">Submit</button>
               </div>
             </div>
-            <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5"></div>
+            <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
+              <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
+                <b className="mb-2 block">Request</b>
+                <HomeEdictor />
+              </div>
+
+              <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
+                <b className="mb-2 block">Response</b>
+                <HomeEdictor />
+              </div>
+            </div>
           </div>
         </div>
       </section>

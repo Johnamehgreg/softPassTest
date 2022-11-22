@@ -57,30 +57,32 @@ const DropDownContent: React.FC<Props> = ({ item, dropdownContent }) => {
 
                                                 :
 
-                                                <>
+                                                item.scrollBusiness ?
+
+                                                    <NavLink
+                                                        to={item.route}
+                                                        state={{ scroll: item.scrollBusiness }}
+                                                        key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                        <div className='article-icon flex justify-center'>
+                                                            <Image />
+                                                        </div>
+                                                        <div className='article-item-content'>
+                                                            <b className='block'> {item.title}:</b>
+                                                            <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
+                                                        </div>
+                                                    </NavLink>
+
+                                                    :
 
 
-                                                    {
-                                                        item.route === '/contact-us' ?
+                                                    <>
 
-                                                            <NavLink
-                                                                to={item.route}
-                                                                key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
-                                                                <div className='article-icon flex justify-center'>
-                                                                    <Image />
-                                                                </div>
-                                                                <div className='article-item-content'>
-                                                                    <b className='block'> {item.title}:</b>
-                                                                    <span className='block text-[13px] text-softpasspurple-500/40'>
-                                                                        Email: enquiries@softpass.net <br /> Phone Number: 07026356742
-                                                                    </span>
-                                                                </div>
-                                                            </NavLink>
 
-                                                            : item.route === 'ApiDoc' ?
+                                                        {
+                                                            item.route === '/contact-us' ?
 
-                                                                <span
-                                                                    onClick={() => window.open('https://documenter.getpostman.com/view/4683690/2s8YmNPN8f', '_blank', 'noopener,noreferrer')}
+                                                                <NavLink
+                                                                    to={item.route}
                                                                     key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
                                                                     <div className='article-icon flex justify-center'>
                                                                         <Image />
@@ -91,24 +93,40 @@ const DropDownContent: React.FC<Props> = ({ item, dropdownContent }) => {
                                                                             Email: enquiries@softpass.net <br /> Phone Number: 07026356742
                                                                         </span>
                                                                     </div>
-                                                                </span>
-
-
-                                                                :
-                                                                <NavLink
-                                                                    to={item.route}
-                                                                    key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
-                                                                    <div className='article-icon flex justify-center'>
-                                                                        <Image />
-                                                                    </div>
-                                                                    <div className='article-item-content'>
-                                                                        <b className='block'> {item.title}:</b>
-                                                                        <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
-                                                                    </div>
                                                                 </NavLink>
 
-                                                    }
-                                                </>
+                                                                : item.route === 'ApiDoc' ?
+
+                                                                    <span
+                                                                        onClick={() => window.open('https://documenter.getpostman.com/view/4683690/2s8YmNPN8f', '_blank', 'noopener,noreferrer')}
+                                                                        key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                                        <div className='article-icon flex justify-center'>
+                                                                            <Image />
+                                                                        </div>
+                                                                        <div className='article-item-content'>
+                                                                            <b className='block'> {item.title}:</b>
+                                                                            <span className='block text-[13px] text-softpasspurple-500/40'>
+                                                                                Email: enquiries@softpass.net <br /> Phone Number: 07026356742
+                                                                            </span>
+                                                                        </div>
+                                                                    </span>
+
+
+                                                                    :
+                                                                    <NavLink
+                                                                        to={item.route}
+                                                                        key={item} className='sm:w-6/12 md:w-6/12 lg:w-4/12 flex w-full  py-4'>
+                                                                        <div className='article-icon flex justify-center'>
+                                                                            <Image />
+                                                                        </div>
+                                                                        <div className='article-item-content'>
+                                                                            <b className='block'> {item.title}:</b>
+                                                                            <span className='block text-[13px] text-softpasspurple-500/40'>{item.content}</span>
+                                                                        </div>
+                                                                    </NavLink>
+
+                                                        }
+                                                    </>
                                         }
 
                                     </>

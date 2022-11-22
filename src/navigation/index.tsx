@@ -5,6 +5,9 @@ import {
   Routes
 } from "react-router-dom";
 import { AuthProvider } from '../contextProvide/AuthContext';
+import Dashboard from '../pages/home/pages/Dashboard';
+import FacialVerification from '../pages/home/pages/FacialVerification';
+import Verification from '../pages/home/pages/Verification';
 import route from './router';
 
 
@@ -69,8 +72,9 @@ const RootRoutes = () => {
 
 
               <Route path={MainRoute.route} element={<MainRoute.Page />} >
-                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/dashboard'  element={<Dashboard />} />
                 <Route path='/auth-verification' element={<Verification />} />
+                <Route path='/facial-verification' element={<FacialVerification />} />
               </Route>
 
               {/* <Route path='/' element={<HomePage />} /> */}
@@ -80,7 +84,7 @@ const RootRoutes = () => {
           )
         }
 
-        <Route path='*' element={<Navigate to={isUserLogin ? '/' : '/landing'} />} />
+        <Route path='*' element={<Navigate to={isUserLogin ? '/dashboard' : '/landing'} />} />
 
 
       </Routes>
