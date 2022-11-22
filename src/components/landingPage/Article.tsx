@@ -1,6 +1,8 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from 'react-router-dom';
+import routes from "../../navigation/Routes";
 
 
 
@@ -13,6 +15,8 @@ const Article = () => {
     const ani2 = useAnimation()
     const ani3 = useAnimation()
     const ani4 = useAnimation()
+    const navigation = useNavigate()
+
 
     console.log(inView, 'viewd')
 
@@ -129,7 +133,7 @@ const Article = () => {
 
                     </ul>
                     <div className="w-full">
-                        <button className="get-button">GET IN TOUCH</button>
+                        <button onClick={() => navigation(routes.contactUs)} className="get-button">GET IN TOUCH</button>
                     </div>
                 </div>
                 <div className="md:w-5/12 w-full">
