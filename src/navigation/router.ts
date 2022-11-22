@@ -21,6 +21,7 @@ import OTPSend from '../pages/OTPSend';
 import OTPVerifyAccount from '../pages/OTPVerifyAccount';
 import Register from '../pages/Register';
 import Sim_Registration from '../pages/Sim_Registration';
+import Wallet from "../pages/home/pages/Wallet.tsx"
 
 
 

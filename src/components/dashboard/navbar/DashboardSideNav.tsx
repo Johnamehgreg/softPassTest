@@ -90,7 +90,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                     return (
                       <span
                         onClick={() => {
-                          setIsDropDownActiveFunc(-1);
+                          // setIsDropDownActiveFunc(-1);
                         }}
                         className="sub-route-item mt-2 relative"
                       >

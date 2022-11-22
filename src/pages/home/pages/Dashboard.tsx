@@ -2,6 +2,7 @@ import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from "@chakra
 import { useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
+import ApiCallHistory from "../../../components/dashboard/widget/ApiCallHistory";
 import ChartDashboard from "../../../components/dashboard/widget/Chart";
 import TopCardContainer from "../../../components/dashboard/widget/TopCardContainer";
 
@@ -25,11 +26,7 @@ const Dashboard = () => {
           amount: "23",
           type: "regular",
         },
-        {
-          name: "Total Wallet Balance",
-          amount: "N 40,000.00",
-          type: "wallet",
-        },
+
       ]);
     
       const [amount, setAmount] = useState([
@@ -103,30 +100,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="py-12 md:px-8 px-4 flex justify-between">
-                    <div className="flex flex-wrap px-3 py-3 shadow-xl sm:w-52 w-40">
-                        <b className="text-[12px] sm:text-sm block w-full pb-4">
-                            Successfull Calls
-                        </b>
-                        <span className="flex justify-center w-full items-center">
-                            <b className="text-lg all-flex">25</b>
-                            <abbr className="text-[9px] text-softpassgreen-300 bg-softpassgreen-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
-                                +25%
-                            </abbr>
-                        </span>
-                    </div>
-                    <div className="flex flex-wrap px-3 py-3 shadow-xl sm:w-52 w-40">
-                        <b className="text-[12px] sm:text-sm block w-full pb-4">
-                            Failed calls
-                        </b>
-                        <span className="flex justify-center w-full items-center">
-                            <b className="text-lg all-flex">10</b>
-                            <abbr className="text-[9px] text-softpasspurple-300 bg-softpasspurple-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
-                                +25%
-                            </abbr>
-                        </span>
-                    </div>
-                </div>
+               <ApiCallHistory info={tabs}/>
                 <div className="w-full overflow-x-scroll">
                     {
                         //@ts-ignore
