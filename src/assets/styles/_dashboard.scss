@@ -4,7 +4,7 @@
 }
 .dashboard-detail-container {
   flex: 1 1 100%;
-  @apply flex md:h-[100vh] flex-col;
+  @apply flex md:h-[100vh] flex-col md:max-w-[calc(100vw-270px)] w-full;
   background-color: #f5f6f8;
 }
 .top-dashboard-nav {
@@ -141,4 +141,36 @@
 }
 .upload-button{
   @apply w-full mt-2 rounded-lg py-1 text-center text-[12px] text-gray-500 border-[1px] border-softpasspurple-300
+}
+.table-filter-item{
+  @apply flex items-center text-[12px] px-2 
+}
+
+.user-table{
+  @apply min-w-[1080px] text-black;
+  thead{
+    tr{
+      td{
+       width: 350px;
+       @apply py-2 pb-3;
+       span{
+        @apply text-[13px] opacity-80
+       } 
+      }
+    }
+  }
+}
+.user-table-body{
+  tr{
+    @apply border-t-[1px] border-gray-400/50;
+    td{
+      @apply text-[12px] font-normal py-3
+    }
+  }
+}
+.primary{
+  @apply bg-softpassgreen-300/10 text-softpassgreen-300
+}
+.danger{
+  @apply bg-softpasspurple-300/10 text-softpasspurple-300
 }

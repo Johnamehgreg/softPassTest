@@ -25,9 +25,9 @@ const RootRoutes = () => {
 
   const readCookies = () => {
 
-    if (user) {
+    // if (user) {
       setisUserLogin(true)
-    }
+    // }
   }
   useEffect(() => {
     readCookies()
