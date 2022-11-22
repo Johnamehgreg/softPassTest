@@ -1,8 +1,6 @@
-import { ReactComponent as TCareer } from '../assets/svg/career.svg';
 import { ReactComponent as TCustomer } from '../assets/svg/tcustomer.svg';
 import { ReactComponent as TUserDetail } from '../assets/svg/tuser-detail.svg';
 import { ReactComponent as TAbout } from '../assets/svg/t_about.svg';
-import { ReactComponent as TBlog } from '../assets/svg/t_blog.svg';
 import { ReactComponent as Tbuger } from '../assets/svg/t_buger.svg';
 import { ReactComponent as TContact } from '../assets/svg/t_contact.svg';
 import { ReactComponent as TFile } from '../assets/svg/t_file.svg';
@@ -94,7 +92,7 @@ export const topNavRoute = [
         link: '/developer',
         subRoutes:[
             {
-                route: '/kyc',
+                route: 'ApiDoc',
                 Image:TFile,
                 title:'API DOCUMENTATION',
                 content:"View all developer documentations"
@@ -123,18 +121,18 @@ export const topNavRoute = [
                 title:'CONTACT US',
                 content:"Email: enquiries@softpass.net \n Phone Number: 07026356742"
             },
-            {
-                route: '/blog',
-                Image:TBlog,
-                title:'BLOG',
-                content:"Amet minim mollit non deserunt ullamco est sit aliqua dolor "
-            },
-            {
-                route: '/kyc',
-                Image:TCareer,
-                title:'CAREERS',
-                content:"Amet minim mollit non deserunt ullamco est sit aliqua dolor "
-            },
+            // {
+            //     route: '/blog',
+            //     Image:TBlog,
+            //     title:'BLOG',
+            //     content:"Amet minim mollit non deserunt ullamco est sit aliqua dolor "
+            // },
+            // {
+            //     route: '/kyc',
+            //     Image:TCareer,
+            //     title:'CAREERS',
+            //     content:"Amet minim mollit non deserunt ullamco est sit aliqua dolor "
+            // },
 
         ]
       }

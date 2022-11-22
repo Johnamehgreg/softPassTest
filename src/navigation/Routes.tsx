@@ -9,7 +9,7 @@ const routes = {
   authOtpVerify: '/otp-verify',
   register: '/register',
   forgetPassword: '/forget-password',
-  kyc:'/kyc',
+  kyc: '/kyc',
   aml: '/aml',
   facialVerification: '/facial-verification',
   KycCrypto: "/kyc-crypto",
@@ -23,7 +23,6 @@ const routes = {
   blogDetails: '/blog-details',
 
   // Home page
-
 
   home: "/",
   verification: "/auth-verification",

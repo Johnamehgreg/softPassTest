@@ -1,12 +1,12 @@
-import { ReactComponent as DDashboard } from "../../assets/image/svg/dashboard.svg"
+import { ReactComponent as DAuditLog } from "../../assets/image/svg/audit.svg"
 import { ReactComponent as DVerification } from "../../assets/image/svg/chart-success.svg"
+import { ReactComponent as DCompliance } from "../../assets/image/svg/compliance.svg"
 import { ReactComponent as DContainer } from "../../assets/image/svg/container.svg"
+import { ReactComponent as DDashboard } from "../../assets/image/svg/dashboard.svg"
 import { ReactComponent as DWallet } from "../../assets/image/svg/empty-wallet.svg"
 import { ReactComponent as DReport } from "../../assets/image/svg/report.svg"
-import { ReactComponent as DCompliance } from "../../assets/image/svg/compliance.svg"
-import { ReactComponent as DTeam } from "../../assets/image/svg/team.svg"
-import { ReactComponent as DAuditLog } from "../../assets/image/svg/audit.svg"
 import { ReactComponent as DProfileSettings } from "../../assets/image/svg/settings.svg"
+import { ReactComponent as DTeam } from "../../assets/image/svg/team.svg"
 
 export const dashboardSideRoute = [
     {

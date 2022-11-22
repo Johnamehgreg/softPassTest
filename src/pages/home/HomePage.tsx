@@ -3,12 +3,13 @@ import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
 import Verification from "./pages/Verification";
 import FacialVerification from "../home/pages/FacialVerification"
 import Wallet from "./pages/Wallet.tsx"
+
 import Dashboard from "./pages/Dashboard";
 
-interface Props {}
+interface Props { }
 
 function HomePage(props: Props) {
-  const {} = props;
+  const { } = props;
   const ref = useRef(null);
 
   //Variables
@@ -73,6 +74,7 @@ function HomePage(props: Props) {
      {/* <Verification /> */}
       {/* <FacialVerification/> */}
       <Wallet/>
+
     </DashboardTemplate>
   );
 }

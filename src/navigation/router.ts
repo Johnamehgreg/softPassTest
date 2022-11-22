@@ -11,7 +11,6 @@ import Costomer_Onboarding from '../pages/CostomerOnboarding';
 import FacialVerification from '../pages/FacialVerification';
 import ForgetPassword from '../pages/ForgetPassword';
 import HomePage from '../pages/home/HomePage';
-import Verification from '../pages/home/pages/Verification';
 import KYC from '../pages/KYC';
 import KYC_Crypto from '../pages/KYC_Crypto';
 import KYC_Driver from '../pages/KYC_Driver';
@@ -145,11 +144,7 @@ const route = [
         route: routes.home,
         Page: HomePage,   
     },
-    {
-        stack: stacks.APP,
-        route: routes.verification,
-        Page: Verification,   
-    },
+ 
 
    
 

@@ -5,6 +5,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { useState } from 'react';
 import { curl, javaScript, nodeJs, php, Python } from '../../../constanst/ApiDoc';
 
+// import { curl, javaScript, nodeJs, php, Python } from '../constanst/ApiDoc';
 
 const myTheme = createTheme({
     theme: 'light',
@@ -73,7 +74,7 @@ function HomeEdictor() {
 
 
     return (
-        <div className='set-edictor p-3'>
+        <div className='set-edictor-home p-3'>
             <div className='edict-content  px-4 pt-4'>
                 <div className="mb-3">
                     <button

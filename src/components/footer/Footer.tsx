@@ -17,7 +17,7 @@ function Footer(props: Props) {
 
     const navigation = useNavigate()
 
-    
+
 
 
 
@@ -35,28 +35,39 @@ function Footer(props: Props) {
             <div className='footer-container flex-wrap mt-10'>
 
 
-            {
-                topNavRoute.map((item, index) => {
-                    return (
-                        <div className='footer-link-container'>
-                            <b>{item.name}</b>
-                            <ul>
-                                {
-                                    item?.subRoutes.map((item) => {
-                                        return (
-                                            <li onClick={() => navigation(item.route)} className="pointer"> {item.title}</li>
-                                        )
-                                    })
-                                }
-                                
-                            </ul>
-                        </div>
-                    )
-                })
-            }
+                {
+                    topNavRoute.map((item, index) => {
+                        return (
+                            <div className='footer-link-container'>
+                                <b>{item.name}</b>
+                                <ul>
+                                    {
+                                        item?.subRoutes.map((item) => {
+                                            return (
+                                                <>
+                                                    {
+                                                        item.route === 'ApiDoc' ?
+                                                            <li
+                                                                onClick={() => window.open('https://documenter.getpostman.com/view/4683690/2s8YmNPN8f', '_blank', 'noopener,noreferrer')}
+                                                                className="pointer"> {item.title}</li>
+                                                            :
 
-          
-         
+                                                            <li onClick={() => navigation(item.route)} className="pointer"> {item.title}</li>
+                                                    }
+                                                </>
+
+                                            )
+                                        })
+                                    }
+
+                                </ul>
+                            </div>
+                        )
+                    })
+                }
+
+
+
 
                 <div className='pt-12 pb-8 w-full text-center'>
                     <span className='copyright-text'>© 2022 SoftPass, Inc.</span>

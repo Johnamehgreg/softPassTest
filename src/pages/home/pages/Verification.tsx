@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import SelectIdDropdown from "../../../components/dashboard/widget/SelectIdDropdown";
 import HomeEdictor from "../components/Edictor";
 
-interface Props {}
+interface Props { }
 
 const Verification: React.FC = (props: Props) => {
-  const {} = props;
+  const { } = props;
 
   //VARIABLES
   const [headerTitle, setHeaderTitle] = useState("");
@@ -45,7 +46,7 @@ const Verification: React.FC = (props: Props) => {
       <div>
         {/* start of select id */}
         <div className="max-w-[200px]">
-          {/* <SelectIdDropdown onChange={onChange} dropdownDirection="right" /> */}
+          <SelectIdDropdown onChange={onChange} dropdownDirection="right" />
         </div>
         {/* end of select id */}
       </div>
