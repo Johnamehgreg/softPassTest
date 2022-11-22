@@ -77,10 +77,10 @@ let list = [
                 title: 'NIN',
                 message: 'Authenticate the identities of people using their National Identity Numbers to ensure they are who they claim to be.'
             },
-            {
-                title: 'Bulk BVN',
-                message: 'Verify your customer identities in bulk. Upload a list of numbers and get your bulk verification done in 3 clicks.'
-            },
+            // {
+            //     title: 'Bulk BVN',
+            //     message: 'Verify your customer identities in bulk. Upload a list of numbers and get your bulk verification done in 3 clicks.'
+            // },
 
             {
                 title: 'International Passport',
@@ -104,16 +104,17 @@ let list = [
         name: 'Customer Information Verification',
         item: [
             {
-                title: 'Phone number verification',
-                message: 'Uniquely verify the identities of your customers using their BVN for KYC compliance'
+                title: 'PHONE NUMBER VERIFICATION',
+                message: 'Verify the authenticity of mobile numbers using our phone number verification service. Confirm carrier, location, and validity of any phone number'
+            },
+            
+            {
+                title: 'Bank Account Verification (NUBAN)',
+                message: 'Our NUBAN lookup service allows you to verify any Nigerian bank account number easily'
             },
             {
-                title: 'Phone  number verification',
-                message: 'Authenticate the identities of people using their National Identity Numbers to ensure they are who they claim to be.'
-            },
-            {
-                title: 'Bank Account Verification (NUBAN) Age Verification',
-                message: 'Verify your customer identities in bulk. Upload a list of numbers and get your bulk verification done in 3 clicks.'
+                title: 'Age verification',
+                message: 'Adopt our customer verification solution to verify the actual age of your customers'
             },
 
 
@@ -124,27 +125,24 @@ let list = [
         name: 'Business Verification',
         item: [
             {
-                title: 'CAC Basic verification',
-                message: 'Uniquely verify the identities of your customers using their BVN for KYC compliance'
+                title: 'CAC Basic Verification',
+                message: 'Get the basic details about any business in Nigeria by verifying their RC numbers'
             },
             {
                 title: 'CAC Advanced Verification',
-                message: 'Authenticate the identities of people using their National Identity Numbers to ensure they are who they claim to be.'
+                message: 'Get advanced details about any business in Nigeria by verifying their RC numbers'
             },
 
         ]
     },
     {
-        name: 'Anti-Money Laundering (AML)',
+        name: 'ANTI-MONEY LAUNDERING',
         item: [
             {
-                title: 'CAC Basic verification',
-                message: 'Uniquely verify the identities of your customers using their BVN for KYC compliance'
+                title: 'AML Service',
+                message: 'Fulfil your AML compliance requirements by leveraging our AI-based systems that compare customer selfies with uploaded IDs.'
             },
-            {
-                title: 'CAC Advanced Verification',
-                message: 'Authenticate the identities of people using their National Identity Numbers to ensure they are who they claim to be.'
-            },
+            
 
         ]
     },
@@ -152,12 +150,12 @@ let list = [
         name: 'Facial Verification',
         item: [
             {
-                title: 'Facial Comparison',
-                message: 'Uniquely verify the identities of your customers using their BVN for KYC compliance'
+                title: 'Liveness Check',
+                message: 'Our liveness detection technology helps to direct a user to perform a series of actions in order to detect their presence. It captures, analyzes, and compares patterns based on the person’s facial details'
             },
             {
-                title: 'Optical character validation (OCR)',
-                message: 'Authenticate the identities of people using their National Identity Numbers to ensure they are who they claim to be.'
+                title: 'OCR',
+                message: 'Completely automate the verification of customer credentials and documents by converting all information on any ID into text which can then be validated. Completely time and cost-efficient'
             },
 
         ]

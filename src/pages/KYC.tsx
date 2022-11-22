@@ -27,17 +27,17 @@ function KYC(props: Props) {
 
     const navigation = useNavigate()
 
-    
-    const handleClick = () => {
-        ScrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
+
+
 
     useEffect(() => {
-     if(state?.scroll){
-        handleClick()
-     }
+        if (state?.scroll) {
+            setTimeout(() => {
+                ScrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
+            }, 300)
+        }
     }, [location])
-    
+
 
     const { } = props
 
@@ -50,8 +50,8 @@ function KYC(props: Props) {
                         <h1>Verify your customer <br></br>information within seconds </h1>
                         <p>Swift and Secured Customer Onboarding with e-KYC</p>
                         <button
-                        onClick={() => navigation(routes.contactUs)}
-                        className="get-button">GET IN TOUCH</button>
+                            onClick={() => navigation(routes.contactUs)}
+                            className="get-button">GET IN TOUCH</button>
                         {/* <button className="get-button">GET IN TOUCH
                    
                     </button> */}
@@ -65,7 +65,7 @@ function KYC(props: Props) {
 
 
             <FullWidth bg="white">
-            
+
                 <div className='bg-white max-softpass-width md:rounded-2xl relative md:-top-[100px]'>
                     <TrustedPartners />
                 </div>
@@ -81,7 +81,7 @@ function KYC(props: Props) {
             </FullWidth>
 
             <HeroWidget>
-               
+
                 <div className='flex flex-wrap max-softpass-width pt-[50px] pb-[50px] md:pb-[150px]' >
                     <div className='text-white flex flex-wrap justify-center garrif'>
                         <span ref={ScrollRef} className=' text-softpasspurple-300'>KYC</span>
@@ -89,7 +89,7 @@ function KYC(props: Props) {
                         <p className='w-11/12 sm:w-8/12 md:w-6/12 text-center pt-4 pb-8'>SoftPass helps businesses confirm the authenticity and accuracy of information provided by their customers in multiple ways using reliable and legitimate source databases.</p>
                     </div>
 
-                    <div  className='text-white flex flex-wrap justify-center garrif'>
+                    <div className='text-white flex flex-wrap justify-center garrif'>
                         <div className='w-full sm:w-6/12'>
                             <div className='costomer-info-article'>
                                 <span> <CallBoxIcon width={'48'} /></span>

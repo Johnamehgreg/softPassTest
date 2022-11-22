@@ -428,3 +428,15 @@ a:hover{
   z-index: 300;
 
 }
+.logout-contain{
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  top: 40px;
+  left: -100px;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.202);
+}

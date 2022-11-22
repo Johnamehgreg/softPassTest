@@ -13,29 +13,31 @@ import TrustedPartners from '../components/widget/TrustedPartners'
 import LandingTemplate from '../layouts/HomeLayout/LandingTemplate'
 import routes from '../navigation/Routes'
 
-interface Props {}
+interface Props { }
 
 function AML(props: Props) {
 
+  const ScrollRef = useRef<null | HTMLDivElement>(null);
+
   const location = useLocation();
   const state = location.state as any;
-  const {} = props
-  const ScrollRef = useRef<null | HTMLDivElement>(null);
-  console.log(location)
-
-  const handleClick = () => {
-    ScrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-};
-
-useEffect(() => {
-  if(state?.scroll){
-     handleClick()
-     
-  }
- }, [location])
-
 
   const navigation = useNavigate()
+
+
+
+  console.log(state)
+
+  useEffect(() => {
+    if (state?.scroll === true) {
+      setTimeout(() => {
+        ScrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 300)
+    }
+  }, [location])
+
+
+
 
   return (
     <LandingTemplate>
@@ -110,7 +112,7 @@ useEffect(() => {
       </FullWidth>
 
       <FullWidth bg="white">
-        <div  ref={ScrollRef} className="flex flex-wrap max-softpass-width pt-[50px] pb-[50px] md:pb-[150px] items-center">
+        <div ref={ScrollRef} className="flex flex-wrap max-softpass-width pt-[50px] pb-[50px] md:pb-[150px] items-center">
           <div className="md:w-6/12 w-full md:pr-3">
             <h1 className="text-[35px] text-softpasspurple-300 garrif font-bold">
               Business Verification (KYB)

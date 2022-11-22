@@ -52,7 +52,16 @@ function Footer(props: Props) {
                                                                 className="pointer"> {item.title}</li>
                                                             :
 
-                                                            <li onClick={() => navigation(item.route)} className="pointer"> {item.title}</li>
+                                                            item.scrollCustomer ?
+
+                                                                <li onClick={() => navigation(item.route, { state: { scroll: item.scrollCustomer } })} className="pointer"> {item.title}</li>
+
+                                                                :
+                                                                item.scrollBusiness ?
+                                                                    <li onClick={() => navigation(item.route, { state: { scroll: item?.scrollBusiness } })} className="pointer"> {item.title}</li>
+                                                                    :
+                                                                    <li onClick={() => navigation(item.route)} className="pointer"> {item.title}</li>
+
                                                     }
                                                 </>
 

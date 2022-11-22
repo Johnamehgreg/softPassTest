@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ApiDocumentation from '../components/landingPage/ApiDocumentation'
 import Article from '../components/landingPage/Article'
-import BlogSection from '../components/landingPage/BlogSection'
 import CircleBreakIcon from '../components/svg-icons/CircleBreakIcon'
 import PlayIcon from '../components/svg-icons/PlayIcon'
 import ShieldCheckIcon from '../components/svg-icons/ShieldCheckIcon'
@@ -104,7 +103,7 @@ function LandingPage(props: Props) {
             <ApiDocumentation />
           </HeroMidWidget>
           
-          <BlogSection header="Our Blog" showLandingInfo={true}/>
+          {/* <BlogSection header="Our Blog" showLandingInfo={true}/> */}
           <NewsTeller />
         </section>
       </section>

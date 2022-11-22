@@ -188,7 +188,7 @@ function Register(props: Props) {
               </>
             )}
           </h3>
-          {currentTab == 1 && (
+          {currentTab === 1 && (
             <>
               <div className="input-contain">
                 <input

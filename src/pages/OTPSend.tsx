@@ -25,7 +25,7 @@ function OTPSend(props: Props) {
    const [password, setpassword] = useState('')
    const [isLoading, setisLoading] = useState(false)
 
-   const [currentTab, setCurrentTab] = useState(1)
+   const [currentTab, setCurrentTab] = useState(2)
 
    const [userInfo, setUserinfo] = useState({
 
@@ -85,7 +85,7 @@ function OTPSend(props: Props) {
             <div className='py-12 flex justify-center'><img alt='' src={softPass}></img></div>
 
             <div className='bg-white w-full login-input-container rounded-lg overflow-hidden'>
-               {
+               {/* {
                   currentTab === 1 && (
                      <>
                         <h3>
@@ -122,14 +122,17 @@ function OTPSend(props: Props) {
                         </p>
                      </>
                   )
-               }
+               } */}
 
 
                {currentTab === 2 && (
                   <>
                      <h3>
-                        <span className=' text-softpasspurple-500'>Enter new password </span>
+                        <span className=' text-softpasspurple-500'>Enter OTP from your mail </span>
                      </h3>
+                     <div className='input-contain'>
+                        <input onChange={(e: any) => settoken(e.target.value)} value={token} type='text' placeholder='OTP Code'></input>
+                     </div>
                      <div className="input-contain">
                         <input
                            value={userInfo.newPassword}
