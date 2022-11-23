@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
-import DashboardTemplate from "../../../../layouts/Dashboard/DashboardTemplate";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
 
 interface Props {}
 
-function Index(props: Props) {
+function Wallet(props: Props) {
   const {} = props;
 
   const [tabs, setTabs] = useState([
@@ -46,4 +45,4 @@ function Index(props: Props) {
   );
 }
 
-export default Index;
+export default Wallet;

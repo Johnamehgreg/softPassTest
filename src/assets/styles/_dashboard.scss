@@ -122,7 +122,8 @@
   height: 700px;
 }
 .sub-route-item {
-  @apply px-3 text-[12px] garrif block w-full py-2 cursor-pointer rounded-[20px] hover:bg-softpasspurple-300/10 transition;
+  @apply relative px-3 text-[12px]  garrif block w-full py-2 cursor-pointer hover:bg-softpasspurple-300/10 transition;
+  
 }
 .select-id-dropdown {
   @apply fixed flex top-0 left-0 w-[100vw] h-[100vh] bg-black/10 md:bg-white 
@@ -173,4 +174,29 @@
 }
 .danger{
   @apply bg-softpasspurple-300/10 text-softpasspurple-300
+}
+.sub-route-item-popup{
+ display: none;
+}
+
+.sub-route-item:hover{
+  .sub-route-item-popup{
+    @apply bg-white w-[300px] py-4 px-4;
+    position: absolute;
+    top: 0;
+    left: 180px;
+    z-index: 100;
+    display: block;
+    box-shadow:5px 5px 5px rgba(0, 0, 0, 0.181)
+    
+  
+  }
+}
+
+.sub-item-child{
+  @apply h-[30px] mb-1 pl-1 flex items-center;
+}
+
+.sub-item-child:hover{
+  background-color: rgba(0, 0, 0, 0.096);
 }
