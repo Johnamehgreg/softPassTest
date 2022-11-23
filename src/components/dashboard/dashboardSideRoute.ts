@@ -11,7 +11,7 @@ import Compliance from "../../pages/home/pages/Compliance/Compliance"
 import Dashboard from "../../pages/home/pages/Dashboard"
 import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
-import Wallet from "../../pages/home/pages/Wallet.tsx/Wallet'"
+import Wallet from "../../pages/home/pages/Wallet.tsx/Wallet"
 
 export const dashboardSideRoute = [
    {
