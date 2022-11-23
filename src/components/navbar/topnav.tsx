@@ -43,12 +43,12 @@ function Topnav(props: Props) {
       
 
       <nav className=" bg-white flex flex-wrap w-full items-center px-2 lg:px-16 md:px-4 garrif md: fixed shadow-lg z-10  top-0 left-0 ">
-        <div className="md:w-3/12 w-full flex relative px-2">
+        <div className="md:w-3/12 w-full flex relative px-2 py-3">
           <NavLink to="/">
             <SoftpassLogo width={'140'} height={'37'} />
           </NavLink>
           <span
-            className="md:hidden inline-block absolute right-2 top-[25px] cursor-pointer"
+            className="md:hidden inline-block absolute -translate-y-[20%] right-2 top-[25px] cursor-pointer"
             onClick={() => {
               setshowNav(!showNav)
             }}
@@ -56,7 +56,7 @@ function Topnav(props: Props) {
             {showNav ? (
               <Navicon width={'20'} color={'red'} />
             ) : (
-              <span className="text-[40px] relative -top-[22px] opacity-50">
+              <span className="text-[40px] relative -top-[12px] opacity-50">
                 &times;
               </span>
             )}

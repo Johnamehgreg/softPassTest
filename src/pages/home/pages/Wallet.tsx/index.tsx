@@ -3,12 +3,14 @@ import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHisto
 import DashboardTemplate from "../../../../layouts/Dashboard/DashboardTemplate";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
+import FundWalletModal from "./modals/FundWalletModal"
 
 interface Props {}
 
 function Index(props: Props) {
   const {} = props;
 
+  const [isOpen, setIsOpen] = useState(true)
   const [tabs, setTabs] = useState([
     {
       name: "Number of Total calls",
@@ -23,6 +25,9 @@ function Index(props: Props) {
       type: "regular",
     },
   ]);
+
+
+  
 
   return (
     <>
@@ -42,6 +47,9 @@ function Index(props: Props) {
 
         <WalletTable/>
       </section>
+
+
+
     </>
   );
 }

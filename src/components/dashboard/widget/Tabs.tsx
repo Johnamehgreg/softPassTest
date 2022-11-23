@@ -10,7 +10,7 @@ function Tabs(props: Props) {
 
   return (
     <div
-      className="full bg-white px-4 py-4 rounded-sm garrif relative bg-contain"
+      className="full bg-white px-4 py-4 rounded-sm garrif relative bg-contain bg-no-repeat"
       style={{ backgroundImage: `url(${ChartImage})` }}
     >
       <span className="block w-full sm:text-[13px] text-[10px] pb-1">

@@ -101,7 +101,7 @@ const Dashboard = () => {
                 </div>
 
                <ApiCallHistory info={tabs}/>
-                <div className="w-full overflow-x-scroll">
+                <div className="w-full overflow-x-scroll hide-scrollbar">
                     {
                         //@ts-ignore
                         <ChartDashboard />
