@@ -4,11 +4,9 @@ import {
   BrowserRouter, Navigate, Route,
   Routes
 } from "react-router-dom";
+import { dashboardSideRoute } from '../components/dashboard/dashboardSideRoute';
 import { AuthProvider } from '../contextProvide/AuthContext';
-import Dashboard from '../pages/home/pages/Dashboard';
-import FacialVerification from '../pages/home/pages/FacialVerification';
 import Verification from '../pages/home/pages/Verification';
-import Wallet from '../pages/home/pages/Wallet.tsx/index';
 import route from './router';
 
 const RootRoutes = () => {
@@ -19,8 +17,12 @@ const RootRoutes = () => {
   const landingRoute = route.filter((item: any) => item.stack !== 'app')
   const user = Cookies.get('isLogin')
 
+  const withoutVerification = dashboardSideRoute.filter((item:any) => item.name !== 'verification' )
+  // const Verification = dashboardSideRoute.filter((item:any) => item.name === 'verification' )[0]
 
+  let verificationRote = () => {
 
+  }
 
 
   const readCookies = () => {
@@ -63,10 +65,17 @@ const RootRoutes = () => {
 
 
               <Route path={MainRoute.route} element={<MainRoute.Page />} >
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/auth-verification' element={<Verification />} />
-                <Route path='/facial-verification' element={<FacialVerification />} />
-                <Route path='/wallet' element={<Wallet />} />
+                {
+                  withoutVerification.map((item:any) => {
+                    const { Page, route } = item
+
+                    return (
+                      <Route path={route} key={route} element={<Page />} />
+                    )
+                    
+                  })
+                }
+                <Route path='/identity-verification'  element={<Verification />} />
               </Route>
 
 

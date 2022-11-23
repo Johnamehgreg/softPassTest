@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
-import DashboardTemplate from "../../../../layouts/Dashboard/DashboardTemplate";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
 import FundWalletModal from "./modals/FundWalletModal"
 
 interface Props {}
 
-function Index(props: Props) {
+function Wallet(props: Props) {
   const {} = props;
 
   const [isOpen, setIsOpen] = useState(true)
@@ -54,4 +53,4 @@ function Index(props: Props) {
   );
 }
 
-export default Index;
+export default Wallet;

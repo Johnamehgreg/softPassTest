@@ -4,6 +4,7 @@ import { ReactComponent as ArrowDown } from "../../../assets/image/svg/ArrowDown
 import { ReactComponent as DLogout } from "../../../assets/image/svg/logout.svg";
 import { ReactComponent as DLogo } from "../../../assets/image/svg/softpassSVG 3.svg";
 import { dashboardSideRoute } from "../dashboardSideRoute";
+import SubNav from "./subNav";
 
 interface Props {
   closeSidebar: boolean;
@@ -18,7 +19,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
   const [route, setRoute] = useState("Users");
   const [isDropdownActive, setIsDropDownActive] = useState(-1);
   const [activeSideContent, setActiveSideContent] = useState(-1);
-
+  const [index, setindex] = useState(0)
   //FUNCTIONS
   const setNavigation = (val: string) => {
     setRoute(val);
@@ -29,7 +30,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
 
   return (
     <div
-      className={`w-full side-nav-container overflow-x-visible overflow-y-auto px-6 pt-6`}
+      className={`w-full side-nav-container  px-6 pt-6`}
     >
       <div className="w-full flex items-center">
         <div className="w-11/12">
@@ -54,34 +55,47 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
               {
                 name === 'verification' ?
 
-                  <div className="flex flex-wrap py-1 inter">
+                  <div
+                    onMouseLeave={() => {
+                      setIsDropDownActive(-1)
+                    }}
+                    onMouseEnter={() => {
+                      setActiveSideContent(index);
+                      setIsDropDownActiveFunc(index);
+                    }}
+                    className="flex  flex-wrap py-1  inter">
                     <span
                       onClick={() => {
-
                         setActiveSideContent(index);
                         setIsDropDownActiveFunc(index);
                       }}
-                      className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
-              ${activeSideContent == index
+
+
+                      className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+                       ${activeSideContent == index
                           ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
                           : "transition duration-300"
                         }
               `}
                     >
-                      <Icon
-                        width={"18"}
-                        class={
-                          activeSideContent == index
-                            ? `side-nav-svg transition duration-300`
-                            : "transition duration-300"
-                        }
-                      />
-                      &nbsp; &nbsp; {item.name}
+
+                      <div className="flex items-center">
+                        <Icon
+                          width={"18"}
+                          class={
+                            activeSideContent == index
+                              ? `side-nav-svg transition duration-300`
+                              : "transition duration-300"
+                          }
+                        />
+                        &nbsp; &nbsp; {item.name}
+
+                      </div>
                       {item.subRoute?.length > 0 && (
                         <span
                           className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
-                              ? "rotate-180"
-                              : "rotate-0"
+                            ? "rotate-180"
+                            : "rotate-0"
                             }`}
                         >
                           <ArrowDown />
@@ -90,16 +104,26 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                     </span>
                     {isDropdownActive == index && activeSideContent == index && (
                       <div className="pl-2">
-                        {subRoute.map((item: any, index: number) => {
+                        {subRoute.map((item: any, iDEX: number) => {
                           return (
                             <span
+                              onMouseEnter={() => {
+
+                              }}
                               onClick={() => {
                                 navigation(item?.route)
+                                setindex(iDEX)
                                 // setIsDropDownActiveFunc(-1);
                               }}
                               className="sub-route-item mt-2 relative"
                             >
-                              {item.subname}
+                              {item?.subname}
+                              {
+                                item?.subRoute?.length > 0 && (
+                                  <SubNav item={item?.subRoute} />
+                                )
+                              }
+
                             </span>
                           );
                         })}
@@ -135,8 +159,8 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       {item.subRoute?.length > 0 && (
                         <span
                           className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
-                              ? "rotate-180"
-                              : "rotate-0"
+                            ? "rotate-180"
+                            : "rotate-0"
                             }`}
                         >
                           <ArrowDown />
