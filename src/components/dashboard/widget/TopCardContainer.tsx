@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import FundWalletModal from '../../../pages/home/pages/Wallet.tsx/modals/FundWalletModal'
 import Tabs from './Tabs'
 
 interface Props {
@@ -8,6 +9,14 @@ interface Props {
 function TopCardContainer(props: Props) {
   const { tabs } = props
 
+   //VARIABLE
+   const [isOpen, setIsOpen] = useState(false)
+
+   //FUNCTION
+   const closeModal = (val: boolean)=>{
+     setIsOpen(val)
+  }
+  
   return (
     <div className="flex flex-wrap justify-between">
       {tabs.map((item: any, index: number) => {
@@ -26,11 +35,14 @@ function TopCardContainer(props: Props) {
           </span>
         </div>
         <div>
-          <button className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
+          <button 
+          onClick={()=>{setIsOpen(true)}}
+          className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
             Fund Wallet
           </button>
         </div>
       </div>
+      <FundWalletModal isOpen={isOpen} closeModal={closeModal}/>
     </div>
   )
 }
