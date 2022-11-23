@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {ReactComponent as WalletFund} from "../../../../../assets/svg/fund-wallet.svg"
 import {ReactComponent as Copy} from "../../../../../assets/svg/copy.svg"
+import FundWalletModal from "../modals/FundWalletModal";
+
 
 interface Props {
   tabs: Array<any>;
@@ -8,6 +10,14 @@ interface Props {
 
 function TopCardContainerWallet(props: Props) {
   const { tabs } = props;
+
+  //VARIABLE
+  const [isOpen, setIsOpen] = useState(false)
+
+  //FUNCTION
+  const closeModal = (val: boolean)=>{
+    setIsOpen(val)
+ }
 
   return (
     <div className="flex flex-wrap ">
@@ -38,11 +48,15 @@ function TopCardContainerWallet(props: Props) {
           </span>
         </div>
         <div>
-          <button className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
+          <button
+          onClick={()=>{closeModal(true)}}
+          className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
             Fund Wallet
           </button>
         </div>
       </div>
+
+      <FundWalletModal isOpen={isOpen} closeModal={closeModal}/>
     </div>
   );
 }

@@ -2,12 +2,14 @@ import { useState } from "react";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
+import FundWalletModal from "./modals/FundWalletModal"
 
 interface Props {}
 
 function Wallet(props: Props) {
   const {} = props;
 
+  const [isOpen, setIsOpen] = useState(true)
   const [tabs, setTabs] = useState([
     {
       name: "Number of Total calls",
@@ -22,6 +24,9 @@ function Wallet(props: Props) {
       type: "regular",
     },
   ]);
+
+
+  
 
   return (
     <>
@@ -41,6 +46,9 @@ function Wallet(props: Props) {
 
         <WalletTable/>
       </section>
+
+
+
     </>
   );
 }

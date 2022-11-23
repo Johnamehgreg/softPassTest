@@ -4,7 +4,7 @@
 }
 .dashboard-detail-container {
   flex: 1 1 100%;
-  @apply flex md:h-[100vh] flex-col md:max-w-[calc(100vw-270px)] w-full;
+  @apply flex md:h-[100vh] flex-col lg:max-w-[calc(100vw-270px)] md:max-w-[calc(100vw-220px)] w-full;
   background-color: #f5f6f8;
 }
 .top-dashboard-nav {
