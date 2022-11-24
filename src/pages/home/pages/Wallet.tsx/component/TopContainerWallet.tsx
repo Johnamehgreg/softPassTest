@@ -49,7 +49,9 @@ function TopCardContainerWallet(props: Props) {
         </div>
         <div>
           <button
-          onClick={()=>{closeModal(true)}}
+          onClick={()=>{closeModal(true)
+          console.log("clicked-wallet")
+        }}
           className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
             Fund Wallet
           </button>
