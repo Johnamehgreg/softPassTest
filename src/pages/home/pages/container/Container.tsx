@@ -62,7 +62,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
         </div>
       </div>
 
-      <div className="px-2 mt-3">
+      <div className="px-2 mt-3 pb-6">
         <CardContainer>
           <>
             <div className="flex justify-between w-full py-3">
@@ -74,7 +74,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
               </div>
             </div>
 
-            <div className="flex w-full flex-wrap mt-8">
+            <div className="flex w-full items-center flex-wrap mt-8">
               {list.map((item: any) => {
                 return (
                   <div className="item-key my-2">
@@ -82,7 +82,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
                   </div>
                 );
               })}
-              <div className="item-key">
+              <div className="item-key w-9 h-7">
                 <AiOutlinePlus />
               </div>
             </div>
