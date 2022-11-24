@@ -7,7 +7,7 @@ const CardContainer:React.FC<Props> = ({children}) => {
 
 
     return (
-            <div className="container-page-card px-4 my-3">
+            <div className="container-page-card px-4 my-5">
                { children }
             </div>
             
