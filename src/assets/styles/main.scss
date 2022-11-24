@@ -451,8 +451,7 @@ a:hover {
 }
 
 .container-page-card {
-  @apply min-h-[100px]  w-full bg-white border-l-4 border-softpasspurple-300;
-  box-shadow: -1px 5px 36px -2px rgba(0, 0, 0, 0.285);
+  @apply min-h-[100px]  w-full bg-white border-l-4 border-softpasspurple-300 shadow-md;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
