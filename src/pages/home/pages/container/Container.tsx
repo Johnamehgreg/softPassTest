@@ -78,7 +78,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
               {list.map((item: any) => {
                 return (
                   <div className="item-key my-2">
-                    <p>{item.name}</p>
+                    <p>{item.name} &nbsp; <abbr className="text-black text-[15px]">&times;</abbr></p>
                   </div>
                 );
               })}
