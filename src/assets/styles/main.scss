@@ -433,3 +433,46 @@ a:hover {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+
+.container-page-tab{
+  @apply flex ;
+
+
+  .cont-tab-page{
+    @apply mr-2 text-sm ;
+    
+  }
+
+  .cont-active-tab{
+    @apply border-b-2 border-softpasspurple-300
+  }
+  
+}
+
+.container-page-card {
+  @apply min-h-[100px]  w-full bg-white border-l-4 border-softpasspurple-300;
+  box-shadow: -1px 5px 36px -2px rgba(0, 0, 0, 0.285);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-key{
+  @apply px-2 py-1 mr-2 ;
+   background: rgba(233, 239, 244, 0.7);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   p{
+    @apply mr-2;
+
+    color: #6F6C90;
+    font-size: 0.8rem;
+
+
+   }
+}

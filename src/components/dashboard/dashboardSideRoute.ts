@@ -8,6 +8,7 @@ import { ReactComponent as DReport } from "../../assets/image/svg/report.svg"
 import { ReactComponent as DProfileSettings } from "../../assets/image/svg/settings.svg"
 import { ReactComponent as DTeam } from "../../assets/image/svg/team.svg"
 import Compliance from "../../pages/home/pages/Compliance/Compliance"
+import ContainerPage from "../../pages/home/pages/container/Container"
 import Dashboard from "../../pages/home/pages/Dashboard"
 import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
@@ -152,7 +153,7 @@ export const dashboardSideRoute = [
       name: 'Container',
       subRoute: [],
       Icon: DContainer,
-      Page:Wallet
+      Page:ContainerPage
    },
    {
       route: '/wallet',
