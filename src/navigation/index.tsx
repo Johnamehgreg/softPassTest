@@ -4,9 +4,8 @@ import {
   BrowserRouter, Navigate, Route,
   Routes
 } from "react-router-dom";
-import { dashboardSideRoute } from '../components/dashboard/dashboardSideRoute';
+import { dashboardSideRoute, verificationRoute } from '../components/dashboard/dashboardSideRoute';
 import { AuthProvider } from '../contextProvide/AuthContext';
-import Verification from '../pages/home/pages/Verification';
 import route from './router';
 
 const RootRoutes = () => {
@@ -20,9 +19,7 @@ const RootRoutes = () => {
   const withoutVerification = dashboardSideRoute.filter((item:any) => item.name !== 'verification' )
   // const Verification = dashboardSideRoute.filter((item:any) => item.name === 'verification' )[0]
 
-  let verificationRote = () => {
-
-  }
+  
 
 
   const readCookies = () => {
@@ -75,7 +72,17 @@ const RootRoutes = () => {
                     
                   })
                 }
-                <Route path='/identity-verification'  element={<Verification />} />
+                {
+                  verificationRoute.map((item:any) => {
+                    const { Page, route } = item
+
+                    return (
+                      <Route path={route} key={route} element={<Page />} />
+                    )
+                    
+                  })
+                }
+                
               </Route>
 
 

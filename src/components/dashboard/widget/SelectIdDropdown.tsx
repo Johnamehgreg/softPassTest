@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { verificationRoute } from "../dashboardSideRoute";
 
 interface Props {
   dropdownDirection: String;
@@ -10,6 +12,8 @@ interface Props {
 const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   const { dropdownDirection, onChange } = props;
   const ref = useRef(null);
+
+  const navigation = useNavigate()
 
   //Variables
   const [selectId, setSelectId] = useState(false);
@@ -45,6 +49,8 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
     onChange(selectContent[0].title, selectContent);
   }, []);
 
+  
+
   return (
     <div className="select-verification relative">
       <span
@@ -74,12 +80,13 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
             />
           </form>
           <div>
-            {selectContent.map((item: any, index: number) => {
+            {verificationRoute.map((item: any, index: number) => {
               return (
                 <div
                   className="my-2 py-1 mx-3"
                   key={"selectId" + index}
                   onClick={() => {
+                    navigation(item.route)
                     onChange(item.title, selectContent);
                     setDbSelectId(index);
                     setSelectId(false);
