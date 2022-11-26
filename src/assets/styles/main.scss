@@ -475,3 +475,20 @@ a:hover {
 
    }
 }
+
+.cont-page-remove{
+  @apply bg-softpasspurple-300 ml-4 px-1;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .inner{
+    background-color: #fff;
+    height: 6px;
+    width: 100%;
+  }
+
+}

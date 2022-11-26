@@ -10,8 +10,25 @@ import { ReactComponent as DTeam } from "../../assets/image/svg/team.svg"
 import Compliance from "../../pages/home/pages/Compliance/Compliance"
 import ContainerPage from "../../pages/home/pages/container/Container"
 import Dashboard from "../../pages/home/pages/Dashboard"
+import FacialVerification from "../../pages/home/pages/FacialVerification"
 import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
+import AMT from "../../pages/home/pages/verification/AMT"
+import BAV from "../../pages/home/pages/verification/BAV"
+import BulkBvn from "../../pages/home/pages/verification/BulkBvn"
+import BvnWithImage from "../../pages/home/pages/verification/BvnWithImage"
+import BvnWithoutWithImage from "../../pages/home/pages/verification/BvnWithout-WithImage"
+import BvnWithoutImage from "../../pages/home/pages/verification/BvnWithoutImage"
+import CACAdvanceVerification from "../../pages/home/pages/verification/CACAdvanceVerification"
+import CACBasic from "../../pages/home/pages/verification/CACBasic"
+import DriverLicense from "../../pages/home/pages/verification/DriverLicense"
+import NIN from "../../pages/home/pages/verification/NIN"
+import NIP from "../../pages/home/pages/verification/NIP"
+import OCR from "../../pages/home/pages/verification/OCR"
+import PNV from "../../pages/home/pages/verification/PNV"
+import PNVBulk from "../../pages/home/pages/verification/PNVBulk"
+import PVC from "../../pages/home/pages/verification/PVC"
+import VotersCard from "../../pages/home/pages/verification/VotersCard"
 import Wallet from "../../pages/home/pages/Wallet.tsx/Wallet"
 
 export const dashboardSideRoute = [
@@ -26,45 +43,55 @@ export const dashboardSideRoute = [
       route: '/verification',
       name: 'verification',
       subRoute: [{
+         
          subname: 'Identity verification',
          subRoute: [
             {
-               route: '/identity-verification',
-               name: 'Bulk BNV',
+               route: '/bulk-bvn',
+               name: 'Bulk BVN',
+               Page:BulkBvn,
             },
             {
-               route: '/identity-verification',
+               route: '/NIN',
                name: 'NIN',
+               Page:NIN
             },
             {
-               route: '/identity-verification',
+               route: '/bvn-with-image',
                name: 'BVN with image',
+               Page:BvnWithImage
             },
             {
-               route: '/identity-verification',
-               name: 'BNV wihout image',
+               route: '/bvn-without-image',
+               name: 'BVN wihout image',
+               Page: BvnWithoutImage
             },
             {
-               route: '/identity-verification',
-               name: 'Bluk BNV with/without image',
+               route: '/bvn-with-without-image',
+               name: 'Bulk BVN with/without image',
+               Page:BvnWithoutWithImage
             },
             {
-               route: '/identity-verification',
+               route: '/driver-license',
                name: 'Driver’s License',
+               Page:DriverLicense
             },
             {
-               route: '/identity-verification',
-               name: 'voters Card',
+               route: '/voters-card',
+               name: 'Voters Card',
+               Page:VotersCard
 
             },
             {
-               route: '/identity-verification',
+               route: '/nigerian-international-password',
                name: 'Nigerian International PassPort',
+               Page:NIP
 
             },
             {
-               route: '/identity-verification',
+               route: '/permanent-voters-card',
                name: 'Permanent voters Card (PVC)',
+               Page:PVC
 
             },
 
@@ -73,48 +100,42 @@ export const dashboardSideRoute = [
       },
       {
          subname: 'Customer Identification',
-         route: '',
          subRoute: [
             {
-               route: '/identity-verification',
+               route: '/phone-number-verification',
                name: 'Phone number verification',
-               Page:Verification
+               Page:PNV
             },
             {
-               route: '/identity-verification',
+               route: '/phone-number-verification-bulk',
                name: 'Phone number verification (Bulk)',
-               Page:Verification
+               Page:PNVBulk
             },
             {
-               route: '/identity-verification',
+               route: '/bank-account-verification',
                name: 'Bank Account Verification (NUBAN)',
-               Page:Verification
+               Page:BAV
             },
             {
-               route: '/identity-verification',
+               route: '/age-verification',
                name: 'Age Verification',
                Page:Verification
             },
-            {
-               route: '/identity-verification',
-               name: 'Bulk BNV with/without image',
-               Page:Verification
-            },
+            
          ]
       },
       {
          subname: 'Facial verification',
-         route: '/facial-verification',
          subRoute: [
             {
-               route: '/identity-verification',
+               route: '/ocr',
                name: 'OCR',
-               Page:Verification
+               Page:OCR
             },
             {
-               route: '/identity-verification',
+               route: '/facial-comparison',
                name: 'Facial Comparison',
-               Page:Verification
+               Page:FacialVerification
             },
 
          ]
@@ -123,27 +144,24 @@ export const dashboardSideRoute = [
          subname: 'Business Verification',
          subRoute: [
             {
-               route: '/identity-verification',
+               route: '/CAC-bacis',
                name: 'CAC Basic ',
-               Page:Verification
+               Page:CACBasic
             },
 
 
             {
-               route: '/identity-verification',
+               route: '/CAC-advanced-verification', 
                name: 'CAC Advanced Verification',
-               Page:Verification
+               Page:CACAdvanceVerification
             },
-            {
-               route: '/identity-verification',
-               name: 'Bulk BNV with/without image',
-               Page:Verification
-            },
+           
          ]
       },
       {
          subname: 'Anti-Money Laundering (AML)',
-         route: ''
+         route: '/anti-money-laundring',
+         Page:AMT
       }
       ],
       Icon: DVerification
@@ -199,3 +217,21 @@ export const dashboardSideRoute = [
       Page:Wallet
    },
 ]
+
+
+let list = dashboardSideRoute.filter((item: any) => item?.name === 'verification')[0]?.subRoute
+
+let iList = list.map((item: any) => {
+  return item.subRoute
+})
+
+let nList = iList.map((item:any) => {
+  return item
+})
+
+console.log(list[4])
+
+export const verificationRoute = [...nList[0], ...nList[1], ...nList[2], ...nList[3], list[4] ]
+
+
+

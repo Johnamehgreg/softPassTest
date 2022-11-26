@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import edit from '../../../../assets/svg/edit.svg';
 import CopyIcon from "../../../../components/svg-icons/CopyIcon";
 import CardContainer from "./components/card";
 import CreateContainers from "./modals/CreateContainersModal";
 import DeactivateContainers from "./modals/DeactivateContainerModal";
 import EditContainers from "./modals/EditContainerModal";
-
 const ContainerPage = () => {
   const [tab, settab] = useState(1);
 
@@ -38,7 +38,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
               tab === 1 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
             }
           >
-            Activate container
+            Activated container
           </button>
           <button
             onClick={() => {
@@ -48,7 +48,7 @@ const closeDeactivateContainerModal = (val: boolean)=>{
               tab === 2 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
             }
           >
-            Disactive container
+            Disactived container
           </button>
         </div>
         <div className="w-6/12">
@@ -69,8 +69,10 @@ const closeDeactivateContainerModal = (val: boolean)=>{
               <h2>SoftPass</h2>
 
               <div className=" flex ">
-                <p>edit</p>
-                <p>remove</p>
+               <img className="pointer" src={edit} />
+                <div className="cont-page-remove">
+                    <div className="inner"></div>
+                </div>
               </div>
             </div>
 
