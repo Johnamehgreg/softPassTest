@@ -200,3 +200,18 @@
 .sub-item-child:hover{
   background-color: rgba(0, 0, 0, 0.096);
 }
+.max-h-zero{
+  max-height: 0;
+  overflow: hidden;
+ }
+ .routes-container {
+  animation: 0.2s 1 linear pop-height;
+ }
+ @keyframes pop-height {
+    from{
+      max-height: 0;
+    }
+    to{
+      max-height: 100vh;
+    }
+ }

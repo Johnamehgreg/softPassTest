@@ -95,7 +95,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
 
                       className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
                        ${activeSideContent == index
-                          ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                          ? " text-softpasspurple-300 transition duration-300 bg-softpasspurple-300/10"
                           : "transition duration-300"
                         }
               `}
@@ -164,7 +164,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       }}
                       className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
             ${activeSideContent == index
-                          ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                          ? " text-softpasspurple-300  transition duration-300 bg-softpasspurple-300/10"
                           : "transition duration-300"
                         }
             `}
