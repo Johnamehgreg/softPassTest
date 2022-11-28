@@ -67,7 +67,8 @@ const RootRoutes = () => {
                     const { Page, route } = item
 
                     return (
-                      <Route path={route} key={route} element={<Page />} />
+                      <Route 
+                      path={route} key={route}  element={<Page />} />
                     )
                     
                   })

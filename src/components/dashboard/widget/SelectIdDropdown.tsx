@@ -6,36 +6,22 @@ import { verificationRoute } from "../dashboardSideRoute";
 
 interface Props {
   dropdownDirection: String;
-  onChange?: any;
 }
 
 const SelectIdDropdown: React.FC<Props> = (props: Props) => {
-  const { dropdownDirection, onChange } = props;
+  const { dropdownDirection,  } = props;
   const ref = useRef(null);
+  const [headerTitle, setHeaderTitle] = useState("");
+  const [fromUniqueInput, setFormUniqueInput] = useState([]);
+ 
+
+
 
   const navigation = useNavigate()
 
   //Variables
   const [selectId, setSelectId] = useState(false);
   const [dbSelectId, setDbSelectId] = useState(0);
-
-  const [selectContent, setselectContent] = useState([
-    { name: "BVN", title: "Bank Verification Number (BVN)" },
-    { name: "NIN", title: "National Identity Number (NIN)" },
-    { name: "Drivers’ License", title: "Drivers’ License" },
-    {
-      name: "Nigerian International Passport",
-      title: "Nigerian International Passport",
-    },
-    { name: "PVC", title: "parmenet Voter`s Card" },
-    { name: "Phone number verification", title: "Phone Number Verification" },
-    {
-      name: "Advanced Phone number verification",
-      title: "Advanced Phone number verification",
-    },
-    { name: "OCR", title: "OCR" },
-    { name: "Facial Comparison", title: "Facial Comparison" },
-  ]);
 
   //FUNCTION
   const closeDropDown = (
@@ -44,22 +30,30 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
     if (event.currentTarget == event.target) setSelectId(false);
   };
 
+  const onChange = (val: string, array: any) => {
+    setHeaderTitle(val);
+    setFormUniqueInput(array);
+  };
+
+
   //HOOK
   useEffect(() => {
-    onChange(selectContent[0].title, selectContent);
+    // onChange(selectContent[0].title, selectContent);
   }, []);
+
+
 
   
 
   return (
-    <div className="select-verification relative">
+    <div className="select-verification text-softpasspurple-300 relative">
       <span
         className="flex items-center cursor-pointer"
         onClick={() => {
           setSelectId(!selectId);
         }}
       >
-        Select verification ID <IoMdArrowDropdown size={25} />
+        Select verification ID <IoMdArrowDropdown color="#000" size={25} />
       </span>
 
       <div
@@ -87,13 +81,12 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
                   key={"selectId" + index}
                   onClick={() => {
                     navigation(item.route)
-                    onChange(item.title, selectContent);
                     setDbSelectId(index);
                     setSelectId(false);
                   }}
                 >
                   <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">
-                    <abbr className="font-semibold text-[13px]">
+                    <abbr className="font-semibold text-black text-[13px]">
                       {item.name}
                     </abbr>
                     <input type="checkbox" checked={dbSelectId == index} />

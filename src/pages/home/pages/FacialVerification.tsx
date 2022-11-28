@@ -91,7 +91,7 @@ const FacialVerification: React.FC = (props: Props) => {
                 ></input>
               </div>
               <div className="input-contain pl-4">
-                <Select placeholder="change">
+                <Select placeholder="Container">
                   {["A", "B", "C"].map((item: any, index: number) => {
                     return <option value={item}>{item}</option>;
                   })}

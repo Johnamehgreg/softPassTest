@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import Cookies from 'js-cookie';
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as ArrowDown } from "../../../assets/image/svg/ArrowDown.svg";
 import { ReactComponent as DLogout } from "../../../assets/image/svg/logout.svg";
 import { ReactComponent as DLogo } from "../../../assets/image/svg/softpassSVG 3.svg";
+import { AuthProvider } from "../../../contextProvide/AuthContext";
+import routes from '../../../navigation/Routes';
 import { dashboardSideRoute } from "../dashboardSideRoute";
 import SubNav from "./subNav";
+
+
+
 
 interface Props {
   closeSidebar: boolean;
@@ -13,8 +19,8 @@ interface Props {
 
 const DashboardSideNav: React.FC<Props> = (props: Props) => {
   const { closeSidebar, closebarFunction } = props;
-
   const navigation = useNavigate()
+
   //VARIABLES
   const [route, setRoute] = useState("Users");
   const [isDropdownActive, setIsDropDownActive] = useState(-1);
@@ -27,6 +33,22 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
   const setIsDropDownActiveFunc = (val: number) => {
     isDropdownActive == -1 ? setIsDropDownActive(val) : setIsDropDownActive(-1);
   };
+
+  const {setisUserLogin} = useContext(AuthProvider)
+
+
+
+  const logout =  async() => {
+    setisUserLogin(false)
+    navigation(routes.landing)
+    try{
+      Cookies.remove('isLogin')
+    }catch (e){
+      
+    }
+    
+  }
+  
 
   return (
     <div
@@ -189,7 +211,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
           );
         })}
         <div className="logout-container">
-          <span className="text-[15px] text-softpassgray-150 flex items-center">
+          <span onClick={() =>  logout()} className="text-[15px] pointer text-softpassgray-150 flex items-center">
             <DLogout /> &nbsp; &nbsp; Log Out
           </span>
         </div>

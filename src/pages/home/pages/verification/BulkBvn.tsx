@@ -1,4 +1,6 @@
+import { Select } from "@chakra-ui/react";
 import React, { useState } from "react";
+import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
 
@@ -16,9 +18,12 @@ const BulkBvn: React.FC = (props: Props) => {
 
     return (
         <>
-            <div>
-               
+             {/* start of select id */}
+             <div className="max-w-[200px]">
+                <SelectIdDropdown  dropdownDirection="right" />
             </div>
+            {/* end of select id */}
+
 
             <section className="bg-white mt-8 garrif rounded-md">
                 <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
@@ -36,11 +41,16 @@ const BulkBvn: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
-                                <HomeInput />
-                                <HomeInput />
-                                <HomeInput />
-                                <HomeInput />
-                                <HomeInput />
+                                <HomeInput placeholder="BVN" />
+                                <HomeInput placeholder="Phone number" />
+                                <HomeInput placeholder="Container" />
+                                <div className="input-contain pl-4">
+                                <Select placeholder="change">
+                                    {["A", "B", "C"].map((item: any, index: number) => {
+                                        return <option value={item}>{item}</option>;
+                                    })}
+                                </Select>
+                            </div>
                                 <div className="w-full text-center py-3 garrif">
                                     <button className="next-button">Submit</button>
                                 </div>

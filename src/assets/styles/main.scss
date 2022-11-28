@@ -491,4 +491,15 @@ a:hover {
     width: 100%;
   }
 
+ 
+
+}
+
+.MuiSelect-select {
+ min-height: 10px !important;
+ height: 10px !important;
+}
+
+.MuiSelect-outlined{
+  border-color: red !important;
 }

@@ -1,6 +1,10 @@
+import { SelectChangeEvent } from '@mui/material/Select';
 import React, { useState } from "react";
+import CustomSelect from '../../../../components/CustomSelect';
+import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
+
 
 interface Props { }
 
@@ -10,15 +14,20 @@ const BvnWithImage: React.FC = (props: Props) => {
     //VARIABLES
     const [headerTitle, setHeaderTitle] = useState("");
     const [fromUniqueInput, setFormUniqueInput] = useState([]);
- 
+    const [age, setAge] = React.useState('');
 
+    const handleChange = (event: SelectChangeEvent) => {
+        setAge(event.target.value as string);
+    };
     //FUNCTION
 
     return (
         <>
-            <div>
-               
+            {/* start of select id */}
+            <div className="max-w-[200px]">
+                <SelectIdDropdown dropdownDirection="right" />
             </div>
+            {/* end of select id */}
 
             <section className="bg-white mt-8 garrif rounded-md">
                 <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
@@ -36,10 +45,15 @@ const BvnWithImage: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
+                                <HomeInput placeholder="BVN" />
                                 <HomeInput placeholder=" Phone number" />
                                 <HomeInput placeholder="Container" />
                                 <HomeInput placeholder=" currency type (NGN)" />
+
+                                <CustomSelect />
+
                                 
+
                                 <div className="w-full text-center py-3 garrif">
                                     <button className="next-button">Submit</button>
                                 </div>

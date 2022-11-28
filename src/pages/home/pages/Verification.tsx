@@ -46,7 +46,7 @@ const Verification: React.FC = (props: Props) => {
       <div>
         {/* start of select id */}
         <div className="max-w-[200px]">
-          <SelectIdDropdown onChange={onChange} dropdownDirection="right" />
+          <SelectIdDropdown  dropdownDirection="right" />
         </div>
         {/* end of select id */}
       </div>

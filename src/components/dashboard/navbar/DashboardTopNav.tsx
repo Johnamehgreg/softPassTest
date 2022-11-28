@@ -76,7 +76,7 @@ const DashboardTopNav: React.FC<Props> = (props: Props) => {
             )
           }
           <span 
-          onClick={() => setshowLogout(!showLogout)}
+         
           className='w-[25px] h-[25px] bg-gray-100 grid place-items-center pointer rounded-full'>
             <ArrowDown />
           </span>

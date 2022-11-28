@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import SelectIdDropdown from "../../components/dashboard/widget/SelectIdDropdown";
 import DashboardTemplate from "../../layouts/Dashboard/DashboardTemplate";
 
 
@@ -22,11 +21,7 @@ function HomePage(props: Props) {
 
   return (
     <DashboardTemplate welcomeNote={"Goodday Micheal "} title={'Trust you are having a great day 😄'}>
-      {/* start of select id */}
-      <div className="max-w-[200px]">
-        <SelectIdDropdown onChange={onChange} dropdownDirection="right" />
-      </div>
-      {/* end of select id */}
+      
       <Outlet />
     </DashboardTemplate>
   );

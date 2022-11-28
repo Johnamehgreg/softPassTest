@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
 
@@ -16,10 +17,11 @@ const BvnWithoutImage: React.FC = (props: Props) => {
 
     return (
         <>
-            <div>
-               
+            {/* start of select id */}
+            <div className="max-w-[200px]">
+                <SelectIdDropdown  dropdownDirection="right" />
             </div>
-
+            {/* end of select id */}
             <section className="bg-white mt-8 garrif rounded-md">
                 <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
                     <h1 className="w-6/12 text-[22px] font-semibold">BVN wihout image</h1>
