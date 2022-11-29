@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import HomeFileUpload from "../../../../components/input/homeFileUpload";
 // import HomeEdictor from "../components/Edictor";
 
 interface Props { }
@@ -130,30 +131,10 @@ const Compliance: React.FC = (props: Props) => {
                         </div>
                         <div className="w-full md:w-5/12 ">
                             <form>
-                                {displayInput.map((item: any, index: number) => {
-                                    const { title } = item;
-                                    let filterTitle = "";
-                                    if (Array.isArray(title)) {
-                                        filterTitle =
-                                            "Input " +
-                                            (
-                                                fromUniqueInput.filter(
-                                                    (item: any, index: number) =>
-                                                        item.title === headerTitle
-                                                )[0] as any
-                                            )?.name;
-                                    } else filterTitle = title;
-
-                                    return (
-                                        <div className="verification-input-contain my-4">
-                                            <input
-                                                required
-                                                type="text"
-                                                placeholder={filterTitle}
-                                            ></input>
-                                        </div>
-                                    );
-                                })}
+                                <HomeFileUpload placeholder="Address" />
+                                <HomeFileUpload placeholder="Upload CAC form" />
+                                <HomeFileUpload placeholder="Upload Certification of Incorporation" />
+                                <HomeFileUpload placeholder="Upload Proof of Address" />
                                 <div className="w-full mt-8  mb-8 justify-end flex  ">
                                     <button className="min-w[20px] bg-softpasspurple-300 px-6 py-1 rounded-md text-white">Save</button>
                                 </div>

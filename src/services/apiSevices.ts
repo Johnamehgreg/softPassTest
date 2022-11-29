@@ -9,6 +9,14 @@ const apis = {
         verifyForgetPassword: (data:any) => server.post(`${BASE_URL}/account/verify-forget-password`, data),
         verifyAccount: (data:any) => server.post(`${BASE_URL}/account/verification/email`, data),
         resendVerificationToken: (data:any) => server.post(`${BASE_URL}/account/resend/verification/email`, data),
+    },
+
+    /// Container 
+
+    container:{
+        getAllContainer: () => server.get(`${BASE_URL}/container/list-all?status=true`,),
+        createContainer: (data:any) => server.post(`${BASE_URL}/container/create`, data)
+
     }
 
 }

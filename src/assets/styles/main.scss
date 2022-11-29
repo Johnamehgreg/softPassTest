@@ -107,7 +107,7 @@ input[type=number]{
   }
 }
 .verification-input-contain {
-  @apply w-full border-[1px] border-gray-400 py-[10px] rounded-lg flex items-center relative;
+  @apply w-full border-[1px]  py-[10px] rounded-lg flex items-center relative;
   animation: 0.5s ease-in-out 1 flow;
   input {
     flex: 1 1 100%;
@@ -502,4 +502,42 @@ a:hover {
 
 .MuiSelect-outlined{
   border-color: red !important;
+}
+
+.upload-btn{
+  @apply px-2 py-1  mx-2 ;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  
+}
+
+.e-question{
+  @apply sm:text-[30rem] md:text-[30rem];
+  position: absolute;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.244);
+  z-index: 0;
+}
+
+.e-question:nth-child(1){
+  left: 100px;
+  transform: rotate(30deg);
+}
+.e-question:nth-child(2){
+  right: 100px;
+  transform: rotate(30deg);
+}
+.e-question:nth-child(3){
+  transform: rotate(30deg);
+  top: 100px;
+}
+.e-question:nth-child(4){
+  top: 0;
+  transform: rotate(30deg);
+}
+
+.error-btn-refetch{
+  @apply bg-softpasspurple-300 text-white px-4 py-2 rounded;
+
 }

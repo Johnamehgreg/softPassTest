@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 export const BASE_URL = 'https://dev-api.softpass.net/api/v1'
 // export const BASE_URL = process.env.REACT_APP_TEST_BASE_API_URL
@@ -15,9 +16,10 @@ export const server = axios.create({
 
 
 server.interceptors.request.use(async (config) => {
-    const token = localStorage.getItem('token')
+       const token = Cookies.get('token')
+
     if(token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = token;
         return config;
     } else {
         return config;

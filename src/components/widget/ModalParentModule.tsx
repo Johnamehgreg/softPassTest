@@ -23,12 +23,13 @@ function ModalParentModule(props: Props) {
       }}
       ref={ref}
       className="fixed z-50 top-0 left-0 w-full h-full bg-black/40
-       flex justify-center sm:items-center items-end routes-container"
+       flex justify-center items-center  routes-container"
     >
       <div
-        className="bg-white rounded-md max-w-[600px] sm:min-w-[250px]
-       w-full sm:w-auto sm:min-h-[100px] sm:max-h-[100vh] sm:h-auto h-[70vh]
-        flex-none overflow-y-auto"
+        className="
+        bg-white rounded-md max-w-[600px] sm:min-w-[250px]
+       sm:w-auto min-h-[10px]
+        flex-none overflow-y-auto overflow-hidden"
       >
         { children }
       </div>

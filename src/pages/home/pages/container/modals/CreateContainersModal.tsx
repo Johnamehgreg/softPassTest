@@ -1,14 +1,57 @@
-import { Select } from "@chakra-ui/react";
-import React from "react";
+import { useFormik } from 'formik';
+import React, { useState } from "react";
+import * as Yup from 'yup';
+import HomeInput from "../../../../../components/input/homeInput";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
+import { useCreateContainer } from './container-query-hook';
 
 interface Props {
   isOpen: Boolean;
   closeModal: Function;
 }
 
+
+
 const CreateContainers: React.FC<Props> = (props: Props) => {
   const { isOpen, closeModal } = props;
+
+
+  const {submit} = useCreateContainer(closeModal)
+
+  
+  const validate = Yup.object({
+    containerName: Yup.string()
+      .required('Container name is required'),
+
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      containerName: '',
+    },
+    validationSchema: validate,
+
+    onSubmit: values => {
+
+      const data = {
+        "container_name": values.containerName
+      }
+      
+      submit(data)
+
+      
+
+
+
+    },
+
+  })
+
+
+
+
+
+  const [containerName, setcontainerName] = useState('')
 
   return isOpen ? (
     <ModalParentModule closeModal={closeModal}>
@@ -30,27 +73,35 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
           </span>
         </div>
 
-        <form className="w-full flex justify-center pt-6" onSubmit={(event)=>{event.preventDefault()}}>
-         <div className="w-10/12">
-         <div className="input-contain">
-            <input
-              required
-              type="text"
-              placeholder="Name of Container"
-            ></input>
+        <form onSubmit={formik.handleSubmit} className="w-full flex justify-center pt-6" >
+          <div className="w-10/12">
+
+            <HomeInput
+              name='containerName'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.containerName}
+              // onChange={(e) => console.log(e.target.value)} 
+              placeholder="Name of Contaner"
+            />
+            {formik.touched.containerName && formik.errors.containerName ? (
+              <p className='text-red-700	text-sm' >{formik.errors.containerName}</p>
+            ) : null}
+
+            {/* <div className="pt-[2px]"></div>
+            <div className="input-contain pl-5">
+              <Select placeholder="Select Services">
+                {["a", "b", "c"].map((item: any, index: number) => {
+                  return <option value={item}>{item}</option>;
+                })}
+              </Select>
+            </div> */}
+            <div className="w-full text-center py-3 garrif">
+              <button
+                type="submit"
+                className="next-button">Submit</button>
+            </div>
           </div>
-            <div className="pt-[2px]"></div>
-          <div className="input-contain pl-5">
-            <Select placeholder="Select Services">
-              {["a", "b", "c"].map((item: any, index: number) => {
-                return <option value={item}>{item}</option>;
-              })}
-            </Select>
-          </div>
-          <div className="w-full text-center py-3 garrif">
-            <button className="next-button">Submit</button>
-          </div>
-         </div>
         </form>
       </div>
     </ModalParentModule>

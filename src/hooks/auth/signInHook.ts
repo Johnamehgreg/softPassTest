@@ -25,7 +25,12 @@ export const useSignInHook = (type: { setisLoading: React.Dispatch<React.SetStat
         setisLoading(true)
         // showPopUp({type:'success', title:'Shoe Pop'})
         apis.auth.login(data).then((response: any) => {
+            
+            const {data} = response.data
+
+            let token = data.token.access.token
             Cookies.set('isLogin', 'true')
+            Cookies.set('token', token)
             setisUserLogin(true)
         }).catch((error: any) => {
             

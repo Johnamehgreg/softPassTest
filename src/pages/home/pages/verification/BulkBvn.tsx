@@ -41,9 +41,9 @@ const BulkBvn: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
-                                <HomeInput placeholder="BVN" />
-                                <HomeInput placeholder="Phone number" />
-                                <HomeInput placeholder="Container" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="BVN" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Phone number" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Container" />
                                 <div className="input-contain pl-4">
                                 <Select placeholder="change">
                                     {["A", "B", "C"].map((item: any, index: number) => {

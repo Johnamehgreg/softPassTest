@@ -39,9 +39,9 @@ const NIN: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
-                                <HomeInput placeholder="Phone number" />
-                                <HomeInput placeholder="Container" />
-                                <HomeInput placeholder="Currency" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Phone number" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Container" />
+                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Currency" />
                              
                                 <div className="w-full text-center py-3 garrif">
                                     <button className="next-button">Submit</button>

@@ -44,11 +44,11 @@ const BAV
                         <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                             <div className="w-full md:w-5/12 ">
                                 <form>
-                                    <HomeInput />
-                                    <HomeInput />
-                                    <HomeInput />
-                                    <HomeInput />
-                                    <HomeInput />
+                                   <HomeInput onBlur={() => console.log(',f') } />
+                                   <HomeInput onBlur={() => console.log(',f') } />
+                                   <HomeInput onBlur={() => console.log(',f') } />
+                                   <HomeInput onBlur={() => console.log(',f') } />
+                                   <HomeInput onBlur={() => console.log(',f') } />
                                     <div className="w-full text-center py-3 garrif">
                                         <button className="next-button">Submit</button>
                                     </div>
