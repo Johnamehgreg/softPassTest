@@ -1,23 +1,20 @@
-import { useFormik } from 'formik';
 import React, { useEffect, useState } from "react";
-import * as Yup from 'yup';
 import { useGetServices } from '../../../../../app-query-hook/use-services-hook';
 import CustomSelect from '../../../../../components/CustomSelect';
-import HomeInput from "../../../../../components/input/homeInput";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
-import { useCreateContainer } from './container-query-hook';
+import { useServicesEvent } from "./container-query-hook";
 
 interface Props {
   isOpen: Boolean;
   closeModal: Function;
   refetch: Function;
-  
+  item:any
 }
 
 
 
-const CreateContainers: React.FC<Props> = (props: Props) => {
-  const { isOpen, closeModal, refetch } = props;
+const AddContainerServices: React.FC<Props> = (props: Props) => {
+  const { isOpen, closeModal, item, refetch } = props;
 
   const [serviceList, setserviceList] = useState<any>([])
 
@@ -41,38 +38,21 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
     checkSuccess()
   }, [data])
 
-
-  const { submit } = useCreateContainer(closeModal,)
-
-
-  const validate = Yup.object({
-    containerName: Yup.string()
-      .required('Container name is required'),
-
-  })
+  const {addService} = useServicesEvent({closeModal, refetch})
 
 
-  const formik = useFormik({
-    initialValues: {
-      containerName: '',
-    },
-    validationSchema: validate,
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    onSubmit: values => {
+    if(services === '') return null
 
-      const data = {
-        "container_name": values.containerName,
-        "services": [services]
-      }
+    let data = {
+      "container_id":item?._id,
+      "service_id":services
+  }
 
-      // return console.log(data)
-
-      submit(data, refetch)
-
-    },
-
-  })
-
+    addService(data)
+  }
 
 
 
@@ -96,21 +76,10 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
           </span>
         </div>
 
-        <form onSubmit={formik.handleSubmit} className="w-full flex justify-center pt-2" >
+        <form onSubmit={onSubmit} className="w-full flex justify-center pt-2" >
           <div className="w-10/12">
 
-            <HomeInput
-              name='containerName'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.containerName}
-              // onChange={(e) => console.log(e.target.value)} 
-              placeholder="Name of Contaner"
-            />
-            {formik.touched.containerName && formik.errors.containerName ? (
-              <p className='text-red-700	text-sm' >{formik.errors.containerName}</p>
-            ) : null}
-
+            
             <CustomSelect onChange={(e) => setservices(e)} placeholder='Select Services' options={serviceList} />
 
             <div className="w-full text-center py-3 garrif">
@@ -125,4 +94,4 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
   ) : null;
 };
 
-export default CreateContainers;
+export default AddContainerServices;

@@ -477,9 +477,9 @@ a:hover {
 }
 
 .cont-page-remove{
-  @apply bg-softpasspurple-300 ml-4 px-1;
-  width: 35px;
-  height: 35px;
+  @apply bg-softpasspurple-300 ml-4 px-2;
+  width: 25px;
+  height: 25px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -487,7 +487,7 @@ a:hover {
 
   .inner{
     background-color: #fff;
-    height: 6px;
+    height: 3px;
     width: 100%;
   }
 
@@ -540,4 +540,23 @@ a:hover {
 .error-btn-refetch{
   @apply bg-softpasspurple-300 text-white px-4 py-2 rounded;
 
+}
+
+
+.modal-close-icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.inner-refetch-card{
+  @apply flex items-center justify-center absolute;
+  width: 100px;
+  height: 50px;  
+  border-radius: 5px;
+  left: 50%;
+  // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.311);
+  transform: translateX(-50%);
 }

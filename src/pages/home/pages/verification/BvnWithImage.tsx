@@ -1,6 +1,5 @@
 import { SelectChangeEvent } from '@mui/material/Select';
 import React, { useState } from "react";
-import CustomSelect from '../../../../components/CustomSelect';
 import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
@@ -50,7 +49,7 @@ const BvnWithImage: React.FC = (props: Props) => {
                                 <HomeInput onBlur={() => console.log('fknf')} placeholder="Container" />
                                 <HomeInput onBlur={() => console.log('fknf')} placeholder=" currency type (NGN)" />
 
-                                <CustomSelect />
+                                {/* <CustomSelect /> */}
 
                                 
 

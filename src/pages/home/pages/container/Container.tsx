@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
 import ContainerItem from "./components/containerItem";
 import { useContainerHook } from "./modals/container-query-hook";
@@ -19,6 +20,9 @@ const ContainerPage = () => {
     setIsCreateContOpen(val)
   }
 
+  const [status, setstatus] = useState(true)
+
+
 
   const onError = () => {
     setisError(true)
@@ -32,8 +36,9 @@ const ContainerPage = () => {
     isFetched,
     isError: isErrorData,
     isSuccess: isDataSuccess,
+    isFetching,
     refetch
-  } = useContainerHook({ onError })
+  } = useContainerHook({ onError, status })
 
   const checkSuccess = () => {
 
@@ -41,6 +46,7 @@ const ContainerPage = () => {
       setisError(false)
       setisSuccess(true)
       setcontainerList(data?.data)
+      console.log(data?.data)
     }
   }
 
@@ -72,6 +78,7 @@ const ContainerPage = () => {
             <button
               onClick={() => {
                 settab(1);
+                setstatus(true)
               }}
               className={
                 tab === 1 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
@@ -82,6 +89,8 @@ const ContainerPage = () => {
             <button
               onClick={() => {
                 settab(2);
+                setstatus(false)
+
               }}
               className={
                 tab === 2 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
@@ -103,39 +112,45 @@ const ContainerPage = () => {
 
         <div className="px-2 mt-3 pb-6">
 
+          <AppRetching isFetching={isFetching} />
 
+
+
+        
 
           {
-            containerList.map((item: any, index: number) => {
-              return (
-                <ContainerItem item={item} />
-              )
-            })
+            containerList
+              .map((item: any, index: any) => {
+                return (
+                  <ContainerItem refetch={refetch} item={item} />
+                )
+              })
           }
-          {/* 
-          <CardContainer>
+
+
+
+          
+          {/* <CardContainer>
             <>
-              <div key={item?._id} className="flex w-full ">
+              <div  className="flex w-full ">
                 <div className="pt-5 text-gray-400 leading-3 w-full">
                   <div className="flex items-center flex-wrap text-[13px] w-full pb-3">
                     <div className="sm:w-6/12 w-full text-[18px] text-black flex items-center">
-                      {item?.container_name}
+                      fdbdkxnds
                     </div>
                     <div className="sm:w-6/12 w-full pt-5 sm:pt-0 flex flex-wrap sm:flex-nowrap items-center">
                       <div className="w-full flex-wrap flex items-center sm:pb-0 pb-4">
                         <p className="text-[13px] w-full pb-2">Container key</p>
-                        {item?.container_key}
+                        csjnkncksxzn
                       </div>
                       <button className="w-10 mx-2">
                         <CopyIcon width={"18"} color={"black"} />
                       </button>
                       <button
-                        onClick={() => { closeEditContainerModal(true) }}
                         className="w-10 mx-2">
                         <CopyIcon width={"18"} color={"black"} />
                       </button>
                       <button
-                        onClick={() => { closeDeactivateContainerModal(true) }}
                         className="w-8 h-7 flex justify-center items-center rounded-md bg-gray-200">
                         <AiOutlinePlus fill="black" />
                       </button>
@@ -151,7 +166,7 @@ const ContainerPage = () => {
 
         </div>
 
-        <CreateContainers isOpen={isCreateContOpen} closeModal={closeCreateContainerModal} />
+        <CreateContainers refetch={refetch} isOpen={isCreateContOpen} closeModal={closeCreateContainerModal} />
       </section>
     </AppWrapper>
 

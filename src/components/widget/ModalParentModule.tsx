@@ -29,7 +29,7 @@ function ModalParentModule(props: Props) {
         className="
         bg-white rounded-md max-w-[600px] sm:min-w-[250px]
        sm:w-auto min-h-[10px]
-        flex-none overflow-y-auto overflow-hidden"
+        flex-none  relative"
       >
         { children }
       </div>

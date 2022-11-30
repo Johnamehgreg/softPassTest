@@ -1,8 +1,11 @@
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import edit from '../../../../../assets/svg/edit.svg';
+import AppDeleteModal from "../../../../../components/AppComponent/AppDeleteModal";
 import CopyIcon from "../../../../../components/svg-icons/CopyIcon";
+import AddContainerServices from "../modals/AddServices";
+import { useGetServiceByContainer, useServicesEvent } from "../modals/container-query-hook";
 import DeactivateContainers from "../modals/DeactivateContainerModal";
 import EditContainers from "../modals/EditContainerModal";
 
@@ -10,14 +13,20 @@ import CardContainer from "./card";
 
 
 interface Props {
-    item: any
+    item: any;
+    refetch: Function
 }
 
-const ContainerItem: React.FC<Props> = ({ item }) => {
-    let data = moment().format('YYYY-MM-DD')
+const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
+    let date = moment().format('YYYY-MM-DD')
+
+    const [servicesList, setservicesList] = useState([])
+
     const [isEditContOpen, setIsEditContOpen] = useState(false)
     const [isDeactivateContOpen, setIsDeactivateContOpen] = useState(false)
-    
+    const [isDeleteServiceOpen, setisDeleteServiceOpen] = useState(false)
+    const [isAddServiceOpen, setisAddServiceOpen] = useState(false)
+    const [serviceIndex, setserviceIndex] = useState(0)
     const closeDeactivateContainerModal = (val: boolean) => {
         setIsDeactivateContOpen(val)
     }
@@ -25,6 +34,38 @@ const ContainerItem: React.FC<Props> = ({ item }) => {
     const closeEditContainerModal = (val: boolean) => {
         setIsEditContOpen(val)
     }
+
+    const onError = () => {
+
+    }
+
+    const { isSuccess, refetch:serviceRefetch, isFetched, data } = useGetServiceByContainer({ onError, containerId: item._id })
+
+   const {deleteService} =  useServicesEvent({refetch:serviceRefetch, closeModal:() => setisDeleteServiceOpen(false)})
+
+    const checkSuccess = () => {
+
+        if (isFetched && isSuccess) {
+            setservicesList(data?.data)
+
+        }
+    }
+
+    const handleServicesDelete = () => {
+        let serviceId:any = servicesList[serviceIndex]
+        console.log(serviceId, 'servicesList')
+
+        deleteService({servicesId:serviceId.service_id, containerId:item._id })
+        
+
+
+    }
+
+
+    useEffect(() => {
+        checkSuccess()
+    }, [data])
+
 
     return (
         <>
@@ -35,29 +76,34 @@ const ContainerItem: React.FC<Props> = ({ item }) => {
                             {item?.container_name}
                         </h2>
 
-                        <div className=" flex ">
+                        <div className=" flex items-center justify-center ">
                             <span
                                 onClick={() => setIsEditContOpen(true)}
                             >
                                 <img className="pointer" src={edit} />
                             </span>
 
-                            <div className="cont-page-remove">
+                            <div className="ml-4 cont-page-remove pointer">
                                 <div className="inner"></div>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex w-full items-center flex-wrap mt-8">
-                        {list.map((item: any) => {
+                        {servicesList.map((item: any, index) => {
                             return (
                                 <div className="item-key my-2">
-                                    <p>{item.name} &nbsp; <abbr className="text-black text-[15px]">&times;</abbr></p>
+                                    <p>{item.service_id} &nbsp; <abbr
+                                    onClick={() => {
+                                        setisDeleteServiceOpen(true)
+                                        setserviceIndex(index)
+                                    }}
+                                    className="text-black pointer text-[15px]">&times;</abbr></p>
                                 </div>
                             );
                         })}
-                        <div className="item-key w-9 h-7">
-                            <AiOutlinePlus />
+                        <div onClick={() => setisAddServiceOpen(true)} className="item-key w-9 pointer h-7">
+                            <AiOutlinePlus  />
                         </div>
                     </div>
 
@@ -70,9 +116,23 @@ const ContainerItem: React.FC<Props> = ({ item }) => {
                                     <CopyIcon width={"18"} color={"black"} />
                                 </div>
                                 <div className="sm:w-6/12 w-full flex flex-wrap items-center">
-                                    <span className="text-softpasspurple-300 font-semibold mr-4">
-                                        Deactivate container
-                                    </span>
+                                    {
+                                        item?.is_active === true ?
+
+                                            <span
+                                                onClick={() => setIsDeactivateContOpen(true)}
+                                                className="text-softpasspurple-300 font-semibold pointer mr-4">
+                                                Deactivate container
+                                            </span>
+
+                                            :
+
+                                            <span
+                                                onClick={() => setIsDeactivateContOpen(true)}
+                                                className="text-softpasspurple-300 font-semibold pointer mr-4">
+                                                Activate container
+                                            </span>
+                                    }
                                     <span>04/08/2022</span>
                                 </div>
                             </div>
@@ -80,9 +140,10 @@ const ContainerItem: React.FC<Props> = ({ item }) => {
                     </div>
                 </>
             </CardContainer>
-
-            <EditContainers isOpen={isEditContOpen} closeModal={closeEditContainerModal} />
-            <DeactivateContainers isOpen={isDeactivateContOpen} closeModal={closeDeactivateContainerModal} />
+            <EditContainers item={item} refetch={refetch} isOpen={isEditContOpen} closeModal={closeEditContainerModal} />
+            <DeactivateContainers refetch={refetch} item={item} isOpen={isDeactivateContOpen} closeModal={closeDeactivateContainerModal} />
+            <AppDeleteModal onDelete={() => handleServicesDelete()} item={servicesList[serviceIndex]} isOpen={isDeleteServiceOpen} closeModal={() => setisDeleteServiceOpen(false)} />
+            <AddContainerServices item={item} refetch={serviceRefetch} isOpen={isAddServiceOpen} closeModal={() => setisAddServiceOpen(false)} />
 
 
         </>
@@ -90,22 +151,6 @@ const ContainerItem: React.FC<Props> = ({ item }) => {
     )
 }
 
-let list = [
-    {
-        name: "BVN",
-    },
-    {
-        name: "NIN",
-    },
-    {
-        name: "Driver Liciens",
-    },
-    {
-        name: "Nigerian international Passport",
-    },
-    {
-        name: "PVC",
-    },
-];
+
 
 export default ContainerItem
