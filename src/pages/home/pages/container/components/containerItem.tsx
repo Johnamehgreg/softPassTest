@@ -98,10 +98,14 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
 
                         <div className=" flex items-center justify-center ">
 
-                            <button
-                                className="w-10 mx-2">
-                                <CopyIcon width={"18"} color={"black"} />
-                            </button>
+                            {
+                                isColase && (
+                                    <button
+                                        className="w-10 mx-2">
+                                        <CopyIcon width={"18"} color={"black"} />
+                                    </button>
+                                )
+                            }
                             <span
                                 onClick={() => setIsEditContOpen(true)}
                             >
