@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { useGetServices } from '../../../../../app-query-hook/use-services-hook';
-import CustomSelect from '../../../../../components/CustomSelect';
+import SelectMultiServices from '../../../../../components/dashboard/widget/selectMultiServices';
 import HomeInput from "../../../../../components/input/homeInput";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
 import { useCreateContainer } from './container-query-hook';
@@ -11,7 +11,7 @@ interface Props {
   isOpen: Boolean;
   closeModal: Function;
   refetch: Function;
-  
+
 }
 
 
@@ -111,7 +111,11 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
               <p className='text-red-700	text-sm' >{formik.errors.containerName}</p>
             ) : null}
 
-            <CustomSelect onChange={(e) => setservices(e)} placeholder='Select Services' options={serviceList} />
+            {/* <CustomSelect onChange={(e) => setservices(e)} placeholder='Select Services' options={serviceList} /> */}
+
+            
+              <SelectMultiServices onChange={(e: any) => console.log(e, 'selected data')} />
+
 
             <div className="w-full text-center py-3 garrif">
               <button

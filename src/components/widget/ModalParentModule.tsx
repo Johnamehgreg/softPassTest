@@ -27,7 +27,7 @@ function ModalParentModule(props: Props) {
     >
       <div
         className="
-        bg-white rounded-md max-w-[600px] sm:min-w-[250px]
+        bg-white overflow-scroll rounded-md max-w-[600px] sm:min-w-[250px]
        sm:w-auto min-h-[10px]
         flex-none  relative"
       >

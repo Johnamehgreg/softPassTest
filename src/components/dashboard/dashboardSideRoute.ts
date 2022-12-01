@@ -141,6 +141,27 @@ export const dashboardSideRoute = [
          ]
       },
       {
+         subname: 'Utilities',
+         subRoute: [
+            {
+               route: '/ocr',
+               name: 'Bill Payment',
+               Page:OCR
+            },
+            {
+               route: '/facial-comparison',
+               name: 'Airtime',
+               Page:FacialVerification
+            },
+            {
+               route: '/facial-comparison',
+               name: 'DATA',
+               Page:FacialVerification
+            },
+
+         ]
+      },
+      {
          subname: 'Business Verification',
          subRoute: [
             {
@@ -229,7 +250,6 @@ let nList = iList.map((item:any) => {
   return item
 })
 
-console.log(list[4])
 
 export const verificationRoute = [...nList[0], ...nList[1], ...nList[2], ...nList[3], list[4] ]
 

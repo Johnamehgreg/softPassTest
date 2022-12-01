@@ -62,7 +62,6 @@ function Edictor() {
             setcode(curl)
         }
 
-        console.log(code)
     }
 
 
@@ -110,7 +109,7 @@ function Edictor() {
                         editable={false}
                         extensions={[javascript({ jsx: true })]}
                         onChange={(value, viewUpdate) => {
-                            console.log('value:', value);
+                            
                         }}
                     />
 

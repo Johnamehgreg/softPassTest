@@ -30,6 +30,11 @@ const apis = {
         getServiceByContainer: (id:string) => server.get(`${BASE_URL}/container-service/all?container_id=${id}`,),
         deleteContainerSrvice: (type:{servicesId:string, containerId:string }) => server.delete(`${BASE_URL}/container-service/remove-service?service_id=${type.servicesId}&container_id=${type.containerId}`,),
         addContainerService: (data:any) => server.post(`${BASE_URL}/container-service/create`, data),
+    },
+
+
+    user:{
+        getUserDetails:() => server.get(`${BASE_URL}/account/user-details`,),
     }
 
 }

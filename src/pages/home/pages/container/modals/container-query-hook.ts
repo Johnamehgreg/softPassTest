@@ -205,7 +205,6 @@ export const useGetServiceByContainer = (arg: ARG1) => {
 
     let data = all?.data
 
-    console.log(data, 'container data')
 
 
     return {

@@ -18,7 +18,6 @@ const Article = () => {
     const navigation = useNavigate()
 
 
-    console.log(inView, 'viewd')
 
     useEffect(() => {
 

@@ -26,6 +26,8 @@ const RootRoutes = () => {
 
     if (user) {
       setisUserLogin(true)
+    }else{
+      setisUserLogin(false)
     }
   }
   useEffect(() => {

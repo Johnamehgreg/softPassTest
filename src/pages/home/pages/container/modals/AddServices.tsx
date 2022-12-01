@@ -61,7 +61,7 @@ const AddContainerServices: React.FC<Props> = (props: Props) => {
       <div className="sm:w-[400px] w-full">
         <div className="flex py-6 px-4 w-full pb-6 items-center border-b-[1px] border-b-gray-200">
           <h4 className="w-full text-[20px] text-softpasspurple-500 font-bold">
-            Create a container
+            Create a service
             <span className="w-full text-[12px] block opacity-50 font-normal">
               Select services you'd like to add to this container
             </span>

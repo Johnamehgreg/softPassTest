@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
+import { AppProvider } from "../../../../contextProvide/AppContext";
 import ContainerItem from "./components/containerItem";
 import { useContainerHook } from "./modals/container-query-hook";
 import CreateContainers from "./modals/CreateContainersModal";
@@ -46,7 +47,6 @@ const ContainerPage = () => {
       setisError(false)
       setisSuccess(true)
       setcontainerList(data?.data)
-      console.log(data?.data)
     }
   }
 
@@ -62,6 +62,17 @@ const ContainerPage = () => {
   }
 
 
+  const {settopNavData} = useContext(AppProvider)
+    
+
+  useEffect(() => {
+      settopNavData({
+          title:'Container',
+          message:'Manage your team member activities as well as transaction history',
+      })
+  }, [])
+
+
 
 
   return (
@@ -72,8 +83,8 @@ const ContainerPage = () => {
       isError={isError}
 
     >
-      <section className="bg-white mt-8 garrif">
-        <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 lg:bg-transparent border-b-[1px] border-b-gray-300">
+      <section className="bg-white rounded-[10px] mt-8 garrif">
+        <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 border-b-[1px] border-b-gray-300">
           <div className="container-page-tab w-6/12 ">
             <button
               onClick={() => {
@@ -81,7 +92,7 @@ const ContainerPage = () => {
                 setstatus(true)
               }}
               className={
-                tab === 1 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
+                tab === 1 ? "cont-tab-page cont-active-tab " : "cont-tab-page  text-gray-400"
               }
             >
               Activated container
@@ -93,24 +104,21 @@ const ContainerPage = () => {
 
               }}
               className={
-                tab === 2 ? "cont-tab-page cont-active-tab" : "cont-tab-page"
+                tab === 2 ? "cont-tab-page cont-active-tab" : "cont-tab-page text-gray-400"
               }
             >
               Disactived container
             </button>
           </div>
-          <div className="w-6/12">
-            <div className="flex justify-end z-10">
-              <b
-                onClick={() => { closeCreateContainerModal(true) }}
-                className="border-[12px] cursor-pointer border-gray-100 px-3 text-[15px] py-1 text-softpasspurple-300">
-                Create Container
-              </b>
-            </div>
+          <div className="w-6/12 flex justify-end">
+            <button className="text-softpasspurple-300 border-[8px] py-1 px-2 border-gray-100  " >
+            Create Container
+            </button>
+           
           </div>
         </div>
 
-        <div className="px-2 mt-3 pb-6">
+        <div className="sm:px-4 md:px-16 mt-3 pb-6">
 
           <AppRetching isFetching={isFetching} />
 

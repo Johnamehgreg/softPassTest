@@ -34,6 +34,7 @@
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "codeflask": "^1.4.1",
+    "dateformat": "^5.0.3",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.7",
     "install": "^0.13.0",

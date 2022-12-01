@@ -19,7 +19,6 @@ export const useForgetPasswordHook = (type:{setisLoading:React.Dispatch<React.Se
                 navigation(routes.authOtp)
             }
         }).catch((error:any) => {
-            console.log(error)
             const {status, data} = error.response
             if(status >=  400 && data.message){
                showPopUp({type:'error', message:data.message})
@@ -77,7 +76,6 @@ export const useVerifyAccount = (type:{setisLoading:React.Dispatch<React.SetStat
             }
         }).catch((error:any) => {
             setisLoading(false)
-            console.log(error)
             const {status, data} = error.response
             if(status >=  400 && data.message){
                showPopUp({type:'error', message:data.message})

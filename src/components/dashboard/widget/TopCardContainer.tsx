@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import FundWalletModal from '../../../pages/home/pages/Wallet.tsx/modals/FundWalletModal'
 import Tabs from './Tabs'
 
@@ -31,7 +31,7 @@ function TopCardContainer(props: Props) {
         <div className="">
           <b className="text-[12px] font-normal block">Total Wallet Balance</b>
           <span className="font-semibold text-softpasspurple-300 text-[18px]">
-            N 40,000.00
+          <span>&#8358;</span> 40,000.00
           </span>
         </div>
         <div>

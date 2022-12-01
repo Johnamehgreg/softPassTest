@@ -36,7 +36,7 @@ const AppDeleteModal: React.FC<Props> = (props: Props) => {
           className="w-full flex justify-center pt-6"
         >
           <div className="w-10/12 pb-5">
-            <div className="w-full text-[15px] opacity-50">Are you sure you want to delete {item?.service_id}?</div>
+            <div className="w-full text-[15px] opacity-50">Are you sure you want to delete {item?.service_id?.service_name}?</div>
             <div className="w-full text-center py-3 garrif">
               <button
                 onClick={() => onDelete()}

@@ -18,7 +18,7 @@ interface Props {
 }
 
 const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
-    let date = moment().format('YYYY-MM-DD')
+    let date = moment(item?.createdAt).format('d/m/yyyy')
 
     const [servicesList, setservicesList] = useState([])
 
@@ -48,6 +48,7 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
         if (isFetched && isSuccess) {
             setservicesList(data?.data)
 
+
         }
     }
 
@@ -55,7 +56,7 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
         let serviceId:any = servicesList[serviceIndex]
         console.log(serviceId, 'servicesList')
 
-        deleteService({servicesId:serviceId.service_id, containerId:item._id })
+        deleteService({servicesId:serviceId.service_id.id, containerId:item._id })
         
 
 
@@ -93,7 +94,7 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                         {servicesList.map((item: any, index) => {
                             return (
                                 <div className="item-key my-2">
-                                    <p>{item.service_id} &nbsp; <abbr
+                                    <p>{item.service_id.service_name} &nbsp; <abbr
                                     onClick={() => {
                                         setisDeleteServiceOpen(true)
                                         setserviceIndex(index)
@@ -133,7 +134,7 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                                                 Activate container
                                             </span>
                                     }
-                                    <span>04/08/2022</span>
+                                    <span>{date}</span>
                                 </div>
                             </div>
                         </div>

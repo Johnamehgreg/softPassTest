@@ -35,8 +35,8 @@ server.interceptors.request.use(async (config) => {
   }, error => {
   
     if (error.response && error.response.status === 401) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('random')
+        Cookies.remove('isLogin')
+        Cookies.remove('token')
     }
    
     return Promise.reject(error);

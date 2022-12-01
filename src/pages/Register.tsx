@@ -82,8 +82,8 @@ function Register(props: Props) {
       first_name: userInfo.fullName,
       last_name: userInfo.fullName,
       email: userInfo.workEmail,
-      product: userInfo.product,
-      current_job_role: userInfo.currentJob,
+      // product: userInfo.product,
+      // current_job_role: userInfo.currentJob,
       country: userInfo.country,
       hear_about_us: userInfo.aboutUs,
       password: userInfo.newPassword,
@@ -102,20 +102,20 @@ function Register(props: Props) {
   };
 
   const [otherInfo, setOtherInfo] = useState([
-    {
-      name: "Product",
-      options: [
-        "Banking and insurance",
-        "Consumer payments",
-        "Lending",
-        "Wealth management",
-        "Others",
-      ],
-    },
-    {
-      name: "Current role",
-      options: ["Software Engineer", "Product Manager", "Founder", "Others"],
-    },
+    // {
+    //   name: "Product",
+    //   options: [
+    //     "Banking and insurance",
+    //     "Consumer payments",
+    //     "Lending",
+    //     "Wealth management",
+    //     "Others",
+    //   ],
+    // },
+    // {
+    //   name: "Current role",
+    //   options: ["Software Engineer", "Product Manager", "Founder", "Others"],
+    // },
     {
       name: "How did you hear about us",
       options: ["Social media", "Email", "Newsletter", "Website", "Others"],

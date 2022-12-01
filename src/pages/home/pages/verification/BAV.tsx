@@ -12,7 +12,6 @@ const BAV
 
         const location = useLocation()
 
-        console.log(location)
 
         //VARIABLES
         const [headerTitle, setHeaderTitle] = useState("");
@@ -34,7 +33,8 @@ const BAV
                         <div className="w-6/12">
                             <div className="flex justify-end z-10">
                                 <b className="border-[12px] border-gray-100 px-3 text-[17px] py-1 text-softpasspurple-300">
-                                    $100/call
+                                    <span>&#8358;</span>
+100/call
                                 </b>
                             </div>
                         </div>
