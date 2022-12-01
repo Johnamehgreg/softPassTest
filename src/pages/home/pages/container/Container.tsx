@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
-import CopyIcon from "../../../../components/svg-icons/CopyIcon";
 import { AppProvider } from "../../../../contextProvide/AppContext";
-import CardContainer from "./components/card";
 import ContainerItem from "./components/containerItem";
 import { useContainerHook } from "./modals/container-query-hook";
 import CreateContainers from "./modals/CreateContainersModal";
@@ -128,9 +125,6 @@ const ContainerPage = () => {
           <AppRetching isFetching={isFetching} />
 
 
-
-        
-
           {
             containerList
               .map((item: any, index: any) => {
@@ -139,42 +133,6 @@ const ContainerPage = () => {
                 )
               })
           }
-
-
-
-          
-          <CardContainer>
-            <>
-              <div  className="flex w-full ">
-                <div className="pt-5 text-gray-400 leading-3 w-full">
-                  <div className="flex items-center flex-wrap text-[13px] w-full pb-3">
-                    <div className="sm:w-6/12 w-full text-[18px] text-black flex items-center">
-                      fdbdkxnds
-                    </div>
-                    <div className="sm:w-6/12 w-full pt-5 sm:pt-0 flex flex-wrap sm:flex-nowrap items-center">
-                      <div className="w-full flex-wrap flex items-center sm:pb-0 pb-4">
-                        <p className="text-[13px] w-full pb-2">Container key</p>
-                        csjnkncksxzn
-                      </div>
-                      <button className="w-10 mx-2">
-                        <CopyIcon width={"18"} color={"black"} />
-                      </button>
-                      <button
-                        className="w-10 mx-2">
-                        <CopyIcon width={"18"} color={"black"} />
-                      </button>
-                      <button
-                        className="w-8 h-7 flex justify-center items-center rounded-md bg-gray-200">
-                        <AiOutlinePlus fill="black" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          </CardContainer>
-
-
 
 
         </div>

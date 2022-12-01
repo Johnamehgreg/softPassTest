@@ -154,6 +154,88 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                   </div>
                   :
 
+                  name === "Utilities" 
+
+                  ?
+
+                  <div
+                  onMouseLeave={() => {
+                    setIsDropDownActive(-1)
+                  }}
+                  onMouseEnter={() => {
+                    setActiveSideContent(index);
+                    setIsDropDownActiveFunc(index);
+                  }}
+                  className="flex  flex-wrap py-1  inter">
+                  <span
+                    onClick={() => {
+                      setActiveSideContent(index);
+                      setIsDropDownActiveFunc(index);
+                    }}
+
+
+                    className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+                     ${activeSideContent == index
+                        ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                        : "transition duration-300"
+                      }
+            `}
+                  >
+
+                    <div className="flex items-center">
+                      <Icon
+                        width={"18"}
+                        class={
+                          activeSideContent == index
+                            ? `side-nav-svg transition duration-300`
+                            : "transition duration-300"
+                        }
+                      />
+                      &nbsp; &nbsp; {item.name}
+
+                    </div>
+                    {item.subRoute?.length > 0 && (
+                      <span
+                        className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
+                          ? "rotate-180"
+                          : "rotate-0"
+                          }`}
+                      >
+                        <ArrowDown />
+                      </span>
+                    )}
+                  </span>
+                  {isDropdownActive == index && activeSideContent == index && (
+                    <div className="pl-2">
+                      {subRoute.map((item: any, iDEX: number) => {
+                        return (
+                          <span
+                            onMouseEnter={() => {
+
+                            }}
+                            onClick={() => {
+                              navigation(item?.route)
+                              setindex(iDEX)
+                              // setIsDropDownActiveFunc(-1);
+                            }}
+                            className="sub-route-item mt-2 relative"
+                          >
+                            {item?.subname}
+                            {
+                              item?.subRoute?.length > 0 && (
+                                <SubNav item={item?.subRoute} />
+                              )
+                            }
+
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                :
+
                   <div className="flex flex-wrap py-1 inter">
                     <span
                       onClick={() => {

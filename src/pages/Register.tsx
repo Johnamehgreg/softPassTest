@@ -1,8 +1,8 @@
-import { Select } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import softPass from "../assets/image/softpassSVG 3.png";
 import AppLoader from "../components/AppComponent/AppLoader";
+import AppSelect from "../components/AppComponent/AppSelect";
 import TabsIndicator from "../components/login/TabsIndicator";
 import EyeSlashIcon from "../components/svg-icons/EyeSlashIcon";
 import FullScreenWidget from "../components/widget/FullScreenWidget";
@@ -226,9 +226,11 @@ function Register(props: Props) {
             </>
           )}
 
+
+
           {currentTab === 2 && (
             <>
-              <>
+              {/* <>
                 {otherInfo.map((item: any, index: number) => {
                   return (
                     <div className="input-contain">
@@ -245,7 +247,9 @@ function Register(props: Props) {
                     </div>
                   );
                 })}
-              </>
+              </> */}
+
+              <AppSelect />
               <div className="input-contain relative">
                 <input
                   value={userInfo.country}

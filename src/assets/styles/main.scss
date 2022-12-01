@@ -552,3 +552,11 @@ a:hover {
   // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.311);
   transform: translateX(-50%);
 }
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #E1227B !important;
+  
+}
+.outlined-basic-label{
+  color: red !important;
+}

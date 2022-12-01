@@ -17,19 +17,19 @@ interface Props {
 
 const DashboardTopNav: React.FC<Props> = (props: Props) => {
   const { closebarFunction, welcomeNote, title } = props
-  
+
   const navigation = useNavigate()
 
   const [showLogout, setshowLogout] = useState(false)
-  const {setisUserLogin} = useContext(AuthProvider)
+  const { setisUserLogin } = useContext(AuthProvider)
 
 
-  const { userDetail,  topNavData  } = useContext(AppProvider)
+  const { userDetail, topNavData } = useContext(AppProvider)
 
 
 
 
- 
+
   return (
     <div className="flex items-center flex-wrap w-full md:px-6 px-0 inter">
       <div className="w-full md:hidden flex py-3 items-center px-5">
@@ -46,24 +46,22 @@ const DashboardTopNav: React.FC<Props> = (props: Props) => {
       <div className="w-full md:w-6/12 leading-5 py-3 md:py-0 px-5 bg-softpassgray-50 md:bg-transparent">
         <b className="block w-full font-semibold">{topNavData.title}</b>
         <span className="text-[13px] text-gray-400">
-        {topNavData.message}
+          {topNavData.message}
         </span>
       </div>
       <div className="w-6/12 px-3 hidden md:flex flex-wrap justify-end items-center">
-        <div>
-          <img
-            src={require('../../../assets/image/anti_money_laundry_2.png')}
-            className='w-[50px] h-[50px] rounded-full  border-gray-300 border-[3px] p-[3px]'></img>
+        <div className='w-[50px] h-[50px] rounded-full bg-softpasspurple-300  border-gray-300 border-[3px] flex items-center justify-center p-[3px]'>
+          <p className='uppercase text-white text-[16px] font-bold'>{userDetail?.first_name?.slice(0,1)}{userDetail?.last_name?.slice(0,1)}</p>
         </div>
         <div className='min-w-[60px] leading-4 px-3 pr-4'>
           <b className="capitalize block w-full text-[13px]">{userDetail?.first_name} {userDetail?.last_name}</b>
           <span className='text-gray-400 text-[12px] '>Manager</span>
         </div>
         <div className='relative'>
-         
-          <span 
-         
-          className='w-[25px] h-[25px] bg-gray-100 grid place-items-center pointer rounded-full'>
+
+          <span
+
+            className='w-[25px] h-[25px] bg-gray-100 grid place-items-center pointer rounded-full'>
             <ArrowDown />
           </span>
         </div>

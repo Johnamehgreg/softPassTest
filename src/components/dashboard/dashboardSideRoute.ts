@@ -11,6 +11,7 @@ import Compliance from "../../pages/home/pages/Compliance/Compliance"
 import ContainerPage from "../../pages/home/pages/container/Container"
 import Dashboard from "../../pages/home/pages/Dashboard"
 import FacialVerification from "../../pages/home/pages/FacialVerification"
+import Profile from "../../pages/home/pages/profile/Profile"
 import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
 import AMT from "../../pages/home/pages/verification/AMT"
@@ -140,27 +141,7 @@ export const dashboardSideRoute = [
 
          ]
       },
-      {
-         subname: 'Utilities',
-         subRoute: [
-            {
-               route: '/ocr',
-               name: 'Bill Payment',
-               Page:OCR
-            },
-            {
-               route: '/facial-comparison',
-               name: 'Airtime',
-               Page:FacialVerification
-            },
-            {
-               route: '/facial-comparison',
-               name: 'DATA',
-               Page:FacialVerification
-            },
-
-         ]
-      },
+     
       {
          subname: 'Business Verification',
          subRoute: [
@@ -181,6 +162,31 @@ export const dashboardSideRoute = [
       },
       {
          subname: 'Anti-Money Laundering (AML)',
+         route: '/anti-money-laundring',
+         Page:AMT
+      }
+      ],
+      Icon: DVerification
+   },
+   {
+      route: '/verification',
+      name: 'Utilities',
+      subRoute: [
+         
+     
+      {
+         subname: 'Bill Payment',
+         route: '/anti-money-laundring',
+         Page:AMT
+      },
+     
+      {
+         subname: 'Airtime',
+         route: '/anti-money-laundring',
+         Page:AMT
+      },
+      {
+         subname: 'DATA',
          route: '/anti-money-laundring',
          Page:AMT
       }
@@ -235,7 +241,7 @@ export const dashboardSideRoute = [
       name: 'profile settings',
       subRoute: [],
       Icon: DProfileSettings,
-      Page:Wallet
+      Page:Profile
    },
 ]
 

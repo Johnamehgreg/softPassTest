@@ -57,10 +57,10 @@ const PNV
                                     <HomeEdictor />
                                 </div>
 
-                                <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
+                                {/* <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
                                     <b className="mb-2 block">Response</b>
                                     <HomeEdictor />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

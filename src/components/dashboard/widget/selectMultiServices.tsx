@@ -33,19 +33,19 @@ const SelectMultiServices: React.FC<Props> = ({ onChange, options }) => {
     }
 
     useEffect(() => {
-        let newList  = 
-        list
-        .filter((i:any) => i.isSelected === true  )
-        .map((obj:any) => {
-            return obj.value
-        })
+        let newList =
+            list
+                .filter((i: any) => i.isSelected === true)
+                .map((obj: any) => {
+                    return obj.value
+                })
         onChange(newList)
     }, [list])
 
     useEffect(() => {
-      setlist(options)
+        setlist(options)
     }, [options])
-    
+
 
 
 
@@ -60,9 +60,9 @@ const SelectMultiServices: React.FC<Props> = ({ onChange, options }) => {
         <div className=" text-softpasspurple-300 relative">
 
             <div
-            onClick={() =>  setshowDropDown(!showDropDown)}
-             className="flex pointer  verification-input-contain px-2   justify-between w-full items-center">
-                <p className="text-black text-[14px]">Select Services</p>
+                onClick={() => setshowDropDown(!showDropDown)}
+                className="flex pointer  verification-input-contain px-2   justify-between w-full items-center">
+                <p className="text-gray-400 text-[14px]">Select Services</p>
                 <IoMdArrowDropdown
 
                     color="#000" size={25} />
@@ -70,7 +70,7 @@ const SelectMultiServices: React.FC<Props> = ({ onChange, options }) => {
 
 
             <div
-                className={` z-50 border-2 ${showDropDown ? 'hidden' : 'block'} border-gray-100 py-4 px-4 rounded-[5px]   "md:-left-full"`}
+                className={` z-50 border-2 ${!showDropDown ? 'hidden' : 'block'} border-gray-100 py-4 px-4 rounded-[5px]   "md:-left-full"`}
 
             >
 

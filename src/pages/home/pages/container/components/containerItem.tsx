@@ -81,11 +81,11 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                         {
                             isColase && (
 
-                                <div className="text-gray-400 flex flex-col justify-center items-center">
+                                <div className="text-gray-400 hidden md:flex flex-col justify-center items-center">
                                     <p className="text-[13px]">Container key</p>
-                                    <div className=" ">
+                                    <p className=" text-[14px]">
                                         {item?.container_key}&nbsp;{" "}
-                                    </div>
+                                    </p>
                                 </div>
                             )
 
