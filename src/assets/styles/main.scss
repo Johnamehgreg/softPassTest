@@ -553,10 +553,21 @@ a:hover {
   transform: translateX(-50%);
 }
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.MuiOutlinedInput-root.Mui-focused 
+.MuiOutlinedInput-notchedOutline {
   border-color: #E1227B !important;
+  border-radius: 8px !important;
   
+}
+.MuiInputBase-input {
+  border-radius: 8px !important;
+}
+.PrivateNotchedOutline-root-1 {
+  border-radius: 8px !important;
 }
 .outlined-basic-label{
   color: red !important;
 }
+
+
+

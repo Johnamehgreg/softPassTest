@@ -1,4 +1,5 @@
 import { SelectChangeEvent } from '@mui/material/Select';
+import { Switch } from 'antd';
 import { Moment } from 'moment';
 import React, { useState } from "react";
 import AppOutlineInput from '../../../../components/AppComponent/AppOutlineInput';
@@ -16,6 +17,10 @@ const Profile: React.FC = (props: Props) => {
 
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
+    };
+
+    const onChange = (checked: boolean) => {
+        console.log(`switch to ${checked}`);
     };
     //FUNCTION
 
@@ -38,8 +43,8 @@ const Profile: React.FC = (props: Props) => {
                 </div>
 
                 <div className="border-t-[1px] border-gray-500 px-2 flex justify-center w-full">
-                    <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
-                        <div className="w-full md:w-5/12 ">
+                    <div className="lg:w-11/12 w-full pt-5 flex flex-wrap  ">
+                        <div className="w-full sm:w-5/12 md:w-4/12 sm:mr-4">
 
                             <AppOutlineInput placeholder='Name of Staff' />
                             <AppOutlineInput placeholder='Phone No' />
@@ -48,7 +53,7 @@ const Profile: React.FC = (props: Props) => {
 
 
                         </div>
-                        <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
+                        <div className="w-full sm:w-5/12 md:w-5/12 flex flex-wrap md:pl-7 md:pr-18 mb-5">
 
                             <AppOutlineInput placeholder='Status' />
                             <AppOutlineInput placeholder='Email' />
@@ -59,8 +64,9 @@ const Profile: React.FC = (props: Props) => {
                     </div>
                 </div>
 
-                <div className="flex mb-8 px-10 ">
-                    <p className='text-[12px]' >Enable 2-factor authentication</p>
+                <div className="flex mb-8 items-center  px-10 ">
+                    <p className='text-[12px] mr-[10px]' >Enable 2-factor authentication</p>
+                    <Switch size='small' defaultChecked onChange={onChange} />
                 </div>
             </section>
         </>

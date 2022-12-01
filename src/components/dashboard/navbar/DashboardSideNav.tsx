@@ -34,21 +34,21 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
     isDropdownActive == -1 ? setIsDropDownActive(val) : setIsDropDownActive(-1);
   };
 
-  const {setisUserLogin} = useContext(AuthProvider)
+  const { setisUserLogin } = useContext(AuthProvider)
 
 
 
-  const logout =  async() => {
+  const logout = async () => {
     setisUserLogin(false)
     navigation(routes.landing)
-    try{
+    try {
       Cookies.remove('isLogin')
-    }catch (e){
-      
+    } catch (e) {
+
     }
-    
+
   }
-  
+
 
   return (
     <div
@@ -152,11 +152,11 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       </div>
                     )}
                   </div>
+
+
                   :
 
-                  name === "Utilities" 
-
-                  ?
+                  name === 'Utilities' ?
 
                   <div
                   onMouseLeave={() => {
@@ -175,7 +175,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
 
 
                     className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
-                     ${activeSideContent == index
+                     ${activeSideContent === index
                         ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
                         : "transition duration-300"
                       }
@@ -186,7 +186,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       <Icon
                         width={"18"}
                         class={
-                          activeSideContent == index
+                          activeSideContent === index
                             ? `side-nav-svg transition duration-300`
                             : "transition duration-300"
                         }
@@ -205,7 +205,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       </span>
                     )}
                   </span>
-                  {isDropdownActive == index && activeSideContent == index && (
+                  {isDropdownActive === index && activeSideContent == index && (
                     <div className="pl-2">
                       {subRoute.map((item: any, iDEX: number) => {
                         return (
@@ -218,14 +218,10 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                               setindex(iDEX)
                               // setIsDropDownActiveFunc(-1);
                             }}
-                            className="sub-route-item mt-2 relative"
+                            className="sub-route-item w-full mt-2 relative"
                           >
                             {item?.subname}
-                            {
-                              item?.subRoute?.length > 0 && (
-                                <SubNav item={item?.subRoute} />
-                              )
-                            }
+                            
 
                           </span>
                         );
@@ -234,7 +230,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                   )}
                 </div>
 
-                :
+                  :
 
                   <div className="flex flex-wrap py-1 inter">
                     <span
@@ -293,7 +289,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
           );
         })}
         <div className="logout-container">
-          <span onClick={() =>  logout()} className="text-[15px] pointer text-softpassgray-150 flex items-center">
+          <span onClick={() => logout()} className="text-[15px] pointer text-softpassgray-150 flex items-center">
             <DLogout /> &nbsp; &nbsp; Log Out
           </span>
         </div>

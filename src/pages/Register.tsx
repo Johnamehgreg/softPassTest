@@ -82,8 +82,8 @@ function Register(props: Props) {
       first_name: userInfo.fullName,
       last_name: userInfo.fullName,
       email: userInfo.workEmail,
-      // product: userInfo.product,
-      // current_job_role: userInfo.currentJob,
+      product: userInfo.product,
+      current_job_role: userInfo.currentJob,
       country: userInfo.country,
       hear_about_us: userInfo.aboutUs,
       password: userInfo.newPassword,
@@ -101,41 +101,72 @@ function Register(props: Props) {
     if (matchPassword) return null;
   };
 
-  const [otherInfo, setOtherInfo] = useState([
-    // {
-    //   name: "Product",
-    //   options: [
-    //     "Banking and insurance",
-    //     "Consumer payments",
-    //     "Lending",
-    //     "Wealth management",
-    //     "Others",
-    //   ],
-    // },
-    // {
-    //   name: "Current role",
-    //   options: ["Software Engineer", "Product Manager", "Founder", "Others"],
-    // },
-    {
-      name: "How did you hear about us",
-      options: ["Social media", "Email", "Newsletter", "Website", "Others"],
-    },
-  ]);
 
-  const updateUserInfo = (val: string, type: string) => {
-    switch (type) {
-      case "Product":
-        setUserinfo({ ...userInfo, product: val });
-        break;
-      case "Current role":
-        setUserinfo({ ...userInfo, currentJob: val });
-        break;
-      case "How did you hear about us":
-        setUserinfo({ ...userInfo, aboutUs: val });
-        break;
-    }
-    console.log(userInfo);
-  };
+
+
+  let product = [
+    {
+      value: "Banking and insurance",
+      label: "Banking and insurance",
+    },
+    {
+      value: "Consumer payments",
+      label: "Consumer payments",
+    },
+    {
+      value: "Lending",
+      label: "Lending",
+    },
+    {
+      value: "Wealth management",
+      label: "Wealth management",
+    },
+    {
+      value: "Others",
+      label: "Others",
+    },
+  ]
+
+  let currentRole = [
+    {
+      value: "Software Engineer",
+      label: "Software Engineer",
+    },
+    {
+      value: "Product Manager",
+      label: "Product Manager",
+    },
+    {
+      value: "Founder",
+      label: "Founder",
+    },
+    {
+      value: "Others",
+      label: "Others",
+    },
+
+
+  ]
+  let aboutUs = [
+    {
+      value: "Social media",
+      label: "Social media",
+    },
+    {
+      value: "Email",
+      label: "Email",
+    },
+    {
+      value: "Newsletter",
+      label: "Newsletter",
+    },
+    {
+      value: "Others",
+      label: "Others",
+    },
+
+
+  ]
 
   const handleCountry = (e: any) => {
     setDropdownToggleCountry(true);
@@ -230,26 +261,19 @@ function Register(props: Props) {
 
           {currentTab === 2 && (
             <>
-              {/* <>
-                {otherInfo.map((item: any, index: number) => {
-                  return (
-                    <div className="input-contain">
-                      <Select
-                        placeholder={item.name}
-                        onChange={(e) => {
-                          updateUserInfo(e.target.value, item.name);
-                        }}
-                      >
-                        {item.options.map((item: any, index: number) => {
-                          return <option value={item}>{item}</option>;
-                        })}
-                      </Select>
-                    </div>
-                  );
-                })}
-              </> */}
+              <AppSelect 
+              placeholder='Product' 
+              onChange={(e) => setUserinfo({ ...userInfo, product: e })} 
+              options={product} />
+              <AppSelect 
+              placeholder="Current role" 
+              onChange={(e) => setUserinfo({ ...userInfo, currentJob: e })} 
+              options={currentRole} />
+              <AppSelect 
+              placeholder="How did you hear about us" 
+              onChange={(e) => setUserinfo({ ...userInfo, aboutUs: e })} 
+              options={aboutUs} />
 
-              <AppSelect />
               <div className="input-contain relative">
                 <input
                   value={userInfo.country}
@@ -289,6 +313,11 @@ function Register(props: Props) {
                   Select all filed to proceed
                 </span>
               )}
+
+
+
+
+
             </>
           )}
 

@@ -172,14 +172,13 @@ export const dashboardSideRoute = [
       route: '/verification',
       name: 'Utilities',
       subRoute: [
-         
-     
+      
+      
       {
          subname: 'Bill Payment',
          route: '/anti-money-laundring',
          Page:AMT
       },
-     
       {
          subname: 'Airtime',
          route: '/anti-money-laundring',
@@ -189,10 +188,12 @@ export const dashboardSideRoute = [
          subname: 'DATA',
          route: '/anti-money-laundring',
          Page:AMT
-      }
+      },
+
       ],
       Icon: DVerification
    },
+ 
    {
       route: '/container',
       name: 'Container',

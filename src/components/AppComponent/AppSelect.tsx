@@ -3,9 +3,11 @@ import { Select } from 'antd';
 import * as React from 'react';
 
 interface Props {
-
+  options:any[],
+  onChange: (e:any) => void;
+  placeholder:string;
 }
-const AppSelect:React.FC<Props> =() => {
+const AppSelect:React.FC<Props> =({options, onChange, placeholder}) => {
   const [age, setAge] = React.useState('');
 
   // const handleChange = (event: SelectChangeEvent) => {
@@ -13,47 +15,18 @@ const AppSelect:React.FC<Props> =() => {
   // };
 
   return (
-    <div>
+    <>
       
-        {/* <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select> */}
-      
+    
       <Select
-      defaultValue="lucy"
-      style={{ width: '100%' }}
-      onChange={()=>{}}
-      options={[
-        {
-          value: 'jack',
-          label: 'Jack',
-        },
-        {
-          value: 'lucy',
-          label: 'Lucy',
-        },
-        {
-          value: 'disabled',
-          disabled: true,
-          label: 'Disabled',
-        },
-        {
-          value: 'Yiminghe',
-          label: 'yiminghe',
-        },
-      ]}
+      defaultValue={placeholder}
+      placeholder={'Hello'}
+      style={{ width: '100%', marginBottom: '20px' }}
+      onChange={(e) => onChange(e)}
+      options={options}
+      size='large'
     />
-    </div>
+    </>
   );
 }
 
