@@ -268,32 +268,23 @@ input[type=number]{
 }
 
 .side-popup {
-  position: fixed;
+  @apply bg-white rounded-[5px] flex fixed min-w-[200px] sm:min-w-[350px] md:min-w-[350px] px-4 py-1 ;
   min-height: 100px;
   top: 80px;
-  right: -500px;
-  width: 350px;
+  right: -400px;
   z-index: 300;
-  background-color: white;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.38);
-  display: flex;
-  font-size: 1.1rem;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.175);
   transition: all linear 500ms;
-  border-radius: 5px;
   top: 10px;
   border-width: 2px;
 
   #popUp-title {
+    @apply text-[18px] text-gray-600;
     text-transform: capitalize;
-    font-size: 1.5rem;
-    font-weight: 500;
   }
 
   #popUp-message {
-    font-size: 1rem;
+    @apply text-[15px] text-gray-600;
   }
 
   #popUp-error-icon {
@@ -312,7 +303,7 @@ input[type=number]{
 }
 
 .show-popup {
-  right: 30px !important;
+  right: 10px !important;
 }
 
 .loader-inner {
@@ -440,7 +431,7 @@ a:hover {
 
 
   .cont-tab-page{
-    @apply mr-8 text-sm  ;
+    @apply mr-2 md:mr-6 text-[8px] md:text-[15px]  ;
     
   }
 
@@ -457,6 +448,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all linear 300ms;
 }
 
 .item-key{

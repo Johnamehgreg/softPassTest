@@ -5,6 +5,7 @@ import { useGetServices } from '../../../../../app-query-hook/use-services-hook'
 import SelectMultiServices from '../../../../../components/dashboard/widget/selectMultiServices';
 import HomeInput from "../../../../../components/input/homeInput";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
+import { popType, showPopUp } from '../../../../../constanst/popupFunc';
 import { useCreateContainer } from './container-query-hook';
 
 interface Props {
@@ -24,14 +25,14 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
 
 
   const { data, isSuccess, isFetched } = useGetServices()
-  const [services, setservices] = useState<string>('')
+  const [services, setservices] = useState<any>([])
 
 
   const checkSuccess = () => {
     if (isSuccess && isFetched) {
 
       let list = data?.data.map((item: any) => {
-        return { label: item?.service_name, value: item?._id }
+        return { label: item?.service_name, value: item?._id, isSelected:false };
       })
       setserviceList(list)
     }
@@ -62,8 +63,10 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
 
       const data = {
         "container_name": values.containerName,
-        "services": [services]
+        "services": services
       }
+
+      if(services.length === 0)return showPopUp({type:popType.error, message:"Service is required"})
 
       // return console.log(data)
 
@@ -114,7 +117,7 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
             {/* <CustomSelect onChange={(e) => setservices(e)} placeholder='Select Services' options={serviceList} /> */}
 
             
-              <SelectMultiServices onChange={(e: any) => console.log(e, 'selected data')} />
+              <SelectMultiServices options={serviceList} onChange={(e: any) => setservices(e) }/>
 
 
             <div className="w-full text-center py-3 garrif">

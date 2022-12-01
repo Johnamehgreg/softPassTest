@@ -22,6 +22,8 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
 
     const [servicesList, setservicesList] = useState([])
 
+    const [isColase, setisColase] = useState(true)
+
     const [isEditContOpen, setIsEditContOpen] = useState(false)
     const [isDeactivateContOpen, setIsDeactivateContOpen] = useState(false)
     const [isDeleteServiceOpen, setisDeleteServiceOpen] = useState(false)
@@ -39,9 +41,9 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
 
     }
 
-    const { isSuccess, refetch:serviceRefetch, isFetched, data } = useGetServiceByContainer({ onError, containerId: item._id })
+    const { isSuccess, refetch: serviceRefetch, isFetched, data } = useGetServiceByContainer({ onError, containerId: item._id })
 
-   const {deleteService} =  useServicesEvent({refetch:serviceRefetch, closeModal:() => setisDeleteServiceOpen(false)})
+    const { deleteService } = useServicesEvent({ refetch: serviceRefetch, closeModal: () => setisDeleteServiceOpen(false) })
 
     const checkSuccess = () => {
 
@@ -53,11 +55,10 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
     }
 
     const handleServicesDelete = () => {
-        let serviceId:any = servicesList[serviceIndex]
-        console.log(serviceId, 'servicesList')
+        let serviceId: any = servicesList[serviceIndex]
 
-        deleteService({servicesId:serviceId.service_id.id, containerId:item._id })
-        
+        deleteService({ servicesId: serviceId.service_id.id, containerId: item._id })
+
 
 
     }
@@ -77,68 +78,119 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                             {item?.container_name}
                         </h2>
 
+                        {
+                            isColase && (
+
+                                <div className="text-gray-400 flex flex-col justify-center items-center">
+                                    <p className="text-[13px]">Container key</p>
+                                    <div className=" ">
+                                        {item?.container_key}&nbsp;{" "}
+                                    </div>
+                                </div>
+                            )
+
+                        }
+
+
+
+
+
+
                         <div className=" flex items-center justify-center ">
+
+                            <button
+                                className="w-10 mx-2">
+                                <CopyIcon width={"18"} color={"black"} />
+                            </button>
                             <span
                                 onClick={() => setIsEditContOpen(true)}
                             >
                                 <img className="pointer" src={edit} />
                             </span>
 
-                            <div className="ml-4 cont-page-remove pointer">
-                                <div className="inner"></div>
-                            </div>
+
+
+                            {
+                                isColase ?
+                                    <button
+                                        onClick={() => setisColase(false)}
+                                        className="w-6 ml-8 h-7 flex justify-center items-center rounded-md bg-gray-200">
+                                        <AiOutlinePlus fill="black" />
+                                    </button>
+                                    :
+
+                                    <div
+                                        onClick={() => setisColase(true)}
+                                        className="ml-8 cont-page-remove pointer">
+                                        <div className="inner"></div>
+                                    </div>
+
+                            }
+
+
                         </div>
                     </div>
 
-                    <div className="flex w-full items-center flex-wrap mt-8">
-                        {servicesList.map((item: any, index) => {
-                            return (
-                                <div className="item-key my-2">
-                                    <p>{item.service_id.service_name} &nbsp; <abbr
-                                    onClick={() => {
-                                        setisDeleteServiceOpen(true)
-                                        setserviceIndex(index)
-                                    }}
-                                    className="text-black pointer text-[15px]">&times;</abbr></p>
-                                </div>
-                            );
-                        })}
-                        <div onClick={() => setisAddServiceOpen(true)} className="item-key w-9 pointer h-7">
-                            <AiOutlinePlus  />
-                        </div>
-                    </div>
-
-                    <div className="flex w-full ">
-                        <div className="pt-5 text-gray-400 leading-3 w-full">
-                            <p className="text-[13px]">Container key</p>
-                            <div className="flex items-center flex-wrap text-[13px] w-full pb-3">
-                                <div className="sm:w-6/12 w-full flex items-center">
-                                    {item?.container_key}&nbsp;{" "}
-                                    <CopyIcon width={"18"} color={"black"} />
-                                </div>
-                                <div className="sm:w-6/12 w-full flex flex-wrap items-center">
-                                    {
-                                        item?.is_active === true ?
-
-                                            <span
-                                                onClick={() => setIsDeactivateContOpen(true)}
-                                                className="text-softpasspurple-300 font-semibold pointer mr-4">
-                                                Deactivate container
-                                            </span>
-
-                                            :
-
-                                            <span
-                                                onClick={() => setIsDeactivateContOpen(true)}
-                                                className="text-softpasspurple-300 font-semibold pointer mr-4">
-                                                Activate container
-                                            </span>
-                                    }
-                                    <span>{date}</span>
+                    {
+                        !isColase && (
+                            <div className="flex w-full items-center flex-wrap mt-8">
+                                {servicesList.map((item: any, index) => {
+                                    return (
+                                        <div className="item-key my-2">
+                                            <p>{item.service_id.service_name} &nbsp; <abbr
+                                                onClick={() => {
+                                                    setisDeleteServiceOpen(true)
+                                                    setserviceIndex(index)
+                                                }}
+                                                className="text-black pointer text-[15px]">&times;</abbr></p>
+                                        </div>
+                                    );
+                                })}
+                                <div onClick={() => setisAddServiceOpen(true)} className="item-key w-9 pointer h-7">
+                                    <AiOutlinePlus />
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        )
+                    }
+
+                    {
+                        !isColase && (
+
+                            <div className="flex w-full ">
+                                <div className="pt-5 text-gray-400 leading-3 w-full">
+                                    <p className="text-[13px]">Container key</p>
+                                    <div className="flex items-center flex-wrap text-[13px] w-full pb-3">
+                                        <div className="sm:w-6/12 w-full flex items-center">
+                                            {item?.container_key}&nbsp;{" "}
+                                            <CopyIcon width={"18"} color={"black"} />
+                                        </div>
+
+                                        <div className="sm:w-6/12 w-full flex flex-wrap items-center">
+                                            {
+                                                item?.is_active === true ?
+
+                                                    <span
+                                                        onClick={() => setIsDeactivateContOpen(true)}
+                                                        className="text-softpasspurple-300 font-semibold pointer mr-4">
+                                                        Deactivate container
+                                                    </span>
+
+                                                    :
+
+                                                    <span
+                                                        onClick={() => setIsDeactivateContOpen(true)}
+                                                        className="text-softpasspurple-300 font-semibold pointer mr-4">
+                                                        Activate container
+                                                    </span>
+                                            }
+                                            <span>{date}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
                 </>
             </CardContainer>
             <EditContainers item={item} refetch={refetch} isOpen={isEditContOpen} closeModal={closeEditContainerModal} />

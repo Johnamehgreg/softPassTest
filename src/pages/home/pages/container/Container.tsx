@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
+import CopyIcon from "../../../../components/svg-icons/CopyIcon";
 import { AppProvider } from "../../../../contextProvide/AppContext";
+import CardContainer from "./components/card";
 import ContainerItem from "./components/containerItem";
 import { useContainerHook } from "./modals/container-query-hook";
 import CreateContainers from "./modals/CreateContainersModal";
@@ -84,7 +87,7 @@ const ContainerPage = () => {
 
     >
       <section className="bg-white rounded-[10px] mt-8 garrif">
-        <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 border-b-[1px] border-b-gray-300">
+        <div className="flex bg-white items-center px-3 md:px-5 py-4 border-b-[1px] border-b-gray-300">
           <div className="container-page-tab w-6/12 ">
             <button
               onClick={() => {
@@ -111,14 +114,16 @@ const ContainerPage = () => {
             </button>
           </div>
           <div className="w-6/12 flex justify-end">
-            <button className="text-softpasspurple-300 border-[8px] py-1 px-2 border-gray-100  " >
+            <button
+            onClick={() => setIsCreateContOpen(true) }
+            className="text-softpasspurple-300 border-[8px] py-1 px-2 border-gray-100 text-[10px] md:text-[15px]  " >
             Create Container
             </button>
            
           </div>
         </div>
 
-        <div className="sm:px-4 md:px-16 mt-3 pb-6">
+        <div className="px-4 md:px-4 lg:px-10 mt-3 pb-6">
 
           <AppRetching isFetching={isFetching} />
 
@@ -138,7 +143,7 @@ const ContainerPage = () => {
 
 
           
-          {/* <CardContainer>
+          <CardContainer>
             <>
               <div  className="flex w-full ">
                 <div className="pt-5 text-gray-400 leading-3 w-full">
@@ -167,7 +172,7 @@ const ContainerPage = () => {
                 </div>
               </div>
             </>
-          </CardContainer> */}
+          </CardContainer>
 
 
 

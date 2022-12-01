@@ -1,79 +1,51 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { HiCheckCircle } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useGetServices } from "../../../app-query-hook/use-services-hook";
+import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 interface Props {
-    onChange:(e:any) => void;
+    onChange: (e: any) => void;
+    options: any
 }
 
-const SelectMultiServices: React.FC<Props> = ({onChange}) => {
+const SelectMultiServices: React.FC<Props> = ({ onChange, options }) => {
 
-    const ref = useRef(null);
-    const [headerTitle, setHeaderTitle] = useState("");
-    const [fromUniqueInput, setFormUniqueInput] = useState([]);
-    const [serviceList, setserviceList] = useState<any>([])
-
-    const [list, setlist] = useState<any>([])
-
-    const { data, isSuccess, isFetched } = useGetServices()
-
-
-    const checkSuccess = () => {
-        if (isSuccess && isFetched) {
-
-            let list = data?.data.map((item: any) => {
-                return { label: item?.service_name, value: item?._id,}
-            })
-            let list1 = data?.data.map((item: any) => {
-                return { label: item?.service_name, isSelected:false, value: item?._id,}
-            })
-            setlist(list1)
-            setserviceList(list)
-        }
-    }
 
     //Variables
-    const [selectId, setSelectId] = useState(false);
 
-    //FUNCTION
-    const closeDropDown = (
-        event: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
-        if (event.currentTarget == event.target) setSelectId(false);
-    };
+    const [list, setlist] = useState<any>([])
+    const [showDropDown, setshowDropDown] = useState(false)
 
 
 
 
-    //HOOK
-    useEffect(() => {
-        checkSuccess()
-    }, [data])
 
-
-
-    const handleOnClick = (value: string) => {
-
-        let newList = list.map((item:any) => {
-            if(value === item.value){
-                return {...item, isSelected:!item.isSelected}
+    const handleOnClick = (item: any) => {
+        console.log(item)
+        let newList = list.map((obj: any) => {
+            if (item.value === obj.value) {
+                return { ...item, isSelected: !obj.isSelected }
             }
 
-            return item
+            return obj
         })
-
         setlist(newList)
-
-        
     }
 
+    useEffect(() => {
+        let newList  = 
+        list
+        .filter((i:any) => i.isSelected === true  )
+        .map((obj:any) => {
+            return obj.value
+        })
+        onChange(newList)
+    }, [list])
 
     useEffect(() => {
-        let service = list.filter((item:any) => item.isSelected === true )
-        console.log(list, 'update list check')
-    }, [list])
+      setlist(options)
+    }, [options])
     
-
 
 
 
@@ -87,10 +59,9 @@ const SelectMultiServices: React.FC<Props> = ({onChange}) => {
     return (
         <div className=" text-softpasspurple-300 relative">
 
-
-            <div onClick={() => {
-                setSelectId(!selectId);
-            }} className="flex pointer  verification-input-contain px-2  my-4 justify-between w-full items-center">
+            <div
+            onClick={() =>  setshowDropDown(!showDropDown)}
+             className="flex pointer  verification-input-contain px-2   justify-between w-full items-center">
                 <p className="text-black text-[14px]">Select Services</p>
                 <IoMdArrowDropdown
 
@@ -99,37 +70,33 @@ const SelectMultiServices: React.FC<Props> = ({onChange}) => {
 
 
             <div
-                ref={ref}
-                className={` z-50 verification-input-contain ${selectId ? "flex" : "hidden"} "md:-left-full"`}
-                onClick={(event) => {
-                    closeDropDown(event);
-                }}
-            >
-                <div className="">
+                className={` z-50 border-2 ${showDropDown ? 'hidden' : 'block'} border-gray-100 py-4 px-4 rounded-[5px]   "md:-left-full"`}
 
-                    <div>
-                        {serviceList.map((item: any, index: number) => {
-                            return (
-                                <div
-                                    className="py-1 mx-3"
-                                    key={"selectId" + index}
-                                    onClick={() => {
-                                        handleOnClick(item?.value)
-                                        // setDbSelectId(index);
-                                        // setSelectId(false);
-                                    }}
-                                >
-                                    <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">
-                                        <abbr className="font-semibold text-black text-[13px]">
-                                            {item?.label}
-                                        </abbr>
-                                        <input type="checkbox" checked={item?.isSelected} />
-                                        <span className="checkmark"></span>
-                                    </label>
-                                </div>
-                            );
-                        })}
-                    </div>
+            >
+
+                <div>
+                    {list?.map((item: any, index: number) => {
+                        return (
+                            <div
+                                className={`${item?.isSelected ? 'bg-gray-100' : 'bg-white'} py-1 items-center rounded-[5px] mb-1 px-2  pointer min-h-[30px] flex`}
+                                key={"selectId" + item.value}
+                                onClick={() => {
+                                    handleOnClick(item)
+                                }}
+                            >
+
+                                {
+                                    item?.isSelected === true ?
+                                        <HiCheckCircle color="#E1227B" size={20} />
+                                        :
+                                        <RiCheckboxBlankCircleFill color="#E1227B" size={20} />
+                                }
+
+
+                                <p className="text-gray-500 text-[13px] ml-2"> {item?.label}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
