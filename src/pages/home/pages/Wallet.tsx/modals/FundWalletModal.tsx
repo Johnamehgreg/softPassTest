@@ -14,22 +14,54 @@ const ModalModule: React.FC<Props> = (props: Props) => {
   const { isOpen, closeModal, refetch } = props;
 
   const [amount, setamount] = useState('')
+  const [url, seturl] = useState('')
 
-  const {initializeWallet} = useWalletEvent(closeModal)
+  const [showIframe, setshowIframe] = useState(false)
 
-  const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+  const { initializeWallet } = useWalletEvent(closeModal)
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    let data ={
-      "amount":amount
+    let data = {
+      "amount": amount
+    }
+
+    const onIframeLoad = (data: any) => {
+      seturl(data?.authorization_url)
+      setshowIframe(true)
+
+      console.log(data.authorization_url, 'return response data')
+    }
+
+    initializeWallet(data, refetch, onIframeLoad)
+
+
   }
 
-  initializeWallet(data, refetch)
 
-  
-  }
 
   return isOpen ? (
     <ModalParentModule closeModal={closeModal}>
+      {
+        showIframe && (
+          <div className="w-full h-full fixed z-30 top-0 flex items-center justify-center left-0 bg-black/40">
+            <div className="h-[90%] w-[90%] rounded-md bg-white  relative  ">
+            <span
+            onClick={() => {
+              setshowIframe(false)
+            }}
+            className="text-[20px] modal-close-icon cursor-pointer"
+          >
+            &times;
+          </span>
+              <iframe src={url} height="100%" width="100%">
+
+              </iframe>
+            </div>
+
+          </div>
+        )
+      }
       <div className="w-full sm:w-[400px]">
         <div className="flex py-3 px-4 w-full items-center border-b-[1px] border-b-gray-200">
           <h4 className="w-full text-[24px]">Fund Wallet</h4>
@@ -93,7 +125,7 @@ const ModalModule: React.FC<Props> = (props: Props) => {
                 onValueChange={(values) => {
                   const { formattedValue, value } = values;
                   setamount(value)
-                  
+
 
                 }} />
               <button className="w-full bg-softpasspurple-300 text-white py-3 rounded-md text-[14px] font-semibold mb-4">

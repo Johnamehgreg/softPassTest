@@ -45,15 +45,17 @@ export const useWalletEvent = (closeModal: Function) => {
     const { setisLoading } = useContext(AppProvider)
 
 
-    const initializeWallet = (data: any, refetch:Function) => {
+    const initializeWallet = (data: any,
+         refetch:Function, 
+         onIframeLoad:(data:any) => void ) => {
 
         setisLoading(true)
 
         apis.wallet.initializeWallet(data)
             .then((res: any) => {
-                closeModal()
-                refetch()
-                showPopUp({ type: popType.success, message: 'Container created successfully' })
+                // closeModal()
+                onIframeLoad(res.data.data)
+                setisLoading(false)
             })
             .catch((err: any) => {
 
