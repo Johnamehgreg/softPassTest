@@ -65,12 +65,12 @@ const Dashboard = () => {
 
     useEffect(() => {
         settopNavData({
-            title: `Good ${getGreetingTime(moment())} ${userDetail?.first_name}`,
-            message: `Hi ${userDetail?.first_name} 👋, here's what has been happening`
+            title: `Good ${getGreetingTime(moment())} ${userDetail?.first_name ? userDetail?.first_name : ''}`,
+            message: `Hi ${userDetail?.first_name ? userDetail?.first_name : '' } 👋,  here's what has been happening`
         })
         
         
-    }, [])
+    }, [userDetail])
 
 
 

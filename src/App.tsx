@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useUserDetails } from "./app-query-hook/use-user-query-hook";
 import "./assets/styles/main.scss";
 import AppLoader from "./components/AppComponent/AppLoader";
 import { PopUp } from "./components/widget/PopUp";
@@ -23,28 +22,13 @@ function App() {
   })
 
 
-
-  const { data, isFetched, isSuccess } = useUserDetails()
-
-  const checkSuccess = () => {
-    if (isSuccess && isFetched) {
-      setuserDetail(data?.data)
-    }
-  }
-
-  useEffect(() => {
-    checkSuccess()
-  }, [data])
-
-  
-
-
   let appValue = {
     isLoading,
     userDetail,
     setisLoading,
     topNavData,
     settopNavData,
+    setuserDetail,
   }
 
   return (
