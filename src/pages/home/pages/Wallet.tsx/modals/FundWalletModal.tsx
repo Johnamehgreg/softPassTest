@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import CurrencyFormat from 'react-currency-format';
 import CopyIcon from "../../../../../components/svg-icons/CopyIcon";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
+import { useWalletEvent } from "../wallet-query-hook";
 
 interface Props {
   isOpen: Boolean;
   closeModal: Function;
+  refetch: Function;
 }
 
 const ModalModule: React.FC<Props> = (props: Props) => {
-  const { isOpen, closeModal } = props;
+  const { isOpen, closeModal, refetch } = props;
+
+  const [amount, setamount] = useState('')
+
+  const {initializeWallet} = useWalletEvent(closeModal)
+
+  const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    let data ={
+      "amount":amount
+  }
+
+  initializeWallet(data, refetch)
+
+  
+  }
 
   return isOpen ? (
     <ModalParentModule closeModal={closeModal}>
@@ -49,7 +67,7 @@ const ModalModule: React.FC<Props> = (props: Props) => {
                 Temitayo Abimbola
               </span>
               <span className=" w-full font-[500] text-[15px] flex items-center">
-                018942567&nbsp; <CopyIcon width={23} color={"black"}/>
+                018942567&nbsp; <CopyIcon width={23} color={"black"} />
               </span>
             </div>
           </div>
@@ -63,13 +81,21 @@ const ModalModule: React.FC<Props> = (props: Props) => {
             <div className="text-[14px] opacity-50">Pay with card</div>
 
             <form
-            onSubmit={(event)=>event.preventDefault()}
+              onSubmit={handleSubmit}
             >
-              <input
-                type="number"
-                placeholder="Enter Amount"
+              <CurrencyFormat
+                value={amount}
                 className="my-4 outline-none w-full py-3 px-3 text-[14px] border-[1px] border-gray-200 rounded-md"
-              ></input>
+                thousandSeparator={true}
+                prefix={'₦ '}
+                required
+                placeholder="Enter Amount"
+                onValueChange={(values) => {
+                  const { formattedValue, value } = values;
+                  setamount(value)
+                  
+
+                }} />
               <button className="w-full bg-softpasspurple-300 text-white py-3 rounded-md text-[14px] font-semibold mb-4">
                 Pay with Card
               </button>

@@ -35,6 +35,11 @@ const apis = {
 
     user:{
         getUserDetails:() => server.get(`${BASE_URL}/account/user-details`,),
+    },
+
+    wallet:{
+        getWalletBalance:() => server.get(`${BASE_URL}/wallet/balance`,),
+        initializeWallet: (data:any) => server.post(`${BASE_URL}/wallet/initilize`, data),
     }
 
 }

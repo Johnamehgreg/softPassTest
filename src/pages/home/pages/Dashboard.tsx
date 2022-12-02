@@ -69,7 +69,6 @@ const Dashboard = () => {
             message: `Hi ${userDetail?.first_name ? userDetail?.first_name : '' } 👋,  here's what has been happening`
         })
         
-        
     }, [userDetail])
 
 

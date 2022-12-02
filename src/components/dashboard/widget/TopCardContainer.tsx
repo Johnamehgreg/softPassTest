@@ -17,6 +17,7 @@ function TopCardContainer(props: Props) {
      setIsOpen(val)
   }
   
+  
   return (
     <div className="flex flex-wrap justify-between">
       {tabs.map((item: any, index: number) => {
@@ -42,7 +43,7 @@ function TopCardContainer(props: Props) {
           </button>
         </div>
       </div>
-      <FundWalletModal isOpen={isOpen} closeModal={closeModal}/>
+      <FundWalletModal refetch={() => console.log('dnjd') } isOpen={isOpen} closeModal={closeModal}/>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CurrencyFormat from 'react-currency-format';
 import { ReactComponent as Copy } from "../../../../../assets/svg/copy.svg";
 import { ReactComponent as WalletFund } from "../../../../../assets/svg/fund-wallet.svg";
 import FundWalletModal from "../modals/FundWalletModal";
@@ -6,10 +7,11 @@ import FundWalletModal from "../modals/FundWalletModal";
 
 interface Props {
   tabs: Array<any>;
+  refetch: Function;
 }
 
 function TopCardContainerWallet(props: Props) {
-  const { tabs } = props;
+  const { tabs, refetch } = props;
 
   //VARIABLE
   const [isOpen, setIsOpen] = useState(false)
@@ -19,6 +21,10 @@ function TopCardContainerWallet(props: Props) {
     setIsOpen(val)
   }
 
+
+  
+
+
   return (
     <div className="flex flex-wrap ">
       <div className="lg:w-[22%] md:w-[32%] sm:w-[48%] w-full mt-3 details flex mx-1 items-center bg-white px-4 py-4 rounded-sm garrif relative bg-contain">
@@ -26,7 +32,7 @@ function TopCardContainerWallet(props: Props) {
           You can fund your wallet through card payment or bank transfer
         </span>
         <span className="w-2/12 flex justify-end sm:text-[13px] text-[10px]">
-          <WalletFund />
+          <WalletFund   />
         </span>
       </div>
 
@@ -43,10 +49,20 @@ function TopCardContainerWallet(props: Props) {
       <div className="wallet-container">
         <div className="">
           <b className="text-[12px] font-normal block">Total Wallet Balance</b>
-          <span className="font-semibold text-softpasspurple-300 text-[18px]">
-            <span>&#8358;</span>
-            40,000.00
-          </span>
+          <CurrencyFormat
+            value={400000}
+            displayType={'text'}
+            thousandSeparator={true}
+            
+            renderText={value => {
+              return (
+                <span className="font-semibold text-softpasspurple-300 text-[18px]">
+                  <span>&#8358;</span>
+                  {value}
+                </span>
+              )
+            }} />
+
         </div>
         <div>
           <button
@@ -60,7 +76,7 @@ function TopCardContainerWallet(props: Props) {
         </div>
       </div>
 
-      <FundWalletModal isOpen={isOpen} closeModal={closeModal} />
+      <FundWalletModal refetch={refetch} isOpen={isOpen} closeModal={closeModal} />
     </div>
   );
 }

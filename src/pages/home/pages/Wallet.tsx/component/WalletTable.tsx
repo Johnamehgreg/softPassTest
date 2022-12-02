@@ -1,35 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as ArrowDown } from "../../../../../assets/image/svg/ArrowDown.svg";
 import { ReactComponent as SortAccend } from "../../../../../assets/svg/sort-ascending.svg";
+import AppDatePicker from "../../../../../components/AppComponent/AppDatePicker";
+import AppDropDownT from "../../../../../components/AppComponent/AppDropdownT";
 
 interface Props {}
 
 const WalletTable: React.FC = (props: Props) => {
   const {} = props;
 
+  const [isShowDate, setisShowDate] = useState(false)
   return (
     <section className="md:px-6 px-3">
       <div className="flex flex-wrap items-center px-3 py-3 bg-gray-100/40">
         <div className="md:w-6/12 sm:w-9/12 flex items-center ">
           <span className="text-sm text-gray-400">Reference</span>
-          <b className="table-filter-item">
-            Temitayo Abimbola{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-          </b>
-          <span className="table-filter-item">
+          <AppDropDownT placeholder="Temitayo Abimbola" />
+          <AppDatePicker setisOpen={(value) => setisShowDate(value)} isOpen={isShowDate} />
+          <span 
+          onClick={() => setisShowDate(!isShowDate)} 
+          className="table-filter-item pointer">
             Date{" "}
             <i className="pt-[3px]">
               <ArrowDown color={"black"} width={"17"} />
             </i>
+           
           </span>
-          <span className="table-filter-item">
-            Status{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-          </span>
+          <AppDropDownT placeholder="Status" />
+
+       
         </div>
         <div className="md:w-6/12 sm:w-3/12 text-end">
           <span className="text-[12px] text-softpasspurple-500">
