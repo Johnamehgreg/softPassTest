@@ -431,7 +431,7 @@ a:hover {
 
 
   .cont-tab-page{
-    @apply mr-2 md:mr-6 text-[8px] md:text-[15px]  ;
+    @apply mr-2 md:mr-6  md:text-[15px] text-[8px] ;
     
   }
 
@@ -505,7 +505,7 @@ a:hover {
 }
 
 .e-question{
-  @apply sm:text-[30rem] md:text-[30rem];
+  @apply sm:text-[30rem] md:text-[30rem] relative;
   position: absolute;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.244);

@@ -8,10 +8,11 @@ import FundWalletModal from "../modals/FundWalletModal";
 interface Props {
   tabs: Array<any>;
   refetch: Function;
+  amountBalance: any
 }
 
 function TopCardContainerWallet(props: Props) {
-  const { tabs, refetch } = props;
+  const { tabs, refetch, amountBalance } = props;
 
   //VARIABLE
   const [isOpen, setIsOpen] = useState(false)
@@ -50,7 +51,7 @@ function TopCardContainerWallet(props: Props) {
         <div className="">
           <b className="text-[12px] font-normal block">Total Wallet Balance</b>
           <CurrencyFormat
-            value={400000}
+            value={amountBalance}
             displayType={'text'}
             thousandSeparator={true}
             

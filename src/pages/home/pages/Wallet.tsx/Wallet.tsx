@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppWrapper from "../../../../components/AppWrapper";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
 import TopCardContainerWallet from "./component/TopContainerWallet";
@@ -15,7 +15,7 @@ function Wallet(props: Props) {
   const [errorText, seterrorText] = useState('Retry')
   const [isError, setisError] = useState(false)
   const [isSuccess, setisSuccess] = useState(false)
-
+  const [amountBalance, setamountBalance] = useState(0)
 
 
 
@@ -57,6 +57,23 @@ function Wallet(props: Props) {
     seterrorText('Retrying...')
   }
 
+  const checkSuccess = () => {
+
+    if (isFetched && isDataSuccess) {
+      setisError(false)
+      setisSuccess(true)
+      setamountBalance(data?.data?.balance)
+
+      
+    }
+  }
+
+
+  useEffect(() => {
+    checkSuccess()
+  }, [data])
+
+
 
 
 
@@ -64,14 +81,14 @@ function Wallet(props: Props) {
     <AppWrapper
       errorText={errorText}
       onRefetch={() => onRefetch()}
-      isSuccess={true}
+      isSuccess={isSuccess}
       isError={isError}
 
     >
 
       <>
 
-        <TopCardContainerWallet refetch={refetch} tabs={tabs} />
+        <TopCardContainerWallet amountBalance={amountBalance} refetch={refetch} tabs={tabs} />
         <section className="bg-white mt-8 garrif">
           <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 lg:bg-transparent border-b-[1px] border-b-gray-300">
             <h1 className="w-6/12 text-[20px] font-semibold">Wallet Funding History</h1>
