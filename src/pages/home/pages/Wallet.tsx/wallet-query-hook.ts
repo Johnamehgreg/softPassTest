@@ -24,22 +24,101 @@ export const useGetWalletHook = (arg: ARG) => {
 
 
     )
+    const { 
+        data: successCallData, 
+        isFetching:successIsFetching, 
+        refetch:successReftch, 
+        isFetched:successIsfetched, 
+        isError:successIsError, 
+        isSuccess:successIsSuccess } = useQuery(
+        ['get-success-calls', ],
+        () => apis.wallet.getSuccessTranasactionCount(),
+        {
+            onError: () => {
+                onError()
+            }
+        }
+
+
+
+    )
+    const { 
+        data: failureCallData, 
+        isFetching:failureIsFetching, 
+        refetch:failureReftch, 
+        isFetched:failureIsfetched, 
+        isError:failureIsError, 
+        isSuccess:faildDataIssuccess } = useQuery(
+        ['get-fail-calls', ],
+        () => apis.wallet.getFailTranasactionCount(),
+        {
+            onError: () => {
+                onError()
+            }
+        }
+
+
+
+    )
 
     let data = all?.data
 
-    console.log(data)
+    console.log(failureCallData, 'Success Calls')
 
     return {
+        successCallData,
         refetch,
+        failureReftch,
+        successReftch,
+        failureIsfetched,
+        successIsFetching,
+        faildDataIssuccess,
+        successIsfetched,
         data,
+        failureCallData,
+        failureIsFetching,
         isFetched,
         isError,
         isSuccess,
-        isFetching
+        isFetching,
+        successIsSuccess
+
+
 
     }
+
+
+
 }
 
+interface Trans{
+    onError:Function, 
+    skip:number,
+    status:any
+}
+
+export const useWalletTransactionHistory = (arg:Trans) => {
+
+    const { onError, skip, status} = arg
+    const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
+        ['get-wallet-transaction-history', skip, status ],
+        () => apis.wallet.getTransactionHistory({skip, status}),
+        {
+            onError: () => {
+                onError()
+            }
+        }
+)
+
+    let data = all?.data
+
+    return {
+        data, 
+        isSuccess,
+        isFetched,
+        isFetching
+    }
+}
 
 export const useWalletEvent = (closeModal: Function) => {
     const { setisLoading } = useContext(AppProvider)

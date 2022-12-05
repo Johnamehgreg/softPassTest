@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CurrencyFormat from 'react-currency-format';
 import { ReactComponent as Copy } from "../../../../../assets/svg/copy.svg";
 import { ReactComponent as WalletFund } from "../../../../../assets/svg/fund-wallet.svg";
+import AppBalanceCard from "../../../../../components/AppComponent/AppBalanceCard";
 import FundWalletModal from "../modals/FundWalletModal";
 
 
@@ -23,7 +23,7 @@ function TopCardContainerWallet(props: Props) {
   }
 
 
-  
+
 
 
   return (
@@ -33,7 +33,7 @@ function TopCardContainerWallet(props: Props) {
           You can fund your wallet through card payment or bank transfer
         </span>
         <span className="w-2/12 flex justify-end sm:text-[13px] text-[10px]">
-          <WalletFund   />
+          <WalletFund />
         </span>
       </div>
 
@@ -47,35 +47,10 @@ function TopCardContainerWallet(props: Props) {
         </span>
       </div>
 
-      <div className="wallet-container">
-        <div className="">
-          <b className="text-[12px] font-normal block">Total Wallet Balance</b>
-          <CurrencyFormat
-            value={amountBalance}
-            displayType={'text'}
-            thousandSeparator={true}
-            
-            renderText={value => {
-              return (
-                <span className="font-semibold text-softpasspurple-300 text-[18px]">
-                  <span>&#8358;</span>
-                  {value}
-                </span>
-              )
-            }} />
 
-        </div>
-        <div>
-          <button
-            onClick={() => {
-              closeModal(true)
-              console.log("clicked-wallet")
-            }}
-            className="text-[12px] bg-softpasspurple-300 text-white whitespace-nowrap p-2 py-1 pb-[5px] rounded-md">
-            Fund Wallet
-          </button>
-        </div>
-      </div>
+
+
+      <AppBalanceCard showisFundWallet={() => setIsOpen(true)} />
 
       <FundWalletModal refetch={refetch} isOpen={isOpen} closeModal={closeModal} />
     </div>

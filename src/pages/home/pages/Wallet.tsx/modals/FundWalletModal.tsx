@@ -46,14 +46,14 @@ const ModalModule: React.FC<Props> = (props: Props) => {
         showIframe && (
           <div className="w-full h-full fixed z-30 top-0 flex items-center justify-center left-0 bg-black/40">
             <div className="h-[90%] w-[90%] rounded-md bg-white  relative  ">
-            <span
-            onClick={() => {
-              setshowIframe(false)
-            }}
-            className="text-[20px] modal-close-icon cursor-pointer"
-          >
-            &times;
-          </span>
+              <span
+                onClick={() => {
+                  setshowIframe(false)
+                }}
+                className="text-[20px] modal-close-icon cursor-pointer"
+              >
+                &times;
+              </span>
               <iframe src={url} height="100%" width="100%">
 
               </iframe>
@@ -96,10 +96,10 @@ const ModalModule: React.FC<Props> = (props: Props) => {
                 Providus Bank
               </span>
               <span className="block w-full font-[200] text-[15px]">
-                Temitayo Abimbola
+                ********* ******
               </span>
               <span className=" w-full font-[500] text-[15px] flex items-center">
-                018942567&nbsp; <CopyIcon width={23} color={"black"} />
+                ********&nbsp; <CopyIcon width={23} color={"black"} />
               </span>
             </div>
           </div>

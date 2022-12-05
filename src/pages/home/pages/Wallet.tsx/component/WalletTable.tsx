@@ -1,97 +1,105 @@
+import dateFormat from "dateformat";
 import React, { useState } from "react";
-import { ReactComponent as ArrowDown } from "../../../../../assets/image/svg/ArrowDown.svg";
+import CurrencyFormat from "react-currency-format";
 import { ReactComponent as SortAccend } from "../../../../../assets/svg/sort-ascending.svg";
-import AppDatePicker from "../../../../../components/AppComponent/AppDatePicker";
-import AppDropDownT from "../../../../../components/AppComponent/AppDropdownT";
+import AppTopTableCont from "../../../../../components/AppComponent/AppTopTableCont";
 
-interface Props {}
+interface Props {
+  onError: Function;
+  transactionHistory:any,
+  setstatus:React.Dispatch<any>
+}
 
-const WalletTable: React.FC = (props: Props) => {
-  const {} = props;
+const WalletTable: React.FC<Props> = (props: Props) => {
+  const { onError, transactionHistory, setstatus } = props;
 
   const [isShowDate, setisShowDate] = useState(false)
+
+
+
+
   return (
-    <section className="md:px-6 px-3">
-      <div className="flex flex-wrap items-center px-3 py-3 bg-gray-100/40">
-        <div className="md:w-6/12 sm:w-9/12 flex items-center ">
-          <span className="text-sm text-gray-400">Reference</span>
-          <AppDropDownT placeholder="Temitayo Abimbola" />
-          <AppDatePicker setisOpen={(value) => setisShowDate(value)} isOpen={isShowDate} />
-          <span 
-          onClick={() => setisShowDate(!isShowDate)} 
-          className="table-filter-item pointer">
-            Date{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-           
-          </span>
-          <AppDropDownT placeholder="Status" />
+    <>
 
-       
-        </div>
-        <div className="md:w-6/12 sm:w-3/12 text-end">
-          <span className="text-[12px] text-softpasspurple-500">
-            Clear filter
-          </span>
-        </div>
-      </div>
+      <section className="md:px-6 px-3">
+        <AppTopTableCont setstatus={setstatus} />
 
-      <div className="w-[100%] overflow-scroll">
-        <div className="pt-3 w-auto">
-          <table width="100%" className="user-table">
-            <thead className="user-table-head">
-              <tr className="click-container">
-                <td>
-                  <span>S/N</span>
-                </td>
-                <td>
-                  <span>Time</span>
-                </td>
-                <td>
-                  <span className="flex justify-start w-full  items-center">
-                    Date&nbsp; <SortAccend />
-                  </span>
-                </td>
-                <td>
-                  <span>Reference</span>
-                </td>
-                <td>
-                  <span>Amount</span>
-                </td>
-                <td>
-                  <span>Status</span>
-                </td>
-                <td>
-                  <span>Payment Gateway</span>
-                </td>
-              </tr>
-            </thead>
-            <tbody className="user-table-body">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item: any, index: number) => {
-                return (
-                  <tr className="py-3">
-                    <td>0{index + 1}</td>
-                    <td>09:00</td>
-                    <td>19 July 2022 </td>
-                    <td>Temitayo Abimbola</td>
-                    <td>N20, 0000</td>
-                    <td>
-                      <button
-                        className={`px-3 py-1 ${true ? "primary" : "danger"}`}
-                      >
-                        {true ? "Successfull" : "Failed"}
-                      </button>
-                    </td>
-                    <td>Card Payment</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="w-[100%] overflow-scroll">
+          <div className="pt-3 w-auto">
+            <table width="100%" className="user-table">
+              <thead className="user-table-head">
+                <tr className="click-container">
+                  <td>
+                    <span>S/N</span>
+                  </td>
+                  <td>
+                    <span>Time</span>
+                  </td>
+                  <td>
+                    <span className="flex justify-start w-full  items-center">
+                      Date&nbsp; <SortAccend />
+                    </span>
+                  </td>
+                  <td>
+                    <span>Reference</span>
+                  </td>
+                  <td>
+                    <span>Amount</span>
+                  </td>
+                  <td>
+                    <span>Status</span>
+                  </td>
+                  <td>
+                    <span>Payment Gateway</span>
+                  </td>
+                </tr>
+              </thead>
+              <tbody className="user-table-body">
+                {transactionHistory?.map((item: any, index: number) => {
+                  return (
+                    <tr className="py-3">
+                      <td>{index + 1}</td>
+                      <td>{dateFormat(item?.createdDate, "h:MM TT")}</td>
+
+                      <td>{dateFormat(item?.createdDate, "dd mmm yyyy")}</td>
+                      <td>{item?.wallet_transaction_reference}</td>
+
+                      <td>
+                        <CurrencyFormat
+                          value={item?.amount}
+                          displayType={'text'}
+                          thousandSeparator={true}
+
+                          renderText={value => {
+                            return (
+                              <span className="">
+                                <span>&#8358; </span>
+                                {value}.00
+                              </span>
+                            )
+                          }} />
+                      </td>
+                      <td>
+                        <button
+                          className={`px-3 py-1 ${true ? "primary" : "danger"}`}
+                        >
+                          {item?.status}
+                        </button>
+                      </td>
+                      <td>Card Payment</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+
+    
+
+    </>
   );
 };
 

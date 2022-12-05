@@ -40,6 +40,16 @@ const apis = {
     wallet:{
         getWalletBalance:() => server.get(`${BASE_URL}/wallet/balance`,),
         initializeWallet: (data:any) => server.post(`${BASE_URL}/wallet/initilize`, data),
+        getTransactionHistory:(type:{ skip:number, status: any}) => {
+            const {skip, status} = type
+            let url = `${BASE_URL}/wallet/transaction-history?page=${skip}&limit=10`
+            if(status !==  null ) {
+                url=`${BASE_URL}/wallet/transaction-history?page=${skip}&limit=10&status=${status}`
+            }
+            return server.get(url)
+        },
+        getSuccessTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-success-count`,),
+        getFailTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-failed-count`,),
     }
 
 }

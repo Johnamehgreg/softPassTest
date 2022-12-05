@@ -1,42 +1,16 @@
-import React from "react";
-import { ReactComponent as ArrowDown } from "../../../../../assets/image/svg/ArrowDown.svg";
+import React, { useState } from "react";
 import { ReactComponent as SortAccend } from "../../../../../assets/svg/sort-ascending.svg";
+import AppTopTableCont from "../../../../../components/AppComponent/AppTopTableCont";
 
 interface Props {}
 
 const TeamTable: React.FC = (props: Props) => {
   const {} = props;
+  const [status, setstatus] = useState<any>(null)
 
   return (
     <section className="md:px-6 px-3">
-      <div className="flex flex-wrap items-center px-3 py-3 bg-gray-100/40">
-        <div className="md:w-6/12 sm:w-9/12 flex items-center ">
-          <span className="text-sm text-gray-400">Reference</span>
-          <b className="table-filter-item">
-            Temitayo Abimbola{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-          </b>
-          <span className="table-filter-item">
-            Date{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-          </span>
-          <span className="table-filter-item">
-            Status{" "}
-            <i className="pt-[3px]">
-              <ArrowDown color={"black"} width={"17"} />
-            </i>
-          </span>
-        </div>
-        <div className="md:w-6/12 sm:w-3/12 text-end">
-          <span className="text-[12px] text-softpasspurple-500">
-            Clear filter
-          </span>
-        </div>
-      </div>
+     <AppTopTableCont setstatus={setstatus} />
 
       <div className="w-[100%] overflow-scroll">
         <div className="pt-3 w-auto">

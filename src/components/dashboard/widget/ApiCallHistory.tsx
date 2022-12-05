@@ -1,11 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useGetWalletHook } from '../../../pages/home/pages/Wallet.tsx/wallet-query-hook'
 
 interface Props {
-    info: Object
+    info: Object,
 }
 
  const ApiCallHistory:React.FC<Props> = (props: Props)=> {
     const {info} = props
+
+
+    const onError = () => {
+    }
+
+    const [transactionCOunt, settransactionCOunt] = useState({
+      successCount:0,
+      failureCount:0,
+    })
+  
+
+    const {
+      failureCallData,
+      successCallData,
+      faildDataIssuccess,
+      failureReftch,
+      successReftch,
+      failureIsfetched,
+      successIsSuccess,
+      successIsfetched,
+      
+    } = useGetWalletHook({ onError })
+
+
+  const checkSuccess = () => {
+
+   
+    if(faildDataIssuccess && failureIsfetched){
+      settransactionCOunt({...transactionCOunt, failureCount:failureCallData?.data.data})
+      console.log('count successfully', failureCallData?.data.data)
+    }
+    if(successIsSuccess && successIsfetched){
+      settransactionCOunt({...transactionCOunt, successCount:successCallData?.data.data})
+    }
+  }
+
+  useEffect(() => {
+    checkSuccess()
+  }, [failureCallData, successCallData ])
 
     return (
         <div className="py-12 md:px-8 px-4 flex justify-between">
@@ -14,7 +54,7 @@ interface Props {
             Successfull Calls
           </b>
           <span className="flex justify-center w-full items-center">
-            <b className="text-lg all-flex font-normal">25</b>
+            <b className="text-lg all-flex font-normal">{transactionCOunt.successCount}</b>
             <abbr className="text-[9px] text-softpassgreen-300 bg-softpassgreen-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
               +25%
             </abbr>
@@ -25,7 +65,7 @@ interface Props {
             Failed calls
           </b>
           <span className="flex justify-center w-full items-center">
-            <b className="text-lg all-flex font-normal">10</b>
+            <b className="text-lg all-flex font-normal">{transactionCOunt.failureCount}</b>
             <abbr className="text-[9px] text-softpasspurple-300 bg-softpasspurple-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
               +25%
             </abbr>

@@ -9,6 +9,9 @@ interface Props {
   setisOpen:(value:boolean) => void;
 }
 
+const { RangePicker } = DatePicker;
+
+
 const AppDatePicker: React.FC<Props> = ({ isOpen, setisOpen }) => {
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
@@ -17,12 +20,14 @@ const AppDatePicker: React.FC<Props> = ({ isOpen, setisOpen }) => {
   
   return (
     <Space direction="vertical">
-      <DatePicker
+      <RangePicker
         autoFocus={true}
         bordered={false}
         open={isOpen}
         onBlur={()=> setisOpen(false)}
-        onChange={onChange} />
+        // onChange={onChange} 
+        
+        />
 
     </Space>
   )

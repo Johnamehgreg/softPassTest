@@ -4,40 +4,57 @@ import React from 'react';
 import { ReactComponent as ArrowDown } from "../../assets/image/svg/ArrowDown.svg";
 
 
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: (
-      <p>1st menu item</p>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-        2nd menu item
-      </a>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-        3rd menu item
-      </a>
-    ),
-  },
-];
+
 
 
 interface Props {
-  placeholder:string
+  placeholder: string,
+  setState: React.Dispatch<any>
 }
 
-const AppDropDownT: React.FC<Props> = ({placeholder}) => (
+const AppDropDownT: React.FC<Props> = ({setState, placeholder }) => { 
+
+const items: MenuProps['items'] = [
+  {
+    key: 'COMPLETED',
+    label: (
+      <p onClick={() => setState('COMPLETED')}>COMPLETED</p>
+    ),
+  },
+  {
+    key: 'FAILED',
+    label: (
+      <p onClick={() => setState('FAILED')}>
+        FAILED
+      </p>
+    ),
+  },
+  {
+    key: 'PENDING',
+    label: (
+      <p  onClick={() => setState('PENDING')}>
+        PENDING
+      </p>
+    ),
+  },
+  {
+    key: 'CANCELLED',
+    label: (
+      <p onClick={() => setState('CANCELLED')}>
+        CANCELLED
+      </p>
+    ),
+  },
+];
+return (
+
+
   <>
 
-    <Dropdown menu={{ items }} placement="bottom" arrow>
+    <Dropdown
+
+      onOpenChange={(e) => console.log(e, 'value selected')}
+      menu={{ items }} placement="bottom" arrow>
       <b className="table-filter-item pointer">
         {placeholder}{" "}
         <i className="pt-[3px]">
@@ -49,7 +66,9 @@ const AppDropDownT: React.FC<Props> = ({placeholder}) => (
 
 
   </>
-);
+
+)
+}
 
 export default AppDropDownT;
 
