@@ -22,6 +22,10 @@ function Wallet(props: Props) {
   const [transactionHistory, settransactionHistory] = useState([])
   const [pagiData, setpagiData] = useState({})
   const [status, setstatus] = useState<any>(null)
+  const [itemNum, setitemNum] = useState(0)
+
+  
+
   const [dateRange, setdateRange] = useState({
     startDate: new Date(),
     endDate: new Date()
@@ -77,6 +81,7 @@ function Wallet(props: Props) {
     if (isFetched && isDataSuccess) {
       setisError(false)
       setisSuccess(true)
+
       setamountBalance(data?.data?.balance)
       
     }
@@ -84,6 +89,7 @@ function Wallet(props: Props) {
     if (transactionSuccess && transactionIsfetched) {
       settransactionHistory(transactionData?.data?.results)
       setpagiData(transactionData?.data)
+      setitemNum(skip * 10)
       console.log(data.data, 'sucess data transaction')
     }
   }
@@ -124,6 +130,7 @@ function Wallet(props: Props) {
 
           <AppRetching isFetching={isFetchingTrans} />
           <WalletTable 
+          itemNum={itemNum}
           setstatus={setstatus}
           transactionHistory={transactionHistory} 
           onError={() => onError()} />

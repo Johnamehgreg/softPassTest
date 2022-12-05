@@ -7,11 +7,12 @@ import AppTopTableCont from "../../../../../components/AppComponent/AppTopTableC
 interface Props {
   onError: Function;
   transactionHistory:any,
-  setstatus:React.Dispatch<any>
+  setstatus:React.Dispatch<any>,
+  itemNum:any
 }
 
 const WalletTable: React.FC<Props> = (props: Props) => {
-  const { onError, transactionHistory, setstatus } = props;
+  const { onError, itemNum, transactionHistory, setstatus } = props;
 
   const [isShowDate, setisShowDate] = useState(false)
 
@@ -58,7 +59,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                 {transactionHistory?.map((item: any, index: number) => {
                   return (
                     <tr className="py-3">
-                      <td>{index + 1}</td>
+                      <td>{index + 1 + itemNum}</td>
                       <td>{dateFormat(item?.createdDate, "h:MM TT")}</td>
 
                       <td>{dateFormat(item?.createdDate, "dd mmm yyyy")}</td>
