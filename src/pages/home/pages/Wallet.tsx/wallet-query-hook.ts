@@ -94,15 +94,16 @@ export const useGetWalletHook = (arg: ARG) => {
 interface Trans{
     onError:Function, 
     skip:number,
-    status:any
+    status:any,
+    dateRange:any
 }
 
 export const useWalletTransactionHistory = (arg:Trans) => {
 
-    const { onError, skip, status} = arg
+    const { onError, skip, status, dateRange} = arg
     const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
-        ['get-wallet-transaction-history', skip, status ],
-        () => apis.wallet.getTransactionHistory({skip, status}),
+        ['get-wallet-transaction-history', skip, dateRange.startDate, dateRange.endDate, status ],
+        () => apis.wallet.getTransactionHistory({skip, status, dateRange}),
         {
             onError: () => {
                 onError()

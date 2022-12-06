@@ -8,11 +8,12 @@ interface Props {
   onError: Function;
   transactionHistory:any,
   setstatus:React.Dispatch<any>,
-  itemNum:any
+  itemNum:any,
+  setdateRange: React.Dispatch<any>
 }
 
 const WalletTable: React.FC<Props> = (props: Props) => {
-  const { onError, itemNum, transactionHistory, setstatus } = props;
+  const { onError, setdateRange, itemNum, transactionHistory, setstatus } = props;
 
   const [isShowDate, setisShowDate] = useState(false)
 
@@ -23,7 +24,9 @@ const WalletTable: React.FC<Props> = (props: Props) => {
     <>
 
       <section className="md:px-6 px-3">
-        <AppTopTableCont setstatus={setstatus} />
+        <AppTopTableCont 
+        setdateRange={setdateRange}
+        setstatus={setstatus} />
 
         <div className="w-[100%] overflow-scroll">
           <div className="pt-3 w-auto">
@@ -59,7 +62,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                 {transactionHistory?.map((item: any, index: number) => {
                   return (
                     <tr className="py-3">
-                      <td>{index + 1 + itemNum}</td>
+                      <td>{index + itemNum}</td>
                       <td>{dateFormat(item?.createdDate, "h:MM TT")}</td>
 
                       <td>{dateFormat(item?.createdDate, "dd mmm yyyy")}</td>

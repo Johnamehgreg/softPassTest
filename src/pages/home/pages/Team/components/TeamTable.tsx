@@ -7,10 +7,16 @@ interface Props {}
 const TeamTable: React.FC = (props: Props) => {
   const {} = props;
   const [status, setstatus] = useState<any>(null)
+  const [dateRange, setdateRange] = useState<any>({
+    startDate: null,
+    endDate: null
+  })
 
   return (
     <section className="md:px-6 px-3">
-     <AppTopTableCont setstatus={setstatus} />
+     <AppTopTableCont
+     setdateRange={setdateRange}
+     setstatus={setstatus} />
 
       <div className="w-[100%] overflow-scroll">
         <div className="pt-3 w-auto">

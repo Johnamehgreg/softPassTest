@@ -7,10 +7,12 @@ import AppDropDownT from "./AppDropdownT";
 
 
 interface Props {
-    setstatus:React.Dispatch<any>
+    setstatus:React.Dispatch<any>,
+    setdateRange:React.Dispatch<any>
+
 }
 
-const AppTopTableCont:React.FC<Props> = ({setstatus}) => {
+const AppTopTableCont:React.FC<Props> = ({setstatus, setdateRange}) => {
     const [isShowDate, setisShowDate] = useState(false)
 
     const { userDetail, topNavData } = useContext(AppProvider)
@@ -25,7 +27,10 @@ const AppTopTableCont:React.FC<Props> = ({setstatus}) => {
                 {userDetail?.first_name} {userDetail?.last_name}{" "}
                    
                 </b>
-                <AppDatePicker setisOpen={(value) => setisShowDate(value)} isOpen={isShowDate} />
+                <AppDatePicker 
+                setdateRange={setdateRange} 
+                setisOpen={(value) => setisShowDate(value)} 
+                isOpen={isShowDate} />
                 <span
                     onClick={() => setisShowDate(!isShowDate)}
                     className="table-filter-item pointer">
@@ -40,7 +45,13 @@ const AppTopTableCont:React.FC<Props> = ({setstatus}) => {
 
             </div>
             <div className="md:w-6/12 sm:w-3/12 text-end">
-                <span className="text-[12px] text-softpasspurple-500">
+                <span onClick={() => {
+                    setstatus(null)
+                    setdateRange({
+                        startDate: null,
+                        endDate: null
+                    })
+                }} className="text-[12px] pointer text-softpasspurple-500">
                     Clear filter
                 </span>
             </div>

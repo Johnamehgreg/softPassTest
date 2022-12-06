@@ -26,9 +26,9 @@ function Wallet(props: Props) {
 
   
 
-  const [dateRange, setdateRange] = useState({
-    startDate: new Date(),
-    endDate: new Date()
+  const [dateRange, setdateRange] = useState<any>({
+    startDate: null,
+    endDate: null
   })
 
 
@@ -74,7 +74,7 @@ function Wallet(props: Props) {
     isSuccess: transactionSuccess,
     isFetched: transactionIsfetched,
     isFetching:isFetchingTrans
-  } = useWalletTransactionHistory({ onError, skip, status })
+  } = useWalletTransactionHistory({ onError, skip, status, dateRange })
 
   const checkSuccess = () => {
 
@@ -130,6 +130,7 @@ function Wallet(props: Props) {
 
           <AppRetching isFetching={isFetchingTrans} />
           <WalletTable 
+          setdateRange={setdateRange}
           itemNum={itemNum}
           setstatus={setstatus}
           transactionHistory={transactionHistory} 
