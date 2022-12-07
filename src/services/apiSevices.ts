@@ -9,6 +9,9 @@ const apis = {
         verifyForgetPassword: (data:any) => server.post(`${BASE_URL}/account/verify-forget-password`, data),
         verifyAccount: (data:any) => server.post(`${BASE_URL}/account/verification/email`, data),
         resendVerificationToken: (data:any) => server.post(`${BASE_URL}/account/resend/verification/email`, data),
+        request2FactorToken: () => server.post(`${BASE_URL}/account/enable-2fa`),
+        verify2factorToken: (data:any) => server.patch(`${BASE_URL}/account/verify-enable-2fa`, data),
+        login2factorToken: (data:any) => server.post(`${BASE_URL}/account/login-2fa`, data),
     },
 
     /// Container 

@@ -18,18 +18,26 @@ const Profile: React.FC = (props: Props) => {
     const [age, setAge] = React.useState('');
     const [toggleBtn, settoggleBtn] = useState(false)
     const [isModalOPen , setisModalOPen ] = useState(true)
+    const [tab, settab] = useState(1)
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
     };
 
+    const { userDetail, setisLoading } = useContext(AppProvider)
+
+
+
     const onChange = (checked: boolean) => {
         console.log(`switch to ${checked}`);
         settoggleBtn(checked)
-        if(checked){
-            setisModalOPen(checked)
+        
+
+        if(checked === true ){
+            setisModalOPen(true)
+           
         }
+        
     };
-    const { userDetail,  } = useContext(AppProvider)
 
     //FUNCTION
 
@@ -113,7 +121,7 @@ const Profile: React.FC = (props: Props) => {
                 </div>
             </section>
 
-            <Add2Factor isOpen={isModalOPen} closeModal={() => setisModalOPen(false)} />
+            <Add2Factor tab={tab} settab={settab} isOpen={isModalOPen} closeModal={() => setisModalOPen(false)} />
         </>
     );
 };
