@@ -1,31 +1,55 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useGetServiceByCategory } from "./dashboard-query-hook"
 
 interface Props {
-    item: any
+    id: string
 }
-const SubNav: React.FC<Props> = ({ item }) => {
+const SubNav: React.FC<Props> = ({ id }) => {
     const navigation  = useNavigate()
     const ref = useRef(null);
     const element = ref.current;
+
+    const [services, setservices] = useState<any>([])
+
+    const onError = () => {
+
+    }
+
+    const { data, refetch, isFetched, isSuccess } = useGetServiceByCategory({ onError, id })
+
+
+    const checkSuccess = () => {
+
+        if (isFetched && isSuccess) {
+          
+          setservices(data.data)
+        }
+      }
+    
+    
+      useEffect(() => {
+        checkSuccess()
+      }, [data])
+    
     
 
     
     return (
         <div className="sub-route-item-popup">
             {
-                item?.map((item:any) => {
+                services?.map((item:any) => {
                     return (
                         <div
                         ref={ref}
                         onClick={
                             () => {
-                                navigation(item.route)
+                                navigation(`/verification-services/${item?.service_name}`)
                                 
                             }
                         }
                         className="sub-item-child pointer rounded">
-                            <p>{item.name}</p>
+                            <p>{item.service_name}</p>
                         </div>
                     )
                 })

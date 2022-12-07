@@ -16,7 +16,6 @@ import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
 import AMT from "../../pages/home/pages/verification/AMT"
 import BAV from "../../pages/home/pages/verification/BAV"
-import BulkBvn from "../../pages/home/pages/verification/BulkBvn"
 import BvnWithImage from "../../pages/home/pages/verification/BvnWithImage"
 import BvnWithoutWithImage from "../../pages/home/pages/verification/BvnWithout-WithImage"
 import BvnWithoutImage from "../../pages/home/pages/verification/BvnWithoutImage"
@@ -29,6 +28,7 @@ import OCR from "../../pages/home/pages/verification/OCR"
 import PNV from "../../pages/home/pages/verification/PNV"
 import PNVBulk from "../../pages/home/pages/verification/PNVBulk"
 import PVC from "../../pages/home/pages/verification/PVC"
+import VerificationPage from "../../pages/home/pages/verification/VerificationPage.tsx"
 import VotersCard from "../../pages/home/pages/verification/VotersCard"
 import Wallet from "../../pages/home/pages/Wallet.tsx/Wallet"
 
@@ -50,7 +50,7 @@ export const dashboardSideRoute = [
             {
                route: '/bulk-bvn',
                name: 'Bulk BVN',
-               Page:BulkBvn,
+               Page:VerificationPage,
             },
             {
                route: '/NIN',

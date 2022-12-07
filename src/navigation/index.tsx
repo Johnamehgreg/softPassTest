@@ -4,8 +4,9 @@ import {
   BrowserRouter, Navigate, Route,
   Routes
 } from "react-router-dom";
-import { dashboardSideRoute, verificationRoute } from '../components/dashboard/dashboardSideRoute';
+import { dashboardSideRoute } from '../components/dashboard/dashboardSideRoute';
 import { AuthProvider } from '../contextProvide/AuthContext';
+import VerificationPage from '../pages/home/pages/verification/VerificationPage.tsx';
 import route from './router';
 
 const RootRoutes = () => {
@@ -16,17 +17,17 @@ const RootRoutes = () => {
   const landingRoute = route.filter((item: any) => item.stack !== 'app')
   const user = Cookies.get('isLogin')
 
-  const withoutVerification = dashboardSideRoute.filter((item:any) => item.name !== 'verification' )
+  const withoutVerification = dashboardSideRoute.filter((item: any) => item.name !== 'verification')
   // const Verification = dashboardSideRoute.filter((item:any) => item.name === 'verification' )[0]
 
-  
+
 
 
   const readCookies = () => {
 
     if (user) {
       setisUserLogin(true)
-    }else{
+    } else {
       setisUserLogin(false)
     }
   }
@@ -65,27 +66,29 @@ const RootRoutes = () => {
 
               <Route path={MainRoute.route} element={<MainRoute.Page />} >
                 {
-                  withoutVerification.map((item:any) => {
+                  withoutVerification.map((item: any) => {
                     const { Page, route } = item
 
                     return (
-                      <Route 
-                      path={route} key={route}  element={<Page />} />
+                      <Route
+                        path={route} key={route} element={<Page />} />
                     )
-                    
+
                   })
                 }
-                {
-                  verificationRoute.map((item:any) => {
+                {/* {
+                  verificationRoute.map((item: any) => {
                     const { Page, route } = item
 
                     return (
                       <Route path={route} key={route} element={<Page />} />
                     )
-                    
+
                   })
-                }
-                
+                } */}
+
+                <Route path={'/verification-services/:service'} element={<VerificationPage />} />
+
               </Route>
 
 

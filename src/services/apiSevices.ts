@@ -48,6 +48,11 @@ const apis = {
         },
         getSuccessTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-success-count`,),
         getFailTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-failed-count`,),
+    },
+
+    SideNav:{
+        getSideNavCategories:() => server.get(`${BASE_URL}/service-category/list-all`,),
+        getServicesByCategory:(id:string) => server.get(`${BASE_URL}/service/all-category?category_id=${id}`,),
     }
 
 }

@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as ArrowDown } from "../../../assets/image/svg/ArrowDown.svg";
 import { ReactComponent as DLogout } from "../../../assets/image/svg/logout.svg";
@@ -7,6 +7,7 @@ import { ReactComponent as DLogo } from "../../../assets/image/svg/softpassSVG 3
 import { AuthProvider } from "../../../contextProvide/AuthContext";
 import routes from '../../../navigation/Routes';
 import { dashboardSideRoute } from "../dashboardSideRoute";
+import { useSideCategoryHook } from './dashboard-query-hook';
 import SubNav from "./subNav";
 
 
@@ -26,6 +27,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
   const [isDropdownActive, setIsDropDownActive] = useState(-1);
   const [activeSideContent, setActiveSideContent] = useState(-1);
   const [index, setindex] = useState(0)
+  const [categories, setcategories] = useState<any>([])
   //FUNCTIONS
   const setNavigation = (val: string) => {
     setRoute(val);
@@ -49,6 +51,25 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
 
   }
 
+  const onError = () => {
+
+  }
+
+
+  const { data, refetch, isFetched, isSuccess } = useSideCategoryHook({ onError })
+
+  const checkSuccess = () => {
+
+    if (isFetched && isSuccess) {
+      console.log(data, 'Hello data is')
+      setcategories(data.data)
+    }
+  }
+
+
+  useEffect(() => {
+    checkSuccess()
+  }, [data])
 
   return (
     <div
@@ -113,7 +134,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                         &nbsp; &nbsp; {item.name}
 
                       </div>
-                      {item.subRoute?.length > 0 && (
+                      {categories?.length > 0 && (
                         <span
                           className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
                             ? "rotate-180"
@@ -125,10 +146,10 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       )}
                     </span>
                     {isDropdownActive == index && activeSideContent == index && (
-                      <div className="pl-2">
-                        {subRoute.map((item: any, iDEX: number) => {
+                      <div className="pl-2 w-full">
+                        {categories?.map((item: any, iDEX: number) => {
                           return (
-                            <span
+                            <div
                               onMouseEnter={() => {
 
                               }}
@@ -139,14 +160,16 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                               }}
                               className="sub-route-item mt-2 relative"
                             >
-                              {item?.subname}
-                              {
+                              {item?.category_name}
+                              {/* {
                                 item?.subRoute?.length > 0 && (
-                                  <SubNav item={item?.subRoute} />
+                                  <SubNav item={item} />
                                 )
-                              }
+                              } */}
 
-                            </span>
+                              <SubNav id={item._id} />
+
+                            </div>
                           );
                         })}
                       </div>
@@ -158,132 +181,132 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
 
                   name === 'Utilities' ?
 
-                  <div
-                  onMouseLeave={() => {
-                    setIsDropDownActive(-1)
-                  }}
-                  onMouseEnter={() => {
-                    setActiveSideContent(index);
-                    setIsDropDownActiveFunc(index);
-                  }}
-                  className="flex  flex-wrap py-1  inter">
-                  <span
-                    onClick={() => {
-                      setActiveSideContent(index);
-                      setIsDropDownActiveFunc(index);
-                    }}
-
-
-                    className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
-                     ${activeSideContent === index
-                        ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
-                        : "transition duration-300"
-                      }
-            `}
-                  >
-
-                    <div className="flex items-center">
-                      <Icon
-                        width={"18"}
-                        class={
-                          activeSideContent === index
-                            ? `side-nav-svg transition duration-300`
-                            : "transition duration-300"
-                        }
-                      />
-                      &nbsp; &nbsp; {item.name}
-
-                    </div>
-                    {item.subRoute?.length > 0 && (
-                      <span
-                        className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
-                          ? "rotate-180"
-                          : "rotate-0"
-                          }`}
-                      >
-                        <ArrowDown />
-                      </span>
-                    )}
-                  </span>
-                  {isDropdownActive === index && activeSideContent == index && (
-                    <div className="pl-2">
-                      {subRoute.map((item: any, iDEX: number) => {
-                        return (
-                          <span
-                            onMouseEnter={() => {
-
-                            }}
-                            onClick={() => {
-                              navigation(item?.route)
-                              setindex(iDEX)
-                              // setIsDropDownActiveFunc(-1);
-                            }}
-                            className="sub-route-item w-full mt-2 relative"
-                          >
-                            {item?.subname}
-                            
-
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-
-                  :
-
-                  <div className="flex flex-wrap py-1 inter">
-                    <span
-                      onClick={() => {
-
-                        navigation(route)
+                    <div
+                      onMouseLeave={() => {
+                        setIsDropDownActive(-1)
+                      }}
+                      onMouseEnter={() => {
                         setActiveSideContent(index);
                         setIsDropDownActiveFunc(index);
                       }}
-                      className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
-            ${activeSideContent == index
-                          ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
-                          : "transition duration-300"
-                        }
-            `}
-                    >
-                      <Icon
-                        width={"18"}
-                        class={
-                          activeSideContent == index
-                            ? `side-nav-svg transition duration-300`
+                      className="flex  flex-wrap py-1  inter">
+                      <span
+                        onClick={() => {
+                          setActiveSideContent(index);
+                          setIsDropDownActiveFunc(index);
+                        }}
+
+
+                        className={`flex w-full justify-between	pr-2 items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+                     ${activeSideContent === index
+                            ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
                             : "transition duration-300"
-                        }
-                      />
-                      &nbsp; &nbsp; {item.name}
-                      {item.subRoute?.length > 0 && (
-                        <span
-                          className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
-                            ? "rotate-180"
-                            : "rotate-0"
-                            }`}
-                        >
-                          <ArrowDown />
-                        </span>
+                          }
+            `}
+                      >
+
+                        <div className="flex items-center">
+                          <Icon
+                            width={"18"}
+                            class={
+                              activeSideContent === index
+                                ? `side-nav-svg transition duration-300`
+                                : "transition duration-300"
+                            }
+                          />
+                          &nbsp; &nbsp; {item.name}
+
+                        </div>
+                        {item.subRoute?.length > 0 && (
+                          <span
+                            className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
+                              ? "rotate-180"
+                              : "rotate-0"
+                              }`}
+                          >
+                            <ArrowDown />
+                          </span>
+                        )}
+                      </span>
+                      {isDropdownActive === index && activeSideContent == index && (
+                        <div className="pl-2 w-full">
+                          {subRoute.map((item: any, iDEX: number) => {
+                            return (
+                              <span
+                                onMouseEnter={() => {
+
+                                }}
+                                onClick={() => {
+                                  navigation(item?.route)
+                                  setindex(iDEX)
+                                  // setIsDropDownActiveFunc(-1);
+                                }}
+                                className="sub-route-item w-full mt-2 relative"
+                              >
+                                {item?.subname}
+
+
+                              </span>
+                            );
+                          })}
+                        </div>
                       )}
-                    </span>
-                    {isDropdownActive == index && activeSideContent == index && (
-                      <div className="pl-2">
-                        {subRoute.map((item: any, index: number) => {
-                          return (
-                            <span
-                              onClick={() => {
-                                setIsDropDownActiveFunc(-1);
-                              }}
-                              className="sub-route-item mt-2 relative"
-                            >
-                              {item.subname}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
+                    </div>
+
+                    :
+
+                    <div className="flex flex-wrap py-1 inter">
+                      <span
+                        onClick={() => {
+
+                          navigation(route)
+                          setActiveSideContent(index);
+                          setIsDropDownActiveFunc(index);
+                        }}
+                        className={`flex w-full items-center py-2 px-1 rounded-md text-[13px] capitalize cursor-pointer
+            ${activeSideContent == index
+                            ? " text-softpasspurple-300 scale-[1.1] transition duration-300 bg-softpasspurple-300/10"
+                            : "transition duration-300"
+                          }
+            `}
+                      >
+                        <Icon
+                          width={"18"}
+                          class={
+                            activeSideContent == index
+                              ? `side-nav-svg transition duration-300`
+                              : "transition duration-300"
+                          }
+                        />
+                        &nbsp; &nbsp; {item.name}
+                        {item.subRoute?.length > 0 && (
+                          <span
+                            className={`ml-4 mt-1 inline-block transition ${isDropdownActive == index && activeSideContent == index
+                              ? "rotate-180"
+                              : "rotate-0"
+                              }`}
+                          >
+                            <ArrowDown />
+                          </span>
+                        )}
+                      </span>
+                      {isDropdownActive == index && activeSideContent == index && (
+                        <div className="pl-2 w-full">
+                          {subRoute.map((item: any, index: number) => {
+                            return (
+                              <span
+                                onClick={() => {
+                                  setIsDropDownActiveFunc(-1);
+                                }}
+                                className="sub-route-item mt-2 relative"
+                              >
+                                {item.subname}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
               }
             </>
           );

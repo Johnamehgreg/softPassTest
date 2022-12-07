@@ -1,8 +1,10 @@
 import { SelectChangeEvent } from '@mui/material/Select';
 import { Switch } from 'antd';
 import { Moment } from 'moment';
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppOutlineInput from '../../../../components/AppComponent/AppOutlineInput';
+import { AppProvider } from '../../../../contextProvide/AppContext';
+import Add2Factor from './components/Add2FactorCard';
 
 
 interface Props { }
@@ -14,14 +16,21 @@ const Profile: React.FC = (props: Props) => {
     const [headerTitle, setHeaderTitle] = useState("");
     const [fromUniqueInput, setFormUniqueInput] = useState([]);
     const [age, setAge] = React.useState('');
-
+    const [toggleBtn, settoggleBtn] = useState(false)
+    const [isModalOPen , setisModalOPen ] = useState(true)
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
     };
 
     const onChange = (checked: boolean) => {
         console.log(`switch to ${checked}`);
+        settoggleBtn(checked)
+        if(checked){
+            setisModalOPen(checked)
+        }
     };
+    const { userDetail,  } = useContext(AppProvider)
+
     //FUNCTION
 
 
@@ -32,6 +41,14 @@ const Profile: React.FC = (props: Props) => {
     //         message: 'Manage your team member activities as well as transaction history',
     //     })
     // }, [])
+
+    useEffect(() => {
+     console.log('@asset data ', userDetail)
+     if(userDetail?.is_2fa_enabled) {
+        settoggleBtn(userDetail?.is_2fa_enabled)
+     }
+    }, [userDetail])
+    
 
     return (
         <>
@@ -46,19 +63,43 @@ const Profile: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap  ">
                         <div className="w-full sm:w-5/12 md:w-4/12 sm:mr-4">
 
-                            <AppOutlineInput placeholder='Name of Staff' />
-                            <AppOutlineInput placeholder='Phone No' />
-                            <AppOutlineInput placeholder='Company Name' />
-                            <AppOutlineInput placeholder='Company Address' />
+                            <AppOutlineInput 
+                            isDisable={true}
+                            value={`${userDetail?.first_name} . ${userDetail?.last_name}`}
+                            placeholder='Name of Staff' />
+                            <AppOutlineInput 
+                            isDisable={true}
+                            value={`${userDetail?.first_name}`}
+                            placeholder='Phone No' />
+                            <AppOutlineInput 
+                             isDisable={true}
+                             value={`${userDetail?.business_name}`}
+                            placeholder='Company Name' />
+                            <AppOutlineInput 
+                             isDisable={true}
+                             value={`${userDetail?.first_name}`}
+                            placeholder='Company Address' />
 
 
                         </div>
                         <div className="w-full sm:w-5/12 md:w-5/12 flex flex-wrap md:pl-7 md:pr-18 mb-5">
 
-                            <AppOutlineInput placeholder='Status' />
-                            <AppOutlineInput placeholder='Email' />
-                            <AppOutlineInput placeholder='Country' />
-                            <AppOutlineInput placeholder='State' />
+                            <AppOutlineInput 
+                            isDisable={true}
+                            value={`${userDetail?.email}`}
+                            placeholder='Status' />
+                            <AppOutlineInput 
+                             isDisable={true}
+                             value={`${userDetail?.email}`}
+                            placeholder='Email' />
+                            <AppOutlineInput 
+                            isDisable={true}
+                            value={`${userDetail?.country}`}
+                            placeholder='Country' />
+                            <AppOutlineInput 
+                            isDisable={true}
+                            value={`${userDetail?.email}`}
+                            placeholder='State' />
 
                         </div>
                     </div>
@@ -66,9 +107,13 @@ const Profile: React.FC = (props: Props) => {
 
                 <div className="flex mb-8 items-center  px-10 ">
                     <p className='text-[12px] mr-[10px]' >Enable 2-factor authentication</p>
-                    <Switch size='small' defaultChecked onChange={onChange} />
+                    <Switch
+                    
+                    size='small' checked={toggleBtn} onChange={onChange} />
                 </div>
             </section>
+
+            <Add2Factor isOpen={isModalOPen} closeModal={() => setisModalOPen(false)} />
         </>
     );
 };

@@ -656,3 +656,8 @@ a:hover {
 .ant-picker-suffix{
   display: none !important;
 }
+
+.success-text{
+  @apply text-[20px] my-0;
+  color: #27AE60;
+}

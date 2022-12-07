@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { verificationRoute } from "../dashboardSideRoute";
+import { useGetServices } from "../../../app-query-hook/use-services-hook";
 
 interface Props {
   dropdownDirection: String;
@@ -14,6 +14,8 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   const [headerTitle, setHeaderTitle] = useState("");
   const [fromUniqueInput, setFormUniqueInput] = useState([]);
  
+
+  const [ServiceList, setServiceList] = useState([])
 
 
 
@@ -36,10 +38,20 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   };
 
 
+  const {data, isFetched, isSuccess, } = useGetServices()
+
+  const checkSuccess = () => {
+    if(isSuccess && isFetched){
+      setServiceList(data?.data)
+    }
+  }
+
+
   //HOOK
   useEffect(() => {
+    checkSuccess()
     // onChange(selectContent[0].title, selectContent);
-  }, []);
+  }, [data]);
 
 
 
@@ -74,20 +86,20 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
             />
           </form>
           <div>
-            {verificationRoute.map((item: any, index: number) => {
+            {ServiceList.map((item: any, index: number) => {
               return (
                 <div
                   className="my-2 py-1 mx-3"
                   key={"selectId" + index}
                   onClick={() => {
-                    navigation(item.route)
+                    navigation(`/verification-services/${item.service_name}`)
                     setDbSelectId(index);
                     setSelectId(false);
                   }}
                 >
                   <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">
                     <abbr className="font-semibold text-black text-[13px]">
-                      {item.name}
+                      {item.service_name}
                     </abbr>
                     <input type="checkbox" checked={dbSelectId == index} />
                     <span className="checkmark"></span>
