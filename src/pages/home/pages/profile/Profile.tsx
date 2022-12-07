@@ -17,7 +17,7 @@ const Profile: React.FC = (props: Props) => {
     const [fromUniqueInput, setFormUniqueInput] = useState([]);
     const [age, setAge] = React.useState('');
     const [toggleBtn, settoggleBtn] = useState(false)
-    const [isModalOPen , setisModalOPen ] = useState(true)
+    const [isModalOPen , setisModalOPen ] = useState(false)
     const [tab, settab] = useState(1)
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
