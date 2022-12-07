@@ -36,9 +36,9 @@ const Add2Factor: React.FC<Props> = (props) => {
 
     const { setisLoading, } = useContext(AppProvider)
 
-    const onSent = () =>{
+    const onSent = () => {
         settab(2)
-     }
+    }
 
 
     const { verifyToken, request2Factor } = useProfileHookEvent()
@@ -46,17 +46,18 @@ const Add2Factor: React.FC<Props> = (props) => {
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (tab === 2) {
-            closeModal()
-        } else {
+        // if (tab === 2) {
+        //     closeModal()
+        // } else {
 
-            let data = {
-                token: otp
-            }
+        // }
 
-            verifyToken({ data, settab })
+
+        let data = {
+            token: otp
         }
 
+        verifyToken({ data, settab })
 
 
     }
@@ -102,10 +103,10 @@ const Add2Factor: React.FC<Props> = (props) => {
                                         <div className="w-full text-[15px] text-center opacity-50">Are you sure you want to enable  <br />  2-Factor authenticator?</div>
                                         <div className="w-full text-center py-3 garrif">
                                             <button
-                                            type='button'
-                                            onClick={() => {
-                                                request2Factor({onSent})
-                                            }}
+                                                type='button'
+                                                onClick={() => {
+                                                    request2Factor({ onSent })
+                                                }}
                                                 className="next-button">Yes, I’m Sure </button>
                                         </div>
                                         <div className="w-full text-center py-0 garrif mb-3">
@@ -181,10 +182,10 @@ const Add2Factor: React.FC<Props> = (props) => {
                             )
                         }
                         {
-                            tab === 2 && (
+                            tab === 3 && (
                                 <div className="w-full text-center py-3 garrif">
                                     <button
-                                    onClick={() => closeModal()}
+                                        onClick={() => closeModal()}
                                         type="button"
                                         className="next-button">Close</button>
                                 </div>
