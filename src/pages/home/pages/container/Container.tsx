@@ -139,7 +139,7 @@ const ContainerPage = () => {
             isFetched && isDataSuccess && containerList.length === 0 && (
               <div className="flex flex-col items-center justify-center">
                 <p className="text-center text-gray-400 text-sm">
-                  There is no data to display.
+                You currently have no {tab === 1 ? 'activate' : 'deactivated'} container. 
                 </p>
               </div>
             )

@@ -132,9 +132,12 @@ function Wallet(props: Props) {
             <h1 className="w-6/12 text-[20px] font-semibold">Wallet Funding History</h1>
             <div className="w-6/12">
               <div className="flex justify-end z-10">
-                <b className="border-[12px] border-gray-100 px-3 text-[15px] py-1 text-softpasspurple-300">
-                  Generate Report
-                </b>
+                <div className="border-[12px] rounded-md border-gray-100">
+                  <button
+                    className="text-softpasspurple-300 rounded-md text-sm px-2 py-2 bg-white">
+                     Generate Report
+                  </button>
+                </div>
               </div>
             </div>
           </div>
