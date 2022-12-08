@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppPagination from "../../../../components/AppComponent/AppPagination";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
+import { AppProvider } from "../../../../contextProvide/AppContext";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
 import { useGetWalletHook, useWalletTransactionHistory } from "./wallet-query-hook";
@@ -24,7 +25,7 @@ function Wallet(props: Props) {
   const [status, setstatus] = useState<any>(null)
   const [itemNum, setitemNum] = useState(0)
 
-  
+
 
   const [dateRange, setdateRange] = useState<any>({
     startDate: null,
@@ -73,7 +74,7 @@ function Wallet(props: Props) {
     data: transactionData,
     isSuccess: transactionSuccess,
     isFetched: transactionIsfetched,
-    isFetching:isFetchingTrans
+    isFetching: isFetchingTrans
   } = useWalletTransactionHistory({ onError, skip, status, dateRange })
 
   const checkSuccess = () => {
@@ -83,7 +84,7 @@ function Wallet(props: Props) {
       setisSuccess(true)
 
       setamountBalance(data?.data?.balance)
-      
+
     }
 
     if (transactionSuccess && transactionIsfetched) {
@@ -98,6 +99,17 @@ function Wallet(props: Props) {
   useEffect(() => {
     checkSuccess()
   }, [data, transactionData])
+
+  const { settopNavData } = useContext(AppProvider)
+
+
+
+  useEffect(() => {
+    settopNavData({
+      title: 'Wallet',
+      message: 'Fund your wallet to enjoy seemless verification',
+    })
+  }, [])
 
 
 
@@ -126,15 +138,18 @@ function Wallet(props: Props) {
               </div>
             </div>
           </div>
-          <ApiCallHistory info={tabs} />
+          <div className="pb-12 mt-8 md:px-12">
+            <ApiCallHistory info={tabs} />
 
-          <AppRetching isFetching={isFetchingTrans} />
-          <WalletTable 
-          setdateRange={setdateRange}
-          itemNum={itemNum}
-          setstatus={setstatus}
-          transactionHistory={transactionHistory} 
-          onError={() => onError()} />
+            <AppRetching isFetching={isFetchingTrans} />
+            <WalletTable
+              setdateRange={setdateRange}
+              itemNum={itemNum}
+              setstatus={setstatus}
+              transactionHistory={transactionHistory}
+              onError={() => onError()} />
+          </div>
+
         </section>
 
         <AppPagination setskip={setskip} data={pagiData} />

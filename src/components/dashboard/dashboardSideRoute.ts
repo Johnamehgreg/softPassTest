@@ -7,11 +7,13 @@ import { ReactComponent as DWallet } from "../../assets/image/svg/empty-wallet.s
 import { ReactComponent as DReport } from "../../assets/image/svg/report.svg"
 import { ReactComponent as DProfileSettings } from "../../assets/image/svg/settings.svg"
 import { ReactComponent as DTeam } from "../../assets/image/svg/team.svg"
+import Auditlog from "../../pages/home/pages/AuditLog/Auditlog"
 import Compliance from "../../pages/home/pages/Compliance/Compliance"
 import ContainerPage from "../../pages/home/pages/container/Container"
 import Dashboard from "../../pages/home/pages/Dashboard"
 import FacialVerification from "../../pages/home/pages/FacialVerification"
 import Profile from "../../pages/home/pages/profile/Profile"
+import Report from "../../pages/home/pages/Report/Report"
 import Team from "../../pages/home/pages/Team/Team"
 import Verification from "../../pages/home/pages/Verification"
 import AMT from "../../pages/home/pages/verification/AMT"
@@ -52,7 +54,7 @@ export const dashboardSideRoute = [
                name: 'Bulk BVN',
                Page:VerificationPage,
             },
-            {
+            {  
                route: '/NIN',
                name: 'NIN',
                Page:NIN
@@ -213,7 +215,7 @@ export const dashboardSideRoute = [
       name: 'report',
       subRoute: [],
       Icon: DReport,
-      Page:Wallet
+      Page:Report
    },
    {
       route: '/compliance',
@@ -235,7 +237,7 @@ export const dashboardSideRoute = [
       name: 'audit Logs',
       subRoute: [],
       Icon: DAuditLog,
-      Page:Wallet
+      Page:Auditlog
    },
    {
       route: '/profile-settings',

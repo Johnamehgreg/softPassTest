@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
 import Chart from 'chart.js/auto'
+import { useEffect } from 'react'
 
 const ChartDashboard = () => {
   useEffect(() => {
@@ -47,7 +47,7 @@ const ChartDashboard = () => {
     })
 
   }, [])
-  return <div className="horizontal-container pt-8 flex overflow-x-auto md:px-6 px-2 h-[350px] md:h-[400px] md:pr-8 md:w-[calc(100vw-300px)] w-[calc(100vw-32px)] "></div>
+  return <div className="horizontal-container  pt-8 flex overflow-x-auto md:px-6 px-2 h-[350px] md:h-[350px] md:pr-8 md:w-[calc(100vw-300px)] w-[calc(100vw-32px)] "></div>
 }
 
 export default ChartDashboard

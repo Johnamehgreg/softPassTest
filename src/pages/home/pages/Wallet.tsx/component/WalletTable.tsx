@@ -23,7 +23,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
   return (
     <>
 
-      <section className="md:px-6 px-3">
+      <section className="md:px-6 mt-8 px-3">
         <AppTopTableCont 
         setdateRange={setdateRange}
         setstatus={setstatus} />
@@ -62,7 +62,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                 {transactionHistory?.map((item: any, index: number) => {
                   return (
                     <tr className="py-3">
-                      <td>{index + itemNum}</td>
+                      <td>{index + 1}</td>
                       <td>{dateFormat(item?.createdDate, "h:MM TT")}</td>
 
                       <td>{dateFormat(item?.createdDate, "dd mmm yyyy")}</td>

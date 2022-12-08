@@ -42,7 +42,7 @@ const Dashboard = () => {
 
     const { settopNavData, userDetail } = useContext(AppProvider)
 
-    function getGreetingTime(m:any) {
+    function getGreetingTime(m: any) {
         var g = null; //return g
 
         if (!m || !m.isValid()) { return; } //if we can't find a valid or filled moment, we return.
@@ -66,9 +66,9 @@ const Dashboard = () => {
     useEffect(() => {
         settopNavData({
             title: `Good ${getGreetingTime(moment())} ${userDetail?.first_name ? userDetail?.first_name : ''}`,
-            message: `Hi ${userDetail?.first_name ? userDetail?.first_name : '' } 👋,  here's what has been happening`
+            message: `Hi ${userDetail?.first_name ? userDetail?.first_name : ''} 👋,  here's what has been happening`
         })
-        
+
     }, [userDetail])
 
 
@@ -93,7 +93,7 @@ const Dashboard = () => {
                 <div className=" flex items-center border-t-[1px] border-gray-300 sm:px-5 px-2 py-4">
                     <div className="w-6/12 md:w-9/12">
                         <div className="flex items-center font-semibold full whitespace-nowrap">
-                            <span className="text-sm sm:text-lg">No API Selected</span>
+                            <span className="text-sm mr-6 sm:text-lg">No API Selected</span>
                             <abbr className="text-sm flex items-center text-softpassgreen-300 relative top-[2px]">
                                 &nbsp;&nbsp;
                                 <AiFillCheckCircle fill="#05CD99" />
@@ -139,12 +139,17 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <ApiCallHistory info={tabs} />
-                <div className="w-full overflow-x-scroll hide-scrollbar">
-                    {
-                        //@ts-ignore
-                        <ChartDashboard />
-                    }
+
+                <div className="pb-12 md:px-12">
+                    <ApiCallHistory info={tabs} />
+
+                    <div className="w-full overflow-x-scroll hide-scrollbar">
+
+                        {
+                            //@ts-ignore
+                            <ChartDashboard />
+                        }
+                    </div>
                 </div>
             </section>
         </div>

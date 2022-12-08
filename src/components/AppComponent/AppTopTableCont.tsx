@@ -19,7 +19,7 @@ const AppTopTableCont:React.FC<Props> = ({setstatus, setdateRange}) => {
 
 
     return (
-        <div className="flex flex-wrap items-center px-3 py-3 bg-gray-100/40">
+        <div className="flex flex-wrap items-center border-gray-400 rounded-md border-[1px] px-3 py-3 bg-gray-100/40">
             <div className="md:w-6/12 sm:w-9/12 flex items-center ">
                 <span className="text-sm text-gray-400">Reference</span>
                 {/* <AppDropDownT placeholder="Temitayo Abimbola" /> */}

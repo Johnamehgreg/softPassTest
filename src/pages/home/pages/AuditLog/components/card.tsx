@@ -3,7 +3,7 @@ import React from "react"
 interface Props {
     children: JSX.Element,
 }
-const CardContainer:React.FC<Props> = ({children}) => {
+const CardAuditLog:React.FC<Props> = ({children}) => {
 
 
     return (
@@ -15,4 +15,4 @@ const CardContainer:React.FC<Props> = ({children}) => {
 }
 
 
-export default CardContainer
+export default CardAuditLog

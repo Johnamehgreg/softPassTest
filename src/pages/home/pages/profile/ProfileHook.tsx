@@ -1,12 +1,17 @@
+import Cookies from "js-cookie"
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { popType, showPopUp } from "../../../../constanst/popupFunc"
 import { AppProvider } from "../../../../contextProvide/AppContext"
+import routes from "../../../../navigation/Routes"
 import apis from "../../../../services/apiSevices"
 
 
 export const useProfileHookEvent = () => {
 
-    const { setisLoading, } = useContext(AppProvider)
+    const { setisLoading, setisUserLogin } = useContext(AppProvider)
+
+    const navigation = useNavigate()
 
     const request2Factor = (type: { onSent: Function }) => {
 
@@ -37,6 +42,13 @@ export const useProfileHookEvent = () => {
             .then((res: any) => {
                 settab(3)
                 showPopUp({ type: popType.success, message: '2Factor verify  successfully' })
+                setisUserLogin(false)
+                navigation(routes.login)
+                try {
+                  Cookies.remove('isLogin')
+                } catch (e) {
+            
+                }
 
             })
             .catch((err: any) => {

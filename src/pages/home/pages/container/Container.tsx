@@ -62,14 +62,14 @@ const ContainerPage = () => {
   }
 
 
-  const {settopNavData} = useContext(AppProvider)
-    
+  const { settopNavData } = useContext(AppProvider)
+
 
   useEffect(() => {
-      settopNavData({
-          title:'Container',
-          message:'Manage your team member activities as well as transaction history',
-      })
+    settopNavData({
+      title: 'Container',
+      message: 'Manage your team member activities as well as transaction history',
+    })
   }, [])
 
 
@@ -85,7 +85,7 @@ const ContainerPage = () => {
     >
       <section className="bg-white rounded-[10px] mt-8 garrif">
         <div className="flex bg-white items-center px-3 md:px-5 py-4 border-b-[1px] border-b-gray-300">
-          <div className="container-page-tab w-6/12 ">
+          <div className="container-page-tab pl-4 w-6/12 ">
             <button
               onClick={() => {
                 settab(1);
@@ -95,7 +95,7 @@ const ContainerPage = () => {
                 tab === 1 ? "cont-tab-page cont-active-tab " : "cont-tab-page  text-gray-400"
               }
             >
-              Activated container
+              Activate container
             </button>
             <button
               onClick={() => {
@@ -112,11 +112,11 @@ const ContainerPage = () => {
           </div>
           <div className="w-6/12 flex justify-end">
             <button
-            onClick={() => setIsCreateContOpen(true) }
-            className="text-softpasspurple-300 border-[8px] py-1 px-2 border-gray-100 text-[10px] md:text-[15px]  " >
-            Create Container
+              onClick={() => setIsCreateContOpen(true)}
+              className="text-softpasspurple-300 border-[8px] py-1 px-2 border-gray-100 text-[10px] rounded-sm md:text-[15px]  " >
+              Create Container
             </button>
-           
+
           </div>
         </div>
 
@@ -132,6 +132,17 @@ const ContainerPage = () => {
                   <ContainerItem refetch={refetch} item={item} />
                 )
               })
+          }
+
+
+          {
+            isFetched && isDataSuccess && containerList.length === 0 && (
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-center text-gray-400 text-sm">
+                  There is no data to display.
+                </p>
+              </div>
+            )
           }
 
 
