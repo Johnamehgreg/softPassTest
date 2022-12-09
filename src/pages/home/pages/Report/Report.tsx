@@ -1,23 +1,66 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AppWrapper from '../../../../components/AppWrapper'
 import ReportTable from './components/ReportTable'
 import TopCard from './components/TopCard'
+import { useGetAllReport } from './ReportHook'
 
 const Report = () => {
 
     const [errorText, seterrorText] = useState('Retry')
     const [isError, setisError] = useState(false)
+    const [isSuccess, setisSuccess] = useState(false)
+    const [reportList, setreportList] = useState<any>([])
+
+    const onError = () => {
+        setisError(true)
+        setisSuccess(false)
+        seterrorText('Retry')
+    
+      }
 
 
-    const onRefetch = () => {
-        seterrorText('Retrying...')
-    }
+      const {
+        data,
+        isFetched,
+        isError: isErrorData,
+        isSuccess: isDataSuccess,
+        isFetching,
+        refetch
+      } = useGetAllReport({ onError, })
+
+
+      const checkSuccess = () => {
+
+        if (isFetched && isDataSuccess) {
+          setisError(false)
+          setisSuccess(true)
+          setreportList(data?.data)
+    
+    
+          console.log(data, '@report  data')
+        }
+      }
+    
+    
+      useEffect(() => {
+        checkSuccess()
+      }, [data])
+
+
+
+  const onRefetch = () => {
+    refetch()
+    seterrorText('Retrying...')
+  }
+
+
+
 
     return (
         <AppWrapper
             errorText={errorText}
             onRefetch={() => onRefetch()}
-            isSuccess={true}
+            isSuccess={isDataSuccess}
             isError={isError}
         >
 
@@ -30,7 +73,7 @@ const Report = () => {
                 <div className="px-4 md:px-4 lg:px-10 mt-3 pb-6">
                     <TopCard />
 
-                    <ReportTable />
+                    <ReportTable list={reportList} />
                 </div>
 
                 

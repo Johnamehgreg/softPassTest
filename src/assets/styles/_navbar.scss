@@ -32,6 +32,10 @@
 .pointer{
   cursor: pointer;
 }
+
+.table-item{
+  @apply bg-white flex items-center justify-center
+}
 .nav-main-link:hover  .arrow-icon{
   transform: rotateZ(180deg);
 

@@ -39,6 +39,9 @@ const apis = {
     user:{
         getUserDetails:() => server.get(`${BASE_URL}/account/user-details`,),
     },
+    report:{
+        getAllReport:() => server.get(`${BASE_URL}/report/list`,),
+    },
 
     wallet:{
         getWalletBalance:() => server.get(`${BASE_URL}/wallet/balance`,),
