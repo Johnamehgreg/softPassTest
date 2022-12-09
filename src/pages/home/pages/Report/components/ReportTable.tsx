@@ -68,8 +68,8 @@ const ReportTable: React.FC<Props> = (props: any) => {
                                             </td>
                                             <td >
                                                 <div className="table-item">
-                                                    <p className="">
-                                                        {dateFormat(item?.createdAt, "dd mmmm yyyy, ")}
+                                                    <p className="text-center">
+                                                        {dateFormat(item?.createdAt, "dd mmmm yyyy")}
                                                         <br />
                                                         {dateFormat(item?.createdAt, "h:MM TT")}
                                                     </p>
