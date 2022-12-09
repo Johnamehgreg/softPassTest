@@ -27,6 +27,8 @@ const DashboardTopNav: React.FC<Props> = (props: Props) => {
   const { userDetail, topNavData } = useContext(AppProvider)
 
 
+  console.log(userDetail, '@all user detail')
+
 
 
 

@@ -1,10 +1,13 @@
-import { Select } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetServices } from "../../../../app-query-hook/use-services-hook";
+import AppSelect from "../../../../components/AppComponent/AppSelect";
 import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
-import HomeEdictor from "../../components/Edictor";
+import { useContainerHook } from "../container/modals/container-query-hook";
+import VericationEdictor from "./components/Edictor";
+import VericationEdictorResponse from "./components/EdictorResponse";
+import { useVerificationHook } from "./VerificationHook";
 
 
 interface Props { }
@@ -13,13 +16,20 @@ const VerificationPage: React.FC = (props: Props) => {
     const { } = props;
 
     //VARIABLES
-    const [headerTitle, setHeaderTitle] = useState("");
-    const [fromUniqueInput, setFormUniqueInput] = useState([]);
+    const [clientId, setclientId] = useState('')
+    const [containerKey, setcontainerKey] = useState('')
+    const [bvnNumber, setbvnNumber] = useState('')
+    const [requestCode, setrequestCode] = useState<any>(null)
 
 
     const [ItemServices, setItemServices] = useState<any>({})
+    const [containerList, setcontainerList] = useState<any>([])
+    const [url, seturl] = useState('')
+    const [headersData, setheadersData] = useState<any>(null)
 
     const navigation = useNavigate()
+
+
 
 
 
@@ -27,29 +37,91 @@ const VerificationPage: React.FC = (props: Props) => {
     //FUNCTION
     let { service } = useParams();
 
+    const onError = () => {
+
+
+    }
+
+    const {
+        data: containerData,
+        isFetched: containerIsFetched,
+        isError: isErrorData,
+        isSuccess: isDataSuccess,
+        isFetching,
+        refetch
+    } = useContainerHook({ onError, status: true })
+
 
     const { data, isFetched, isSuccess, } = useGetServices()
 
     const checkSuccess = () => {
-        if (isSuccess && isFetched) {
-            let Ite = data?.data.filter((item:any) => item.service_name === service)
+        if (containerIsFetched && isDataSuccess) {
+            let CList = containerData?.data.map((i: any) => {
+                return { ...i, label: i?.container_name, value: i?.container_key }
+            })
+            setcontainerList(CList)
 
-            if(Ite.length > 0) {
+        }
+        if (isSuccess && isFetched) {
+            let Ite = data?.data.filter((item: any) => item.service_name === service)
+
+            if (Ite.length > 0) {
                 setItemServices(Ite[0])
-            }else{
+            } else {
                 navigation(`/dashboard`)
             }
 
-            
+
         }
     }
+
+
 
 
     //HOOK
     useEffect(() => {
         checkSuccess()
         // onChange(selectContent[0].title, selectContent);
-    }, [data]);
+    }, [data, containerData]);
+
+
+
+    const onSelectContainer = (item: any) => {
+        setclientId(item?.client_id)
+        setcontainerKey(item?.container_key)
+
+    }
+
+    useEffect(() => {
+        if (service === 'Basic BVN') {
+            setheadersData({
+                client_id: clientId,
+                container_key: containerKey
+
+            })
+        }
+    }, [containerKey, clientId])
+
+    const { submit } = useVerificationHook({ url, type: service, header: headersData })
+
+
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        let data = {
+            "bvn": bvnNumber
+        }
+
+
+
+        submit(data, setrequestCode)
+
+    }
+
+
+
+
+
     return (
         <>
             {/* start of select id */}
@@ -75,32 +147,74 @@ const VerificationPage: React.FC = (props: Props) => {
                 <div className="border-t-[1px] border-gray-500 px-2 flex justify-center w-full">
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
-                            <form>
-                                <HomeInput onBlur={() => console.log('fknf')} placeholder="BVN" />
-                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Phone number" />
-                                <HomeInput onBlur={() => console.log('fknf')} placeholder="Container" />
-                                <div className="input-contain pl-4">
-                                    <Select placeholder="change">
-                                        {["A", "B", "C"].map((item: any, index: number) => {
-                                            return <option value={item}>{item}</option>;
-                                        })}
-                                    </Select>
-                                </div>
-                                <div className="w-full text-center py-3 garrif">
-                                    <button className="next-button">Submit</button>
-                                </div>
+                            <form
+                                onSubmit={onSubmit}
+                            >
+
+                                {
+                                    service === 'Basic BVN' ?
+
+                                        <>
+                                            <HomeInput
+                                                required={true}
+                                                onBlur={() => console.log('fknf')}
+                                                placeholder="BVN Number"
+                                                onChange={(e) => setbvnNumber(e.target.value)}
+                                            />
+                                            <AppSelect
+                                                placeholder="Select container"
+                                                options={containerList}
+                                                onChange={(e) => onSelectContainer(e)}
+                                            />
+                                            <div className="w-full text-center py-3 garrif">
+                                                <button className="next-button">Submit</button>
+                                            </div>
+                                        </>
+
+                                        : <>
+                                            <HomeInput
+                                                required={true}
+                                                onBlur={() => console.log('fknf')}
+                                                placeholder="BVN Number"
+                                                onChange={(e) => setbvnNumber(e.target.value)}
+                                            />
+                                            <AppSelect
+                                                placeholder="Select container"
+                                                options={containerList}
+                                                onChange={(e) => onSelectContainer(e)}
+                                            />
+                                            <div className="w-full text-center py-3 garrif">
+                                                <button className="next-button">Submit</button>
+                                            </div>
+                                        </>
+
+                                }
+
                             </form>
                         </div>
                         <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
                             <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
                                 <b className="mb-2 block">Request</b>
-                                <HomeEdictor />
+                                <VericationEdictor
+                                    containerKey={containerKey}
+                                    clientId={clientId}
+                                    bvnNumber={bvnNumber}
+
+
+                                />
+                                {/* <HomeEdictor /> */}
                             </div>
 
-                            {/* <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
-                                <b className="mb-2 block">Response</b>
-                                <HomeEdictor />
-                            </div> */}
+                            {
+                                requestCode !== null && (
+                                    <div className="mt-4 w-full bg-gray-100 md:p-5 p-2 rounded-md overflow-auto">
+                                        <b className="mb-2 block">Response</b>
+                                        <VericationEdictorResponse
+                                            responseCode={requestCode}
+                                        />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

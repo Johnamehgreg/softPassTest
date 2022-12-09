@@ -47,6 +47,9 @@ const ContainerPage = () => {
       setisError(false)
       setisSuccess(true)
       setcontainerList(data?.data)
+
+
+      console.log(data?.data, '@container data')
     }
   }
 

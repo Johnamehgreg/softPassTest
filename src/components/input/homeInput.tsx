@@ -7,6 +7,7 @@ interface Props {
     value?: string;
     name?: string;
     onBlur: Function;
+    required?:boolean
 
 }
 const HomeInput: React.FC<Props> = ({
@@ -14,7 +15,8 @@ const HomeInput: React.FC<Props> = ({
     onChange,
     value,
     name,
-    onBlur
+    onBlur,
+    required
 
 }) => {
     const [isFocus, setisFocus] = useState(false)
@@ -32,6 +34,7 @@ const HomeInput: React.FC<Props> = ({
                 }}
                 type="text"
                 onChange={onChange}
+                required={required}
                 placeholder={placeholder}
             />
         </div>

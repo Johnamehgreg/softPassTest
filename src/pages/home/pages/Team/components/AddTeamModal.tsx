@@ -1,5 +1,4 @@
 import React from "react";
-import AppSelect from "../../../../../components/AppComponent/AppSelect";
 import HomeInput from "../../../../../components/input/homeInput";
 import ModalParentModule from "../../../../../components/widget/ModalParentModule";
 
@@ -61,10 +60,10 @@ const AddTeamModal: React.FC<Props> = ({ closeModal, isOpen }) => {
                                 onBlur={() => console.log('flkf')}
                                 onChange={() => console.log('flkf')} />
 
-                            <AppSelect
+                            {/* <AppSelect
                                 placeholder="Current role"
                                 onChange={(e: any) => console.log('dkmd')}
-                                options={currentRole} />
+                                options={currentRole} /> */}
                             <button className="w-full bg-softpasspurple-300 text-white py-3 rounded-md text-[14px] font-semibold mb-4">
                                 Add member
                             </button>

@@ -263,15 +263,17 @@ function Register(props: Props) {
             <>
               <AppSelect 
               placeholder='Product' 
-              onChange={(e) => setUserinfo({ ...userInfo, product: e })} 
+              onChange={(e:any) => setUserinfo({ ...userInfo, product: e.value })} 
               options={product} />
+             <div className="mb-4"></div>
               <AppSelect 
               placeholder="Current role" 
-              onChange={(e) => setUserinfo({ ...userInfo, currentJob: e })} 
+              onChange={(e:any) => setUserinfo({ ...userInfo, currentJob: e.value })} 
               options={currentRole} />
+               <div className="mb-4"></div>
               <AppSelect 
               placeholder="How did you hear about us" 
-              onChange={(e) => setUserinfo({ ...userInfo, aboutUs: e })} 
+              onChange={(e:any) => setUserinfo({ ...userInfo, aboutUs: e.value })} 
               options={aboutUs} />
 
               <div className="input-contain relative">

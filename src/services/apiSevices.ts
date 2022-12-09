@@ -56,7 +56,19 @@ const apis = {
     SideNav:{
         getSideNavCategories:() => server.get(`${BASE_URL}/service-category/list-all`,),
         getServicesByCategory:(id:string) => server.get(`${BASE_URL}/service/all-category?category_id=${id}`,),
+    },
+
+    verification:{
+        verificationRequest: (type:{data:any, header:any, url:string}) => {
+
+            const {data, url, header} = type
+            
+            return server.post(`${BASE_URL}/verification${url}`, data, {
+                headers:header
+            } )
+        }
     }
+
 
 }
 
