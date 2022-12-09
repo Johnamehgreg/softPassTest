@@ -1,7 +1,9 @@
+import { motion, useAnimation } from "framer-motion";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import edit from '../../../../../assets/svg/edit.svg';
+import AppCopy from "../../../../../components/AppComponent/AppCopy";
 import AppDeleteModal from "../../../../../components/AppComponent/AppDeleteModal";
 import CopyIcon from "../../../../../components/svg-icons/CopyIcon";
 import AddContainerServices from "../modals/AddServices";
@@ -9,7 +11,6 @@ import { useGetServiceByContainer, useServicesEvent } from "../modals/container-
 import DeactivateContainers from "../modals/DeactivateContainerModal";
 import EditContainers from "../modals/EditContainerModal";
 
-import CardContainer from "./card";
 
 
 interface Props {
@@ -68,10 +69,51 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
         checkSuccess()
     }, [data])
 
+    const ani1 = useAnimation()
+
+    useEffect(() => {
+
+        if (isColase) {
+            ani1.start({
+                x: 0,
+                height: '40px',
+                transition: {
+                    type: 'spring',
+                    duration: 0.5,
+
+                    // bounce: 0.3
+                }
+            })
+        } else {
+            ani1.start({
+                x: 0,
+                height: 'auto',
+                transition: {
+                    type: 'spring',
+                    duration: 0.5,
+                    // bounce: 0.3
+                }
+            })
+        }
+    }, [isColase])
+
+
+
 
     return (
         <>
-            <CardContainer>
+            <motion.div
+                animate={{
+                    x: 0,
+                    height: 'auto',
+                    transition: {
+                        type: 'spring',
+                        duration: 0.5,
+                        // bounce: 0.3
+                    }
+                }}
+                //  animate={ani1}
+                className="container-page-card px-4 overflow-x-hidden py-4 my-5">
                 <>
                     <div key={item?._id} className="flex justify-between w-full py-3">
                         <h2>
@@ -96,10 +138,10 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
 
                             {
                                 isColase && (
-                                    <button
-                                        className="w-10 mx-2">
+                                    <AppCopy text={item?.container_key} >
                                         <CopyIcon width={"18"} color={"black"} />
-                                    </button>
+                                    </AppCopy>
+
                                 )
                             }
                             <span
@@ -162,7 +204,9 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                                     <div className="flex items-center flex-wrap text-[13px] w-full pb-3">
                                         <div className="sm:w-6/12 w-full flex items-center">
                                             {item?.container_key}&nbsp;{" "}
-                                            <CopyIcon width={"18"} color={"black"} />
+                                            <AppCopy text={item?.container_key} >
+                                                <CopyIcon width={"18"} color={"black"} />
+                                            </AppCopy>
                                         </div>
 
                                         <div className="sm:w-6/12 w-full flex flex-wrap items-center">
@@ -192,11 +236,11 @@ const ContainerItem: React.FC<Props> = ({ item, refetch }) => {
                         )
                     }
                 </>
-            </CardContainer>
+            </motion.div>
             <EditContainers item={item} refetch={refetch} isOpen={isEditContOpen} closeModal={closeEditContainerModal} />
             <DeactivateContainers refetch={refetch} item={item} isOpen={isDeactivateContOpen} closeModal={closeDeactivateContainerModal} />
             <AppDeleteModal onDelete={() => handleServicesDelete()} item={servicesList[serviceIndex]} isOpen={isDeleteServiceOpen} closeModal={() => setisDeleteServiceOpen(false)} />
-            <AddContainerServices item={item} refetch={serviceRefetch} isOpen={isAddServiceOpen} closeModal={() => setisAddServiceOpen(false)} />
+            <AddContainerServices list={servicesList} item={item} refetch={serviceRefetch} isOpen={isAddServiceOpen} closeModal={() => setisAddServiceOpen(false)} />
 
 
         </>

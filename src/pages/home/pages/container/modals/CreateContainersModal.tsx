@@ -32,7 +32,7 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
     if (isSuccess && isFetched) {
 
       let list = data?.data.map((item: any) => {
-        return { label: item?.service_name, value: item?._id, isSelected:false };
+        return { label: item?.service_name, value: item?._id, isSelected: false };
       })
       setserviceList(list)
     }
@@ -66,7 +66,7 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
         "services": services
       }
 
-      if(services.length === 0)return showPopUp({type:popType.error, message:"Service is required"})
+      if (services.length === 0) return showPopUp({ type: popType.error, message: "Service is required" })
 
       // return console.log(data)
 
@@ -116,8 +116,8 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
 
             {/* <CustomSelect onChange={(e) => setservices(e)} placeholder='Select Services' options={serviceList} /> */}
 
-            
-              <SelectMultiServices options={serviceList} onChange={(e: any) => setservices(e) }/>
+
+            <SelectMultiServices options={serviceList} onChange={(e: any) => setservices(e)} />
 
 
             <div className="w-full text-center py-3 garrif">
