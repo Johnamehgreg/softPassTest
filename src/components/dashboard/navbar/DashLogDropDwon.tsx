@@ -1,7 +1,11 @@
 // import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { motion, useAnimation } from 'framer-motion';
+import Cookies from 'js-cookie';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ArrowDown } from '../../../assets/image/svg/ArrowDown.svg';
+import { AuthProvider } from '../../../contextProvide/AuthContext';
+import routes from '../../../navigation/Routes';
 
 
 interface Props {
@@ -14,6 +18,8 @@ const LogoutDropDown: React.FC<Props> = (props: any) => {
   const arrowAni = useAnimation()
   let dropDownRef = React.useRef<any>()
 
+  const navigation  = useNavigate()
+
   React.useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!dropDownRef.current.contains(event.target)) {
@@ -21,6 +27,23 @@ const LogoutDropDown: React.FC<Props> = (props: any) => {
       }
     })
   })
+
+
+  const { setisUserLogin } = React.useContext(AuthProvider)
+
+
+
+
+  const logout = async () => {
+    setisUserLogin(false)
+    navigation(routes.landing)
+    try {
+      Cookies.remove('isLogin')
+    } catch (e) {
+
+    }
+
+  }
 
 
 
@@ -97,10 +120,19 @@ const LogoutDropDown: React.FC<Props> = (props: any) => {
         className=" bg-white z-[100] px-2 h-auto  shadow-xl right-[-20px] top-[20px] absolute    rounded-md  overflow-scroll ">
         <div
           onClick={() => {
-
+            logout()
+            setshowDropDown(false)
           }}
           className="px-2 my-2 rounded-sm flex items-center  hover:bg-gray-100 h-[30px] pointer">
           <p className='text-[14px] text-gray-500'>Logout</p>
+        </div>
+        <div
+          onClick={() => {
+            navigation('/profile-settings')
+            setshowDropDown(false)
+          }}
+          className="px-2 my-2 rounded-sm flex items-center  hover:bg-gray-100 h-[30px] pointer">
+          <p className='text-[14px] text-gray-500'>Profile</p>
         </div>
       </motion.div>
 
