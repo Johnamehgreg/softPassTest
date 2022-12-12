@@ -38,10 +38,12 @@ export const useVerificationHook = (arg: Props) => {
         // return console.log(data, 'Varification')
         apis.verification.verificationRequest({ data, url: urlSring, header: HeaderData })
             .then((response) => {
-                console.log(response, 'Varification')
+                console.log(response.data, 'Varification')
 
-                let res = JSON.stringify(response)
-                setrequestCode(`${response}` )
+                let res = JSON.stringify(response.data)
+                setrequestCode(res )
+
+                console.log(response.toString(), 'Verification successful')
                 showPopUp({ type: popType.success, message: 'Successful' })
             })
             .catch((err: any) => {
@@ -49,7 +51,7 @@ export const useVerificationHook = (arg: Props) => {
                 const { data } = err.response
 
                 if (data?.message) {
-                    showPopUp({ type: popType.error, message: data?.message })
+                showPopUp({ type: popType.error, message: data?.message })
                 } else {
                     showPopUp({ type: popType.error, message: 'Something went wrong' })
                 }

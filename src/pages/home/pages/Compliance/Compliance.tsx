@@ -14,26 +14,18 @@ const Compliance: React.FC = (props: Props) => {
     const [fromUniqueInput, setFormUniqueInput] = useState([]);
     const [displayInput, setdisplayinput] = useState([
         {
-            title: "Full name of staff",
+            title: "Business Name",
             value: "",
         },
         {
-            title: ["apple", "baller"],
+            title: "company size",
             value: "",
         },
         {
-            title: "phone number",
+            title: "Tax ID Number",
             value: "",
         },
-        {
-            title: "Currency type (NGN)",
-            value: "",
-        },
-        {
-            title: "container",
-            value: "",
-            content: [],
-        },
+      
     ]);
 
     //FUNCTION
