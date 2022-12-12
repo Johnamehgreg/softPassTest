@@ -102,7 +102,7 @@ const VerificationPage: React.FC = (props: Props) => {
         }
     }, [containerKey, clientId])
 
-    const { submit } = useVerificationHook({ url, type: service, header: headersData })
+    const { submit } = useVerificationHook({ url, type: service, header: {containerKey, clientId} })
 
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {

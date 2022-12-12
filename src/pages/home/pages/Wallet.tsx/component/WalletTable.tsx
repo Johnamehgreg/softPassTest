@@ -6,9 +6,9 @@ import AppTopTableCont from "../../../../../components/AppComponent/AppTopTableC
 
 interface Props {
   onError: Function;
-  transactionHistory:any,
-  setstatus:React.Dispatch<any>,
-  itemNum:any,
+  transactionHistory: any,
+  setstatus: React.Dispatch<any>,
+  itemNum: any,
   setdateRange: React.Dispatch<any>
 }
 
@@ -24,9 +24,9 @@ const WalletTable: React.FC<Props> = (props: Props) => {
     <>
 
       <section className="md:px-6 mt-8 px-3">
-        <AppTopTableCont 
-        setdateRange={setdateRange}
-        setstatus={setstatus} />
+        <AppTopTableCont
+          setdateRange={setdateRange}
+          setstatus={setstatus} />
 
         <div className="w-[100%] overflow-scroll">
           <div className="pt-3 w-auto">
@@ -34,27 +34,48 @@ const WalletTable: React.FC<Props> = (props: Props) => {
               <thead className="user-table-head">
                 <tr className="click-container">
                   <td>
-                    <span>S/N</span>
+                  <div className="table-item">
+                  <span>S/N</span>
+                  </div>
+                   
                   </td>
                   <td>
-                    <span>Time</span>
+                  <div className="table-item">
+                  <span>Time</span>
+                  </div>
+                   
                   </td>
                   <td>
-                    <span className="flex justify-start w-full  items-center">
+                  {/* <div className="table-item"> */}
+                  <span className="flex justify-start w-full  items-center">
                       Date&nbsp; <SortAccend />
                     </span>
+                  {/* </div> */}
+                   
                   </td>
                   <td>
-                    <span>Reference</span>
+                  <div className="table-item">
+                  <span>Reference</span>
+                  </div>
+                    
                   </td>
                   <td>
-                    <span>Amount</span>
+                  <div className="table-item">
+                  <span>Amount</span>
+                  </div>
+                    
                   </td>
                   <td>
-                    <span>Status</span>
+                  <div className="table-item">
+                  <span>Status</span>
+                  </div>
+                   
                   </td>
                   <td>
-                    <span>Payment Gateway</span>
+                  <div className="table-item">
+                  <span>Payment Gateway</span>
+                  </div>
+                   
                   </td>
                 </tr>
               </thead>
@@ -62,35 +83,69 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                 {transactionHistory?.map((item: any, index: number) => {
                   return (
                     <tr className="py-3">
-                      <td>{index + 1}</td>
-                      <td>{dateFormat(item?.createdDate, "h:MM TT")}</td>
-
-                      <td>{dateFormat(item?.createdDate, "dd mmm yyyy")}</td>
-                      <td>{item?.wallet_transaction_reference}</td>
-
                       <td>
-                        <CurrencyFormat
-                          value={item?.amount}
-                          displayType={'text'}
-                          thousandSeparator={true}
-
-                          renderText={value => {
-                            return (
-                              <span className="">
-                                <span>&#8358; </span>
-                                {value}.00
-                              </span>
-                            )
-                          }} />
+                        <div className="table-item">
+                          {index + 1}
+                        </div>
                       </td>
                       <td>
-                        <button
-                          className={`px-3 py-1 ${true ? "primary" : "danger"}`}
-                        >
-                          {item?.status}
-                        </button>
+                        <div className="table-item">
+                          {dateFormat(item?.createdDate, "h:MM TT")}
+                        </div>
                       </td>
-                      <td>Card Payment</td>
+
+                      <td>
+                        {/* <div className="table-item"> */}
+                          {dateFormat(item?.createdDate, "dd mmm yyyy")}
+                        {/* </div> */}
+
+                      </td>
+                      <td>
+                        <div className="table-item">
+                          {item?.wallet_transaction_reference}
+                        </div>
+                      </td>
+
+                      <td>
+
+                        <div className="table-item">
+                          {
+                            item?.is_in_flow === true ? '' : '-'
+                          }
+                          <CurrencyFormat
+                            value={item?.amount}
+                            displayType={'text'}
+                            thousandSeparator={true}
+
+                            renderText={value => {
+                              return (
+                                <span className="">
+                                  <span>&#8358; </span>
+                                  {value}.00
+                                </span>
+                              )
+                            }} />
+                        </div>
+
+
+                      </td>
+                      <td>
+                        <div className="table-item">
+                          <button
+                            className={`px-3 py-1 ${true ? "primary" : "danger"}`}
+                          >
+                            {item?.status}
+                          </button>
+                        </div>
+
+                      </td>
+                      <td>
+                      <div className="table-item">
+                     {
+                      item?.payment_method
+                     }
+                      </div>
+                       </td>
                     </tr>
                   );
                 })}
@@ -101,7 +156,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
       </section>
 
 
-    
+
 
     </>
   );

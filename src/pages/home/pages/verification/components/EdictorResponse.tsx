@@ -204,34 +204,7 @@ const VericationEdictorResponse:React.FC<Props> = (props:any) => {
     return (
         <div className='set-edictor-home p-3'>
             <div className='edict-content  px-4 pt-4'>
-                <div className="mb-3">
-                    <button
-                        onClick={() => handleTab('nodejs')}
-                        className={tab === 'nodejs' ? "e-active-tab" : "e-inactive-tab"}>
-                        Node Js
-                    </button>
-                    <button
-                        onClick={() => handleTab('php')}
-                        className={tab === 'php' ? "e-active-tab" : "e-inactive-tab"}>
-                        PHP
-                    </button>
-                    <button
-                        onClick={() => handleTab('python')}
-                        className={tab === 'python' ? "e-active-tab" : "e-inactive-tab"}>
-                        Python
-                    </button>
-                    <button
-                        onClick={() => handleTab('js')}
-                        className={tab === 'js' ? "e-active-tab" : "e-inactive-tab"}>
-                        Javascript
-                    </button>
-                    <button
-                        onClick={() => handleTab('curl')}
-                        className={tab === 'curl' ? "e-active-tab" : "e-inactive-tab"}>
-                        Curl
-                    </button>
-
-                </div>
+               
                 <div className='edictor-wrapper'>
 
                     <CodeMirror

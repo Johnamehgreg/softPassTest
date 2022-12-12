@@ -91,7 +91,7 @@ function Wallet(props: Props) {
       settransactionHistory(transactionData?.data?.results)
       setpagiData(transactionData?.data)
       setitemNum(skip * 10)
-      console.log(data.data, 'sucess data transaction')
+      console.log(transactionData, 'sucess data transaction')
     }
   }
 
@@ -135,24 +135,38 @@ function Wallet(props: Props) {
                 <div className="border-[12px] rounded-md border-gray-100">
                   <button
                     className="text-softpasspurple-300 rounded-md text-sm px-2 py-2 bg-white">
-                     Generate Report
+                    Generate Report
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pb-12 mt-8 md:px-12">
-            <ApiCallHistory info={tabs} />
+          {
+            transactionHistory.length > 0 && (
+              <div className="pb-12 mt-8 md:px-12">
+                <ApiCallHistory info={tabs} />
 
-            <AppRetching isFetching={isFetchingTrans} />
-            <WalletTable
-              setdateRange={setdateRange}
-              itemNum={itemNum}
-              setstatus={setstatus}
-              transactionHistory={transactionHistory}
-              onError={() => onError()} />
-          </div>
+                <AppRetching isFetching={isFetchingTrans} />
+                <WalletTable
+                  setdateRange={setdateRange}
+                  itemNum={itemNum}
+                  setstatus={setstatus}
+                  transactionHistory={transactionHistory}
+                  onError={() => onError()} />
+              </div>
+            )
+          }
 
+
+          {
+            isFetched && isDataSuccess && transactionHistory.length === 0 && (
+              <div className="flex flex-col items-center h-[100px] justify-center">
+                <p className="text-center text-gray-400 text-sm">
+                  You currently have no  transaction
+                </p>
+              </div>
+            )
+          }
         </section>
 
         <AppPagination setskip={setskip} data={pagiData} />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HomeFileUpload from "../../../../components/input/homeFileUpload";
+import TopCard from "./components/TopCard";
 // import HomeEdictor from "../components/Edictor";
 
 interface Props { }
@@ -44,22 +45,15 @@ const Compliance: React.FC = (props: Props) => {
 
     return (
         <>
-            <div>
-                {/* start of select id */}
-                <div className="max-w-[200px]">
-                    {/* <SelectIdDropdown onChange={onChange} dropdownDirection="right" /> */}
-                </div>
-                {/* end of select id */}
-            </div>
-
-            <section className="bg-white mt-8 garrif rounded-md">
+           <TopCard />
+            <section className="bg-white  garrif rounded-md">
                 <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
                     <h1 className="w-6/12 text-[22px] font-semibold">Customer credentials</h1>
                 </div>
 
-                <div className="border-t-[1px]  border-gray-500 px-2 flex justify-center w-full">
+                <div className="border-t-[1px] px-8 border-gray-500  flex  w-full">
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
-                        <div className="w-full md:w-5/12 ">
+                        <div className="w-full md:w-4/12 ">
                             <form>
                                 {displayInput.map((item: any, index: number) => {
                                     const { title } = item;
@@ -98,8 +92,8 @@ const Compliance: React.FC = (props: Props) => {
                     <h1 className="w-6/12 text-[22px] font-semibold">Director Information</h1>
                 </div>
 
-                <div className="border-t-[1px]  border-gray-500 px-2 flex justify-center w-full">
-                    <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
+                <div className="border-t-[1px]  border-gray-500 px-2 flex  ">
+                    <div className="w-full md:w-5/6 md:pl-4   pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
                                 {displayInput.map((item: any, index: number) => {

@@ -65,6 +65,9 @@ const apis = {
         verificationRequest: (type:{data:any, header:any, url:string}) => {
 
             const {data, url, header} = type
+
+
+             console.log(data, url, header, 'verification data')
             
             return server.post(`${BASE_URL}/verification${url}`, data, {
                 headers:header

@@ -140,7 +140,7 @@ const ContainerPage = () => {
 
           {
             isFetched && isDataSuccess && containerList.length === 0 && (
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center h-[100px] justify-center">
                 <p className="text-center text-gray-400 text-sm">
                 You currently have no {tab === 1 ? 'activate' : 'deactivated'} container. 
                 </p>

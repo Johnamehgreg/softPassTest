@@ -8,7 +8,7 @@ interface Props {
 }
 const HomeFileUpload:React.FC<Props> = ({placeholder, onChange, value}) => {
     return (
-        <div className="verification-input-contain my-4">
+        <div className=" flex items-center py-1 border-gray-200 rounded-md border-[1px] justify-between my-4">
             {/* <input
                 required
                 type="text"

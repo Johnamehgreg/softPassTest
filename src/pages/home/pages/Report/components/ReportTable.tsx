@@ -110,7 +110,7 @@ const ReportTable: React.FC<Props> = (props: any) => {
                                             <td >
                                                 <div className="table-item">
                                                     <button
-                                                        className={`px-3 py-1 ${item.status === 'Successful' ? "primary" : "danger"}`}
+                                                        className={`px-3 py-1 ${item?.status === 'Successful' ? "primary" : "danger"}`}
                                                     >
                                                         {item?.status}
                                                     </button>
