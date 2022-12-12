@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
-import { useGetServices } from "../../../app-query-hook/use-services-hook";
+import { useGetServices } from "../../../../../app-query-hook/use-services-hook";
+// import { useGetServices } from "../../../app-query-hook/use-services-hook";
+
 
 interface Props {
   dropdownDirection: String;
@@ -10,18 +11,16 @@ interface Props {
 
 const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   const { dropdownDirection,  } = props;
-  const ref = useRef(null);
-  let dropDownRef = React.useRef<any>()
-
   const [headerTitle, setHeaderTitle] = useState("");
   const [fromUniqueInput, setFormUniqueInput] = useState([]);
  
 
+  const [selectId, setSelectId] = useState(false);
+  const [dbSelectId, setDbSelectId] = useState(0);
+
+
   const [ServiceList, setServiceList] = useState([])
-
-
-
-  const navigation = useNavigate()
+  let dropDownRef = React.useRef<any>()
 
   React.useEffect(() => {
     document.addEventListener("mousedown", (event) => {
@@ -31,20 +30,16 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
     })
   })
 
+
+
+
   //Variables
-  const [selectId, setSelectId] = useState(false);
-  const [dbSelectId, setDbSelectId] = useState(0);
 
   //FUNCTION
   const closeDropDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (event.currentTarget == event.target) setSelectId(false);
-  };
-
-  const onChange = (val: string, array: any) => {
-    setHeaderTitle(val);
-    setFormUniqueInput(array);
   };
 
 
@@ -87,7 +82,7 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
           closeDropDown(event);
         }}
       >
-        <div className="select-id-dp-container px-1">
+        <div className="select-id-dp-container">
           <form className="select-dp-form mb-4">
             <BiSearch /> &nbsp; &nbsp;
             <input
@@ -102,7 +97,6 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
                   className="my-2 py-1 mx-3"
                   key={"selectId" + index}
                   onClick={() => {
-                    navigation(`/verification-services/${item.service_name}`)
                     setDbSelectId(index);
                     setSelectId(false);
                   }}

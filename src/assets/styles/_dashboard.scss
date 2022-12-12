@@ -134,7 +134,7 @@
     items-end;
 }
 .select-id-dp-container {
-  @apply bg-white h-auto py-4 px-3 max-h-[80vh] w-full md:w-auto overflow-y-auto overflow-x-visible rounded-xl;
+  @apply bg-white h-auto py-4  max-h-[80vh] w-full md:w-auto overflow-y-auto overflow-x-visible rounded-xl;
 }
 .select-dp-form {
   @apply w-full bg-softpassgray-150/20 flex items-center px-2 rounded-[20px] py-2;
@@ -200,7 +200,7 @@
 }
 
 .sub-item-child:hover{
-  background-color: rgba(0, 0, 0, 0.096);
+  background-color:#FCE9F1;
 }
 .max-h-zero{
   max-height: 0;

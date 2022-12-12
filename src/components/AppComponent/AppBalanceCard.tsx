@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
+import { faitAmount } from '../../constanst/AmountFunction';
 import { useGetWalletHook } from '../../pages/home/pages/Wallet.tsx/wallet-query-hook';
 
 
@@ -57,7 +58,10 @@ const AppBalanceCard:React.FC<Props> = ({showisFundWallet}) => {
           return (
             <span className="font-semibold text-softpasspurple-300 text-[18px]">
               <span>&#8358;</span>
-              {value}.00
+              {
+                faitAmount(`${value}`)
+              }
+              
             </span>
           )
         }} />

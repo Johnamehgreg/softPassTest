@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ReactComponent as ArrowDown } from '../../../assets/image/svg/ArrowDown.svg'
 import { ReactComponent as DLogo } from '../../../assets/image/svg/softpassSVG 3.svg'
 import { AppProvider } from '../../../contextProvide/AppContext'
 import { AuthProvider } from '../../../contextProvide/AuthContext'
 import Navicon from '../../svg-icons/Navicon'
+import LogoutDropDown from './DashLogDropDwon'
 
 
 
@@ -60,12 +60,9 @@ const DashboardTopNav: React.FC<Props> = (props: Props) => {
           <span className='text-gray-400 text-[12px] '>Manager</span>
         </div>
         <div className='relative'>
+         
 
-          <span
-
-            className='w-[25px] h-[25px] bg-gray-100 grid place-items-center pointer rounded-full'>
-            <ArrowDown />
-          </span>
+          <LogoutDropDown />
         </div>
       </div>
     </div>

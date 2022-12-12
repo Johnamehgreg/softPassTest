@@ -1,4 +1,4 @@
-import Dashboard from "./pages/Dashboard"
+import Dashboard from "./pages/Dashboard/Dashboard"
 import Verification from "./pages/Verification"
 import routes from './routes'
 

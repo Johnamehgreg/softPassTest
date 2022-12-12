@@ -21,12 +21,15 @@ const apis = {
         createContainer: (data:any) => server.post(`${BASE_URL}/container/create`, data),
         editContainer: (type:{data:any, id:string}) => server.put(`${BASE_URL}/container/edit?containerId=${type.id}`, type.data),
         disactiveContainer: ( url:string) => server.put(`${BASE_URL}${url}`,)
-
-
-
     },
 
     //  services 
+
+    // dashboard
+
+    dashboard:{
+        getDashboardSummary:() => server.get(`${BASE_URL}/report/dashboard-summary`,),
+    },
 
     services:{
         getAllServices: () => server.get(`${BASE_URL}/service/all`,),
