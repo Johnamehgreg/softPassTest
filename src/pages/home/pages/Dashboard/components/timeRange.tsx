@@ -92,14 +92,14 @@ const TimeRange: React.FC<Props> = (props: Props) => {
             onClick={() => {
                 setSelectId(!selectId);
               }}
-            className="w-min-150px flex justify-center">
+            className=" flex justify-center">
                 <abbr className="all-flex text-sm sm:text-md"> {title}</abbr>
                 <IoMdArrowDropdown size={25} fill={"#A3AED0"} />
             </span>
 
             <div
                 ref={dropDownRef}
-                className={`select-id-dropdown py-8 px-2 z-50 
+                className={`select-id-dropdown  px-2 z-50 
         ${selectId ? "flex" : "hidden"} 
         ${dropdownDirection == "right" ? "md:-right-full" : "md:-left-full"}`}
                 onClick={(event) => {
