@@ -70,3 +70,53 @@ export const useGetServiceByCategory = (arg: ARGServices) => {
 
     }
 }
+
+export const useGetSuccessCall = () => {
+    
+
+    const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
+        ['get-success-dashboard-calls',],
+        () => apis.dashboard.getSuccessCalls(),
+       
+
+
+
+    )
+
+    let data = all?.data
+
+    return {
+        refetch,
+        data,
+        isFetched,
+        isError,
+        isSuccess,
+        isFetching
+
+    }
+}
+
+export const useGetFailsedCall = () => {
+    
+
+    const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
+        ['get-failed-dashboard-calls',],
+        () => apis.dashboard.getFailedCalls(),
+       
+
+
+
+    )
+
+    let data = all?.data
+
+    return {
+        refetch,
+        data,
+        isFetched,
+        isError,
+        isSuccess,
+        isFetching
+
+    }
+}

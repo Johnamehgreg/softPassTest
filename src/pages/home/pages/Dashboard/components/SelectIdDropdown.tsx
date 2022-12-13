@@ -7,16 +7,18 @@ import { useGetServices } from "../../../../../app-query-hook/use-services-hook"
 
 interface Props {
   dropdownDirection: String;
+  onChange:(e:any) => void
 }
 
 const SelectIdDropdown: React.FC<Props> = (props: Props) => {
-  const { dropdownDirection,  } = props;
+  const { dropdownDirection, onChange } = props;
   const [headerTitle, setHeaderTitle] = useState("");
   const [fromUniqueInput, setFormUniqueInput] = useState([]);
  
 
   const [selectId, setSelectId] = useState(false);
   const [dbSelectId, setDbSelectId] = useState(0);
+  const [title, settitle] = useState(' Select verification ID')
 
 
   const [ServiceList, setServiceList] = useState([])
@@ -48,6 +50,8 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   const checkSuccess = () => {
     if(isSuccess && isFetched){
       setServiceList(data?.data)
+      console.log(data?.data, '@services data')
+      // onChange(data?.data[0])
     }
   }
 
@@ -55,6 +59,7 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   //HOOK
   useEffect(() => {
     checkSuccess()
+
     // onChange(selectContent[0].title, selectContent);
   }, [data]);
 
@@ -70,12 +75,13 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
           setSelectId(!selectId);
         }}
       >
-        Select verification ID <IoMdArrowDropdown color="#000" size={25} />
+        {title}
+        <IoMdArrowDropdown color="#000" size={25} />
       </span>
 
       <div
         ref={dropDownRef}
-        className={`select-id-dropdown z-50 
+        className={`select-id-dropdown py-8 px-2 z-50 
         ${selectId ? "flex" : "hidden"} 
         ${dropdownDirection == "right" ? "md:-right-full" : "md:-left-full"}`}
         onClick={(event) => {
@@ -99,6 +105,9 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
                   onClick={() => {
                     setDbSelectId(index);
                     setSelectId(false);
+                    onChange(item)
+                    settitle(item?.service_name)
+                    console.log(item, 'services id')
                   }}
                 >
                   <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">

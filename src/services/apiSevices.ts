@@ -28,7 +28,31 @@ const apis = {
     // dashboard
 
     dashboard:{
-        getDashboardSummary:() => server.get(`${BASE_URL}/report/dashboard-summary`,),
+        getDashboardSummary:(type:{
+            servicesId:any,
+            startDate:any,
+            endDate:any,
+        }) => {
+            const {servicesId, startDate, endDate } = type
+
+            let sID = servicesId !== null ? `?service_id=${servicesId}` : ''
+            let st = startDate !== null ? `&fromDate=${startDate}` : ''
+            let ed = endDate !== null ? `&toDate=${endDate}` : ''
+
+            if(servicesId === null){
+                 st = startDate !== null ? `?fromDate=${startDate}` : ''
+            }else {
+                 st = startDate !== null ? `&fromDate=${startDate}` : ''
+            }
+
+            console.log(servicesId, 'services id data')
+
+            let url = `/report/dashboard-summary${sID}${st}${ed}`
+            return server.get(`${BASE_URL}${url}`,)
+        },
+
+        getSuccessCalls: () => server.get(`${BASE_URL}/report/dashboard-total-success`,),
+        getFailedCalls: () => server.get(`${BASE_URL}/report/dashboard-total-failed`,),
     },
 
     services:{

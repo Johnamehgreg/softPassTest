@@ -1,14 +1,14 @@
-import { Button, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
 import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
-import { IoMdArrowDropdown } from "react-icons/io";
+import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
 import ChartDashboard from "../../../../components/dashboard/widget/Chart";
 import TopCardContainer from "../../../../components/dashboard/widget/TopCardContainer";
 import { AppProvider } from "../../../../contextProvide/AppContext";
 import SelectIdDropdown from "./components/SelectIdDropdown";
+import TimeRange from "./components/timeRange";
 import { useDashboardEvent } from "./Dashboard-query-hook";
 
 
@@ -35,12 +35,7 @@ const Dashboard = () => {
 
     ]);
 
-    const [amount, setAmount] = useState([
-        { name: "Last 1 week" },
-        { name: "Last 2 weeks" },
-        { name: "Last 3 weeks" },
-        { name: "Last one month" },
-    ]);
+ 
 
     const { settopNavData, userDetail } = useContext(AppProvider)
 
@@ -64,14 +59,21 @@ const Dashboard = () => {
         return g;
     }
 
+    const [failureList, setfailureList] = useState([])
+    const [successList, setsuccessList] = useState([])
+    const [dayList, setdayList] = useState([])
+    const [servicesId, setservicesId] = useState<any>(null)
+    const [startDate, setstartDate] = useState<any>(null)
+    const [endDate, setendDate] = useState<any>(null)
 
 
-  const onError = () => {
-    setisError(true)
-    setisSuccess(false)
-    seterrorText('Retry')
 
-  }
+    const onError = () => {
+        setisError(true)
+        setisSuccess(false)
+        seterrorText('Retry')
+
+    }
 
     const [isSuccess, setisSuccess] = useState(false)
     const [isError, setisError] = useState(false)
@@ -79,7 +81,7 @@ const Dashboard = () => {
 
 
     const onRefetch = () => {
-        // refetch()
+        refetch()
         seterrorText('Retrying...')
     }
 
@@ -100,26 +102,50 @@ const Dashboard = () => {
         isSuccess: isDataSuccess,
         isFetching,
         refetch
-      } = useDashboardEvent({ onError, })
+    } = useDashboardEvent({ onError, servicesId, startDate, endDate })
 
 
 
-      const checkSuccess = () => {
+    const checkSuccess = () => {
 
         if (isFetched && isDataSuccess) {
-          setisError(false)
-          setisSuccess(true)
-        //   setcontainerList(data?.data)
-    
-    
-          console.log(data?.data, '@container data')
+            setisError(false)
+            setisSuccess(true)
+            let apiData = data?.data[0]?.api_log_history[0].dailyusage
+
+            let day = apiData?.map((item: any) => {
+                return `${item?.day}`
+            })
+
+            let successList = apiData?.filter((item: any) => item.status === "Successful").map((item: any) => {
+                return item.count
+            })
+            let FailureList = apiData?.filter((item: any) => item.status === "Failed").map((item: any) => {
+                return item.count
+            })
+
+            if (data.data.length === 0) {
+                setdayList([])
+                setfailureList([])
+                setsuccessList([])
+            } else {
+                setdayList(day)
+                setfailureList(FailureList)
+                setsuccessList(successList)
+            }
+
+
+
+
+
+            console.log(data.data, '@container data')
         }
-      }
+    }
 
 
-      useEffect(() => {
+    useEffect(() => {
         checkSuccess()
-      }, [data])
+    }, [data])
 
 
 
@@ -140,7 +166,10 @@ const Dashboard = () => {
                         <h1 className="w-6/12 text-[22px] font-semibold">Overview</h1>
                         <div className="w-6/12">
                             <div className="flex justify-end z-10">
-                                <SelectIdDropdown dropdownDirection={'left'} />
+                                <SelectIdDropdown
+                                    onChange={(e: any) => setservicesId(e._id)
+                                    }
+                                    dropdownDirection={'left'} />
                             </div>
                         </div>
                     </div>
@@ -156,53 +185,33 @@ const Dashboard = () => {
                                 </abbr>
                             </div>
                         </div>
-                        <div className="w-6/12 md:w-3/12 flex justify-end md:justify-center">
-                            <Menu closeOnSelect={false}>
-                                <MenuButton as={Button} colorScheme="red">
-                                    <span className="w-min-150px flex justify-center">
-                                        <abbr className="all-flex text-sm sm:text-md">Monthly</abbr>
-                                        <IoMdArrowDropdown size={25} fill={"#A3AED0"} />
-                                    </span>
-                                </MenuButton>
-                                <MenuList
-                                    bgColor="white"
-                                    minWidth={"230px"}
-                                    borderRadius="5px"
-                                    boxShadow="inner"
-                                    border={"2px"}
-                                    borderColor="red"
-                                    padding="10px"
-                                >
-                                    <MenuGroup title="" padding={"15px"}>
-                                        {amount.map((item: any, index: number) => {
-                                            return (
-                                                <MenuItem>
-                                                    {/* <span className="flex items-center text-[15px] py-[6px] px-4 pl-6 gariff"> */}
-                                                    <label className="container flex items-center text-[15px] py-[6px] px-4 pl-6 gariff">
-                                                        <abbr className="font-semibold text-[13px]">
-                                                            {item.name}
-                                                        </abbr>
-                                                        <input type="checkbox" />
-                                                        <span className="checkmark"></span>
-                                                    </label>
-                                                </MenuItem>
-                                            );
-                                        })}
-                                    </MenuGroup>
-                                </MenuList>
-                            </Menu>
-                        </div>
+                        <TimeRange
+                        dropdownDirection={'left'}
+                        onChange={(e) => {
+                            setstartDate(e.start)
+                            setendDate(e.end)
+                        } }
+                        />
+                       
                     </div>
 
 
                     <div className="pb-12 md:px-12">
                         <ApiCallHistory info={tabs} />
 
+                        <AppRetching
+                            isFetching={isFetching}
+                        />
+
                         <div className="w-full overflow-x-scroll hide-scrollbar">
 
                             {
                                 //@ts-ignore
-                                <ChartDashboard />
+                                <ChartDashboard
+                                    day={dayList}
+                                    failureList={failureList}
+                                    successList={successList}
+                                />
                             }
                         </div>
                     </div>

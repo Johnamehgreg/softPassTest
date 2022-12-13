@@ -3,15 +3,19 @@ import apis from "../../../../services/apiSevices"
 
 interface ARG {
     onError: () => void,
+    servicesId:any,
+    startDate: any,
+    endDate: any,
+
     
 }
 
 export const useDashboardEvent = (arg: ARG) => {
-    const { onError,  } = arg
+    const { onError, servicesId, startDate, endDate } = arg
 
     const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
-        ['get-all-dashboard', ],
-        () => apis.dashboard.getDashboardSummary(),
+        ['get-all-dashboard', servicesId, startDate, endDate ],
+        () => apis.dashboard.getDashboardSummary({servicesId, startDate,  endDate}),
         {
             onError: () => {
                 onError()

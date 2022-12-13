@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import FundWalletModal from '../../../pages/home/pages/Wallet.tsx/modals/FundWalletModal'
-import { useGetWalletHook } from '../../../pages/home/pages/Wallet.tsx/wallet-query-hook'
 import AppBalanceCard from '../../AppComponent/AppBalanceCard'
+import { useGetFailsedCall, useGetSuccessCall } from '../navbar/dashboard-query-hook'
 import Tabs from './Tabs'
 
 interface Props {
@@ -28,33 +28,39 @@ function TopCardContainer(props: Props) {
   const onError = () => {
   }
 
-  const {
-    failureCallData,
-    successCallData,
-    faildDataIssuccess,
-    failureReftch,
-    successReftch,
-    failureIsfetched,
-    successIsSuccess,
-    successIsfetched,
+  const { 
+    refetch:reFetchSuccess,
+    data:successData,
+    isFetched: successIsFeted ,
+    isSuccess: isSuccessRequest,
+  } = useGetSuccessCall()
+  const { refetch,
+    data:failData,
+    isFetched,
+    isError,
+    isSuccess,
+    isFetching
+  } = useGetFailsedCall()
 
-  } = useGetWalletHook({ onError })
+
+
+
 
 
   const checkSuccess = () => {
 
-    if (faildDataIssuccess && failureIsfetched) {
-      settransactionCOunt({ ...transactionCOunt, failureCount: failureCallData?.data.data })
-      console.log('count successfully', failureCallData?.data.data)
+    if (isSuccessRequest && successIsFeted) {
+      settransactionCOunt({ ...transactionCOunt, successCount:  successData?.data })
+      console.log('count successfully', successData.data)
     }
-    if (successIsSuccess && successIsfetched) {
-      settransactionCOunt({ ...transactionCOunt, successCount: successCallData?.data.data })
+    if (isSuccess && isFetched) {
+      settransactionCOunt({ ...transactionCOunt, successCount: failData?.data })
     }
   }
 
   useEffect(() => {
     checkSuccess()
-  }, [failureCallData, successCallData])
+  }, [failData, successData])
 
 
   return (
@@ -63,7 +69,7 @@ function TopCardContainer(props: Props) {
 
       <div className="lg:w-[22%] md:w-[32%] w-[49%] mt-3">
         <Tabs details={{
-          amount: `${transactionCOunt.successCount + transactionCOunt.successCount}`,
+          amount: `${transactionCOunt.successCount + transactionCOunt.failureCount}`,
           name: "Number of Total calls",
           title: "This month",
           type: "regular",

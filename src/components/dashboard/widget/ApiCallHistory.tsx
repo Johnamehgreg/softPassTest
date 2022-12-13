@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useGetWalletHook } from '../../../pages/home/pages/Wallet.tsx/wallet-query-hook'
+import { useGetFailsedCall, useGetSuccessCall } from '../navbar/dashboard-query-hook'
 
 interface Props {
     info: Object,
@@ -16,36 +16,39 @@ interface Props {
       successCount:0,
       failureCount:0,
     })
-  
 
-    const {
-      failureCallData,
-      successCallData,
-      faildDataIssuccess,
-      failureReftch,
-      successReftch,
-      failureIsfetched,
-      successIsSuccess,
-      successIsfetched,
-      
-    } = useGetWalletHook({ onError })
+
+
+  const { 
+    refetch:reFetchSuccess,
+    data:successData,
+    isFetched: successIsFeted ,
+    isSuccess: isSuccessRequest,
+  } = useGetSuccessCall()
+  const { refetch,
+    data:failData,
+    isFetched,
+    isError,
+    isSuccess,
+    isFetching
+  } = useGetFailsedCall()
+  
 
 
   const checkSuccess = () => {
 
-   
-    if(faildDataIssuccess && failureIsfetched){
-      settransactionCOunt({...transactionCOunt, failureCount:failureCallData?.data.data})
-      console.log('count successfully', failureCallData?.data.data)
+    if (isSuccessRequest && successIsFeted) {
+      settransactionCOunt({ ...transactionCOunt, successCount:  successData?.data })
+      console.log('count successfully', successData.data)
     }
-    if(successIsSuccess && successIsfetched){
-      settransactionCOunt({...transactionCOunt, successCount:successCallData?.data.data})
+    if (isSuccess && isFetched) {
+      settransactionCOunt({ ...transactionCOunt, successCount: failData?.data })
     }
   }
 
   useEffect(() => {
     checkSuccess()
-  }, [failureCallData, successCallData ])
+  }, [failData, successData])
 
     return (
         <div className="py-2  flex justify-between">

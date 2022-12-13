@@ -1,7 +1,9 @@
 import Chart from 'chart.js/auto'
 import { useEffect } from 'react'
 
-const ChartDashboard = () => {
+
+
+const ChartDashboard = ({day, failureList, successList}) => {
   useEffect(() => {
     if (document.querySelector('#horizontalChart')) {
       document.querySelector('#horizontalChart').remove()
@@ -25,19 +27,34 @@ const ChartDashboard = () => {
         },
       },
       data: {
-        labels: ['10', '20', '30', '40', '50','60', '70', '80', '90','100', ],
+        labels: day,
         datasets: [
           {
-            data: [20, 30, 15, 50, 60, 30, 15, 90, 40, 33],
+            data: successList,
             label: 'Pending',
-            borderColor: '#E12179',
+            borderColor: '#05CD99',
             backgroundColor: [
-              'rgba(95, 163, 72, 1)',
-              'rgba(127, 188, 88, 1)',
-              'rgba(146, 215, 103, 1)',
-              'rgba(159, 235, 112, 1)',
-              'rgba(188, 243, 153, 1)',
-              'rgba(195, 231, 172, 1)',
+              '#05CD99',
+              '#05CD99',
+              '#05CD99',
+              '#05CD99',
+              '#05CD99',
+              '#05CD99',
+            ],
+            fill: false,
+            lineTension: 0.4,
+          },
+          {
+            data: failureList,
+            label: 'Pending',
+            borderColor: '#fb050567',
+            backgroundColor: [
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
             ],
             fill: false,
             lineTension: 0.4,
@@ -46,7 +63,7 @@ const ChartDashboard = () => {
       },
     })
 
-  }, [])
+  })
   return <div className="horizontal-container  pt-8 flex overflow-x-auto md:px-6 px-2 h-[350px] md:h-[350px] md:pr-8 md:w-[calc(100vw-300px)] w-[calc(100vw-32px)] "></div>
 }
 
