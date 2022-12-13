@@ -31,7 +31,7 @@ const ChartDashboard = ({day, failureList, successList}) => {
         datasets: [
           {
             data: successList,
-            label: 'Pending',
+            label: 'Successful',
             borderColor: '#05CD99',
             backgroundColor: [
               '#05CD99',
@@ -46,7 +46,7 @@ const ChartDashboard = ({day, failureList, successList}) => {
           },
           {
             data: failureList,
-            label: 'Pending',
+            label: 'Failure',
             borderColor: '#fb050567',
             backgroundColor: [
               '#fb050567',
