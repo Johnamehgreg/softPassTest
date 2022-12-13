@@ -25,6 +25,9 @@ function TopCardContainer(props: Props) {
     failureCount: 0,
   })
 
+  const [successCount, setsuccessCount] = useState(0)
+  const [failedCOunt, setfailedCOunt] = useState(0)
+
   const onError = () => {
   }
 
@@ -50,11 +53,11 @@ function TopCardContainer(props: Props) {
   const checkSuccess = () => {
 
     if (isSuccessRequest && successIsFeted) {
-      settransactionCOunt({ ...transactionCOunt, successCount:  successData?.data })
+      setsuccessCount(successData?.data)
       console.log('count successfully', successData.data)
     }
     if (isSuccess && isFetched) {
-      settransactionCOunt({ ...transactionCOunt, successCount: failData?.data })
+      setfailedCOunt(failData?.data)
     }
   }
 
@@ -69,7 +72,7 @@ function TopCardContainer(props: Props) {
 
       <div className="lg:w-[22%] md:w-[32%] w-[49%] mt-3">
         <Tabs details={{
-          amount: `${transactionCOunt.successCount + transactionCOunt.failureCount}`,
+          amount: `${successCount + failedCOunt}`,
           name: "Number of Total calls",
           title: "This month",
           type: "regular",
@@ -77,7 +80,7 @@ function TopCardContainer(props: Props) {
       </div>
       <div className="lg:w-[22%] md:w-[32%] w-[49%] mt-3">
         <Tabs details={{
-          amount: `${transactionCOunt.successCount}`,
+          amount: `${successCount}`,
           name: "Number of Success calls",
           title: "This month",
           type: "regular",
@@ -85,7 +88,7 @@ function TopCardContainer(props: Props) {
       </div>
       <div className="lg:w-[22%] md:w-[32%] w-[49%] mt-3">
         <Tabs details={{
-          amount: `${transactionCOunt.failureCount}`,
+          amount: `${failedCOunt}`,
           name: "Number of Failed calls",
           title: "This month",
           type: "regular",

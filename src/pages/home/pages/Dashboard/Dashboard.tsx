@@ -114,7 +114,7 @@ const Dashboard = () => {
             let apiData = data?.data[0]?.api_log_history[0].dailyusage
 
             let day = apiData?.map((item: any) => {
-                return `${item?.day}`
+                return item?.day
             })
 
             let successList = apiData?.filter((item: any) => item.status === "Successful").map((item: any) => {
