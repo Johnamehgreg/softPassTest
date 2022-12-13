@@ -115,7 +115,7 @@ const Dashboard = () => {
 
             let day = apiData?.map((item: any) => {
                 return item?.day
-            })
+            }).sort(function(a:any, b:any){return a-b});
 
             let successList = apiData?.filter((item: any) => item.status === "Successful").map((item: any) => {
                 return item.count

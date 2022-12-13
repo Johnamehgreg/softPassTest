@@ -53,6 +53,15 @@ interface Props {
   }
 
 
+  const getPercent = (amount:number) => {
+    let total = successCount + failedCOunt
+
+    let  l = amount / total * 100
+
+    return l.toFixed(0)
+  }
+
+
 
   useEffect(() => {
     checkSuccess()
@@ -67,7 +76,7 @@ interface Props {
           <span className="flex justify-center w-full items-center">
             <b className="text-lg all-flex font-normal">{successCount}</b>
             <abbr className="text-[9px] text-softpassgreen-300 bg-softpassgreen-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
-              +{successCount}%
+              +{getPercent(successCount)}%
             </abbr>
           </span>
         </div>
@@ -78,7 +87,7 @@ interface Props {
           <span className="flex justify-center w-full items-center">
             <b className="text-lg all-flex font-normal">{failedCOunt}</b>
             <abbr className="text-[9px] text-softpasspurple-300 bg-softpasspurple-300/10 h-[20px] w-[45px] font-semibold rounded-lg grid place-items-center">
-              -25%
+              -{getPercent(failedCOunt)}%
             </abbr>
           </span>
         </div>
