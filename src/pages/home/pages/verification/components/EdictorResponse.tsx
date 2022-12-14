@@ -44,11 +44,16 @@ const VericationEdictorResponse:React.FC<Props> = (props:any) => {
 
     return (
         <div className='set-edictor-home p-3'>
-           <JSONPretty 
+            <div className='edict-content overflow-scroll  px-4 pt-4'>
+               
+                  <JSONPretty 
                   id="json-pretty" 
                   mainStyle="padding:1rem; font-size:0.8em;  height: 100%;  background:#160A4B;" 
                   
                    data={responseCode}></JSONPretty>
+                   
+
+            </div>
         </div>
 
     );
