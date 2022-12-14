@@ -46,6 +46,8 @@ export const useVerificationHook = (arg: Props) => {
                 let res = JSON.stringify(response.data)
                 setrequestCode(res)
 
+              
+
                 console.log(response.toString(), 'Verification successful')
                 showPopUp({ type: popType.success, message: 'Successful' })
             })

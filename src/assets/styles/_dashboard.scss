@@ -136,6 +136,10 @@
     shadow-lg z-[9] rounded-md 
     items-end;
 }
+.select-id-dropdown-range {
+ @apply min-w-[300px] top-[50px] absolute right-[100px];
+ box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.04);
+}
 .select-id-dp-container {
   @apply bg-white h-auto py-4  max-h-[80vh] w-full md:w-auto overflow-y-auto overflow-x-visible rounded-xl;
 }

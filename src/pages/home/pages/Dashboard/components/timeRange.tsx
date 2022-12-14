@@ -92,7 +92,7 @@ const TimeRange: React.FC<Props> = (props: Props) => {
             onClick={() => {
                 setSelectId(!selectId);
               }}
-            className=" flex justify-center">
+            className=" flex justify-center pointer">
                 <abbr className="all-flex text-sm sm:text-md"> {title}</abbr>
                 <IoMdArrowDropdown size={25} fill={"#A3AED0"} />
             </span>

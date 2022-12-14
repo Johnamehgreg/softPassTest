@@ -36,13 +36,13 @@ const apis = {
             const {servicesId, startDate, endDate } = type
 
             let sID = servicesId !== null ? `?service_id=${servicesId}` : ''
-            let st = startDate !== null ? `&fromDate=${startDate}` : ''
-            let ed = endDate !== null ? `&toDate=${endDate}` : ''
+            let st = startDate !== null ? `&toDate=${startDate}` : ''
+            let ed = endDate !== null ? `&fromDate=${endDate}` : ''
 
             if(servicesId === null){
-                 st = startDate !== null ? `?fromDate=${startDate}` : ''
+                 st = startDate !== null ? `?toDate=${startDate}` : ''
             }else {
-                 st = startDate !== null ? `&fromDate=${startDate}` : ''
+                 st = startDate !== null ? `&toDate=${startDate}` : ''
             }
 
             console.log(servicesId, 'services id data')
