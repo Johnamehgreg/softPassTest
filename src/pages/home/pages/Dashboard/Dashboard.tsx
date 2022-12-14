@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     ]);
 
- 
+
 
     const { settopNavData, userDetail } = useContext(AppProvider)
 
@@ -65,7 +65,7 @@ const Dashboard = () => {
     const [servicesId, setservicesId] = useState<any>(null)
     const [startDate, setstartDate] = useState<any>(null)
     const [endDate, setendDate] = useState<any>(null)
-
+    const [apiTitle, setapiTitle] = useState('No API Selected')
 
 
     const onError = () => {
@@ -115,7 +115,7 @@ const Dashboard = () => {
 
             let day = apiData?.map((item: any) => {
                 return item?.day
-            }).sort(function(a:any, b:any){return a-b});
+            })
 
             let successList = apiData?.filter((item: any) => item.status === "Successful").map((item: any) => {
                 return item.count
@@ -147,6 +147,10 @@ const Dashboard = () => {
         checkSuccess()
     }, [data])
 
+    const json = {
+        "name": "John Doe","age": 32,
+        "email": "johndoe@example.com"
+    };
 
 
     return (
@@ -160,6 +164,8 @@ const Dashboard = () => {
 
                 <TopCardContainer tabs={tabs} />
 
+                {/* <pre>{JSON.stringify(json, null, 2)}</pre> */}
+
 
                 <section className="bg-white rounded-[10px] mt-8 garrif">
                     <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 lg:bg-transparent">
@@ -167,7 +173,10 @@ const Dashboard = () => {
                         <div className="w-6/12">
                             <div className="flex justify-end z-10">
                                 <SelectIdDropdown
-                                    onChange={(e: any) => setservicesId(e._id)
+                                    onChange={(e: any) => {
+                                        setapiTitle(e.service_name)
+                                        setservicesId(e._id)
+                                    }
                                     }
                                     dropdownDirection={'left'} />
                             </div>
@@ -177,7 +186,7 @@ const Dashboard = () => {
                     <div className=" flex items-center border-t-[1px] border-gray-300 sm:px-5 px-2 py-4">
                         <div className="w-6/12 md:w-9/12">
                             <div className="flex items-center font-semibold full whitespace-nowrap">
-                                <span className="text-sm mr-6 sm:text-lg">No API Selected</span>
+                                <span className="text-sm mr-6 sm:text-lg">{apiTitle}</span>
                                 <abbr className="text-sm flex items-center text-softpassgreen-300 relative top-[2px]">
                                     &nbsp;&nbsp;
                                     <AiFillCheckCircle fill="#05CD99" />
@@ -186,13 +195,15 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <TimeRange
-                        dropdownDirection={'left'}
-                        onChange={(e) => {
-                            setstartDate(e.start)
-                            setendDate(e.end)
-                        } }
+                            dropdownDirection={'left'}
+                            onChange={(e) => {
+
+                                setstartDate(e.start)
+                                setendDate(e.end)
+
+                            }}
                         />
-                       
+
                     </div>
 
 

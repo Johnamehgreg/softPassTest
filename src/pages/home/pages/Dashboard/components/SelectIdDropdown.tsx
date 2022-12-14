@@ -32,6 +32,17 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
     })
   })
 
+  const handleSearch = (value: any) => {
+
+    if (value.length === 0) {
+      return setServiceList(data?.data);
+    }
+    let filteredData = data?.data?.filter((item: any, index: any) =>
+      item?.service_name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setServiceList(filteredData)
+  };
 
 
 
@@ -89,11 +100,12 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
         }}
       >
         <div className="select-id-dp-container">
-          <form className="select-dp-form mb-4">
+          <form className="select-dp-form w-full mb-4">
             <BiSearch /> &nbsp; &nbsp;
             <input
               placeholder="Search Verification ID"
-              className="bg-transparent outline-none"
+              className="bg-transparent w-full outline-none"
+              onChange={(e:any) => handleSearch(e.target.value)}
             />
           </form>
           <div>

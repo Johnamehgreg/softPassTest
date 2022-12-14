@@ -44,7 +44,7 @@ export const useVerificationHook = (arg: Props) => {
                 console.log(response.data, 'Varification')
 
                 let res = JSON.stringify(response.data)
-                setrequestCode(res)
+                setrequestCode(response.data)
 
               
 
