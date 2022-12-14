@@ -81,7 +81,7 @@ const CreateContainers: React.FC<Props> = (props: Props) => {
 
   return isOpen ? (
     <ModalParentModule closeModal={closeModal}>
-      <div className="sm:w-[400px] w-full">
+      <div className="sm:w-[400px] overflow-scroll w-full">
         <div className="flex py-6 px-4 w-full pb-6 items-center border-b-[1px] border-b-gray-200">
           <h4 className="w-full text-[20px] text-softpasspurple-500 font-bold">
             Create a container

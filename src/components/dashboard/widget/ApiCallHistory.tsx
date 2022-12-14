@@ -54,6 +54,7 @@ interface Props {
 
 
   const getPercent = (amount:number) => {
+    
     let total = successCount + failedCOunt
 
     let  l = amount / total * 100

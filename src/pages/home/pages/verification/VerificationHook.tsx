@@ -5,17 +5,17 @@ import apis from "../../../../services/apiSevices"
 
 
 interface Props {
-    url: string,
     type: any,
     header: any
 }
 
 export const useVerificationHook = (arg: Props) => {
-    const { url, type, header } = arg
+    const { type, header } = arg
 
     const { setisLoading } = useContext(AppProvider)
 
-    let urlSring: string = '/bvn/basic-bvn'
+
+    // if() 
 
 
     let HeaderData = {
@@ -23,7 +23,6 @@ export const useVerificationHook = (arg: Props) => {
         "container-key": header?.containerKey
     }
 
-    console.log(header, "value change")
 
 
 
@@ -35,13 +34,17 @@ export const useVerificationHook = (arg: Props) => {
 
 
 
+
         // return console.log(data, 'Varification')
-        apis.verification.verificationRequest({ data, url: urlSring, header: HeaderData })
+
+        // return alert(type)
+
+        apis.verification.verificationRequest({ data, url: getUrl(type), header: HeaderData })
             .then((response) => {
                 console.log(response.data, 'Varification')
 
                 let res = JSON.stringify(response.data)
-                setrequestCode(res )
+                setrequestCode(res)
 
                 console.log(response.toString(), 'Verification successful')
                 showPopUp({ type: popType.success, message: 'Successful' })
@@ -51,7 +54,7 @@ export const useVerificationHook = (arg: Props) => {
                 const { data } = err.response
 
                 if (data?.message) {
-                showPopUp({ type: popType.error, message: data?.message })
+                    showPopUp({ type: popType.error, message: data?.message })
                 } else {
                     showPopUp({ type: popType.error, message: 'Something went wrong' })
                 }
@@ -65,4 +68,18 @@ export const useVerificationHook = (arg: Props) => {
         submit
     }
 }
+
+const getUrl = (type: string) => {
+    switch (type) {
+        case 'Basic bvn':
+            return '/bvn/basic-bvn';
+            break;
+        case 'Tin Verification':
+            return '/tin-verify';
+            break;
+        default:
+            return  ''
+    }
+}
+
 

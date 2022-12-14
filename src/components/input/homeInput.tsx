@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 interface Props {
     placeholder?: string,
-    onChange?: (e: any) => void;
+    onChange: (e: any) => void;
     value?: string;
     name?: string;
     onBlur: Function;
@@ -33,7 +33,7 @@ const HomeInput: React.FC<Props> = ({
                     onBlur()
                 }}
                 type="text"
-                onChange={onChange}
+                onChange={(e:any) => onChange(e)}
                 required={required}
                 placeholder={placeholder}
             />

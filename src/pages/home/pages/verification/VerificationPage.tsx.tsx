@@ -19,12 +19,12 @@ const VerificationPage: React.FC = (props: Props) => {
     const [clientId, setclientId] = useState('')
     const [containerKey, setcontainerKey] = useState('')
     const [bvnNumber, setbvnNumber] = useState('')
+    const [tinNumber, settinNumber] = useState('')
     const [requestCode, setrequestCode] = useState<any>(null)
 
 
     const [ItemServices, setItemServices] = useState<any>({})
     const [containerList, setcontainerList] = useState<any>([])
-    const [url, seturl] = useState('')
     const [headersData, setheadersData] = useState<any>(null)
 
     const navigation = useNavigate()
@@ -92,25 +92,29 @@ const VerificationPage: React.FC = (props: Props) => {
 
     }
 
-    useEffect(() => {
-        if (service === 'Basic BVN') {
-            setheadersData({
-                client_id: clientId,
-                container_key: containerKey
-
-            })
+    const getDataType = () => {
+        switch (service) {
+            case 'Basic bvn':
+                return { "bvn": bvnNumber };
+                break;
+            case 'Tin Verification':
+                return { "tinNumber": tinNumber };
+                break;
+            default:
+                return {}
         }
-    }, [containerKey, clientId])
+    }
 
-    const { submit } = useVerificationHook({ url, type: service, header: {containerKey, clientId} })
+
+
+
+    const { submit } = useVerificationHook({ type: service, header: { containerKey, clientId } })
 
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        let data = {
-            "bvn": bvnNumber
-        }
+        let data = getDataType()
 
 
 
@@ -152,10 +156,11 @@ const VerificationPage: React.FC = (props: Props) => {
                             >
 
                                 {
-                                    service === 'Basic BVN' ?
+                                    service === 'Basic bvn' ?
 
                                         <>
                                             <HomeInput
+                                                value={bvnNumber}
                                                 required={true}
                                                 onBlur={() => console.log('fknf')}
                                                 placeholder="BVN Number"
@@ -166,29 +171,56 @@ const VerificationPage: React.FC = (props: Props) => {
                                                 options={containerList}
                                                 onChange={(e) => onSelectContainer(e)}
                                             />
-                                            <div className="w-full text-center py-3 garrif">
-                                                <button className="next-button">Submit</button>
-                                            </div>
+
                                         </>
 
-                                        : <>
-                                            <HomeInput
-                                                required={true}
-                                                onBlur={() => console.log('fknf')}
-                                                placeholder="BVN Number"
-                                                onChange={(e) => setbvnNumber(e.target.value)}
-                                            />
-                                            <AppSelect
-                                                placeholder="Select container"
-                                                options={containerList}
-                                                onChange={(e) => onSelectContainer(e)}
-                                            />
-                                            <div className="w-full text-center py-3 garrif">
-                                                <button className="next-button">Submit</button>
-                                            </div>
-                                        </>
+                                        :
+
+                                        service === 'Tin Verification' ?
+
+
+                                            <>
+                                                <HomeInput
+                                                    value={tinNumber}
+                                                    required={true}
+                                                    onBlur={() => console.log('fknf')}
+                                                    placeholder="TIN Number"
+                                                    onChange={(e) => settinNumber(e.target.value)}
+                                                />
+                                                <AppSelect
+                                                    placeholder="Select container"
+                                                    options={containerList}
+                                                    onChange={(e) => onSelectContainer(e)}
+                                                />
+
+                                            </>
+
+                                            :
+
+                                            <>
+                                                <HomeInput
+                                                    required={true}
+                                                    onBlur={() => console.log('fknf')}
+                                                    placeholder="BVN Number"
+                                                    onChange={(e) => settinNumber(e.target.value)}
+                                                />
+                                                <AppSelect
+                                                    placeholder="Select container"
+                                                    options={containerList}
+                                                    onChange={(e) => onSelectContainer(e)}
+                                                />
+
+                                            </>
+
+
+
 
                                 }
+
+
+                                <div className="w-full text-center py-3 garrif">
+                                    <button className="next-button">Submit</button>
+                                </div>
 
                             </form>
                         </div>

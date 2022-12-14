@@ -22,7 +22,7 @@ function ModalParentModule(props: Props) {
         closeDropDown(event);
       }}
       ref={ref}
-      className="fixed z-50 top-0 left-0 w-full h-full bg-black/40
+      className="fixed overflow-scroll z-50 top-0 left-0 w-full h-full bg-black/40
        flex justify-center items-center  routes-container"
     >
       <div

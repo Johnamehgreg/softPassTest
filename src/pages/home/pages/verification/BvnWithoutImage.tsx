@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
-import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
 
 interface Props { }
@@ -39,11 +38,14 @@ const BvnWithoutImage: React.FC = (props: Props) => {
                     <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
                         <div className="w-full md:w-5/12 ">
                             <form>
+                               {/* <HomeInput onBlur={() => console.log(',f') } />
                                <HomeInput onBlur={() => console.log(',f') } />
                                <HomeInput onBlur={() => console.log(',f') } />
                                <HomeInput onBlur={() => console.log(',f') } />
-                               <HomeInput onBlur={() => console.log(',f') } />
-                               <HomeInput onBlur={() => console.log(',f') } />
+                               <HomeInput onBlur={() => console.log(',f') } /> */}
+
+
+
                                 <div className="w-full text-center py-3 garrif">
                                     <button className="next-button">Submit</button>
                                 </div>

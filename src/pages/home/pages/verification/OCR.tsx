@@ -1,7 +1,6 @@
 import { Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ReactComponent as ProfileImage } from "../../../../assets/svg/wallet-icon.svg";
-import HomeInput from "../../../../components/input/homeInput";
 import HomeEdictor from "../../components/Edictor";
 
 interface Props { }
@@ -62,7 +61,7 @@ const OCR: React.FC = (props: Props) => {
                                 </Select>
                             </div>
 
-                            <HomeInput  onBlur={() => console.log('fknf')} placeholder="Currency type (NGN)" />
+                            {/* <HomeInput  onBlur={() => console.log('fknf')} placeholder="Currency type (NGN)" /> */}
 
                             <div className="input-contain pl-4">
                                 <Select placeholder="Container">
