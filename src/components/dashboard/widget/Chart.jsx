@@ -25,7 +25,7 @@ const ChartDashboard = ({day, failureList, successList}) => {
 
     let ctx = document.querySelector('#horizontalChart').getContext('2d')
 
-    let newChartCreate = new Chart(ctx, {
+     new Chart(ctx, {
       type: 'line',
       options: {
         maintainAspectRatio: false,
@@ -41,22 +41,22 @@ const ChartDashboard = ({day, failureList, successList}) => {
         labels: day, 
         // x
         datasets: [
-          {
-            data: successList,
-            //  y
-            label: 'Successful',
-            borderColor: '#05CD99',
-            backgroundColor: [
-              '#05CD99',
-              '#05CD99',
-              '#05CD99',
-              '#05CD99',
-              '#05CD99',
-              '#05CD99',
-            ],
-            fill: false,
-            lineTension: 0.6,
-          },
+          // {
+          //   data: successList,
+          //   //  y
+          //   label: 'Successful',
+          //   borderColor: '#05CD99',
+          //   backgroundColor: [
+          //     '#05CD99',
+          //     '#05CD99',
+          //     '#05CD99',
+          //     '#05CD99',
+          //     '#05CD99',
+          //     '#05CD99',
+          //   ],
+          //   fill: false,
+          //   lineTension: 0.6,
+          // },
           {
             data: failureList,
             label: 'Failure',
@@ -76,7 +76,7 @@ const ChartDashboard = ({day, failureList, successList}) => {
       },
     })
 
-  })
+  },[day, ])
   return <div className="horizontal-container  pt-8 flex  md:px-6 px-2 h-[350px] md:h-[350px] md:pr-8   "></div>
 }
 
