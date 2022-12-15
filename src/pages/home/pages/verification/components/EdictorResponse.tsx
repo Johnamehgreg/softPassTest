@@ -48,7 +48,7 @@ const VericationEdictorResponse:React.FC<Props> = (props:any) => {
                
                   <JSONPretty 
                   id="json-pretty" 
-                  mainStyle="padding:1rem; font-size:0.8em;  height: 100%;  background:#160A4B;" 
+                  mainStyle="padding:1rem; font-size:0.8em; color:#A6CA7E;  height: 100%;  background:#160A4B;" 
                   
                    data={responseCode}></JSONPretty>
                    

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import HomeFileUpload from "../../../../components/input/homeFileUpload";
+import React, { useEffect, useState } from "react";
+import AppWrapper from "../../../../components/AppWrapper";
+import HomeInput from "../../../../components/input/homeInput";
+import { useComplianceEvent, useHandleComplianceUpdate } from "./compliance-hook";
 import TopCard from "./components/TopCard";
 // import HomeEdictor from "../components/Edictor";
 
@@ -10,127 +12,201 @@ const Compliance: React.FC = (props: Props) => {
     const { } = props;
 
     //VARIABLES
-    const [headerTitle, setHeaderTitle] = useState("");
-    const [fromUniqueInput, setFormUniqueInput] = useState([]);
-    const [displayInput, setdisplayinput] = useState([
-        {
-            title: "Business Name",
-            value: "",
-        },
-        {
-            title: "company size",
-            value: "",
-        },
-        {
-            title: "Tax ID Number",
-            value: "",
-        },
-      
-    ]);
+
+    const [errorText, seterrorText] = useState('Retry')
+    const [isSuccess, setisSuccess] = useState(false)
+    const [isError, setisError] = useState(false)
+    const [complincesInputData, setcomplincesInputData] = useState({
+        tax_id: '',
+        organization_name: '',
+        director_name: '',
+        director_email: '',
+        director_phone: '',
+        bvn: ''
+    })
+    const onError = () => {
+        setisError(true)
+        setisSuccess(false)
+        seterrorText('Retry')
+
+    }
+
+    const {
+        data,
+        isFetched,
+        isSuccess: isDataSuccess,
+        isFetching,
+        refetch
+    } = useComplianceEvent({ onError, })
+
+
+    const { update } = useHandleComplianceUpdate(refetch)
+
+
+
+    const onRefetch = () => {
+        refetch()
+        seterrorText('Retrying...')
+    }
 
     //FUNCTION
 
-    const onChange = (val: string, array: any) => {
-        setHeaderTitle(val);
-        setFormUniqueInput(array);
-    };
+
+    const checkSuccess = () => {
+
+        if (isFetched && isDataSuccess) {
+            setisError(false)
+            setisSuccess(true)
+            // setcomplinceDetail(data?.data)
+            let lData = data?.data
+            setcomplincesInputData({
+                ...complincesInputData,
+                tax_id: lData.tax_id,
+                organization_name: lData.organization_name,
+                director_name: lData.director_name,
+                director_email: lData.director_email,
+                director_phone: lData.director_phone,
+                bvn: lData.bvn
+
+            })
+            //   setcontainerList(data?.data)
+
+
+            console.log(data?.data, '@complinces data')
+        }
+    }
+
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        let data = {
+            "tax_id":complincesInputData.tax_id,
+            "director_name":complincesInputData.director_name,
+            "director_email":complincesInputData.director_email,
+            "director_phone":complincesInputData.director_phone,
+            "bvn":complincesInputData.bvn
+        }
+
+        update(data)
+    }
+
+
+    useEffect(() => {
+        checkSuccess()
+    }, [data])
 
     return (
-        <>
-           <TopCard />
-            <section className="bg-white  garrif rounded-md">
-                <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
-                    <h1 className="w-6/12 text-[22px] font-semibold">Customer credentials</h1>
-                </div>
+        <AppWrapper
+            errorText={errorText}
+            onRefetch={() => onRefetch()}
+            isSuccess={isSuccess}
+            isError={isError}
 
-                <div className="border-t-[1px] px-8 border-gray-500  flex  w-full">
-                    <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
-                        <div className="w-full md:w-4/12 ">
-                            <form>
-                                {displayInput.map((item: any, index: number) => {
-                                    const { title } = item;
-                                    let filterTitle = "";
-                                    if (Array.isArray(title)) {
-                                        filterTitle =
-                                            "Input " +
-                                            (
-                                                fromUniqueInput.filter(
-                                                    (item: any, index: number) =>
-                                                        item.title === headerTitle
-                                                )[0] as any
-                                            )?.name;
-                                    } else filterTitle = title;
+        >
+            <>
+                <TopCard />
+                <form 
+                onSubmit={onSubmit}
+                className="bg-white  garrif rounded-md">
+                    <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
+                        <h1 className="w-6/12 text-[22px] font-semibold">Customer credentials</h1>
+                    </div>
 
-                                    return (
-                                        <div className="verification-input-contain my-4">
-                                            <input
-                                                required
-                                                type="text"
-                                                placeholder={filterTitle}
-                                            ></input>
-                                        </div>
-                                    );
-                                })}
+                    <div className="border-t-[1px] px-8 border-gray-500  flex  w-full">
+                        <div className="lg:w-11/12 w-full pt-5 flex flex-wrap justify-between">
+                            <div className="w-full md:w-4/12 ">
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.organization_name}
+                                    placeholder="Business Name"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, organization_name: e.target.value })
+                                    }}
 
-                            </form>
-                        </div>
-                        <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
+                                />
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.tax_id}
+                                    placeholder="Tax ID Number"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, tax_id: e.target.value })
+                                    }}
 
+                                />
+                            </div>
+                            <div className="w-full md:w-7/12 flex flex-wrap md:pl-7 mb-5">
+
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
-                    <h1 className="w-6/12 text-[22px] font-semibold">Director Information</h1>
-                </div>
+                    <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
+                        <h1 className="w-6/12 text-[22px] font-semibold">Director Information</h1>
+                    </div>
 
-                <div className="border-t-[1px]  border-gray-500 px-2 flex  ">
-                    <div className="w-full md:w-5/6 md:pl-4   pt-5 flex flex-wrap justify-between">
-                        <div className="w-full md:w-5/12 ">
-                            <form>
-                                {displayInput.map((item: any, index: number) => {
-                                    const { title } = item;
-                                    let filterTitle = "";
-                                    if (Array.isArray(title)) {
-                                        filterTitle =
-                                            "Input " +
-                                            (
-                                                fromUniqueInput.filter(
-                                                    (item: any, index: number) =>
-                                                        item.title === headerTitle
-                                                )[0] as any
-                                            )?.name;
-                                    } else filterTitle = title;
+                    <div className="border-t-[1px]  border-gray-500 px-2 flex  ">
+                        <div className="w-full md:w-5/6 md:pl-4   pt-5 flex flex-wrap justify-between">
+                            <div className="w-full md:w-5/12 ">
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.director_name}
+                                    placeholder="Name"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, director_name: e.target.value })
+                                    }}
 
-                                    return (
-                                        <div className="verification-input-contain my-4">
-                                            <input
-                                                required
-                                                type="text"
-                                                placeholder={filterTitle}
-                                            ></input>
-                                        </div>
-                                    );
-                                })}
-                                
-                            </form>
-                        </div>
-                        <div className="w-full md:w-5/12 ">
-                            <form>
-                                <HomeFileUpload placeholder="Address" />
-                                <HomeFileUpload placeholder="Upload CAC form" />
-                                <HomeFileUpload placeholder="Upload Certification of Incorporation" />
-                                <HomeFileUpload placeholder="Upload Proof of Address" />
+                                />
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.director_email}
+                                    placeholder="Email"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, director_email: e.target.value })
+                                    }}
+
+                                />
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.director_phone}
+                                    placeholder="Phone number"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, director_phone: e.target.value })
+                                    }}
+
+                                />
+                                <HomeInput
+                                    onBlur={() => console.log('')}
+                                    name='containerName'
+                                    value={complincesInputData.bvn}
+                                    placeholder="BVN"
+                                    onChange={(e) => {
+                                        setcomplincesInputData({ ...complincesInputData, bvn: e.target.value })
+                                    }}
+
+                                />
+
                                 <div className="w-full mt-8  mb-8 justify-end flex  ">
-                                    <button className="min-w[20px] bg-softpasspurple-300 px-6 py-1 rounded-md text-white">Save</button>
+                                    <button type="submit" className="min-w[20px] bg-softpasspurple-300 px-6 py-1 rounded-md text-white">Save</button>
                                 </div>
-                            </form>
+                            </div>
+                            <div className="w-full md:w-5/12 ">
+
+                                {/* <div className="w-full mt-8  mb-8 justify-end flex  ">
+                                    <button className="min-w[20px] bg-softpasspurple-300 px-6 py-1 rounded-md text-white">Save</button>
+                                </div> */}
+                            </div>
+
                         </div>
-                    
                     </div>
-                </div>
-            </section>
-        </>
+                </form>
+            </>
+
+        </AppWrapper>
     );
 };
 

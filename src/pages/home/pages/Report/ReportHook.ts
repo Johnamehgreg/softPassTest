@@ -3,15 +3,18 @@ import apis from "../../../../services/apiSevices"
 
 interface ARG1 {
     onError: () => void,
+    skip:number,
+    status:any,
+    dateRange:any
    
 }
 
 export const useGetAllReport = (arg: ARG1) => {
-    const { onError,  } = arg
+    const { onError,  skip, status, dateRange  } = arg
 
     const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
-        ['get-all-report', ],
-        () => apis.report.getAllReport(),
+        ['get-all-report', skip, dateRange.startDate, dateRange.endDate, status],
+        () => apis.report.getAllReport({skip, status, dateRange}),
         {
             onError: () => {
                 onError()

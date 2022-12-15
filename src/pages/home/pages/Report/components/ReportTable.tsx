@@ -63,7 +63,7 @@ const ReportTable: React.FC<Props> = (props: any) => {
                                         <tr className="py-3">
                                             <td >
                                             <div className="table-item">
-                                                <p>{index}</p>
+                                                <p>{index + 1}</p>
                                             </div>
                                             </td>
                                             <td >

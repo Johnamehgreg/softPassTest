@@ -67,7 +67,19 @@ const apis = {
         getUserDetails:() => server.get(`${BASE_URL}/account/user-details`,),
     },
     report:{
-        getAllReport:() => server.get(`${BASE_URL}/report/list`,),
+        getAllReport:(type:{ skip:number, status: any, dateRange:any}) => {
+            const {skip, status, dateRange} = type
+
+            let s = status !== null ? `&status=${status}` : ''
+            let st = dateRange?.startDate !== null ? `&toDate=${dateRange?.startDate}` : ''
+            let ed = dateRange?.endDate !== null ? `&fromDate=${dateRange?.endDate}` : ''
+
+
+            let url = `/report/list?limit=10&page=${skip}${s}${st}${ed}`
+
+
+            return server.get(`${BASE_URL}${url}`,)
+        },
     },
 
     wallet:{
@@ -100,6 +112,12 @@ const apis = {
                 headers:header
             } )
         }
+    },
+
+
+    compliance:{
+        getComplianceDetail:() => server.get(`${BASE_URL}/organization/compliance-details`,),
+        updateComplincesDetail:(data:any) => server.put(`${BASE_URL}/organization/compliance-update`, data),
     }
 
 

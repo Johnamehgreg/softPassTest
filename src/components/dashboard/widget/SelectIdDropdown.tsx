@@ -57,6 +57,20 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
   }
 
 
+  const handleSearch = (value: any) => {
+
+    if (value.length === 0) {
+      return setServiceList(data?.data);
+    }
+    let filteredData = data?.data?.filter((item: any, index: any) =>
+      item?.service_name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setServiceList(filteredData)
+  };
+
+
+
   //HOOK
   useEffect(() => {
     checkSuccess()
@@ -93,6 +107,7 @@ const SelectIdDropdown: React.FC<Props> = (props: Props) => {
             <input
               placeholder="Search Verification ID"
               className="bg-transparent outline-none"
+              onChange={(e:any) => handleSearch(e.target.value)}
             />
           </form>
           <div>
