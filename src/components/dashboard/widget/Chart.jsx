@@ -37,11 +37,13 @@ const ChartDashboard = ({day, failureList, successList}) => {
         },
       },
       data: {
-        labels:list1,
-        // labels: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,],
+      //  labels:list1, 
+        labels: day, 
+        // x
         datasets: [
           {
-            data: [1, 6, 9, 12, 15, 11],
+            data: successList,
+            //  y
             label: 'Successful',
             borderColor: '#05CD99',
             backgroundColor: [
@@ -55,21 +57,21 @@ const ChartDashboard = ({day, failureList, successList}) => {
             fill: false,
             lineTension: 0.6,
           },
-          // {
-          //   data: failureList,
-          //   label: 'Failure',
-          //   borderColor: '#fb050567',
-          //   backgroundColor: [
-          //     '#fb050567',
-          //     '#fb050567',
-          //     '#fb050567',
-          //     '#fb050567',
-          //     '#fb050567',
-          //     '#fb050567',
-          //   ],
-          //   fill: false,
-          //   lineTension: 0.6,
-          // },
+          {
+            data: failureList,
+            label: 'Failure',
+            borderColor: '#fb050567',
+            backgroundColor: [
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+              '#fb050567',
+            ],
+            fill: false,
+            lineTension: 0.6,
+          },
         ],
       },
     })

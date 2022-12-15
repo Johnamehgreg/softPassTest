@@ -111,7 +111,9 @@ const Dashboard = () => {
         if (isFetched && isDataSuccess) {
             setisError(false)
             setisSuccess(true)
-            let apiData = data?.data[0]?.api_log_history[0].dailyusage
+            let apiData = data?.data[0]?.api_log_history[0].dailyusage.sort(function(a:any, b:any){return a.day-b.day});
+
+             
 
             let day = apiData?.map((item: any) => {
                 return item?.day
