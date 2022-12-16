@@ -1,3 +1,4 @@
+import jsPDF from 'jspdf';
 import { useContext, useEffect, useState } from "react";
 import AppPagination from "../../../../components/AppComponent/AppPagination";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
@@ -8,10 +9,14 @@ import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
 import { useGetWalletHook, useWalletTransactionHistory } from "./wallet-query-hook";
 
+
 interface Props { }
 
 function Wallet(props: Props) {
   const { } = props;
+
+  // const pdfRef = React.createRef();
+
 
   const [isOpen, setIsOpen] = useState(true)
 
@@ -111,6 +116,22 @@ function Wallet(props: Props) {
     })
   }, [])
 
+  const pdfGenerate = () => {
+    var doc = new jsPDF('landscape', 'px', 'a4', false)
+    const input = document.getElementById('divToPrint')
+    const el1: HTMLElement = input!;
+    doc.html(el1, {
+      callback : function (pdf:any) {
+        pdf.save('wallet.pdf')
+      }
+    })
+    // // doc.addImage()
+    // doc.save('wallet.pdf')
+
+    
+   
+  }
+
 
 
 
@@ -125,7 +146,7 @@ function Wallet(props: Props) {
     >
 
       <>
-
+      
         <TopCardContainerWallet amountBalance={amountBalance} refetch={refetch} tabs={tabs} />
         <section className="bg-white mt-8 garrif">
           <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 lg:bg-transparent border-b-[1px] border-b-gray-300">
@@ -134,6 +155,7 @@ function Wallet(props: Props) {
               <div className="flex justify-end z-10">
                 <div className="border-[12px] rounded-md border-gray-100">
                   <button
+                  onClick={() => pdfGenerate()} 
                     className="text-softpasspurple-300 rounded-md text-sm px-2 py-2 bg-white">
                     Generate Report
                   </button>
@@ -141,9 +163,10 @@ function Wallet(props: Props) {
               </div>
             </div>
           </div>
+
           {
             transactionHistory.length > 0 && (
-              <div className="pb-12 mt-8 md:px-12">
+              <div className="pb-12 mt-8 md:px-12" id="divToPrint">
                 <ApiCallHistory info={tabs} />
 
                 <AppRetching isFetching={isFetchingTrans} />

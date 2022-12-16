@@ -106,6 +106,14 @@ input[type=number]{
     @apply outline-none text-[14px] pl-3 garrif bg-transparent;
   }
 }
+.verification-upload-contain {
+  @apply w-full border-[1px]  py-[5px] rounded-lg flex items-center relative;
+  animation: 0.5s ease-in-out 1 flow;
+  input {
+    flex: 1 1 100%;
+    @apply outline-none text-[14px] pl-3 garrif bg-transparent;
+  }
+}
 .verification-input-contain {
   @apply w-full border-[1px]  py-[10px] rounded-lg flex items-center relative;
   animation: 0.5s ease-in-out 1 flow;
