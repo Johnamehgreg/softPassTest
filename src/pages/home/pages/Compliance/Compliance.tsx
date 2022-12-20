@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppWrapper from "../../../../components/AppWrapper";
 import HomeInput from "../../../../components/input/homeInput";
+import { AppProvider } from "../../../../contextProvide/AppContext";
 import { useComplianceEvent, useHandleComplianceUpdate } from "./compliance-hook";
 import TopCard from "./components/TopCard";
 import UploadInout from "./components/uplaodInput";
@@ -23,6 +24,7 @@ const Compliance: React.FC = (props: Props) => {
     const [errorText, seterrorText] = useState('Retry')
     const [isSuccess, setisSuccess] = useState(false)
     const [isError, setisError] = useState(false)
+    const { setisLoading } = useContext(AppProvider)
     const [complincesInputData, setcomplincesInputData] = useState<any>({
         tax_id: '',
         team_size: '',
@@ -31,9 +33,7 @@ const Compliance: React.FC = (props: Props) => {
         director_email: '',
         director_phone: '',
         bvn: '',
-        ucp_form: null,
-        upa_form: null,
-        cc_form: null
+
     })
 
     const [isCC_Form, setisCC_Form] = useState<any>({
@@ -81,7 +81,7 @@ const Compliance: React.FC = (props: Props) => {
         seterrorText('Retrying...')
     }
 
-   
+
 
 
 
@@ -113,9 +113,9 @@ const Compliance: React.FC = (props: Props) => {
     }
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        alert('check')
+
         event.preventDefault()
-        console.log(isCC_Form, 'check' )
+        setisLoading(true)
         const data = new FormData();
         data.append("cloud_name", "softpass");
         data.append("upload_preset", "soieburj")
@@ -123,37 +123,85 @@ const Compliance: React.FC = (props: Props) => {
         data.append("api_key", "532628562871137");
         let url = `https://api.cloudinary.com/v1_1/softpass/upload`
 
-       
 
-        if(isCC_Form.isSelected === true){
-            
+
+        if (isCC_Form.isSelected === true) {
+
             data.append("file", isCC_Form.file);
-        
-            axios.post(url, data)
-            .then((res:any) => {
-                console.log(res, 'response upload')
-            })
-            .catch((err) => {
-                console.error(err, 'response upload')
-            })
-            
 
-            
+            axios.post(url, data)
+                .then((res: any) => {
+                    setisCC_Form({ ...isCC_Form, url: res.data.secure_url, isUploaded: true })
+                    setTimeout(() => {
+                        onUpdate({ cac: res.data.secure_url })
+                    }, 200);
+
+
+                })
+                .catch((err) => {
+                    console.error(err, 'response upload')
+                })
+
+        }
+        if (isUCP_Form.isSelected === true) {
+
+            data.append("file", isUCP_Form.file);
+
+            axios.post(url, data)
+                .then((res: any) => {
+                    setisUCP_Form({ ...isUCP_Form, url: res.data.secure_url, isUploaded: true })
+                    console.log(res.data.secure_url, 'response upload')
+                })
+                .catch((err) => {
+
+                })
+
+        }
+        if (isUPA_Form.isSelected === true) {
+
+            data.append("file", isUPA_Form.file);
+
+            axios.post(url, data)
+                .then((res: any) => {
+                    setisUPA_Form({ ...isUPA_Form, url: res.data.secure_url, isUploaded: true })
+
+                })
+                .catch((err) => {
+
+                })
+
         }
 
-        // update(data)
+
     }
 
 
-    const onUpdate = () => {
-        let data = {
+    const onUpdate = (type: { cac?: string }) => {
+        const { cac } = type
+        let data: any = {
             "tax_id": complincesInputData.tax_id,
             "director_name": complincesInputData.director_name,
             "director_email": complincesInputData.director_email,
             "director_phone": complincesInputData.director_phone,
             "bvn": complincesInputData.bvn,
             "team_size": complincesInputData.team_size,
+
         }
+
+
+        if (isCC_Form.isSelected === true) {
+            let cac_form = cac
+            data.cac_form = cac_form
+        }
+
+        console.log(data, 'Available Form')
+
+         setisLoading(false)
+
+
+
+
+        update(data)
     }
 
 
@@ -172,7 +220,7 @@ const Compliance: React.FC = (props: Props) => {
             <>
                 <TopCard />
                 <form
-                    onSubmit={onSubmit}
+                    onSubmit={(e) => onSubmit(e)}
                     className="bg-white  garrif rounded-md">
                     <div className="flex items-center px-3 md:px-5 py-4 rounded-lg bg-softpassgray-50 md:bg-transparent">
                         <h1 className="w-6/12 text-[22px] font-semibold">Customer credentials</h1>
@@ -327,7 +375,7 @@ const Compliance: React.FC = (props: Props) => {
                                 />
 
 
-                                
+
 
 
 

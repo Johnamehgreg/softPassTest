@@ -14,7 +14,7 @@ export const useComplianceEvent = (arg: ARG) => {
     const { onError, } = arg
 
     const { data: all, isFetching, refetch, isFetched, isError, isSuccess } = useQuery(
-        ['get-complinces-data', ],
+        ['get-complinces-data',],
         () => apis.compliance.getComplianceDetail(),
         {
             onError: () => {
@@ -40,19 +40,19 @@ export const useComplianceEvent = (arg: ARG) => {
 }
 
 
-export const useHandleComplianceUpdate = (refetch:Function) => {
+export const useHandleComplianceUpdate = (refetch: Function) => {
 
     const { setisLoading } = useContext(AppProvider)
 
 
-    const update = (data:any) => {
+    const update = (data: any) => {
         setisLoading(true)
         apis.compliance.updateComplincesDetail(data)
-            .then((res:any) => {
+            .then((res: any) => {
                 refetch()
                 showPopUp({ type: popType.success, message: 'Compliance updated successfully' })
             })
-            .catch((err:any) => {
+            .catch((err: any) => {
                 const { data } = err.response
 
                 if (data?.message) {
@@ -67,25 +67,25 @@ export const useHandleComplianceUpdate = (refetch:Function) => {
     }
 
 
-    const uploadImage = (image:any) => {
+    const uploadImage = (image: any) => {
         const data = new FormData();
         data.append("file", image);
         data.append("cloud_name", "softpass");
         data.append("upload_preset", "soieburj")
         data.append("api_secret", "1SmKMTGGZ6auOJmdq3P6CcEUtdk");
         data.append("api_key", "532628562871137");
-    
+
         let url = "https://api.cloudinary.com/v1_1/${cloudName}/upload"
-    
+
         axios.post(url, data)
-        .then((res) => {
-            return { status: 'success', response: res}
-        })
-        .catch((err) => {
-            return { status: 'failure', response: err}
-        })
-        
-      }
+            .then((res) => {
+                return { status: 'success', response: res }
+            })
+            .catch((err) => {
+                return { status: 'failure', response: err }
+            })
+
+    }
 
     return {
         update,
