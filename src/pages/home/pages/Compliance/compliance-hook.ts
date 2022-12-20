@@ -1,8 +1,10 @@
+import axios from "axios"
 import { useContext } from "react"
 import { useQuery } from "react-query"
 import { popType, showPopUp } from "../../../../constanst/popupFunc"
 import { AppProvider } from "../../../../contextProvide/AppContext"
 import apis from "../../../../services/apiSevices"
+
 
 interface ARG {
     onError: () => void,
@@ -64,7 +66,30 @@ export const useHandleComplianceUpdate = (refetch:Function) => {
             })
     }
 
+
+    const uploadImage = (image:any) => {
+        const data = new FormData();
+        data.append("file", image);
+        data.append("cloud_name", "softpass");
+        data.append("upload_preset", "soieburj")
+        data.append("api_secret", "1SmKMTGGZ6auOJmdq3P6CcEUtdk");
+        data.append("api_key", "532628562871137");
+    
+        let url = "https://api.cloudinary.com/v1_1/${cloudName}/upload"
+    
+        axios.post(url, data)
+        .then((res) => {
+            return { status: 'success', response: res}
+        })
+        .catch((err) => {
+            return { status: 'failure', response: err}
+        })
+        
+      }
+
     return {
-        update
+        update,
+        uploadImage
     }
 }
+

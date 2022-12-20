@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import DashboardPng from "../assets/svg/Desktop - 7.svg"
-import dashboardFrame from "../assets/svg/kyc_header_image.svg"
+// import dashboardFrame from "../assets/svg/kyc_header_image.svg"
 import SubRoute from '../components/kyc/SubRoute'
 import CallBoxIcon from '../components/svg-icons/CallBoxIcon'
 import HouseBoxIcon from '../components/svg-icons/HouseBoxIcon'
@@ -57,7 +57,7 @@ function KYC(props: Props) {
                     </button> */}
                     </div>
                     <div className='md:w-6/12 w-full'>
-                        <img alt="" src={dashboardFrame} className="rounded-2xl"></img>
+                        <img alt="" src='https://res.cloudinary.com/softpass/image/upload/v1671448276/kyc_header_image_ah9fna.svg' className="rounded-2xl"></img>
                     </div>
                 </div>
             </HeroWidget>

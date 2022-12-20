@@ -1,29 +1,19 @@
-import { useState } from "react";
+import React from "react";
 
 interface Props {
-    onChange: (e:any) => void;
+    onFileSelect: (e: any, type: string) => void;
     placeholder?: string;
+    type: string;
+    fileName?: string | null;
+
 }
 
 
-const UploadInout:React.FC<Props> = (props) => {
-    const {onChange, placeholder} = props
+const UploadInout: React.FC<Props> = (props) => {
+    const { onFileSelect, placeholder, type, fileName } = props
 
-    const [fileName, setfileName] = useState(null)
 
-    const onchangeImgFunc = (e: any) => {
-        let fr: any = new FileReader();
-        if (e.target.files.length > 0) {
-            let fileData = e.target.files[0]
-            fr.readAsArrayBuffer(fileData);
-            const blob = new Blob([fr.result]);
-            const url = URL.createObjectURL(blob,)
-            setfileName(fileData?.name)
-            console.log(e.target.files[0], 'html data')
-            onChange(e)
 
-        }
-    };
     return (
         <div className="w-full my-4">
             <div
@@ -34,17 +24,17 @@ const UploadInout:React.FC<Props> = (props) => {
                 <label
 
                     className='no-edit-input rounded-[50px] px-4 py-1 border-[1px] border-gray-400  pointer'
-                    htmlFor="profile-input-file"
+                    htmlFor={type}
                 >
 
                     <p className="text-[13px]">Upload</p>
 
                     <input
-                        onChange={onchangeImgFunc}
+                        onChange={(e: any) => onFileSelect(e.target.files[0], type)}
                         // disabled={edit}
                         className="hidden"
                         type="file"
-                        id="profile-input-file"
+                        id={type}
                         accept="image/png, image/jpg,  image/jpeg"
                     />
                 </label>
@@ -52,10 +42,12 @@ const UploadInout:React.FC<Props> = (props) => {
             </div>
 
             {
-                fileName !== null && (
+                fileName && (
                     <p className="text-[12px] mt-1 text-gray-500">File name: {fileName} </p>
                 )
             }
+
+
         </div>
     )
 }

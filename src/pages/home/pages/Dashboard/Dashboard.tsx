@@ -5,7 +5,6 @@ import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
 import ChartDashboard from "../../../../components/dashboard/widget/Chart";
-import TopCardContainer from "../../../../components/dashboard/widget/TopCardContainer";
 import { AppProvider } from "../../../../contextProvide/AppContext";
 import SelectIdDropdown from "./components/SelectIdDropdown";
 import TimeRange from "./components/timeRange";
@@ -59,15 +58,12 @@ const Dashboard = () => {
         return g;
     }
 
-    const [failureList, setfailureList] = useState([])
-    const [successList, setsuccessList] = useState([])
-    const [dayList, setdayList] = useState([])
+    
     const [servicesId, setservicesId] = useState<any>(null)
     const [startDate, setstartDate] = useState<any>(null)
     const [endDate, setendDate] = useState<any>(null)
     const [apiTitle, setapiTitle] = useState('No API Selected')
-
-
+    const [dashboardData, setdashboardData] = useState<any>([])
     const onError = () => {
         setisError(true)
         setisSuccess(false)
@@ -111,36 +107,21 @@ const Dashboard = () => {
         if (isFetched && isDataSuccess) {
             setisError(false)
             setisSuccess(true)
-            let apiData = data?.data[0]?.api_log_history[0].dailyusage.sort(function(a:any, b:any){return a.day-b.day});
 
-             
-
-            let day = apiData?.map((item: any) => {
-                return item?.day
+            let apiData = data?.data?.sort(function(a:any, b:any){return a.day-b.day}).map((item:any) =>  {
+                return {...item, day:`${item.day}`}
             })
 
-            let successList = apiData?.filter((item: any) => item.status === "Successful").map((item: any) => {
-                return item.count
-            })
-            let FailureList = apiData?.filter((item: any) => item.status === "Failed").map((item: any) => {
-                return item.count
-            })
+          
 
-            if (data.data.length === 0) {
-                setdayList([])
-                setfailureList([])
-                setsuccessList([])
-            } else {
-                setdayList(day)
-                setfailureList(FailureList)
-                setsuccessList(successList)
-            }
+            setdashboardData([ ...apiData, ])
 
 
 
+            // console.log(apiData, 'daily usage')
+            
 
 
-            console.log(apiData, '@container data')
         }
     }
 
@@ -164,7 +145,7 @@ const Dashboard = () => {
         >
             <div>
 
-                <TopCardContainer tabs={tabs} />
+                {/* <TopCardContainer tabs={tabs} /> */}
 
                 {/* <pre>{JSON.stringify(json, null, 2)}</pre> */}
 
@@ -221,9 +202,7 @@ const Dashboard = () => {
                             {
                                 //@ts-ignore
                                 <ChartDashboard
-                                    day={dayList}
-                                    failureList={failureList}
-                                    successList={successList}
+                                    data={dashboardData}
                                 />
                             }
                         </div>
@@ -236,3 +215,39 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+
+
+let dash = [
+    { day: "1",  },
+    { day: "2",},
+    { day: "3",},
+    { day: "4",},
+    { day: "5",},
+    { day: "6",},
+    { day: "7",},
+    { day: "8",},
+    { day: "9",},
+    { day: "10",},
+    { day: "11",},
+    { day: "12",},
+    { day: "13",},
+    { day: "14",},
+    { day: "15",},
+    { day: "16",},
+    { day: "17",},
+    { day: "18",},
+    { day: "19",},
+    { day: "20",},
+    { day: "21",},
+    { day: "22",},
+    { day: "23",},
+    { day: "24",},
+    { day: "25",},
+    { day: "26",},
+    { day: "27",},
+    { day: "28",},
+    { day: "29",},
+    { day: "30",},
+    { day: "31",},
+]

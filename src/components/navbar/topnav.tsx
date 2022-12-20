@@ -109,7 +109,7 @@ function Topnav(props: Props) {
           <div className="md:w-3/12  lg:w-4/12 w-full md:flex block  flex-wrap justify-center items-center">
             <div className="text-center">
               <span className="md:inline-block hidden md:px-3 lg:px-5">
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to={routes.login}>Login</NavLink>
               </span>
               <NavLink
                 to={routes.register}

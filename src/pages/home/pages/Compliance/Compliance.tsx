@@ -5,7 +5,8 @@ import { useComplianceEvent, useHandleComplianceUpdate } from "./compliance-hook
 import TopCard from "./components/TopCard";
 import UploadInout from "./components/uplaodInput";
 // import HomeEdictor from "../components/Edictor";
-import ReactS3Client from 'react-aws-s3-typescript';
+// import S3 from "react-aws-s3";
+
 
 interface Props { }
 
@@ -21,7 +22,7 @@ const Compliance: React.FC = (props: Props) => {
     const [errorText, seterrorText] = useState('Retry')
     const [isSuccess, setisSuccess] = useState(false)
     const [isError, setisError] = useState(false)
-    const [complincesInputData, setcomplincesInputData] = useState({
+    const [complincesInputData, setcomplincesInputData] = useState<any>({
         tax_id: '',
         team_size: '',
         organization_name: '',
@@ -29,8 +30,31 @@ const Compliance: React.FC = (props: Props) => {
         director_email: '',
         director_phone: '',
         bvn: '',
-        cac_form:null
+        ucp_form: null,
+        upa_form: null,
+        cc_form: null
     })
+
+    const [isCC_Form, setisCC_Form] = useState<any>({
+        isSelected: false,
+        isUploaded: false,
+        url: '',
+        file: ''
+    })
+    const [isUCP_Form, setisUCP_Form] = useState<any>({
+        isSelected: false,
+        isUploaded: false,
+        url: '',
+        file: ''
+    })
+    const [isUPA_Form, setisUPA_Form] = useState<any>({
+        isSelected: false,
+        isUploaded: false,
+        url: '',
+        file: ''
+    })
+
+
     const onError = () => {
         setisError(true)
         setisSuccess(false)
@@ -47,7 +71,7 @@ const Compliance: React.FC = (props: Props) => {
     } = useComplianceEvent({ onError, })
 
 
-    const { update } = useHandleComplianceUpdate(refetch)
+    const { update, uploadImage } = useHandleComplianceUpdate(refetch)
 
 
 
@@ -56,7 +80,9 @@ const Compliance: React.FC = (props: Props) => {
         seterrorText('Retrying...')
     }
 
-    //FUNCTION
+   
+
+
 
 
     const checkSuccess = () => {
@@ -76,6 +102,7 @@ const Compliance: React.FC = (props: Props) => {
                 bvn: lData.bvn,
                 team_size: lData.team_size,
 
+
             })
             //   setcontainerList(data?.data)
 
@@ -84,7 +111,7 @@ const Compliance: React.FC = (props: Props) => {
         }
     }
 
-    const onSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         let data = {
@@ -96,32 +123,11 @@ const Compliance: React.FC = (props: Props) => {
             "team_size": complincesInputData.team_size,
         }
 
-        const s3Config = {
-            bucketName: 'soft-bucket',
-            region: 'us-east-1',
-            accessKeyId: 'AKIAV7PVZCUWZJM6YAFN',
-            secretAccessKey: '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',
+        if(isCC_Form.isSelected === true){
+            let result = uploadImage(isCC_Form.file)
+
+            console.log(result, 'upload data')
         }
-
-
-        const s3 = new ReactS3Client(s3Config);
-        let fileInput:any = complincesInputData.cac_form;
-        let formdata: any = new FormData();
-        // formdata.append("upload", fileInput.files[0], "user-profile-picture.jpg");
-        // formdata.append("type", "profilePicture");
-
-        const filename = 'filename-to-be-uploaded'; 
-
-       let  file = formdata
-
-
-       s3.uploadFile(file, filename)
-        .then((res:any) => {
-            console.log(res.response, 'aws response error');
-        })
-        .catch((err:any) => {
-            console.log(err.response, 'aws response error');
-        })
 
         // update(data)
     }
@@ -250,18 +256,58 @@ const Compliance: React.FC = (props: Props) => {
 
                                 />
 
+                                {/* {
+                                    uploadItem.map((item: any) => {
+                                        return (
+                                            <UploadInout
+                                                placeholder={item.placehoalder}
+                                                type={item.type}
+                                                onFileSelect={(e, type) => {
+                                                    onFileSelected(e, type)
+                                                    // alert('1')
+                                                    // setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
+                                                }}
+                                            />
+                                        )
+                                    })
+                                } */}
                                 <UploadInout
-                                placeholder='Upload CAC form'
-                                onChange={(e) => setcomplincesInputData({ ...complincesInputData, cac_form: e })}
+                                    type="CAC"
+                                    fileName={isCC_Form.file?.name}
+                                    placeholder='Upload CAC form'
+                                    onFileSelect={(e) => {
+                                        // alert('1')
+                                        setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
+                                    }}
                                 />
+
                                 <UploadInout
-                                placeholder='Upload Certification of Incorporation'
-                                onChange={(e) => setcomplincesInputData({ ...complincesInputData, cac_form: e })}
+                                    type="UCI"
+                                    fileName={isUCP_Form.file?.name}
+                                    placeholder='Upload Certification of Incorporation'
+                                    onFileSelect={(e) => {
+                                        setisUCP_Form({ ...isUCP_Form, isSelected: true, file: e })
+                                    }}
                                 />
+
+
+
+
                                 <UploadInout
-                                placeholder='Upload Proof of Address'
-                                onChange={(e) => setcomplincesInputData({ ...complincesInputData, cac_form: e })}
+                                    type="UPA"
+                                    fileName={isUPA_Form?.file?.name}
+                                    placeholder='Upload Proof of Address'
+                                    onFileSelect={(e) => {
+                                        setisUPA_Form({ ...isUPA_Form, isSelected: true, file: e })
+                                    }}
                                 />
+
+
+                                
+
+
+
+
 
                                 <div className="w-full mt-8  mb-8 justify-end flex  ">
                                     <button type="submit" className="min-w[20px] bg-softpasspurple-300 px-6 py-1 rounded-md text-white">Save</button>
