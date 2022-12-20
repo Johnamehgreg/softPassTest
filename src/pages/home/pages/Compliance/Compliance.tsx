@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AppWrapper from "../../../../components/AppWrapper";
 import HomeInput from "../../../../components/input/homeInput";
@@ -112,8 +113,39 @@ const Compliance: React.FC = (props: Props) => {
     }
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        alert('check')
         event.preventDefault()
+        console.log(isCC_Form, 'check' )
+        const data = new FormData();
+        data.append("cloud_name", "softpass");
+        data.append("upload_preset", "soieburj")
+        data.append("api_secret", "1SmKMTGGZ6auOJmdq3P6CcEUtdk");
+        data.append("api_key", "532628562871137");
+        let url = `https://api.cloudinary.com/v1_1/softpass/upload`
 
+       
+
+        if(isCC_Form.isSelected === true){
+            
+            data.append("file", isCC_Form.file);
+        
+            axios.post(url, data)
+            .then((res:any) => {
+                console.log(res, 'response upload')
+            })
+            .catch((err) => {
+                console.error(err, 'response upload')
+            })
+            
+
+            
+        }
+
+        // update(data)
+    }
+
+
+    const onUpdate = () => {
         let data = {
             "tax_id": complincesInputData.tax_id,
             "director_name": complincesInputData.director_name,
@@ -122,14 +154,6 @@ const Compliance: React.FC = (props: Props) => {
             "bvn": complincesInputData.bvn,
             "team_size": complincesInputData.team_size,
         }
-
-        if(isCC_Form.isSelected === true){
-            let result = uploadImage(isCC_Form.file)
-
-            console.log(result, 'upload data')
-        }
-
-        // update(data)
     }
 
 

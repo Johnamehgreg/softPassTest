@@ -5,6 +5,7 @@ import AppRetching from "../../../../components/AppComponent/AppRetching";
 import AppWrapper from "../../../../components/AppWrapper";
 import ApiCallHistory from "../../../../components/dashboard/widget/ApiCallHistory";
 import ChartDashboard from "../../../../components/dashboard/widget/Chart";
+import TopCardContainer from "../../../../components/dashboard/widget/TopCardContainer";
 import { AppProvider } from "../../../../contextProvide/AppContext";
 import SelectIdDropdown from "./components/SelectIdDropdown";
 import TimeRange from "./components/timeRange";
@@ -145,7 +146,7 @@ const Dashboard = () => {
         >
             <div>
 
-                {/* <TopCardContainer tabs={tabs} /> */}
+                <TopCardContainer tabs={tabs} />
 
                 {/* <pre>{JSON.stringify(json, null, 2)}</pre> */}
 
