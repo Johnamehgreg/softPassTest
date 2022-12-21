@@ -83,6 +83,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
               </thead>
               <tbody className="user-table-body">
                 {transactionHistory?.map((item: any, index: number) => {
+                  let amt = `${ item?.amount}`
                   return (
                     <tr className="py-3">
                       <td>
@@ -128,7 +129,10 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                                     item?.is_in_flow === true ? '' : '- '
                                   }
                                   <span className="ml-1">&#8358; </span>
-                                  {value}.00
+                                  {
+                                    amt?.includes('.') ? `${value}` : `${value}.00`
+                                  }
+                                 
                                 </span>
                               )
                             }} />
