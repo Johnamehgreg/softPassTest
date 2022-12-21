@@ -156,7 +156,7 @@ function Wallet(props: Props) {
       ];
       rows.push(temp);
     }
-    pdf.text(235, 40, "Softpass Wallet Funding History");
+    pdf.text(235, 40, "Wallet Funding History");
     pdf.autoTable(columns, rows, {
       startY: 65,
       theme: "grid",

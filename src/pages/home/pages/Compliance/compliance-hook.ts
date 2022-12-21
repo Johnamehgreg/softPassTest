@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useContext } from "react"
 import { useQuery } from "react-query"
 import { popType, showPopUp } from "../../../../constanst/popupFunc"
@@ -67,24 +66,28 @@ export const useHandleComplianceUpdate = (refetch: Function) => {
     }
 
 
-    const uploadImage = (image: any) => {
-        const data = new FormData();
-        data.append("file", image);
-        data.append("cloud_name", "softpass");
-        data.append("upload_preset", "soieburj")
-        data.append("api_secret", "1SmKMTGGZ6auOJmdq3P6CcEUtdk");
-        data.append("api_key", "532628562871137");
+    const uploadImage = (type:{data:any, setdefault:Function}) => {
 
-        let url = "https://api.cloudinary.com/v1_1/${cloudName}/upload"
-
-        axios.post(url, data)
-            .then((res) => {
-                return { status: 'success', response: res }
+        const {data, setdefault} = type
+       
+        apis.compliance.updateComplincesDetail(data)
+            .then((res: any) => {
+                refetch()
+                setdefault()
+                showPopUp({ type: popType.success, message: 'File uploaded successfully' })
             })
-            .catch((err) => {
-                return { status: 'failure', response: err }
-            })
+            .catch((err: any) => {
+                const { data } = err.response
 
+                if (data?.message) {
+                    showPopUp({ type: popType.error, message: data?.message })
+                } else {
+                    showPopUp({ type: popType.error, message: 'Something went wrong' })
+                }
+            })
+            .finally(() => {
+                // setisLoading(false)
+            })
     }
 
     return {

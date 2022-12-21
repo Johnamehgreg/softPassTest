@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetServices } from "../../../../app-query-hook/use-services-hook";
 import AppSelect from "../../../../components/AppComponent/AppSelect";
 import SelectIdDropdown from "../../../../components/dashboard/widget/SelectIdDropdown";
 import HomeInput from "../../../../components/input/homeInput";
+import { AppProvider } from "../../../../contextProvide/AppContext";
 import { useContainerHook } from "../container/modals/container-query-hook";
 import VericationEdictor from "./components/Edictor";
 import VericationEdictorResponse from "./components/EdictorResponse";
@@ -21,6 +22,12 @@ const VerificationPage: React.FC = (props: Props) => {
     const [bvnNumber, setbvnNumber] = useState('')
     const [tinNumber, settinNumber] = useState('')
     const [requestCode, setrequestCode] = useState<any>(null)
+    const [bvnPhone, setbvnPhone] = useState('')
+
+    const [mode, setmode] = useState({
+        type: 'BVN',
+        value:''
+    })
 
 
     const [ItemServices, setItemServices] = useState<any>({})
@@ -29,10 +36,10 @@ const VerificationPage: React.FC = (props: Props) => {
 
     const navigation = useNavigate()
 
-
-
-
-
+    let modeList = [
+        { label: 'BVN', value: 'BVN' },
+        { label: 'Phone number', value: 'PHONE' },
+    ]
 
     //FUNCTION
     let { service } = useParams();
@@ -53,6 +60,8 @@ const VerificationPage: React.FC = (props: Props) => {
 
 
     const { data, isFetched, isSuccess, } = useGetServices()
+    const { userDetail, } = useContext(AppProvider)
+
 
     const checkSuccess = () => {
         if (containerIsFetched && isDataSuccess) {
@@ -75,6 +84,8 @@ const VerificationPage: React.FC = (props: Props) => {
         }
     }
 
+    console.log('loading', userDetail)
+
 
 
 
@@ -92,14 +103,24 @@ const VerificationPage: React.FC = (props: Props) => {
 
     }
 
+    const onSelectMode = (e: any) => {
+        setmode({...mode, type:e.label, value:e.value})
+    }
+
     const getDataType = () => {
         switch (service) {
             case 'Basic bvn':
                 return { "bvn": bvnNumber };
-                break;
+
             case 'Tin Verification':
                 return { "tinNumber": tinNumber };
-                break;
+
+            case 'Customer verification with phone number':
+                return {
+                    "bvnOrPhone": bvnPhone,
+                    "mode": mode.value
+                };
+
             default:
                 return {}
         }
@@ -196,21 +217,49 @@ const VerificationPage: React.FC = (props: Props) => {
                                             </>
 
                                             :
+                                            service === 'Customer verification with phone number' ?
 
-                                            <>
-                                                <HomeInput
-                                                    required={true}
-                                                    onBlur={() => console.log('fknf')}
-                                                    placeholder="BVN Number"
-                                                    onChange={(e) => settinNumber(e.target.value)}
-                                                />
-                                                <AppSelect
-                                                    placeholder="Select container"
-                                                    options={containerList}
-                                                    onChange={(e) => onSelectContainer(e)}
-                                                />
 
-                                            </>
+                                                <>
+                                                    <AppSelect
+                                                        placeholder="Select Mode"
+                                                        options={modeList}
+                                                        onChange={(e) => onSelectMode(e)}
+                                                    />
+                                                    <div className="mt-4"></div>
+                                                    <HomeInput
+                                                        value={bvnPhone}
+                                                        required={true}
+                                                        onBlur={() => console.log('fknf')}
+                                                        placeholder={mode.type === 'BVN' ? "BVN" : "Phone number"}
+                                                        onChange={(e) => setbvnPhone(e.target.value)}
+                                                    />
+                                                    <AppSelect
+                                                        placeholder="Select container"
+                                                        options={containerList}
+                                                        onChange={(e) => onSelectContainer(e)}
+                                                    />
+
+
+
+                                                </>
+
+                                                :
+
+                                                <>
+                                                    <HomeInput
+                                                        required={true}
+                                                        onBlur={() => console.log('fknf')}
+                                                        placeholder="BVN Number"
+                                                        onChange={(e) => settinNumber(e.target.value)}
+                                                    />
+                                                    <AppSelect
+                                                        placeholder="Select container"
+                                                        options={containerList}
+                                                        onChange={(e) => onSelectContainer(e)}
+                                                    />
+
+                                                </>
 
 
 

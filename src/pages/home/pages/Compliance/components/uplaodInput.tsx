@@ -5,39 +5,50 @@ interface Props {
     placeholder?: string;
     type: string;
     fileName?: string | null;
+    isUpload?: boolean;
 
 }
 
 
 const UploadInout: React.FC<Props> = (props) => {
-    const { onFileSelect, placeholder, type, fileName } = props
+    const { onFileSelect, placeholder, type, isUpload, fileName } = props
+
+    console.log(isUpload, 'uplaod data')
 
 
 
     return (
         <div className="w-full my-4">
             <div
-                className={`border-gray-400 px-3 justify-between verification-upload-contain  `}
+                className={`border-gray-400 px-3 ${isUpload ? 'min-h-[40px]' : ''} justify-between verification-upload-contain  `}
             >
                 <p className="text-[14px]"> {placeholder}</p>
 
-                <label
+                {
+                    !isUpload && (
+                        <label
 
-                    className='no-edit-input rounded-[50px] px-4 py-1 border-[1px] border-gray-400  pointer'
-                    htmlFor={type}
-                >
+                            className='no-edit-input rounded-[50px] px-4 py-1 border-[1px] border-gray-400  pointer'
+                            htmlFor={type}
+                        >
 
-                    <p className="text-[13px]">Upload</p>
+                            <p className="text-[13px]">Upload</p>
 
-                    <input
-                        onChange={(e: any) => onFileSelect(e.target.files[0], type)}
-                        // disabled={edit}
-                        className="hidden"
-                        type="file"
-                        id={type}
-                        accept="image/png, image/jpg,  image/jpeg"
-                    />
-                </label>
+                            <input
+                                onChange={(e: any) => onFileSelect(e.target.files[0], type)}
+                                // disabled={edit}
+                                className="hidden"
+                                type="file"
+                                id={type}
+                                accept="image/png, image/jpg,  image/jpeg"
+                            />
+                        </label>
+                    )
+                }
+
+
+
+
 
             </div>
 

@@ -24,6 +24,7 @@ const Compliance: React.FC = (props: Props) => {
     const [errorText, seterrorText] = useState('Retry')
     const [isSuccess, setisSuccess] = useState(false)
     const [isError, setisError] = useState(false)
+    const [showModal, setshowModal] = useState(true)
     const { setisLoading } = useContext(AppProvider)
     const [complincesInputData, setcomplincesInputData] = useState<any>({
         tax_id: '',
@@ -33,6 +34,11 @@ const Compliance: React.FC = (props: Props) => {
         director_email: '',
         director_phone: '',
         bvn: '',
+        cac_rc: '',
+        address_verification: '',
+        cac_form: '',
+        isCacForm: false,
+        isAddressVerification: false,
 
     })
 
@@ -40,19 +46,21 @@ const Compliance: React.FC = (props: Props) => {
         isSelected: false,
         isUploaded: false,
         url: '',
-        file: ''
+        file: '',
+        uploadedUrl: null
     })
-    const [isUCP_Form, setisUCP_Form] = useState<any>({
-        isSelected: false,
-        isUploaded: false,
+
+    const [preview, setpreview] = useState({
         url: '',
-        file: ''
+        type: ''
     })
+
     const [isUPA_Form, setisUPA_Form] = useState<any>({
         isSelected: false,
         isUploaded: false,
         url: '',
-        file: ''
+        file: '',
+        uploadedUrl: null
     })
 
 
@@ -67,7 +75,7 @@ const Compliance: React.FC = (props: Props) => {
         data,
         isFetched,
         isSuccess: isDataSuccess,
-        isFetching,
+
         refetch
     } = useComplianceEvent({ onError, })
 
@@ -80,6 +88,11 @@ const Compliance: React.FC = (props: Props) => {
         refetch()
         seterrorText('Retrying...')
     }
+
+    useEffect(() => {
+
+    }, [isCC_Form?.isSelected, isUPA_Form?.isSelected])
+
 
 
 
@@ -102,19 +115,22 @@ const Compliance: React.FC = (props: Props) => {
                 director_phone: lData.director_phone,
                 bvn: lData.bvn,
                 team_size: lData.team_size,
-
-
+                cac_rc: lData.cac_rc,
+                address_verification: lData.address_verification,
+                cac_form: lData.cac_form,
+                isAddressVerification: lData.address_verification.length > 4 ? true : false,
+                isCacForm: lData.cac_form.length > 4 ? true : false
             })
-            //   setcontainerList(data?.data)
 
 
-            console.log(data?.data, '@complinces data')
+            console.log(complincesInputData, '@complinces data')
         }
     }
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault()
+
         setisLoading(true)
         const data = new FormData();
         data.append("cloud_name", "softpass");
@@ -122,48 +138,43 @@ const Compliance: React.FC = (props: Props) => {
         data.append("api_secret", "1SmKMTGGZ6auOJmdq3P6CcEUtdk");
         data.append("api_key", "532628562871137");
         let url = `https://api.cloudinary.com/v1_1/softpass/upload`
-
-
-
         if (isCC_Form.isSelected === true) {
 
             data.append("file", isCC_Form.file);
 
             axios.post(url, data)
                 .then((res: any) => {
-                    setisCC_Form({ ...isCC_Form, url: res.data.secure_url, isUploaded: true })
-                    setTimeout(() => {
-                        onUpdate({ cac: res.data.secure_url })
-                    }, 200);
 
+                    setisCC_Form({ ...isCC_Form, isUploaded: true })
 
+                    let data = {
+                        "cac_form": res.data.secure_url
+                    }
+                    const setdefualt = () => {
+                        setisCC_Form({ ...isCC_Form, file: '', url: '', isUploaded: true, isSelected: false })
+                    }
+                    uploadImage({ data, setdefault: setdefualt })
                 })
                 .catch((err) => {
                     console.error(err, 'response upload')
                 })
 
         }
-        if (isUCP_Form.isSelected === true) {
 
-            data.append("file", isUCP_Form.file);
-
-            axios.post(url, data)
-                .then((res: any) => {
-                    setisUCP_Form({ ...isUCP_Form, url: res.data.secure_url, isUploaded: true })
-                    console.log(res.data.secure_url, 'response upload')
-                })
-                .catch((err) => {
-
-                })
-
-        }
         if (isUPA_Form.isSelected === true) {
-
             data.append("file", isUPA_Form.file);
 
             axios.post(url, data)
                 .then((res: any) => {
-                    setisUPA_Form({ ...isUPA_Form, url: res.data.secure_url, isUploaded: true })
+                    setisUPA_Form({ ...isUPA_Form, isUploaded: true })
+                    let data = {
+                        "address_verification": res.data.secure_url
+                    }
+
+                    const setdefualt = () => {
+                        setisUPA_Form({ ...isUPA_Form, file: '', url: '', isSelected: false })
+                    }
+                    uploadImage({ data, setdefault: setdefualt })
 
                 })
                 .catch((err) => {
@@ -173,41 +184,68 @@ const Compliance: React.FC = (props: Props) => {
         }
 
 
+        onUpdate()
     }
 
 
-    const onUpdate = (type: { cac?: string }) => {
-        const { cac } = type
-        let data: any = {
-            "tax_id": complincesInputData.tax_id,
-            "director_name": complincesInputData.director_name,
-            "director_email": complincesInputData.director_email,
-            "director_phone": complincesInputData.director_phone,
-            "bvn": complincesInputData.bvn,
-            "team_size": complincesInputData.team_size,
+    const onUpdate = () => {
 
+        let lData = data?.data
+
+        let dataS: any = {}
+
+
+        if (complincesInputData.tax_id !== lData?.tax_id && complincesInputData.tax_id?.trim() !== '') {
+            let tax_id = complincesInputData.tax_id
+            dataS.tax_id = tax_id
+        }
+        if (complincesInputData.director_name !== lData?.director_name && complincesInputData.director_name?.trim() !== '') {
+            let director_name = complincesInputData.director_name
+            dataS.director_name = director_name
+        }
+        if (complincesInputData.director_email !== lData?.director_email && complincesInputData.director_email?.trim() !== '') {
+            let director_email = complincesInputData.director_email
+            dataS.director_email = director_email
+        }
+        if (complincesInputData.director_phone !== lData?.director_phone && complincesInputData.director_phone?.trim() !== '') {
+            let director_phone = complincesInputData.director_phone
+            dataS.director_phone = director_phone
+        }
+        if (complincesInputData.bvn !== lData?.bvn && complincesInputData.bvn?.trim() !== '') {
+            let bvn = complincesInputData.bvn
+            dataS.bvn = bvn
+        }
+        if (complincesInputData.team_size !== lData?.team_size && complincesInputData.team_size?.trim() !== '') {
+            let team_size = complincesInputData.team_size
+            dataS.team_size = team_size
+        }
+        if (complincesInputData.organization_name !== lData?.organization_name && complincesInputData.organization_name?.trim() !== '') {
+            let organization_name = complincesInputData.organization_name
+            dataS.organization_name = organization_name
+        }
+        if (complincesInputData.cac_rc !== lData?.cac_rc && complincesInputData.cac_rc?.trim() !== '') {
+            let cac_rc = complincesInputData.cac_rc
+            dataS.cac_rc = cac_rc
         }
 
 
-        if (isCC_Form.isSelected === true) {
-            let cac_form = cac
-            data.cac_form = cac_form
-        }
-
-        console.log(data, 'Available Form')
-
-         setisLoading(false)
 
 
-
-
-        update(data)
+        update(dataS)
     }
 
 
     useEffect(() => {
         checkSuccess()
     }, [data])
+    
+    const handleReUpload = (e:any) => {
+        if(preview.type === 'cac' ){
+            setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
+        }else {
+            setisUPA_Form({ ...isUPA_Form, isSelected: true, file: e })
+        }
+    }
 
     return (
         <AppWrapper
@@ -320,53 +358,48 @@ const Compliance: React.FC = (props: Props) => {
                                 <HomeInput
                                     onBlur={() => console.log('')}
                                     name='containerName'
-                                    value={complincesInputData.bvn}
+                                    value={complincesInputData.cac_rc}
                                     placeholder="Company registration number"
                                     onChange={(e) => {
-                                        setcomplincesInputData({ ...complincesInputData, bvn: e.target.value })
+                                        setcomplincesInputData({ ...complincesInputData, cac_rc: e.target.value })
                                     }}
 
                                 />
 
-                                {/* {
-                                    uploadItem.map((item: any) => {
-                                        return (
-                                            <UploadInout
-                                                placeholder={item.placehoalder}
-                                                type={item.type}
-                                                onFileSelect={(e, type) => {
-                                                    onFileSelected(e, type)
-                                                    // alert('1')
-                                                    // setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
-                                                }}
-                                            />
-                                        )
-                                    })
-                                } */}
+
                                 <UploadInout
                                     type="CAC"
+                                    isUpload={complincesInputData.isCacForm}
                                     fileName={isCC_Form.file?.name}
-                                    placeholder='Upload CAC form'
+                                    placeholder='Upload Certificate of Incorporation'
                                     onFileSelect={(e) => {
                                         // alert('1')
                                         setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
                                     }}
                                 />
 
-                                <UploadInout
-                                    type="UCI"
-                                    fileName={isUCP_Form.file?.name}
-                                    placeholder='Upload Certification of Incorporation'
-                                    onFileSelect={(e) => {
-                                        setisUCP_Form({ ...isUCP_Form, isSelected: true, file: e })
-                                    }}
-                                />
-
+                                {
+                                    complincesInputData.isCacForm && (
+                                        <div
+                                            onClick={() => {
+                                                setshowModal(true)
+                                                setpreview({
+                                                    ...preview,
+                                                    url: complincesInputData.cac_form,
+                                                    type: 'cac'
+                                                })
+                                            }}
+                                            className="pointer flex items-center justify-center h-[20px] rounded-md w-[80px] bg-softpasspurple-300 text-white text-[11px] mt-[-10px]">
+                                            <p>Preview</p>
+                                        </div>
+                                    )
+                                }
 
 
 
                                 <UploadInout
                                     type="UPA"
+                                    isUpload={complincesInputData.isAddressVerification}
                                     fileName={isUPA_Form?.file?.name}
                                     placeholder='Upload Proof of Address'
                                     onFileSelect={(e) => {
@@ -374,8 +407,22 @@ const Compliance: React.FC = (props: Props) => {
                                     }}
                                 />
 
-
-
+                                {
+                                    complincesInputData.isAddressVerification && (
+                                        <div
+                                            onClick={() => {
+                                                setshowModal(true)
+                                                setpreview({
+                                                    ...preview,
+                                                    url: complincesInputData.address_verification,
+                                                    type: 'address'
+                                                })
+                                            }}
+                                            className="pointer flex items-center justify-center h-[20px] rounded-md w-[80px] bg-softpasspurple-300 text-white text-[11px] mt-[-10px]">
+                                            <p>Preview</p>
+                                        </div>
+                                    )
+                                }
 
 
 
@@ -390,9 +437,60 @@ const Compliance: React.FC = (props: Props) => {
                         </div>
                     </div>
                 </form>
+
+                {
+                    showModal && (
+                        <div className="fixed overflow-scroll z-50 top-0 left-0 w-full h-full bg-black/40
+                        flex justify-center items-center  routes-container"
+                        >
+
+
+                            <div className="h-[90%] w-auto  rounded-md overflow-scroll relative ">
+                                <div className="flex flex-col  justify-center h-[90%] w-[90%] py-6 px-4  pb-6   ">
+
+                                    <span
+                                        onClick={() => {
+                                            setshowModal(false)
+                                        }}
+                                        className="text-[20px] modal-close-icon cursor-pointer"
+                                    >
+                                        &times;
+                                    </span>
+
+
+                                    <img className=" bg-contain h-[100%]" src={preview.url} alt='' />
+
+                                    <div className="w-full mt-8  mb-8 justify-center flex  ">
+                                        <label
+                                            className="min-w[20px] pointer bg-softpasspurple-300 px-6 py-1 rounded-md text-white"
+                                        >
+
+                                            <p className="text-[13px]">Upload</p>
+
+                                            <input
+                                                onChange={(e: any) => handleReUpload(e.target.files[0])}
+                                                
+                                                className="hidden"
+                                                type="file"
+                                                id='preview-upload'
+                                                accept="image/png, image/jpg,  image/jpeg"
+                                            />
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
             </>
 
+
+
         </AppWrapper>
+
+
+
     );
 };
 

@@ -6,26 +6,26 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 interface Props {
   options: any[],
-  onChange: (e:any) => void;
-  placeholder:string;
+  onChange: (e: any) => void;
+  placeholder: string;
 }
 const AppSelect: React.FC<Props> = (props: any) => {
+
 
   const { options, onChange, placeholder } = props
   const [title, settitle] = React.useState(placeholder)
   const [showDropDown, setshowDropDown] = React.useState(false)
   const ani1 = useAnimation()
   const arrowAni = useAnimation()
-    let dropDownRef = React.useRef<any>()
+  let dropDownRef = React.useRef<any>()
 
-    React.useEffect(() => {
-      document.addEventListener("mousedown", (event) => {
-        if (!dropDownRef.current.contains(event.target)) {
-          setshowDropDown(false)
-        }
-      })
+  React.useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!dropDownRef.current.contains(event.target)) {
+        setshowDropDown(false)
+      }
     })
-
+  })
 
   console.log('@all available', options)
 
@@ -33,7 +33,7 @@ const AppSelect: React.FC<Props> = (props: any) => {
   React.useEffect(() => {
     if (showDropDown) {
       ani1.start({
-       
+
         scale: 1,
         transition: {
           type: 'spring',
@@ -74,7 +74,7 @@ const AppSelect: React.FC<Props> = (props: any) => {
     }
   }, [showDropDown])
 
-  const onSelect = (item:any) => {
+  const onSelect = (item: any) => {
     setshowDropDown(false)
     settitle(item?.label)
     onChange(item)
@@ -83,7 +83,7 @@ const AppSelect: React.FC<Props> = (props: any) => {
 
 
   return (
-    <div  ref={dropDownRef} className='w-full rounded-md relative h-[40px] border-[1px] border-gray-400 '>
+    <div ref={dropDownRef} className='w-full rounded-md relative h-[40px] border-[1px] border-gray-400 '>
       <div
         onClick={() => setshowDropDown(!showDropDown)}
         className="w-full flex h-full px-2 pointer justify-between items-center">
@@ -102,10 +102,10 @@ const AppSelect: React.FC<Props> = (props: any) => {
             .map((item: any) => {
               return (
                 <div
-                onClick={() => {
-                  onSelect(item)
-                }}
-                className="px-2 my-2 rounded-sm flex items-center  hover:bg-gray-100 h-[30px] pointer">
+                  onClick={() => {
+                    onSelect(item)
+                  }}
+                  className="px-2 my-2 rounded-sm flex items-center  hover:bg-gray-100 h-[30px] pointer">
                   <p className='text-[14px] text-gray-500'>{item.label}</p>
                 </div>
               )

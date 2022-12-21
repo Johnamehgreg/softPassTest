@@ -36,48 +36,48 @@ const WalletTable: React.FC<Props> = (props: Props) => {
               <thead className="user-table-head">
                 <tr className="click-container">
                   <td>
-                  <div className="table-item">
-                  <span>S/N</span>
-                  </div>
-                   
+                    <div className="table-item">
+                      <span>S/N</span>
+                    </div>
+
                   </td>
                   <td>
-                  <div className="table-item">
-                  <span>Time</span>
-                  </div>
-                   
+                    <div className="table-item">
+                      <span>Time</span>
+                    </div>
+
                   </td>
                   <td>
-                  {/* <div className="table-item"> */}
-                  <span className="flex justify-start w-full  items-center">
+                    {/* <div className="table-item"> */}
+                    <span className="flex justify-start w-full  items-center">
                       Date&nbsp; <SortAccend />
                     </span>
-                  {/* </div> */}
-                   
+                    {/* </div> */}
+
                   </td>
                   <td>
-                  <div className="table-item">
-                  <span>Reference</span>
-                  </div>
-                    
+                    <div className="table-item">
+                      <span>Reference</span>
+                    </div>
+
                   </td>
                   <td>
-                  <div className="table-item">
-                  <span>Amount</span>
-                  </div>
-                    
+                    <div className="table-item">
+                      <span>Amount</span>
+                    </div>
+
                   </td>
                   <td>
-                  <div className="table-item">
-                  <span>Status</span>
-                  </div>
-                   
+                    <div className="table-item">
+                      <span>Status</span>
+                    </div>
+
                   </td>
                   <td>
-                  <div className="table-item">
-                  <span>Payment Gateway</span>
-                  </div>
-                   
+                    <div className="table-item">
+                      <span>Payment Gateway</span>
+                    </div>
+
                   </td>
                 </tr>
               </thead>
@@ -89,7 +89,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                         <div className="table-item">
 
                           {
-                            
+
                           }
                           {index + 1 + itemNum - 10}
                         </div>
@@ -102,7 +102,7 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
                       <td>
                         {/* <div className="table-item"> */}
-                          {dateFormat(item?.createdDate, "dd mmm yyyy")}
+                        {dateFormat(item?.createdDate, "dd mmm yyyy")}
                         {/* </div> */}
 
                       </td>
@@ -114,10 +114,8 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
                       <td>
 
-                        <div className="table-item">
-                          {
-                            item?.is_in_flow === true ? '' : '-'
-                          }
+                        <div className={`table-item ${item?.is_in_flow === true ? 'text-green-500' : 'text-red-500'}`}>
+
                           <CurrencyFormat
                             value={item?.amount}
                             displayType={'text'}
@@ -125,8 +123,11 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
                             renderText={value => {
                               return (
-                                <span className="">
-                                  <span>&#8358; </span>
+                                <span >
+                                  {
+                                    item?.is_in_flow === true ? '' : '- '
+                                  }
+                                  <span className="ml-1">&#8358; </span>
                                   {value}.00
                                 </span>
                               )
@@ -146,14 +147,14 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
                       </td>
                       <td>
-                      <div className="table-item ">
-                     <p style={{color:'#4155C8'}}>
-                     {
-                      item?.payment_method
-                     }
-                     </p>
-                      </div>
-                       </td>
+                        <div className="table-item ">
+                          <p style={{ color: '#4155C8' }}>
+                            {
+                              item?.payment_method
+                            }
+                          </p>
+                        </div>
+                      </td>
                     </tr>
                   );
                 })}

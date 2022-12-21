@@ -75,10 +75,13 @@ const getUrl = (type: string) => {
     switch (type) {
         case 'Basic bvn':
             return '/bvn/basic-bvn';
-            break;
+           
         case 'Tin Verification':
             return '/tin-verify';
-            break;
+            
+            case 'Customer verification with phone number':
+            return '/bvn/customer-verification-phone';
+            
         default:
             return  ''
     }
