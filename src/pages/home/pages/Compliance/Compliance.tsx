@@ -24,7 +24,7 @@ const Compliance: React.FC = (props: Props) => {
     const [errorText, seterrorText] = useState('Retry')
     const [isSuccess, setisSuccess] = useState(false)
     const [isError, setisError] = useState(false)
-    const [showModal, setshowModal] = useState(true)
+    const [showModal, setshowModal] = useState(false)
     const { setisLoading } = useContext(AppProvider)
     const [complincesInputData, setcomplincesInputData] = useState<any>({
         tax_id: '',
