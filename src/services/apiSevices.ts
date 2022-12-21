@@ -91,6 +91,10 @@ const apis = {
            
             return server.get(url)
         },
+        getAllWalletHistory:() => {
+        let url=`${BASE_URL}/wallet/transaction-history `
+            return server.get(url)
+        },
         getSuccessTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-success-count`,),
         getFailTranasactionCount:() => server.get(`${BASE_URL}/wallet/transaction-failed-count`,),
     },

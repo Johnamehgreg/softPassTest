@@ -110,14 +110,28 @@ export const useWalletTransactionHistory = (arg:Trans) => {
             }
         }
 )
+    const { data: allover, isFetching:allIsFetching,  isFetched:allIsFetched,  isSuccess:allIsSuccess } = useQuery(
+        ['get-all-wallet-transaction-history', ],
+        () => apis.wallet.getAllWalletHistory(),
+        {
+            onError: () => {
+                onError()
+            }
+        }
+)
 
     let data = all?.data
+    let alldata = allover?.data
 
     return {
         data, 
         isSuccess,
         isFetched,
-        isFetching
+        isFetching,
+        allIsFetching,
+        alldata,
+        allIsFetched,
+        allIsSuccess,
     }
 }
 

@@ -30,6 +30,7 @@ function Wallet(props: Props) {
   const [pagiData, setpagiData] = useState({})
   const [status, setstatus] = useState<any>(null)
   const [itemNum, setitemNum] = useState(0)
+  const [allTransaction, setallTransaction] = useState<any>([])
 
 
 
@@ -80,7 +81,11 @@ function Wallet(props: Props) {
     data: transactionData,
     isSuccess: transactionSuccess,
     isFetched: transactionIsfetched,
-    isFetching: isFetchingTrans
+    isFetching: isFetchingTrans,
+    alldata,
+    allIsFetching,
+    allIsFetched,
+    allIsSuccess
   } = useWalletTransactionHistory({ onError, skip, status, dateRange })
 
   const checkSuccess = () => {
@@ -93,6 +98,10 @@ function Wallet(props: Props) {
 
     }
 
+    if (allIsSuccess && allIsFetched) {
+      setallTransaction(alldata.data.results)
+      console.log(alldata.data.results, 'all data for trans')
+    }
     if (transactionSuccess && transactionIsfetched) {
       settransactionHistory(transactionData?.data?.results)
       setpagiData(transactionData?.data)
@@ -104,7 +113,7 @@ function Wallet(props: Props) {
 
   useEffect(() => {
     checkSuccess()
-  }, [data, transactionData])
+  }, [data, transactionData, alldata])
 
   const { settopNavData } = useContext(AppProvider)
 
@@ -134,16 +143,16 @@ function Wallet(props: Props) {
     ];
     var rows = [];
 
-    for (let i = 0; i < transactionHistory.length; i++) {
+    for (let i = 0; i < allTransaction.length; i++) {
 
       var temp = [
         i + 1,
-        // `${dateFormat(transactionHistory[i]?.createdDate, "h:MM TT")}`,
-        `${dateFormat(transactionHistory[i]?.createdDate, "dd mmm yyyy")}`,
-        transactionHistory[i]?.wallet_transaction_reference,
-        `${transactionHistory[i]?.is_in_flow === true ? '' : '-'}  N${transactionHistory[i]?.amount}`,
-        transactionHistory[i]?.status,
-        transactionHistory[i]?.payment_method,
+        // `${dateFormat(allTransaction[i]?.createdDate, "h:MM TT")}`,
+        `${dateFormat(allTransaction[i]?.createdDate, "dd mmm yyyy")}`,
+        allTransaction[i]?.wallet_transaction_reference,
+        `${allTransaction[i]?.is_in_flow === true ? '' : '-'}  N${allTransaction[i]?.amount}`,
+        allTransaction[i]?.status,
+        allTransaction[i]?.payment_method,
       ];
       rows.push(temp);
     }
@@ -156,15 +165,15 @@ function Wallet(props: Props) {
         halign: "center",
         cellPadding: 3.5,
         lineWidth: 0.5,
-       
+        lineColor: [0, 0, 0],
         textColor: [0, 0, 0]
       },
       headStyles: {
         textColor: [0, 0, 0],
         fontStyle: "normal",
         lineWidth: 0.5,
-       
-        fillColor: [88, 85, 332]
+        lineColor: [0, 0, 0],
+        fillColor: [166, 204, 247]
       },
 
       rowStyles: {
