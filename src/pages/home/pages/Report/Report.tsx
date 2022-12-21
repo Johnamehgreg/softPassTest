@@ -20,6 +20,9 @@ const Report = () => {
     endDate: null
   })
 
+  const [itemNum, setitemNum] = useState(0)
+
+
 
 
   const onError = () => {
@@ -47,9 +50,7 @@ const Report = () => {
       setisSuccess(true)
       setreportList(data?.data?.results)
       setpagiData(data?.data)
-
-
-
+      setitemNum(skip * 10)
 
       console.log(data?.data, '@report  data')
     }
@@ -100,7 +101,7 @@ const Report = () => {
 
 
 
-                  <ReportTable list={reportList} />
+                  <ReportTable itemNum={itemNum} list={reportList} />
 
                 </>
 

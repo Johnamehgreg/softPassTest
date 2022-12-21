@@ -1,4 +1,6 @@
+import dateFormat from "dateformat";
 import jsPDF from 'jspdf';
+import "jspdf-autotable";
 import { useContext, useEffect, useState } from "react";
 import AppPagination from "../../../../components/AppComponent/AppPagination";
 import AppRetching from "../../../../components/AppComponent/AppRetching";
@@ -8,7 +10,6 @@ import { AppProvider } from "../../../../contextProvide/AppContext";
 import TopCardContainerWallet from "./component/TopContainerWallet";
 import WalletTable from "./component/WalletTable";
 import { useGetWalletHook, useWalletTransactionHistory } from "./wallet-query-hook";
-
 
 interface Props { }
 
@@ -25,7 +26,7 @@ function Wallet(props: Props) {
   const [isSuccess, setisSuccess] = useState(false)
   const [amountBalance, setamountBalance] = useState(0)
   const [skip, setskip] = useState(1)
-  const [transactionHistory, settransactionHistory] = useState([])
+  const [transactionHistory, settransactionHistory] = useState<any>([])
   const [pagiData, setpagiData] = useState({})
   const [status, setstatus] = useState<any>(null)
   const [itemNum, setitemNum] = useState(0)
@@ -116,21 +117,66 @@ function Wallet(props: Props) {
     })
   }, [])
 
-  const pdfGenerate = () => {
-    var doc = new jsPDF('landscape', 'px', 'a4', false)
-    const input = document.getElementById('divToPrint')
-    const el1: HTMLElement = input!;
-    doc.html(el1, {
-      callback : function (pdf:any) {
-        pdf.save('wallet.pdf')
-      }
-    })
-    // // doc.addImage()
-    // doc.save('wallet.pdf')
 
-    
-   
-  }
+
+
+
+  const print = () => {
+    const pdf: any = new jsPDF("p", "pt", "a4");
+    const columns = [
+      "S/N",
+      // "Time",
+      "Date",
+      "Reference",
+      "Amount",
+      "Status",
+      "Payment Gateway",
+    ];
+    var rows = [];
+
+    for (let i = 0; i < transactionHistory.length; i++) {
+
+      var temp = [
+        i + 1,
+        // `${dateFormat(transactionHistory[i]?.createdDate, "h:MM TT")}`,
+        `${dateFormat(transactionHistory[i]?.createdDate, "dd mmm yyyy")}`,
+        transactionHistory[i]?.wallet_transaction_reference,
+        `${transactionHistory[i]?.is_in_flow === true ? '' : '-'}  N${transactionHistory[i]?.amount}`,
+        transactionHistory[i]?.status,
+        transactionHistory[i]?.payment_method,
+      ];
+      rows.push(temp);
+    }
+    pdf.text(235, 40, "Softpass Wallet Funding History");
+    pdf.autoTable(columns, rows, {
+      startY: 65,
+      theme: "grid",
+      styles: {
+        font: "times",
+        halign: "center",
+        cellPadding: 3.5,
+        lineWidth: 0.5,
+       
+        textColor: [0, 0, 0]
+      },
+      headStyles: {
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        lineWidth: 0.5,
+       
+        fillColor: [88, 85, 332]
+      },
+
+      rowStyles: {
+        lineWidth: 0.5,
+        lineColor: [0, 0, 0]
+      },
+      tableLineColor: [0, 0, 0]
+    });
+    console.log(pdf.output("datauristring"));
+    pdf.save("pdf");
+  };
+
 
 
 
@@ -146,7 +192,7 @@ function Wallet(props: Props) {
     >
 
       <>
-      
+
         <TopCardContainerWallet amountBalance={amountBalance} refetch={refetch} tabs={tabs} />
         <section className="bg-white mt-8 garrif">
           <div className="flex items-center px-3 md:px-5 py-4 bg-softpassgray-50 lg:bg-transparent border-b-[1px] border-b-gray-300">
@@ -155,7 +201,7 @@ function Wallet(props: Props) {
               <div className="flex justify-end z-10">
                 <div className="border-[12px] rounded-md border-gray-100">
                   <button
-                  onClick={() => pdfGenerate()} 
+                    onClick={() => print()}
                     className="text-softpasspurple-300 rounded-md text-sm px-2 py-2 bg-white">
                     Generate Report
                   </button>

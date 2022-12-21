@@ -17,6 +17,8 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
   const [isShowDate, setisShowDate] = useState(false)
 
+  console.log(itemNum - 10, 'item data value')
+
 
 
 
@@ -85,7 +87,11 @@ const WalletTable: React.FC<Props> = (props: Props) => {
                     <tr className="py-3">
                       <td>
                         <div className="table-item">
-                          {index + 1}
+
+                          {
+                            
+                          }
+                          {index + 1 + itemNum - 10}
                         </div>
                       </td>
                       <td>
@@ -140,10 +146,12 @@ const WalletTable: React.FC<Props> = (props: Props) => {
 
                       </td>
                       <td>
-                      <div className="table-item">
+                      <div className="table-item ">
+                     <p style={{color:'#4155C8'}}>
                      {
                       item?.payment_method
                      }
+                     </p>
                       </div>
                        </td>
                     </tr>

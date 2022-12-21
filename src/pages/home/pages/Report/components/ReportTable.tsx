@@ -1,12 +1,13 @@
-import dateFormat from "dateformat"
-import CurrencyFormat from "react-currency-format"
+import dateFormat from "dateformat";
+import CurrencyFormat from "react-currency-format";
 
 interface Props {
-    list: any
+    list: any;
+    itemNum:number
 }
 
 const ReportTable: React.FC<Props> = (props: any) => {
-    const { list } = props
+    const { list, itemNum } = props
 
     console.log(list, '@all list item')
     return (
@@ -63,7 +64,7 @@ const ReportTable: React.FC<Props> = (props: any) => {
                                         <tr className="py-3">
                                             <td >
                                             <div className="table-item">
-                                                <p>{index + 1}</p>
+                                                <p>{index + 1 + itemNum - 10}</p>
                                             </div>
                                             </td>
                                             <td >

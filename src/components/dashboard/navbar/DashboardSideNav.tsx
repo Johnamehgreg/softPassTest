@@ -66,6 +66,9 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
     }
   }
 
+  let verificationList = categories?.filter((item:any) => item.category_type === "Identity" )
+  let utilityList = categories?.filter((item:any) => item.category_type === "Utility" )
+
 
   useEffect(() => {
     checkSuccess()
@@ -147,7 +150,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                     </span>
                     {isDropdownActive == index && activeSideContent == index && (
                       <div className="pl-2 w-full">
-                        {categories?.map((item: any, iDEX: number) => {
+                        {verificationList?.map((item: any, iDEX: number) => {
                           return (
                             <div
                               onMouseEnter={() => {
@@ -230,7 +233,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                       </span>
                       {isDropdownActive === index && activeSideContent == index && (
                         <div className="pl-2 w-full">
-                          {subRoute.map((item: any, iDEX: number) => {
+                          {utilityList?.map((item: any, iDEX: number) => {
                             return (
                               <span
                                 onMouseEnter={() => {
@@ -243,7 +246,7 @@ const DashboardSideNav: React.FC<Props> = (props: Props) => {
                                 }}
                                 className="sub-route-item w-full mt-2 relative"
                               >
-                                {item?.subname}
+                                {item?.category_name}
 
 
                               </span>
