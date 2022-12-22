@@ -7,7 +7,8 @@ interface Props {
     value?: string;
     name?: string;
     onBlur: Function;
-    required?:boolean
+    required?:boolean,
+    disabled?:boolean,
 
 }
 const HomeInput: React.FC<Props> = ({
@@ -16,7 +17,8 @@ const HomeInput: React.FC<Props> = ({
     value,
     name,
     onBlur,
-    required
+    required,
+    disabled
 
 }) => {
     const [isFocus, setisFocus] = useState(false)
@@ -27,6 +29,7 @@ const HomeInput: React.FC<Props> = ({
             <input
                 value={value}
                 name={name}
+                disabled={disabled}
                 onFocus={() => setisFocus(true)}
                 onBlur={() => {
                     setisFocus(false)

@@ -39,6 +39,9 @@ const Compliance: React.FC = (props: Props) => {
         cac_form: '',
         isCacForm: false,
         isAddressVerification: false,
+        isOrganization_setup_completed: false,
+        is_tax_id_verified: false,
+        is_cac_rc_verified: false
 
     })
 
@@ -116,6 +119,9 @@ const Compliance: React.FC = (props: Props) => {
                 bvn: lData.bvn,
                 team_size: lData.team_size,
                 cac_rc: lData.cac_rc,
+                is_cac_rc_verified: lData.is_cac_rc_verified,
+                is_tax_id_verified: lData.is_tax_id_verified,
+                isOrganization_setup_completed: lData.isOrganization_setup_completed,
                 address_verification: lData.address_verification,
                 cac_form: lData.cac_form,
                 isAddressVerification: lData.address_verification.length > 4 ? true : false,
@@ -123,7 +129,7 @@ const Compliance: React.FC = (props: Props) => {
             })
 
 
-            console.log(complincesInputData, '@complinces data')
+            console.log(lData, '@complinces data')
         }
     }
 
@@ -238,11 +244,11 @@ const Compliance: React.FC = (props: Props) => {
     useEffect(() => {
         checkSuccess()
     }, [data])
-    
-    const handleReUpload = (e:any) => {
-        if(preview.type === 'cac' ){
+
+    const handleReUpload = (e: any) => {
+        if (preview.type === 'cac') {
             setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
-        }else {
+        } else {
             setisUPA_Form({ ...isUPA_Form, isSelected: true, file: e })
         }
     }
@@ -288,6 +294,7 @@ const Compliance: React.FC = (props: Props) => {
 
                                 />
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.tax_id}
@@ -311,7 +318,9 @@ const Compliance: React.FC = (props: Props) => {
                     <div className="border-t-[1px] px-8  border-gray-500 flex  ">
                         <div className="w-full md:w-5/6 md:pl-4   pt-5 flex flex-wrap justify-between">
                             <div className="w-full md:w-5/12 ">
+
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.director_name}
@@ -322,6 +331,7 @@ const Compliance: React.FC = (props: Props) => {
 
                                 />
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.director_email}
@@ -332,6 +342,7 @@ const Compliance: React.FC = (props: Props) => {
 
                                 />
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.director_phone}
@@ -342,6 +353,7 @@ const Compliance: React.FC = (props: Props) => {
 
                                 />
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.bvn}
@@ -356,6 +368,7 @@ const Compliance: React.FC = (props: Props) => {
                             </div>
                             <div className="w-full md:w-5/12 ">
                                 <HomeInput
+                                    disabled={complincesInputData?.isOrganization_setup_completed}
                                     onBlur={() => console.log('')}
                                     name='containerName'
                                     value={complincesInputData.cac_rc}
@@ -368,62 +381,45 @@ const Compliance: React.FC = (props: Props) => {
 
 
                                 <UploadInout
+                                    onPreview={() => {
+                                        setshowModal(true)
+                                        setpreview({
+                                            ...preview,
+                                            url: complincesInputData.cac_form,
+                                            type: 'cac'
+                                        })
+                                    }}
                                     type="CAC"
                                     isUpload={complincesInputData.isCacForm}
                                     fileName={isCC_Form.file?.name}
-                                    placeholder='Upload Certificate of Incorporation'
+                                    placeholder={complincesInputData.isCacForm ? 'Certificate of Incorporation' : 'Upload Certificate of Incorporation'}
                                     onFileSelect={(e) => {
                                         // alert('1')
                                         setisCC_Form({ ...isCC_Form, isSelected: true, file: e })
                                     }}
                                 />
 
-                                {
-                                    complincesInputData.isCacForm && (
-                                        <div
-                                            onClick={() => {
-                                                setshowModal(true)
-                                                setpreview({
-                                                    ...preview,
-                                                    url: complincesInputData.cac_form,
-                                                    type: 'cac'
-                                                })
-                                            }}
-                                            className="pointer flex items-center justify-center h-[20px] rounded-md w-[80px] bg-softpasspurple-300 text-white text-[11px] mt-[-10px]">
-                                            <p>Preview</p>
-                                        </div>
-                                    )
-                                }
+
 
 
 
                                 <UploadInout
+                                    onPreview={() => {
+                                        setshowModal(true)
+                                        setpreview({
+                                            ...preview,
+                                            url: complincesInputData.address_verification,
+                                            type: 'address'
+                                        })
+                                    }}
                                     type="UPA"
                                     isUpload={complincesInputData.isAddressVerification}
                                     fileName={isUPA_Form?.file?.name}
-                                    placeholder='Upload Proof of Address'
+                                    placeholder={complincesInputData.isAddressVerification ? 'Proof of Address' : 'Upload Proof of Address'}
                                     onFileSelect={(e) => {
                                         setisUPA_Form({ ...isUPA_Form, isSelected: true, file: e })
                                     }}
                                 />
-
-                                {
-                                    complincesInputData.isAddressVerification && (
-                                        <div
-                                            onClick={() => {
-                                                setshowModal(true)
-                                                setpreview({
-                                                    ...preview,
-                                                    url: complincesInputData.address_verification,
-                                                    type: 'address'
-                                                })
-                                            }}
-                                            className="pointer flex items-center justify-center h-[20px] rounded-md w-[80px] bg-softpasspurple-300 text-white text-[11px] mt-[-10px]">
-                                            <p>Preview</p>
-                                        </div>
-                                    )
-                                }
-
 
 
 
@@ -460,24 +456,30 @@ const Compliance: React.FC = (props: Props) => {
 
                                     <img className=" bg-contain h-[100%]" src={preview.url} alt='' />
 
-                                    <div className="w-full mt-8  mb-8 justify-center flex  ">
-                                        <label
-                                            className="min-w[20px] pointer bg-softpasspurple-300 px-6 py-1 rounded-md text-white"
-                                        >
+                                    {
+                                        !complincesInputData?.isOrganization_setup_completed && (
+                                            <div className="w-full mt-8  mb-8 justify-center flex  ">
+                                                <label
+                                                    className="min-w[20px] pointer bg-softpasspurple-300 px-6 py-1 rounded-md text-white"
+                                                >
 
-                                            <p className="text-[13px]">Upload</p>
+                                                    <p className="text-[13px]">Upload</p>
 
-                                            <input
-                                                onChange={(e: any) => handleReUpload(e.target.files[0])}
-                                                
-                                                className="hidden"
-                                                type="file"
-                                                id='preview-upload'
-                                                accept="image/png, image/jpg,  image/jpeg"
-                                            />
-                                        </label>
-                                        
-                                    </div>
+                                                    <input
+                                                        onChange={(e: any) => handleReUpload(e.target.files[0])}
+
+                                                        className="hidden"
+                                                        type="file"
+                                                        id='preview-upload'
+                                                        accept="image/png, image/jpg,  image/jpeg"
+                                                    />
+                                                </label>
+
+                                            </div>
+                                        )
+                                    }
+
+
                                 </div>
                             </div>
                         </div>

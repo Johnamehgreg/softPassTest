@@ -6,12 +6,13 @@ interface Props {
     type: string;
     fileName?: string | null;
     isUpload?: boolean;
+    onPreview: () => void;
 
 }
 
 
 const UploadInout: React.FC<Props> = (props) => {
-    const { onFileSelect, placeholder, type, isUpload, fileName } = props
+    const { onFileSelect, placeholder, onPreview, type, isUpload, fileName } = props
 
     console.log(isUpload, 'uplaod data')
 
@@ -25,7 +26,7 @@ const UploadInout: React.FC<Props> = (props) => {
                 <p className="text-[14px]"> {placeholder}</p>
 
                 {
-                    !isUpload && (
+                    !isUpload ? (
                         <label
 
                             className='no-edit-input rounded-[50px] px-4 py-1 border-[1px] border-gray-400  pointer'
@@ -44,6 +45,19 @@ const UploadInout: React.FC<Props> = (props) => {
                             />
                         </label>
                     )
+
+                        :
+                        (
+                            <label
+                            onClick={() => {onPreview()}}
+                                className='no-edit-input rounded-[50px] px-4 py-1 border-[1px] border-gray-400  pointer'
+                            >
+
+                                <p className="text-[13px]">Preview</p>
+
+
+                            </label>
+                        )
                 }
 
 

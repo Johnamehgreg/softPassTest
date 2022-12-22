@@ -14,6 +14,7 @@
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@mui/material": "^5.10.15",
+    "@mui/x-date-pickers-pro": "^5.0.11",
     "@popperjs/core": "^2.11.6",
     "@react-pdf-viewer/core": "^3.9.0",
     "@react-pdf-viewer/zoom": "^3.9.0",

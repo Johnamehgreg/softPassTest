@@ -680,3 +680,9 @@ a:hover {
 .cardTest{
   @apply bg-red-500 w-full md:w-1/4 hover:bg-gray-600  h-[40px] pointer;
 }
+
+
+.MuiDialogContent-root > div > div{
+  background-color: #E1227B !important;
+  display: none;
+}

@@ -30,6 +30,7 @@ function Wallet(props: Props) {
   const [pagiData, setpagiData] = useState({})
   const [status, setstatus] = useState<any>(null)
   const [itemNum, setitemNum] = useState(0)
+
   const [allTransaction, setallTransaction] = useState<any>([])
 
 
@@ -83,7 +84,6 @@ function Wallet(props: Props) {
     isFetched: transactionIsfetched,
     isFetching: isFetchingTrans,
     alldata,
-    allIsFetching,
     allIsFetched,
     allIsSuccess
   } = useWalletTransactionHistory({ onError, skip, status, dateRange })
@@ -92,10 +92,14 @@ function Wallet(props: Props) {
 
     if (isFetched && isDataSuccess) {
       setisError(false)
-      setisSuccess(true)
+     
 
       setamountBalance(data?.data?.balance)
 
+    }
+
+    if(allIsSuccess && isDataSuccess ){
+      setisSuccess(true)
     }
 
     if (allIsSuccess && allIsFetched) {
@@ -237,7 +241,7 @@ function Wallet(props: Props) {
 
 
           {
-            isFetched && isDataSuccess && transactionHistory.length === 0 && (
+            isFetched && isSuccess && transactionHistory.length === 0 && (
               <div className="flex flex-col items-center h-[100px] justify-center">
                 <p className="text-center text-gray-400 text-sm">
                   You currently have no  transaction
